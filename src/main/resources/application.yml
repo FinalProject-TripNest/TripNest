@@ -1,0 +1,17 @@
+#jsp
+spring:
+ config:
+    import: mysql.yml
+ mvc:
+   view:
+     prefix: /WEB-INF/
+     suffix: .jsp
+ devtools:
+   livereload:
+     enabled: true
+#mybatis
+mybatis:
+  type-aliases-package: data.*
+  mapper-locations:
+  - /mapper/**/*.xml
+

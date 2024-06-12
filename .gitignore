@@ -1,0 +1,27 @@
+### 공통 파일
+src/main/resources/mysql.yml
+
+### IntelliJ IDEA ###
+.idea/
+target/
+out/
+src/test/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.classpath
+.project
+build/
