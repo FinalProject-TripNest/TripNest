@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class JournalController {
 
 	@GetMapping("journal")
-	public String index() {
+	public String journalPage() {
 		return "journal/journal";
 	}
+
+	
 }
