@@ -11,6 +11,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/reset.css">
 <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -38,7 +39,7 @@
 				<ul class="main">
 					<li><a href="javascript:;">FIND NEST</a></li>
 					<li><a href="javascript:;">PROMOTION</a></li>
-					<li><a href="javascript:;">JOURNAL</a></li>
+					<li><a href="journal">JOURNAL</a></li>
 				</ul>
 				<ul class="sub">
 					<li><a href="javascript:;">LOGIN</a></li>
@@ -48,3 +49,7 @@
 		</div>
 	</nav>
 </header>
+
+<!-- 탑버튼 -->
+<div class="top_btn"></div>
+<!-- //탑버튼 -->
