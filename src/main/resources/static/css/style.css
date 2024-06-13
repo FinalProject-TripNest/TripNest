@@ -483,8 +483,7 @@ header#header .menu ul.sub li {
 }
 
 #index .common {
-	padding: 120px 0;
-	border-bottom: 1px solid #e8e8e8;
+	padding: 120px 0 0 0;
 }
 
 #index .common .head {
@@ -515,6 +514,22 @@ header#header .menu ul.sub li {
 	margin-top: 60px;
 	display: flex;
 	flex-wrap: wrap;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 60px;
+}
+
+#index .common.promotion .list {
+	border-bottom: none;
+}
+
+#index .common.journal {
+	border-bottom: none;
+	padding-bottom: 60px;
+}
+
+#index .common.journal .list {
+	padding-bottom: 0;
+	border-bottom: none;
 }
 
 #index .common .list .block {
@@ -550,5 +565,31 @@ header#header .menu ul.sub li {
 #index .common .list .block .text_box .text {
 	margin-top: 20px;
 	color: #333;
+}
+
+#index .event {
+	padding: 60px 0 0 0;
+}
+
+#index .event a {
+	height: 100%;
+	display: flex;
+	height: 350px;
+	background-image: url("../img/main/main_event_bg.jpg");
+	background-size: cover;
+	background-position: center 66%;
+	background-repeat: no-repeat;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: #fff;
+}
+
+#index .event a p.title {
+	font-size: 24px;
+}
+
+#index .event a p.text {
+	margin-top: 20px;
 }
 /*//index*/
