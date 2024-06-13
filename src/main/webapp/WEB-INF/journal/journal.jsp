@@ -16,7 +16,6 @@
 
 #promotion_detail .block {
 	width: calc(( 100% - 60px)/3);
-	border: 1px solid red;
 	position: static !important;
 	margin-right: 30px;
 	margin-bottom: 60px;
@@ -90,146 +89,26 @@
 				<div class="title">
 					<a class="title2">TRAVEL</a>
 				</div>
-				
+
 				<div class="list">
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
+
+					<c:forEach items="${dto}" var="list">
+						<a href="javascript:;" class="block"> <img alt=""
+							src="../img/journal/${list.journal_photo}" class="img1">
+							<div class="content"
+								style="display: flex; align-items: center; justify-content: space-between;">
+								<div style="display: flex; align-items: center;">
+									<p class="miniTitle">${list.journal_title}</p>
+									<!-- 예시로 추가한 이미지 -->
+									<img alt="" src="../img/journal/new.png" width="15" height="15">
+								</div>
+								<p style="font-size: 14px; color: #4D4D4D;">
+								<fmt:formatDate value="${list.journal_date }" pattern="yyyy-MM-dd"/>
+								</p>
 							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">모두가 만족한 5월 어느 날의 기록. 가족여행을 계획 중이라면 스토너리의 ‘밍글링(Mingling)’ 
-						혹은 ‘게더링(Gathering)’ 객실을 강력하게 추천한다.</p>
-
-					</a> 
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					<a href="javascript:;" class="block"> <img alt=""
-						src="../img/journal/test1.png" class="img1">
-						<div class="content"
-							style="display: flex; align-items: center; justify-content: space-between;">
-							<div style="display: flex;align-items: center;">
-								<p class="miniTitle">푸르른 꿈속 정원</p>
-								<img alt="" src="../img/journal/new.png" width="15" height="15">
-							</div>
-
-							<p style="font-size: 14px; color: #4D4D4D;">2024.06.13</p>
-						</div>
-						<p class="miniContent">우리의 기념일을 위한 선물로 예약하게 된 몽중정원, 이곳에서의 하루
-							덕분에 우리의 계획도 확실해졌고 다짐과 정돈을 통해 일상을 헤쳐 나가는 원동력이 되었다.</p>
-
-					</a> 
-					
-					
+							<p class="miniContent">${list.journal_content}</p>
+						</a>
+					</c:forEach>
 
 
 				</div>
