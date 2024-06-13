@@ -11,6 +11,25 @@ body {
 	max-width: 1300px;
 }
 
+/*탑버튼*/
+.top_btn {
+	position: fixed;
+	height: 60px;
+	width: 60px;
+	bottom: 60px;
+	right: 60px;
+	z-index: 9999;
+	background-image: url(../img/common/top_btn.png);
+	background-size: 30px;
+	border-radius: 60px;
+	cursor: pointer;
+	border: 2px solid #000;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: #fff;
+	display: none;
+}
+/*//탑버튼*/
 /*header*/
 header#header {
 	font-family: 'Lato' !important;
@@ -39,6 +58,7 @@ header#header  nav {
 	justify-content: center;
 	height: 100px;
 	background: #fff;
+	border-bottom: 1px solid #ddd;
 }
 
 header#header  nav a.logo {

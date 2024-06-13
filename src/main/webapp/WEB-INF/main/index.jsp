@@ -14,7 +14,7 @@ header#header .select {
 			<div class="section1 common">
 				<div class="center">
 					<div class="head">
-						<div class="title">
+						<div class="title" data-aos="fade-up">
 							<span>오직 트립네스트에서만</span>
 						</div>
 						<a href="javascript::" class="link">전체 보기</a>

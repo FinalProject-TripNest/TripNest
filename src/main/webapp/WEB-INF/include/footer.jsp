@@ -65,6 +65,8 @@
 	src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c890ddd8c7f2607257a2db412525f318&libraries=services">
-	
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="../js/parallax_scroll.js" type="module"></script>
+<script src="../js/ukiyo.js"></script>
+<script src="../js/index.js"></script>
+
