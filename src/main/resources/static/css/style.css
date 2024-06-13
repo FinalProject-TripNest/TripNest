@@ -14,8 +14,10 @@ body {
 /*header*/
 header#header {
 	font-family: 'Lato' !important;
+	position: fixed;
+	width: 100%;
+	z-index: 9999;
 }
-
 
 header#header .top_event {
 	height: 80px;
@@ -36,7 +38,7 @@ header#header  nav {
 	display: flex;
 	justify-content: center;
 	height: 100px;
-	border-bottom: 1px solid #ddd;
+	background: #fff;
 }
 
 header#header  nav a.logo {
@@ -417,52 +419,6 @@ header#header .menu ul.sub li {
 	height: 20px
 }
 
-.footer_cont .sns li a.facebook {
-	background: url(/web/images/sns-logo/footer/sns-facebook.svg) no-repeat
-		50%;
-	background-size: cover
-}
-
-.footer_cont .sns li a.instagram {
-	background: url(/web/images/sns-logo/footer/sns-insta.svg) no-repeat 50%;
-	background-size: cover
-}
-
-.footer_cont .sns li a.naver {
-	background: url(/web/images/sns-logo/footer/sns-naver.svg) no-repeat 50%;
-	background-size: cover
-}
-
-.footer_cont .sns li a.brunch {
-	background: url(/web/images/sns-logo/footer/sns-brunch.svg) no-repeat
-		50%;
-	background-size: cover
-}
-
-.footer_cont .sns li a.youtube {
-	background: url(/web/images/sns-logo/footer/sns-youtube.svg) no-repeat
-		50%;
-	background-size: cover
-}
-
-.footer_cont .sns li a.tiktok {
-	background: url(/web/images/sns-logo/footer/sns-tiktok.svg) no-repeat
-		50%;
-	background-size: cover
-}
-
-.footer_cont .sns li a.pinterest {
-	background: url(/web/images/sns-logo/footer/sns-pinterest.svg) no-repeat
-		50%;
-	background-size: cover
-}
-
-.footer_cont .sns li a.twitter {
-	background: url(/web/images/sns-logo/footer/sns-twitter.svg) no-repeat
-		50%;
-	background-size: cover
-}
-
 .footer_cont .copyright {
 	position: absolute;
 	bottom: 0;
@@ -496,3 +452,83 @@ header#header .menu ul.sub li {
 }
 
 /*//footer*/
+
+/*index*/
+#index .top_banner {
+	height: 530px;
+	background-image: url("../img/main/main_bg.jpg");
+	background-position: 0% 70%;
+	object-fit: cover;
+	background-repeat: no-repeat;
+}
+
+#index .common {
+	padding: 120px 0;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+#index .common .head {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	color: #181818;
+}
+
+#index .common .head .title span {
+	letter-spacing: 6px;
+}
+
+#index .common .head a.link {
+	position: absolute;
+	right: 0;
+	font-size: 14px;
+	color: #181818;
+	display: flex;
+	width: 76px;
+	background-image: url("../img/main/right_arrow.png");
+	background-repeat: no-repeat;
+	background-position: 100%;
+	background-size: 20px;
+}
+
+#index .common .list {
+	margin-top: 60px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#index .common .list .block {
+	margin-right: 30px;
+	width: calc(( 100% - 60px)/3);
+	margin-bottom: 60px;
+}
+
+#index .common .list .block img {
+	height: 260px;
+	width: 100%;
+	object-fit: cover;
+}
+
+#index .common .list .block:nth-child(3n) {
+	margin-right: 0;
+}
+
+#index .common .list .block .text_box {
+	margin-top: 40px;
+	text-align: center;
+}
+
+#index .common .list .block .text_box span {
+	display: block;
+}
+
+#index .common .list .block .text_box .title {
+	font-size: 30px;
+	color: #181818;
+}
+
+#index .common .list .block .text_box .text {
+	margin-top: 20px;
+	color: #333;
+}
+/*//index*/
