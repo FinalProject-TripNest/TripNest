@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="../img/favicon.ico">
+<link rel="icon" href="../img/common/favicon.ico">
 <link
 	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
 	rel="stylesheet">
@@ -22,13 +22,14 @@
 	</a>
 	<nav>
 		<div>
-			<a class="logo" href="index"> <img alt="" src="../img/logo.png">
+			<a class="logo" href="index"> <img alt=""
+				src="../img/common/logo.png">
 			</a>
 			<div class="select">
 				<ul>
-					<li><img alt="" src="../img/header_location.png"> <span>어디로
-							떠날까요?</span></li>
-					<li><img alt="" src="../img/header_back.png"> <span>언제
+					<li><img alt="" src="../img/common/header_location.png">
+						<span>어디로 떠날까요?</span></li>
+					<li><img alt="" src="../img/common/header_back.png"> <span>언제
 							떠날까요?</span></li>
 
 				</ul>
