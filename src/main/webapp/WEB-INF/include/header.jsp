@@ -38,7 +38,7 @@
 			<div class="menu">
 				<ul class="main">
 					<li><a href="javascript:;">FIND NEST</a></li>
-					<li><a href="javascript:;">PROMOTION</a></li>
+					<li><a href="promotion">PROMOTION</a></li>
 					<li><a href="journal">JOURNAL</a></li>
 				</ul>
 				<ul class="sub">

@@ -558,13 +558,22 @@ header#header .menu ul.sub li {
 }
 
 #index .common .list .block .text_box .title {
-	font-size: 30px;
+	font-size: 26px;
 	color: #181818;
+	line-height: 40px;
 }
 
 #index .common .list .block .text_box .text {
 	margin-top: 20px;
-	color: #333;
+	color: gray;
+	line-height: 24px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 1.71;
+	line-height: 24px;
 }
 
 #index .event {
@@ -593,3 +602,78 @@ header#header .menu ul.sub li {
 	margin-top: 20px;
 }
 /*//index*/
+
+/*promotion*/
+#promotion .list {
+	display: flex;
+	flex-wrap: wrap;
+	height: auto !important;
+	padding: 0 0 60px 0;
+}
+
+#promotion .block {
+	width: calc(( 100% - 60px)/3);
+	position: static !important;
+	margin-right: 30px;
+	margin-bottom: 60px;
+	overflow: hidden;
+}
+
+#promotion .block:nth-child(3n) {
+	margin-right: 0
+}
+
+#promotion .block .img1 {
+	width: 100%;
+	height: 410px;
+	object-fit: cover;
+	display: block;
+	margin-bottom: 20px;
+}
+
+#promotion .list .content {
+	text-align: left;
+	font-size: 14px;
+	line-height: 1.71;
+	color: #4d4d4d;
+	margin: 0 0 12px;
+}
+
+#promotion .list .content .miniTitle {
+	font-size: 20px;
+	line-height: 1.8;
+	text-align: left;
+	color: #333;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right: 5px;
+}
+
+#promotion .list .miniContent {
+	color: gray;
+	margin-bottom: 20px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-align: left;
+	font-size: 14px;
+	line-height: 1.71;
+}
+
+#promotion .title {
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
+}
+
+#promotion .title2 {
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
+}
+/*//promotion*/
