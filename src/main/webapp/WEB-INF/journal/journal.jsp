@@ -108,7 +108,8 @@
                                     </c:if>
 								</div>
 								<p style="font-size: 14px; color: #4D4D4D;">
-								<fmt:formatDate value="${list.journal_date }" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${list.journal_date }"
+										pattern="yyyy-MM-dd" />
 								</p>
 							</div>
 							<p class="miniContent">${list.journal_content}</p>
