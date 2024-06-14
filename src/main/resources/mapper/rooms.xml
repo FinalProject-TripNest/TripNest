@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="data.mapper.RoomsMapperInter">
+	<insert id="insertRoom" parameterType="RoomsDto" keyProperty="room_id">
+		insert into ROOMS(room_id,room_name,room_price,room_min_capacity,room_max_capacity,room_address,room_service,room_detail) 
+		values(null,#{room_name},#{room_price},#{room_min_capacity},#{room_max_capacity},#{room_address},#{room_service},#{room_detail})
+	</insert>
+	
+	<select id="getLastInsertedRoomId" resultType="int">
+        SELECT LAST_INSERT_ID()
+   </select>
+</mapper>
