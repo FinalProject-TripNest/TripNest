@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
 <title>TRIP NEST</title>
-<!-- 외부 CSS 파일 포함 -->
 <style>
 /* 각 페이지 스타일 */
 #journal .list {
@@ -86,13 +85,17 @@
 		<div id="journal">
 			<div class="center">
 				<!-- 각 페이지 작업 코드 -->
-				<div class="title">
+				<div class="title" data-aos="fade-up" data-aos-duration="500">
 					<a class="title2">TRAVEL</a>
 				</div>
 
 				<div class="list">
 
 					<c:forEach items="${dto}" var="list">
+					
+					<c:set var="currentDate" value="<%= new java.util.Date() %>"/>
+                    <c:set var="dateDiff" value="${(currentDate.time - list.journal_date.time) / (1000 * 60 * 60 * 24)}"/>
+					
 						<a href="javascript:;" class="block"> <img alt=""
 							src="../img/journal/${list.journal_photo}" class="img1">
 							<div class="content"
@@ -100,7 +103,9 @@
 								<div style="display: flex; align-items: center;">
 									<p class="miniTitle">${list.journal_title}</p>
 									<!-- 예시로 추가한 이미지 -->
-									<img alt="" src="../img/journal/new.png" width="15" height="15">
+                                    <c:if test="${dateDiff <= 15}">
+                                        <img alt="" src="../img/journal/new.png" width="15" height="15">
+                                    </c:if>
 								</div>
 								<p style="font-size: 14px; color: #4D4D4D;">
 									<fmt:formatDate value="${list.journal_date }"
