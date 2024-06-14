@@ -22,8 +22,15 @@ public class JournalController {
 		List<JournalDto> dto = service.dataList();
 		model.addObject("dto", dto);
 		model.setViewName("/journal/journal");
-		System.out.println(dto);
 		return model;
+	}
+	
+	@GetMapping("journal/addform")
+	public String showAddForm()
+	{
+		
+		
+		return "journal/journal_addform";
 	}
 
 }
