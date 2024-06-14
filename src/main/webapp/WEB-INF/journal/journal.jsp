@@ -7,14 +7,14 @@
 <!-- 외부 CSS 파일 포함 -->
 <style>
 /* 각 페이지 스타일 */
-#promotion_detail .list {
+#journal .list {
 	display: flex;
 	flex-wrap: wrap;
 	height: auto !important;
 	padding-bottom: 60px;
 }
 
-#promotion_detail .block {
+#journal .block {
 	width: calc(( 100% - 60px)/3);
 	position: static !important;
 	margin-right: 30px;
@@ -22,17 +22,17 @@
 	overflow: hidden;
 }
 
-#promotion_detail .block:nth-child(3n) {
+#journal .block:nth-child(3n) {
 	margin-right: 0
 }
 
-#promotion_detail .title {
+#journal .title {
 	text-align: center;
 	padding: 60px 0;
 	justify-content: center;
 }
 
-#promotion_detail .title2 {
+#journal .title2 {
 	font-size: 20px;
 	line-height: 33px;
 	font-weight: 500;
@@ -41,7 +41,7 @@
 	text-transform: uppercase;
 }
 
-#promotion_detail .block .img1 {
+#journal .block .img1 {
 	width: 100%;
 	height: 410px;
 	object-fit: cover;
@@ -49,7 +49,7 @@
 	margin-bottom: 20px;
 }
 
-#promotion_detail .list .content {
+#journal .list .content {
 	text-align: left;
 	font-size: 14px;
 	line-height: 1.71;
@@ -57,7 +57,7 @@
 	margin: 0 0 12px;
 }
 
-#promotion_detail .list .content .miniTitle {
+#journal .list .content .miniTitle {
 	font-size: 20px;
 	line-height: 1.8;
 	text-align: left;
@@ -68,7 +68,7 @@
 	margin-right: 5px;
 }
 
-#promotion_detail .list .miniContent {
+#journal .list .miniContent {
 	color: gray;
 	margin-bottom: 20px;
 	display: -webkit-box;
@@ -83,7 +83,7 @@
 </style>
 <body>
 	<div id="wrap">
-		<div id="promotion_detail">
+		<div id="journal">
 			<div class="center">
 				<!-- 각 페이지 작업 코드 -->
 				<div class="title">
@@ -103,7 +103,8 @@
 									<img alt="" src="../img/journal/new.png" width="15" height="15">
 								</div>
 								<p style="font-size: 14px; color: #4D4D4D;">
-								<fmt:formatDate value="${list.journal_date }" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${list.journal_date }"
+										pattern="yyyy-MM-dd" />
 								</p>
 							</div>
 							<p class="miniContent">${list.journal_content}</p>
