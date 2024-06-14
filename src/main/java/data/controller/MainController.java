@@ -15,7 +15,7 @@ public class MainController {
 
 	@GetMapping("index")
 	public String index() {
-		return "main/index";
+		return "room/roominsertform2";
 	}
 
 }
