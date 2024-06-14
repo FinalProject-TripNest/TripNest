@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
 <title>TRIP NEST</title>
 <style>
@@ -61,40 +63,18 @@ header#header .select {
 						<div class="title" data-aos="fade-up">
 							<span>PROMOTION</span>
 						</div>
-						<a href="javascript::" class="link">전체 보기</a>
+						<a href="promotion" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a>
+						<c:forEach items="${promotionDto }" var="list" begin="0" end="6">
+							<a class="block" href="javascript:;"> <img alt=""
+								src="../img/promotion/${list.promotion_photo }">
+								<div class="text_box">
+									<span class="title">${list.promotion_title}</span> <span
+										class="text">${list.promotion_content}</span>
+								</div>
+							</a>
+						</c:forEach>
 
 					</div>
 				</div>
@@ -116,37 +96,16 @@ header#header .select {
 						<a href="journal" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a>
+						<c:forEach items="${journalDto }" var="list" begin="0" end="6">
+							<a class="block" href="javascript:;"> <img alt=""
+								src="../img/journal/${list.journal_photo }">
+								<div class="text_box">
+									<span class="title">${list.journal_title}</span> <span
+										class="text">${list.journal_content}</span>
+								</div>
+							</a>
+						</c:forEach>
+
 					</div>
 				</div>
 			</div>
