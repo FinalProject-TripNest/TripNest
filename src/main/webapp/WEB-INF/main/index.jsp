@@ -19,41 +19,28 @@ header#header .select {
 						<div class="title" data-aos="fade-up">
 							<span>오직 트립네스트에서만</span>
 						</div>
-						<a href="javascript::" class="link">전체 보기</a>
+						<a href="find/list" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a> <a class="block" href="javascript:;"> <img alt=""
-							src="../img/main/main_bg.jpg">
-							<div class="text_box">
-								<span class="title">title</span> <span class="text">text</span>
-							</div>
-						</a>
-
+						<c:forEach items="${roomsDto}" var="room" begin="0" end="5">
+							<c:set var="firstImage" value="true" />
+							<c:forEach items="${imageDto}" var="image">
+								<c:if test="${room.room_id eq image.room_id}">
+									<c:if test="${firstImage}">
+										<a class="block" href="javascript:;"> <img alt=""
+											src="${image.image_photo}">
+											<div class="text_box">
+												<span class="title">${room.room_name}</span> <span
+													class="text">${room.city} / ${room.district} / <fmt:formatNumber
+														value="${room.room_price}" type="currency" />~
+												</span>
+											</div>
+										</a>
+										<c:set var="firstImage" value="false" />
+									</c:if>
+								</c:if>
+							</c:forEach>
+						</c:forEach>					
 					</div>
 				</div>
 			</div>
@@ -63,19 +50,19 @@ header#header .select {
 						<div class="title" data-aos="fade-up">
 							<span>PROMOTION</span>
 						</div>
-						<a href="promotion" class="link">전체 보기</a>
+						<a href="promotion/list" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<c:forEach items="${promotionDto }" var="list" begin="0" end="6">
+						<c:forEach items="${promotionDto}" var="promotion" begin="0"
+							end="5">
 							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/promotion/${list.promotion_photo }">
+								src="../img/promotion/${promotion.promotion_photo}">
 								<div class="text_box">
-									<span class="title">${list.promotion_title}</span> <span
-										class="text">${list.promotion_content}</span>
+									<span class="title">${promotion.promotion_title}</span> <span
+										class="text">${promotion.promotion_content}</span>
 								</div>
 							</a>
 						</c:forEach>
-
 					</div>
 				</div>
 			</div>
@@ -93,15 +80,15 @@ header#header .select {
 						<div class="title" data-aos="fade-up">
 							<span>JOURNAL</span>
 						</div>
-						<a href="journal" class="link">전체 보기</a>
+						<a href="journal/list" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<c:forEach items="${journalDto }" var="list" begin="0" end="6">
+						<c:forEach items="${journalDto}" var="journal" begin="0" end="5">
 							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/journal/${list.journal_photo }">
+								src="../img/journal/${journal.journal_photo}">
 								<div class="text_box">
-									<span class="title">${list.journal_title}</span> <span
-										class="text">${list.journal_content}</span>
+									<span class="title">${journal.journal_title}</span> <span
+										class="text">${journal.journal_content}</span>
 								</div>
 							</a>
 						</c:forEach>
@@ -112,7 +99,7 @@ header#header .select {
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 	<script>
-		
+		// 추가적인 JavaScript 코드 필요 시 여기에 작성
 	</script>
 </body>
 </html>
