@@ -677,3 +677,93 @@ header#header .menu ul.sub li {
 	text-transform: uppercase;
 }
 /*//promotion*/
+
+/*findList*/
+#findList {
+	max-width: 1740px;
+	margin: 0 auto;
+}
+
+#findList>.title {
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
+}
+
+#findList .title2 {
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
+}
+
+#findList .list {
+	display: flex;
+	flex-wrap: wrap;
+	padding-bottom: 60px;
+}
+
+#findList .list .block {
+	width: calc(( 100% - 100px)/6);
+	margin-right: 20px;
+	margin-bottom: 60px;
+}
+
+#findList .list .block:nth-child(6n) {
+	margin-right: 0;
+}
+
+#findList .list .block .img {
+	height: 270px;
+}
+
+#findList .list .block .img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 16px;
+}
+
+#findList .list .block .text_box {
+	padding-top: 20px;
+	line-height: 26px;
+}
+
+#findList .list .block .text_box .top {
+	display: flex;
+	justify-content: space-between;
+	font-weight: 500;
+}
+
+#findList .list .block .text_box .top .rating {
+	display: flex;
+	align-items: center;
+}
+
+#findList .list .block .text_box .top .rating img {
+	width: 16px;
+	margin-right: 6px;
+}
+
+#findList .list .block .text_box .top .title {
+	font-size: 20px;
+	color: #333;
+}
+
+#findList .list .block .text_box .location {
+	font-size: 14px;
+	color: #808080;
+}
+
+#findList .list .block .text_box .price {
+	font-size: 14px;
+}
+
+#findList .list .block .text_box .standard {
+	font-size: 14px;
+	color: #808080;
+}
+
+/*//findList*/

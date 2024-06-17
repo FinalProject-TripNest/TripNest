@@ -40,7 +40,7 @@
 			</div>
 			<div class="menu">
 				<ul class="main">
-					<li><a href="javascript:;">FIND NEST</a></li>
+					<li><a href="${root }/find/list">FIND NEST</a></li>
 					<li><a href="${root }/promotion/list">PROMOTION</a></li>
 					<li><a href="${root }/journal/list">JOURNAL</a></li>
 				</ul>
