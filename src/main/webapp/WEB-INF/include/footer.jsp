@@ -48,21 +48,21 @@
 			<div class="copyright">Copyright©TRIPNEST</div>
 		</div>
 		<div class="footer_address">
-		<span class="info" style="word-break: keep-all">상호명 (주) 트립네스트<!-- -->
-            |<!-- --> <!-- --> <!-- -->대표자 김민규<!-- --> | <!-- -->주소 서울특별시 강남구
-            역삼동 테헤란로<!-- --> | <!-- -->전화 3456-2143<!-- --> |<!-- --> <!-- -->help@tripnest.com<!-- -->
-            <br>사업자등록번호 676-87-00055<!-- --> |<!-- --> <!-- -->통신판매업신고
-            제2015-서울강남-0499호<!-- --> <a class="info" href="javascript:;"
-            rel="noreferrer">[사업자정보확인]</a> <!-- -->| <!-- -->관광사업자등록 일반여행업
-            2018-000049호(강남구청)<!-- --> <!-- -->
-            <div class="info">(주)트립네스트는 통신판매 중개자로서 통신판매의 당사자가 아니며 상품의 예약,
-               이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</div></span>
+			<span class="info" style="word-break: keep-all">상호명 (주) 트립네스트<!-- -->
+				|<!-- --> <!-- --> <!-- -->대표자 김민규<!-- --> | <!-- -->주소 서울특별시 강남구
+				역삼동 테헤란로<!-- --> | <!-- -->전화 3456-2143<!-- --> |<!-- --> <!-- -->help@tripnest.com<!-- -->
+				<br>사업자등록번호 676-87-00055<!-- --> |<!-- --> <!-- -->통신판매업신고
+				제2015-서울강남-0499호<!-- --> <a class="info" href="javascript:;"
+				rel="noreferrer">[사업자정보확인]</a> <!-- -->| <!-- -->관광사업자등록 일반여행업
+				2018-000049호(강남구청)<!-- --> <!-- -->
+				<div class="info">(주)트립네스트는 통신판매 중개자로서 통신판매의 당사자가 아니며 상품의 예약,
+					이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.</div></span>
 		</div>
 	</div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script
-   src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="../js/parallax_scroll.js" type="module"></script>
 <script src="../js/ukiyo.js"></script>

@@ -17,9 +17,8 @@ public class PromotionController {
 	@Autowired
 	PromotionService service;
 
-	@GetMapping("promotion")
-	public ModelAndView promotionPage() 
-	{
+	@GetMapping("/promotion/list")
+	public ModelAndView promotionPage() {
 		ModelAndView model = new ModelAndView();
 		List<PromotionDto> dto = service.dataList();
 		model.addObject("dto", dto);

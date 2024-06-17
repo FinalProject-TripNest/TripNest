@@ -9,4 +9,8 @@
 	<select id="getLastInsertedRoomId" resultType="int">
         SELECT LAST_INSERT_ID()
    </select>
+   
+   	<select id="dataList" resultType="RoomsDto">
+		select * from ROOMS order by room_id desc
+	</select>
 </mapper>

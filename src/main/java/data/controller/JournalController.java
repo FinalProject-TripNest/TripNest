@@ -16,7 +16,7 @@ public class JournalController {
 	@Autowired
 	JournalService service;
 
-	@GetMapping("journal")
+	@GetMapping("/journal/list")
 	public ModelAndView journalPage() {
 		ModelAndView model = new ModelAndView();
 		List<JournalDto> dto = service.dataList();
@@ -25,7 +25,7 @@ public class JournalController {
 		return model;
 	}
 	
-	@GetMapping("journal/addform")
+	@GetMapping("/journal/addform")
 	public String showAddForm()
 	{
 		

@@ -4,4 +4,8 @@
 	<insert id="insertImage" parameterType="ImagesDto">
 		insert into IMAGES(room_id,image_photo) values(#{room_id},#{image_photo})
 	</insert>
+	
+	   	<select id="dataList" resultType="ImagesDto">
+		select * from IMAGES order by image_id desc
+	</select>
 </mapper>
