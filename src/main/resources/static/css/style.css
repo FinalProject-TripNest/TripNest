@@ -476,10 +476,11 @@ header#header .menu ul.sub li {
 /*index*/
 #index .top_banner {
 	height: 530px;
-	background-image: url("../img/main/main_bg.jpg");
+	background-image: url("../img/main/main_bg.jpg");  
 	background-position: 0% 70%;
 	object-fit: cover;
 	background-repeat: no-repeat;
+	align-content: space-around; /* 박범수 수정 */
 }
 
 #index .common {
@@ -601,6 +602,22 @@ header#header .menu ul.sub li {
 #index .event a p.text {
 	margin-top: 20px;
 }
+
+#index #hotel_search { /* 박범수 수정 */
+	height: 150px;
+	width: 70%;
+	border: 2px solid red;
+	text-align: center;
+	margin: 320px auto;
+	display: flex;
+}
+
+#index #hotel_search_address {
+	height: 50px;
+	width: 40%;
+}
+
+#index #hotel_search_
 /*//index*/
 
 /*promotion*/

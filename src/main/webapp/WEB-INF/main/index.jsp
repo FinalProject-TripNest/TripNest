@@ -12,7 +12,13 @@ header#header .select {
 <body>
 	<div id="wrap">
 		<div id="index">
-			<div class="top_banner"></div>
+			<div class="top_banner">
+				<div id="hotel_search">
+					<input id="hotel_search_address">
+					<div id="hotel_search_date"></div>
+					<div id="hotel_search_capacity"></div>
+				</div>
+			</div>
 			<div class="stay common">
 				<div class="center">
 					<div class="head">

@@ -18,7 +18,8 @@ public class PromotionController {
 	PromotionService service;
 
 	@GetMapping("promotion")
-	public ModelAndView promotionPage() {
+	public ModelAndView promotionPage() 
+	{
 		ModelAndView model = new ModelAndView();
 		List<PromotionDto> dto = service.dataList();
 		model.addObject("dto", dto);
