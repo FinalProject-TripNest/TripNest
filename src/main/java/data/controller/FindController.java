@@ -36,8 +36,10 @@ public class FindController {
 	@GetMapping("/find/list/detail")
 	public ModelAndView detail(@RequestParam("room_id") String room_id) {
 		ModelAndView detailModel = new ModelAndView();
-		RoomsDto roomdto = roomsService.getOneData(room_id);
-		detailModel.addObject("roomdto", roomdto);
+		RoomsDto detailDto = roomsService.getOneData(room_id);
+		List<ImagesDto> imageDto = imageService.imgList(room_id); // 이미지 서비스에서 String으로 전달
+		detailModel.addObject("detailDto", detailDto); // 변수명 수정
+		detailModel.addObject("imageDto", imageDto); // 변수명 수정
 		detailModel.setViewName("find/detail");
 		return detailModel;
 	}
