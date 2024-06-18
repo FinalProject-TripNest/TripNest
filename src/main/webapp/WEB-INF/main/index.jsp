@@ -67,7 +67,7 @@ header#header .select {
 				</div>
 			</div>
 			<div class="event">
-				<a href="javascript:;">
+				<a href="find/list">
 					<div>
 						<p class="title">Experience Tripnest Daily</p>
 						<p class="text">트립네스트에서의 경험을 일상으로</p>
