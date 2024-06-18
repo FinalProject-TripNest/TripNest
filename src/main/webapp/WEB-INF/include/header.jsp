@@ -40,10 +40,11 @@
 					<li><a href="javascript:;">JOURNAL</a></li>
 				</ul>
 				<ul class="sub">
-					<li><a href="javascript:;">LOGIN</a></li>
-					<li><a href="javascript:;">SIGN UP</a></li>
+					<li><a href="login">LOGIN</a></li>
+					<li><a href="register">SIGN UP</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 </header>
+</html>

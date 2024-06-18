@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-
-
 	@GetMapping("/")
 	public String start() {
 		return "redirect:index";
@@ -17,5 +15,5 @@ public class MainController {
 	public String index() {
 		return "main/index";
 	}
-
+	
 }
