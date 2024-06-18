@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c890ddd8c7f2607257a2db412525f318&libraries=services"></script>
@@ -14,17 +15,27 @@
 </head>
 <title>TRIP NEST</title>
 <style>
-   html,
+ html,
     body {
       position: relative;
-      height: 100%;
     }
-    swiper-container {
+
+    body {
+      background: #fff;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper {
       width: 100%;
       height: 100%;
     }
 
-    swiper-slide {
+    .swiper-slide {
+
       font-size: 18px;
       background: #fff;
       display: flex;
@@ -32,15 +43,9 @@
       align-items: center;
     }
 
-    swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     
-     .number-input {
+    .number-input {
             display: flex;
             align-items: center;
         }
@@ -123,6 +128,7 @@
 #map{
  width:96%;
  height:450px;
+ margin-top: 5%;
 }
 .image-preview-container {
     text-align: center;
@@ -190,8 +196,16 @@ input.service{
 	margin-top: 5%;
 	cursor: pointer;
 }
-
-
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+	background-color: black;
+}
+.swiper-button-next:after, .swiper-button-prev:after{
+	color: black;
+}
+input.addrinput{
+margin-bottom: 20px;
+}
+ 
 </style>
 <body>
 
@@ -199,11 +213,12 @@ input.service{
 	<div id="wrap">
 		<div id="roominsertfrom">
 			<div class="center">
-				<form action="insert" method="post" enctype="multipart/form-data" id="roomform">
+			<form action="insert" method="post" enctype="multipart/form-data" id="roomform">
 				 <input type="hidden" name="room_address" id="room_address">
-					<swiper-container class="mySwiper" pagination="true" pagination-type="progressbar" navigation="true">
-				    <swiper-slide>
-							<div class="tablediv">
+				<div class="swiper mySwiper">
+			    <div class="swiper-wrapper">
+			      <div class="swiper-slide">
+			      	<div class="tablediv">
 								<table class="form-table">
 								<caption align="top"><b>기본사항 작성하기</b></caption>
 									<tr>
@@ -261,36 +276,31 @@ input.service{
 									</tr>
 								</table>
 							</div>
-						</swiper-slide>
-						
-						
-				    <swiper-slide>
-				    	<div class="tablediv">
-				    	<table class="addr-table">
-				    		<caption align="top"><b>주소입력하기</b></caption>
-				    		<tr>
-				    			<td>
-				    				<div>
-										<input type="text" id="sample6_postcode" placeholder="우편번호">
-										<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" id="sample6_address" placeholder="주소" required="required"><br>
-										<input type="text" id="sample6_detailAddress" placeholder="상세주소" required="required">
-										<input type="text" id="sample6_extraAddress" placeholder="참고항목">
-									</div>
-				    			</td>
-				    		</tr>
-							</table>
-							<div align="center">
-								<button type="button" onclick="searchAddress()" class="addrbtn">주소로 지도 표시하기</button>	
-							</div>
-							<div id="map"></div>
-
-
+			      </div>
+			      <div class="swiper-slide">
+			      	<div class="tablediv">
+					    	<table class="addr-table">
+					    		<caption align="top"><b>주소입력하기</b></caption>
+					    		<tr>
+					    			<td>
+					    				<div>
+											<input type="text" class="addrinput" id="sample6_postcode" placeholder="우편번호">
+											<input type="button" class="addrinput" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+											<input type="text" class="addrinput" id="sample6_address" placeholder="주소" required="required"><br>
+											<input type="text" class="addrinput" id="sample6_detailAddress" placeholder="상세주소" required="required">
+											<input type="text" class="addrinput" id="sample6_extraAddress" placeholder="참고항목">
+										</div>
+					    			</td>
+					    		</tr>
+								</table>
+								<!-- <div align="center">
+									<button type="button" onclick="searchAddress()" class="addrbtn">주소로 지도 표시하기</button>	
+								</div> -->
+								<div id="map"></div>
 				    	</div>
-				    </swiper-slide>
-				    
-				    <swiper-slide>
-				    	<div class="tablediv">
+			      </div>
+			      <div class="swiper-slide">
+			      <div class="tablediv">
 				    		<table class="service-table">
 				    			<caption align="top"><b>편의시설 선택하기</b></caption>
 				    			<tr align="center">
@@ -379,9 +389,13 @@ input.service{
 				    			<button type="submit" id="insertbtn">등록하기</button>
 				    		</div>	
 				    	</div>
-				    </swiper-slide>
-				  </swiper-container>
-				 </form>
+			      </div>
+			    </div>
+			    <div class="swiper-button-next"></div>
+			    <div class="swiper-button-prev"></div>
+			    <div class="swiper-pagination"></div>
+			  </div>
+			  </form>
 			</div>
 		</div>
 	</div>
@@ -390,8 +404,17 @@ input.service{
 
 
 	<%@ include file="../include/footer.jsp"%>
-
 	<script>
+	var swiper = new Swiper(".mySwiper", {
+	      pagination: {
+	        el: ".swiper-pagination",
+	        type: "progressbar",
+	      },
+	      navigation: {
+	        nextEl: ".swiper-button-next",
+	        prevEl: ".swiper-button-prev",
+	      },
+	    });
 	
 	//도로명주소 검색
 	function sample6_execDaumPostcode() {
@@ -478,9 +501,83 @@ input.service{
          }
      });
     
+    //폼을 제출할때 빠진 정보가 없게끔. 비어있는 슬라이드로 이동함.
+     $(document).ready(function(){
+    	 
+    	    $("#insertbtn").click(function(){
+    	    	var room_name=$("#room_name").val();
+    	    	var images = $("#image_photo")[0].files.length;
+    	    	var room_price = $("#room_price").val();
+            var room_detail = $("#room_detail").val();
+            var room_address=$("#room_address").val();
+            var services = $("input[name='room_service[]']:checked").length;
+    	    	
+    	    	if(!room_name){
+    	    		
+    	    		alert("숙소이름을 입력해 주세요.");
+    	            // 슬라이드를 첫 번째 페이지로 이동
+    	            var swiper = document.querySelector('.mySwiper').swiper;
+    	            swiper.slideTo(0);
+    	            return false;
+    	    	}
+    	    	 if (!room_price) {
+    	                alert("숙소가격을 입력해 주세요.");
+    	                // 슬라이드를 첫 번째 페이지로 이동
+    	                var swiper = document.querySelector('.mySwiper').swiper;
+    	                swiper.slideTo(0);
+    	                return false;
+    	            }
+    	    	 if (images == 0) {
+    	                alert("숙소사진을 선택해 주세요.");
+    	                // 슬라이드를 첫 번째 페이지로 이동
+    	                var swiper = document.querySelector('.mySwiper').swiper;
+    	                swiper.slideTo(0);
+    	                return false;
+    	            }
+
+    	            if (!room_detail) {
+    	                alert("상세정보를 입력해 주세요.");
+    	                // 슬라이드를 첫 번째 페이지로 이동
+    	                var swiper = document.querySelector('.mySwiper').swiper;
+    	                swiper.slideTo(0);
+    	                return false;
+    	            }
+    	            if (!room_address) {
+    	                alert("주소를 입력해 주세요.");
+    	                // 슬라이드를 첫 번째 페이지로 이동
+    	                var swiper = document.querySelector('.mySwiper').swiper;
+    	                swiper.slideTo(1);
+    	                return false;
+    	            }
+    	            if (services == 0) {
+    	                alert("1개 이상의 편의시설을 선택해 주세요.");
+    	                // 슬라이드를 마지막 페이지로 이동
+    	                return false;
+    	            }
+    	            return true;
+    	    	
+    	    })
+     });
+    
+
+
+
 
 	</script>
 	<script type="text/javascript">
+	
+	 $(document).ready(function() {
+		   $('#sample6_detailAddress,#sample6_address').on('keyup', function() {
+		        var address = $('#sample6_address').val().trim(); // 주소 입력 필드 값 가져오기
+
+		        // 주소가 입력되어 있는 경우에만 지도 업데이트
+		        if (address) {
+		            searchAddress(address); // 주소 검색 함수 호출
+		        }
+		    });
+	    });
+	   
+	
 	//카카오 지도
 	//마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 	   var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -492,7 +589,7 @@ input.service{
 	           level: 3 // 지도의 확대 레벨
 	       };  
 
-	   // 지도를 생성합니다    
+	   // 지도를 생성합니다   
 	   var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 	   // 주소로 좌표를 검색하는 함수
@@ -519,6 +616,9 @@ input.service{
                }
            });
        }
+	   
+	   
+
 	</script>
 </body>
 </html>

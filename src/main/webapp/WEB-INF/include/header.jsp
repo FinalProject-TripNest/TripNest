@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +18,7 @@
 <link rel="stylesheet" href="../css/reset.css">
 <link rel="stylesheet" href="../css/style.css">
 </head>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <header id="header">
 	<a href="javascript:;" class="top_event">
 		<div>
@@ -37,9 +41,11 @@
 			</div>
 			<div class="menu">
 				<ul class="main">
+					<li><a href="${root }/room/roominsert">숙소등록</a></li>
 					<li><a href="javascript:;">FIND NEST</a></li>
-					<li><a href="promotion">PROMOTION</a></li>
-					<li><a href="journal">JOURNAL</a></li>
+					 <li><a href="${root }/promotion/list">PROMOTION</a></li>
+               <li><a href="${root }/journal/list">JOURNAL</a></li>
+
 				</ul>
 				<ul class="sub">
 					<li><a href="javascript:;">LOGIN</a></li>

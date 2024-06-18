@@ -4,4 +4,8 @@
 	<insert id="insertImage" parameterType="ImagesDto">
 		insert into IMAGES(room_id,image_photo) values(#{room_id},#{image_photo})
 	</insert>
+	
+	<select id="getAllRoomPhoto" resultType="ImagesDto" >
+		select * from IMAGES
+	</select>
 </mapper>

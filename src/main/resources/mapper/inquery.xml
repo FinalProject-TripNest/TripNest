@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="data.mapper.InqueryMapperInter">
+	<insert id="insertInquery" parameterType="InqueryDto">
+		insert into INQUERY (inquery_title,inquery_content,inquery_answer,inquery_category,inquery_date)
+		values(#{inquery_title},#{inquery_content},#{inquery_answer},#{inquery_category},now())
+	</insert>
+	
+	<select id="getInqueryList" parameterType="HashMap" resultType="InqueryDto">
+		select * from INQUERY order by num desc limit #{start},#{perpage}
+	</select>
+	
+	<select id="getTotalInquery" resultType="int">
+		select count(*) from INQUERY
+	</select>
+	
+	<update id="updateInqueryAnswer" parameterType="InqueryDto">
+		update INQUERY set inquery_answer=#{inquery_answer} where inquery_id=#{inquery_id}
+	</update>
+</mapper>

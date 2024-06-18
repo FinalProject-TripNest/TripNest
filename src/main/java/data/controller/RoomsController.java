@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,12 @@ public class RoomsController {
 	@Autowired
 	S3UploaderService s3service;
 	
+	@GetMapping("/room/roominsert")
+	public String roomform() {
+		//return "/room/roominsertform2";
+		return "/room/roominsertform";
+	}
+	
 	@PostMapping("/room/insert")
 	public String insert(@ModelAttribute RoomsDto dto,
 			List<MultipartFile> image_upload, 
@@ -51,8 +58,7 @@ public class RoomsController {
 		
 		 // 방 정보 삽입 후, room 의 마지막에 등록된 romm_id값을 가져와서 images테이블에 넣어줌.
         int room_id = service.getLastInsertedRoomId(); 
-        
-		String photo="";
+       
 		//SimpleDateFormat sdf=new SimpleDateFormat("yyyMMdd");
 		for(MultipartFile multi:image_upload) {
 			//String newName=sdf.format(new Date())+"_"+multi.getOriginalFilename();
@@ -61,7 +67,11 @@ public class RoomsController {
 				
 				//roomphohto 는 s3에 등록할 파일명?같은거 path
 				String imageUrl = s3service.upload(multi, "roomphoto");
-                photo += imageUrl + ",";
+                //photo += imageUrl + ",";
+				ImagesDto imgdto=new ImagesDto();
+				imgdto.setRoom_id(room_id);
+				imgdto.setImage_photo(imageUrl);
+				imgservice.insertImage(imgdto);
 				
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
@@ -71,15 +81,9 @@ public class RoomsController {
 				e.printStackTrace();
 			}
 		}
-		photo=photo.substring(0, photo.length()-1);
-		
-		ImagesDto imgdto=new ImagesDto();
-		imgdto.setRoom_id(room_id);
-		imgdto.setImage_photo(photo);
-		
-		imgservice.insertImage(imgdto);
+		//photo=photo.substring(0, photo.length()-1);	
 
-		return "/room/roominsertform2";
+		return "redirect:/";
 
 	}
 
