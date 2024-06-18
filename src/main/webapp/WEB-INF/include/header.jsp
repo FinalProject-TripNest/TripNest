@@ -6,15 +6,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="../img/favicon.ico">
+<link rel="icon" href="../img/common/favicon.ico">
 <link
 	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
 	rel="stylesheet">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="../css/reset.css">
-<link rel="stylesheet" href="../css/style.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="${root }/css/reset.css">
+<link rel="stylesheet" href="${root }/css/style.css">
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <header id="header">
@@ -25,22 +26,23 @@
 	</a>
 	<nav>
 		<div>
-			<a class="logo" href="index"> <img alt="" src="../img/logo.png">
+			<a class="logo" href="${root }/index"> <img alt=""
+				src="${root }/img/common/logo.png">
 			</a>
 			<div class="select">
 				<ul>
-					<li><img alt="" src="../img/header_location.png"> <span>어디로
-							떠날까요?</span></li>
-					<li><img alt="" src="../img/header_back.png"> <span>언제
+					<li><img alt="" src="${root }/img/common/header_location.png">
+						<span>어디로 떠날까요?</span></li>
+					<li><img alt="" src="${root }/img/common/header_back.png"> <span>언제
 							떠날까요?</span></li>
 
 				</ul>
 			</div>
 			<div class="menu">
 				<ul class="main">
-					<li><a href="javascript:;">FIND NEST</a></li>
-					<li><a href="javascript:;">PROMOTION</a></li>
-					<li><a href="javascript:;">JOURNAL</a></li>
+					<li><a href="${root }/find/list">FIND NEST</a></li>
+					<li><a href="${root }/promotion/list">PROMOTION</a></li>
+					<li><a href="${root }/journal/list">JOURNAL</a></li>
 				</ul>
 				<ul class="sub">
 					<li><a href="${root }/member/login">LOGIN</a></li>
@@ -50,4 +52,11 @@
 		</div>
 	</nav>
 </header>
+<<<<<<< HEAD
 </html>
+=======
+
+<!-- 탑버튼 -->
+<div class="top_btn"></div>
+<!-- //탑버튼 -->
+>>>>>>> 3edd368dff658d156670bccdf5b41fd07fe4ccbf

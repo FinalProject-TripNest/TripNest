@@ -3,11 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
 <title>TRIP NEST</title>
 <style>
 /* 각 페이지 스타일 */
@@ -21,7 +16,7 @@
 		<div id="페이지 이름 예시:promotion_detail.jsp id=promotion_detail">
 			<div class="center">
 				<!-- 각 페이지 작업 코드 -->
-				
+				123
 				<!--//각 페이지 작업 코드  -->
 			</div>
 		</div>

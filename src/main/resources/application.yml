@@ -15,4 +15,7 @@ mybatis:
   type-aliases-package: data.*
   mapper-locations:
   - /mapper/**/*.xml
+<<<<<<< HEAD
   
+=======
+>>>>>>> 3edd368dff658d156670bccdf5b41fd07fe4ccbf
