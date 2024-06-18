@@ -66,6 +66,7 @@
 	margin-top: 50px;
 	border: 1px solid #e0e0e0;
 	padding: 100px 20px 60px;
+	margin-bottom: 100px;
 }
 
 #reservation .detailbox .bookingfrm {

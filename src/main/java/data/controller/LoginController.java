@@ -44,6 +44,7 @@ public class LoginController {
             session.setMaxInactiveInterval(60 * 60 * 8); // 8시간
 
             session.setAttribute("myid", memberDto.getMember_useremail());
+            session.setAttribute("myname", memberDto.getMember_name());
             session.setAttribute("loginok", "yes");
             session.setAttribute("member", memberDto);
 
