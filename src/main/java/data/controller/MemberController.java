@@ -81,4 +81,5 @@ public class MemberController {
     public String registerSuccess() {
         return "/member/registerSuccess";
     }
+
 }

@@ -18,8 +18,6 @@ p {
 }
 </style>
 <body>
-
-
 	<div id="wrap">
 		<div id="member_registerSuccess">
 			<div class="center">
@@ -32,11 +30,9 @@ p {
 			</div>
 		</div>
 	</div>
-
-
-
-
+	
 	<%@ include file="../include/footer.jsp"%>
+	
 	<script>
 	//각 페이지 자바스크립트
 
