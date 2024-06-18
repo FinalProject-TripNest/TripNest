@@ -114,7 +114,7 @@
 	<div id="wrap">
         <div id="member_registerForm">
             <div class="center">
-                <h1>TRIP NEST JOIN</h1>
+                <h1>TRIP NEST</h1>
                 <h2>회원가입</h2>
                 
                 <form action="${pageContext.request.contextPath}/member/insert" method="post">

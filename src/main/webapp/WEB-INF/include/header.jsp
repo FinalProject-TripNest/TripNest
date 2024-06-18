@@ -7,12 +7,8 @@
 <head>
 <meta charset="utf-8">
 <link rel="icon" href="../img/common/favicon.ico">
-<link
-	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="${root }/css/reset.css">
 <link rel="stylesheet" href="${root }/css/style.css">
@@ -45,8 +41,16 @@
 					<li><a href="${root }/journal/list">JOURNAL</a></li>
 				</ul>
 				<ul class="sub">
-					<li><a href="${root }/member/login">LOGIN</a></li>
-					<li><a href="${root }/member/register">SIGN UP</a></li>
+					<c:choose>
+                        <c:when test="${sessionScope.loginok == null}">
+                            <li><a href="${root}/login/loginform">LOGIN</a></li>
+                            <li><a href="${root}/member/register">SIGN UP</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="${root}/mypage">MY PAGE</a></li>
+                            <li><a href="${root}/login/logout">LOGOUT</a></li>
+                        </c:otherwise>
+                    </c:choose>
 				</ul>
 			</div>
 		</div>
