@@ -53,8 +53,8 @@
                             <li><a href="${root}/member/register">SIGN UP</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="${root}/mypage">MY PAGE</a></li>
                             <li><a href="${root}/login/logout">LOGOUT</a></li>
+                            <li><a href="${root}/mypage">MY PAGE</a></li>
                         </c:otherwise>
                     </c:choose>
 				</ul>
