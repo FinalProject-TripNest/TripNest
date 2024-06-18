@@ -20,6 +20,8 @@ public class RoomsDto {
 	private String room_detail;
 	private String room_staus;
 	private String room_location;
-    private String city;
-    private String district;	
+	private String room_hp;
+	private String city;
+	private String district;
+
 }
