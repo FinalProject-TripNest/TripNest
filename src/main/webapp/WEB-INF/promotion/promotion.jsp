@@ -21,8 +21,6 @@
 								style="display: flex; align-items: center; justify-content: space-between;">
 								<div style="display: flex; align-items: center;">
 									<p class="miniTitle">${list.promotion_title}</p>
-									<!-- 예시로 추가한 이미지 -->
-									<img alt="" src="../img/journal/new.png" width="15" height="15">
 								</div>
 								<p style="font-size: 14px; color: #4D4D4D;">
 									<fmt:formatDate value="${list.promotion_date }"
