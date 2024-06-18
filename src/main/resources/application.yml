@@ -9,12 +9,22 @@ spring:
  devtools:
    livereload:
      enabled: true
+ mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tripnest24@gmail.com
+    password: "s k a j j j v j q k f f p k e r"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 #mybatis
 mybatis:
   type-aliases-package: data.*
   mapper-locations:
   - /mapper/**/*.xml
-
 #s3
 cloud:
   aws:

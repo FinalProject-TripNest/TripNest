@@ -1,11 +1,11 @@
 package data.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-
+import org.apache.ibatis.annotations.Param;
 import data.dto.MemberDto;
 
 @Mapper
 public interface MemberMapperInter {
-
-	public void insertMember(MemberDto dto);
+    void insertMember(MemberDto dto);
+    MemberDto findByEmail(@Param("email") String email);
 }
