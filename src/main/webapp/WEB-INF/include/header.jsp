@@ -14,8 +14,8 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
 	rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<link rel="stylesheet" href="../css/reset.css">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="${root }/css/reset.css">
+<link rel="stylesheet" href="${root }/css/style.css">
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <header id="header">
@@ -27,13 +27,13 @@
 	<nav>
 		<div>
 			<a class="logo" href="${root }/index"> <img alt=""
-				src="../img/common/logo.png">
+				src="${root }/img/common/logo.png">
 			</a>
 			<div class="select">
 				<ul>
-					<li><img alt="" src="../img/common/header_location.png">
+					<li><img alt="" src="${root }/img/common/header_location.png">
 						<span>어디로 떠날까요?</span></li>
-					<li><img alt="" src="../img/common/header_back.png"> <span>언제
+					<li><img alt="" src="${root }/img/common/header_back.png"> <span>언제
 							떠날까요?</span></li>
 
 				</ul>

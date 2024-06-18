@@ -10,8 +10,6 @@
 </head>
 <title>TRIP NEST</title>
 <body>
-
-
 	<div id="wrap">
 		<div id="findList">
 			<div class="title" data-aos="fade-up">
@@ -23,7 +21,8 @@
 					<c:forEach items="${imageDto}" var="image">
 						<c:if test="${room.room_id eq image.room_id}">
 							<c:if test="${firstImage}">
-								<a href="" class="block">
+								<a href="list/detail?room_id=${room.room_id }"
+									class="block">
 									<div class="img">
 										<img alt="" src="${image.image_photo}">
 									</div>

@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="root" value="<%=request.getContextPath()%>" />
 <footer id="footer">
 	<div class="container_wide">
 		<div class="footer_cont">
 			<div class="logo">
-				<img src="/img/common/logo.png" alt="STAYFOLIO">
+				<img src="${root }/img/common/logo.png" alt="STAYFOLIO">
 			</div>
 			<div class="menu-cs">
 				<ul class="menu">
@@ -64,7 +67,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="../js/parallax_scroll.js" type="module"></script>
-<script src="../js/ukiyo.js"></script>
-<script src="../js/index.js"></script>
+<script src="${root }/js/parallax_scroll.js" type="module"></script>
+<script src="${root }/js/ukiyo.js"></script>
+<script src="${root }/js/index.js"></script>
 

@@ -32,4 +32,15 @@ public class FindController {
 		return model;
 	}
 
+	@GetMapping("/find/list/detail")
+	public ModelAndView detail() {
+		ModelAndView model2 = new ModelAndView();
+		List<RoomsDto> roomsDto2 = roomsService.dataList();
+		List<ImagesDto> imageDto2 = imageService.dataList();
+		model2.addObject("roomsDto2", roomsDto2);
+		model2.addObject("imageDto2", imageDto2);
+		model2.setViewName("find/datail");
+		return model2;
+	}
+
 }

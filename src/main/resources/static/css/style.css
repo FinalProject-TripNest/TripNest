@@ -767,3 +767,59 @@ header#header .menu ul.sub li {
 }
 
 /*//findList*/
+#findDetail .center>.title {
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
+}
+
+#findDetail .center>.title>.title2 {
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
+}
+
+#findDetail .head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 2px solid #ddd;
+	padding-bottom: 20px;
+}
+
+#findDetail .head .title {
+	font-size: 26px;
+	font-weight: 500;
+	color: #000;
+}
+
+#findDetail .head .data_btn {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+#findDetail .head .data_btn img {
+	width: 18px;
+	transform: rotate(90deg);
+	margin-left: 10px;
+}
+
+#findDetail .head .payment_btn {
+	width: 240px;
+	height: 40px;
+	margin: 0;
+	background-color: #000;
+	border: 1px solid #000;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/*findDetail*/
+
+/*//findDetail*/

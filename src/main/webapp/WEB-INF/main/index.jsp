@@ -27,7 +27,7 @@ header#header .select {
 							<c:forEach items="${imageDto}" var="image">
 								<c:if test="${room.room_id eq image.room_id}">
 									<c:if test="${firstImage}">
-										<a class="block" href="javascript:;"> <img alt=""
+										<a class="block" href="find/list/detail?room_id=${room.room_id }"> <img alt=""
 											src="${image.image_photo}">
 											<div class="text_box">
 												<span class="title">${room.room_name}</span> <span
