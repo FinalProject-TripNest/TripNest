@@ -52,11 +52,9 @@
 		</div>
 	</nav>
 </header>
-<<<<<<< HEAD
-</html>
-=======
+
 
 <!-- 탑버튼 -->
 <div class="top_btn"></div>
 <!-- //탑버튼 -->
->>>>>>> 3edd368dff658d156670bccdf5b41fd07fe4ccbf
+
