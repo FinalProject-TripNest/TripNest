@@ -9,31 +9,10 @@ spring:
  devtools:
    livereload:
      enabled: true
- mail:
-    host: smtp.gmail.com
-    port: 587
-    username: tripnest24@gmail.com
-    password: "s k a j j j v j q k f f p k e r"
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+
 #mybatis
 mybatis:
   type-aliases-package: data.*
   mapper-locations:
   - /mapper/**/*.xml
-#s3
-cloud:
-  aws:
-    s3:
-      bucket: finaltripnest0613
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
-    credentials:
-      accessKey: AKIAZI2LFNEJAGA6N2XS
-      secretKey: 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
+  
