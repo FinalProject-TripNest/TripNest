@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.JournalDto;
@@ -17,6 +18,15 @@ public class ReservationController {
 		
 		
 		model.setViewName("/find/reservation");
+		return model;
+	}
+	
+	@PostMapping("/find/insert")
+	public ModelAndView insert() {
+		ModelAndView model = new ModelAndView();
+		
+		
+		model.setViewName("/find/reservation_success");
 		return model;
 	}
 	
