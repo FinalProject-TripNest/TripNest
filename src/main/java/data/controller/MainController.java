@@ -19,39 +19,36 @@ import data.service.RoomsService;
 @Controller
 public class MainController {
 
-<<<<<<< HEAD
-=======
-	@Autowired
-	JournalService journalService;
+   @Autowired
+   JournalService journalService;
 
-	@Autowired
-	PromotionService promotionService;
+   @Autowired
+   PromotionService promotionService;
 
-	@Autowired
-	RoomsService roomsService;
+   @Autowired
+   RoomsService roomsService;
 
-	@Autowired
-	ImageService imageService;
+   @Autowired
+   ImageService imageService;
 
->>>>>>> 3edd368dff658d156670bccdf5b41fd07fe4ccbf
-	@GetMapping("/")
-	public String start() {
-		return "redirect:index";
-	}
+   @GetMapping("/")
+   public String start() {
+      return "redirect:index";
+   }
 
-	@GetMapping("index")
-	public ModelAndView index() {
-		ModelAndView model = new ModelAndView();
-		List<JournalDto> journalDto = journalService.dataList();
-		List<PromotionDto> promotionDto = promotionService.dataList();
-		List<RoomsDto> roomsDto = roomsService.dataList();
-		List<ImagesDto> imageDto = imageService.dataList();
-		model.addObject("journalDto", journalDto);
-		model.addObject("promotionDto", promotionDto);
-		model.addObject("roomsDto", roomsDto);
-		model.addObject("imageDto", imageDto);
-		model.setViewName("/main/index");
-		return model;
-	}
-	
+   @GetMapping("index")
+   public ModelAndView index() {
+      ModelAndView model = new ModelAndView();
+      List<JournalDto> journalDto = journalService.dataList();
+      List<PromotionDto> promotionDto = promotionService.dataList();
+      List<RoomsDto> roomsDto = roomsService.dataList();
+      List<ImagesDto> imageDto = imageService.dataList();
+      model.addObject("journalDto", journalDto);
+      model.addObject("promotionDto", promotionDto);
+      model.addObject("roomsDto", roomsDto);
+      model.addObject("imageDto", imageDto);
+      model.setViewName("/main/index");
+      return model;
+   }
+
 }
