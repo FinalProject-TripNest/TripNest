@@ -27,12 +27,13 @@
 						<span>날짜를 선택해주세요.</span> <img alt=""
 							src="../../img/main/right_arrow.png">
 					</div>
-					<a href="../../find/reservation?room_id=${room_id }" class="payment_btn">결제하기</a>
+					<a href="../../find/reservation?room_id=${roomdto.room_id}"
+						class="payment_btn">결제하기</a>
+
 				</div>
 				<div class="main">
-				<div class="infomation">
-				</div>
-				<div></div>
+					<div class="infomation"></div>
+					<div></div>
 				</div>
 				<!--//각 페이지 작업 코드  -->
 			</div>

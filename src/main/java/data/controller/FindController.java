@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
@@ -33,14 +34,12 @@ public class FindController {
 	}
 
 	@GetMapping("/find/list/detail")
-	public ModelAndView detail() {
-		ModelAndView model2 = new ModelAndView();
-		List<RoomsDto> roomsDto2 = roomsService.dataList();
-		List<ImagesDto> imageDto2 = imageService.dataList();
-		model2.addObject("roomsDto2", roomsDto2);
-		model2.addObject("imageDto2", imageDto2);
-		model2.setViewName("find/datail");
-		return model2;
+	public ModelAndView detail(@RequestParam("room_id") String room_id) {
+		ModelAndView detailModel = new ModelAndView();
+		RoomsDto roomdto = roomsService.getOneData(room_id);
+		detailModel.addObject("roomdto", roomdto);
+		detailModel.setViewName("find/detail");
+		return detailModel;
 	}
 
 }
