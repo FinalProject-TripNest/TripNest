@@ -562,13 +562,15 @@
 				</div>
 
 				<div class="titlebox1">
-					<div class="name">서촌영락재</div>
+					<div class="name">${roomsDto.room_name }</div>
 					<div class="day" role="presentation">
 						<!-- 						<div class="btn_select ">날짜를 선택해주세요. -->
 						<!-- 						</div> -->
 						2024. 07. 01 - 2024. 07. 02 <span>1 박</span>
 					</div>
-					<div class="price">₩350,000</div>
+					<div class="price">
+					    <fmt:formatNumber value="${roomsDto.room_price}" type="currency" currencySymbol="₩ " groupingUsed="true"/>
+					</div>
 
 
 
@@ -577,37 +579,42 @@
 
 				<div class="detailbox">
 					<form action="reservationInfo" method="post" class="bookingfrm">
+						<input type="hidden" name="MEMBER_ID" value="${memberDto.member_id }">
+						<input type="hidden" name="ROOM_ID" value="${roomsDto.room_id }">
 						<div class="frm_tit">Reservations</div>
 						<ul class="stay_list">
 							<li><div class="tit">예약 스테이</div>
-								<div class="cont">서촌영락재</div></li>
+								<div class="cont">${roomsDto.room_name }</div></li>
 							<li><div class="tit">예약일</div>
 								<div class="cont day">
-									2024-07-08 ~ 2024-07-09<span>1 박</span>
+									<input type="hidden" name="RESERVATION_CHECKIN" value="2024-06-19">
+									<input type="hidden" name="RESERVATION_CHECKOUT" value="2024-06-20">
+									2024-07-08 ~ 2024-07-09
+									<span>1 박</span>
 								</div></li>
 							<li><div class="tit">이름</div>
 								<div class="cont">
 									<div class="inpt_inner">
 										<input type="text" id="name" class="input-width"
-											placeholder="이름을 입력해 주세요." readonly="" value="손범수">
+											placeholder="이름" readonly="" value="${memberDto.member_name}">
 									</div>
 								</div></li>
 							<li><div class="tit">휴대전화</div>
 								<div class="cont">
-									<div class="phone">01053451881</div>
+									<div class="phone">${memberDto.member_phone}</div>
 								</div></li>
 							<li><div class="tit">이메일</div>
 								<div class="cont">
 									<div class="inpt_inner">
 										<input type="email" id="email" class="input-width"
-											placeholder="@까지 정확하게 입력하세요." readonly=""
-											value="ssoo9271@nate.com">
+											placeholder="이메일" readonly=""
+											value="${memberDto.member_useremail}">
 									</div>
 								</div></li>
 							<li><div class="tit">인원</div>
 								<div class="cont member ">
 									<div class="select">
-										<span>성인</span><select class="adult-select"><option
+										<span>성인</span><select class="adult-select" name="adultCount"><option
 												value="1">1명</option>
 											<option value="2">2명</option>
 											<option value="3">3명</option>
@@ -616,7 +623,7 @@
 											<option value="6">6명</option></select>
 									</div>
 									<div class="select">
-										<span>아동</span><select class="child-select"><option
+										<span>아동</span><select class="child-select" name="childCount"><option
 												value="0">0명</option>
 											<option value="1">1명</option>
 											<option value="2">2명</option>
@@ -624,14 +631,14 @@
 											<option value="4">4명</option></select>
 									</div>
 									<div class="select">
-										<span>영아</span><select class="baby-select"><option
+										<span>영아</span><select class="baby-select" name="babyCount"><option
 												value="0">0명</option>
 											<option value="1">1명</option>
 											<option value="2">2명</option>
 											<option value="3">3명</option>
 											<option value="4">4명</option></select>
 									</div>
-									<span>(최대 6명)</span> <span class="member_txt"> 아동:
+									<span>(최대 ${roomsDto.room_max_capacity }명)</span> <span class="member_txt"> 아동:
 										24개월~12세 &nbsp; <br>영아: 24개월 미만
 									</span>
 								</div></li>
@@ -718,7 +725,7 @@
 								<div class="cont">
 									<textarea
 										placeholder="사전에 협의되지 않은 상업 목적의 사진/영상 촬영(광고, 쇼핑몰, SNS 마켓 등)과 드론 촬영은 불가합니다. "
-										name="comment"></textarea>
+										name="RESERVATION_REQUIRE"></textarea>
 								</div></li>
 							<li><div class="tit">할인 혜택</div>
 								<div class="cont">
@@ -755,16 +762,17 @@
 								<div class="cont">
 									<dl>
 										<dt>
-											객실 요금<span class="plus_option">서촌영락재
-												&nbsp;&nbsp;₩350,000 * 1 박</span>
+											객실 요금<span class="plus_option">
+												<fmt:formatNumber value="${roomsDto.room_price}" type="currency" currencySymbol="₩ " groupingUsed="true"/>
+												 * 1 박</span>
 										</dt>
 										<dd>₩350,000</dd>
 										<dt>할인 금액</dt>
 										<dd>₩30,000</dd>
 										<dt class="total"></dt>
 										<dd class="total">
-											<input type="hidden" name="RESERVATION_PRICE"
-												id="RESERVATION_PRICE" value="60000">₩320,000
+											<input type="hidden" name="RESERVATION_PRICE" id="RESERVATION_PRICE" value="${roomsDto.room_price}">
+											<fmt:formatNumber value="${roomsDto.room_price}" type="currency" currencySymbol="₩ " groupingUsed="true"/>
 										</dd>
 									</dl>
 								</div></li>
@@ -982,11 +990,11 @@
 			// 조건 확인
 			if (allAgreeChecked && subAllAgreeChecked) {
 				// 모든 체크박스가 선택된 경우
-				if (totalCount > 6) {
-					// 7명 이상인 경우
-					alert("최대 6명까지만 예약 가능합니다.");
+				if (totalCount > ${roomsDto.room_max_capacity }) {
+					// 최대인원 초과인 경우
+					alert("최대 인원을 초과하였습니다.");
 				} else {
-					// 6명 이하인 경우
+					// 최대인원 이하인 경우
 					requestPay(); // 결제 요청 함수 호출
 				}
 			} else {
@@ -1014,7 +1022,7 @@
 				// 3개월, 4개월, 5개월, 6개월 할부 옵션 추가
 				}
 			}, function(rsp) { // callback
-				if (rsp.success) { // 결제 성공 시 로직
+				if (rsp.success) { // 결제 성공 시 로직ㄱ
 					$(".bookingfrm").submit(); // 폼 제출
 				} else { // 결제 실패 시
 					alert("결제를 취소했습니다.");
