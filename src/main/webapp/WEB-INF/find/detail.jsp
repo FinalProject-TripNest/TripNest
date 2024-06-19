@@ -86,7 +86,7 @@
 
 				</div>
 
-				<div class="map">${detailDto.room_location}</div>
+				
 
 				<!--//각 페이지 작업 코드  -->
 			</div>
