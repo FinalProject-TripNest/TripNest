@@ -243,7 +243,7 @@
 		<!-- 이전 -->
 		<c:if test="${startPage>1 }">
 			<li class="page-item">
-			<a class="page-link" href="list?currentPage=${startPage-1 }"
+			<a class="page-link" href="roomlist?currentPage=${startPage-1 }"
 			style="color: black;">이전</a>
 			</li>
 		</c:if>
@@ -252,12 +252,12 @@
 		<c:forEach var="pp" begin="${startPage }" end="${endPage }">
 			<c:if test="${currentPage==pp }">
 				<li class="page-item active" style="display: inline; margin-right: 5px;">
-					<a class="page-link" href="list?currentPage=${pp }">${pp }</a>
+					<a class="page-link" href="roomlist?currentPage=${pp }">${pp }</a>
 				</li>
 			</c:if>
 			<c:if test="${currentPage!=pp }">
 				<li class="page-item" style="display: inline; margin-right: 5px;">
-					<a class="page-link" href="list?currentPage=${pp }">${pp }</a>
+					<a class="page-link" href="roomlist?currentPage=${pp }">${pp }</a>
 				</li>
 			</c:if>
 		</c:forEach>
@@ -265,7 +265,7 @@
 		<!-- 다음 -->
 		<c:if test="${endPage<totalPage }">
 			<li class="page-item">
-				<a class="page-link" href="list?currentPage=${endPage+1}"
+				<a class="page-link" href="roomlist?currentPage=${endPage+1}"
 				style="color: black;">다음</a>
 			</li>
 		</c:if>

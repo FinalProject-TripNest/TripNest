@@ -18,7 +18,6 @@
 	<div id="wrap">
 		<div id="admininquery">
 			<div class="center">
-
 			</div>
 		</div>
 	</div>
