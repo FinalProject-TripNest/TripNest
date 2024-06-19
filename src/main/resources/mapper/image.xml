@@ -8,4 +8,8 @@
 	<select id="getAllRoomPhoto" resultType="ImagesDto" >
 		select * from IMAGES
 	</select>
+	
+	<select id="getDataRoomImg" parameterType="String" resultType="ImagesDto">
+		select * from IMAGES where room_id=#{room_id}
+	</select>
 </mapper>

@@ -9,4 +9,24 @@
 	<select id="getLastInsertedRoomId" resultType="int">
         SELECT LAST_INSERT_ID()
    </select>
+   
+   <select id="getAllRooms" resultType="RoomsDto" parameterType="HashMap">
+   	select * from ROOMS order by room_id desc limit #{start},#{perpage}
+   </select>
+   
+   <select id="getTotalRooms" resultType="int">
+   	select count(*) from ROOMS
+   </select>
+   
+   <select id="getDataRoom" parameterType="String" resultType="RoomsDto">
+   	select * from ROOMS where room_id=#{room_id}
+   </select>
+   
+   <update id="updateRoomAcc" parameterType="String">
+   	update ROOMS set room_status="승인" where room_id=#{room_id}
+   </update>
+   
+   <update id="updateRoomHold" parameterType="String">
+   	update ROOMS set room_status="보류" where room_id=#{room_id}
+   </update>
 </mapper>

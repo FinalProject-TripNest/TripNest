@@ -8,4 +8,5 @@ public interface ImageServiceInter {
 
 	public void insertImage(ImagesDto dto);
 	public List<ImagesDto> getAllRoomPhoto();
+	public ImagesDto getDataRoomImg(String room_id);
 }

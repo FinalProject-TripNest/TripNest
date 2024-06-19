@@ -7,7 +7,7 @@
 	</insert>
 	
 	<select id="getInqueryList" parameterType="HashMap" resultType="InqueryDto">
-		select * from INQUERY order by num desc limit #{start},#{perpage}
+		select * from INQUERY order by inquery_id desc limit #{start},#{perpage}
 	</select>
 	
 	<select id="getTotalInquery" resultType="int">
@@ -17,4 +17,5 @@
 	<update id="updateInqueryAnswer" parameterType="InqueryDto">
 		update INQUERY set inquery_answer=#{inquery_answer} where inquery_id=#{inquery_id}
 	</update>
+	
 </mapper>

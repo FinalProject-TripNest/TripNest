@@ -18,7 +18,7 @@ public class RoomsDto {
 	private String room_address;
 	private String room_service;
 	private String room_detail;
-	private String room_staus;
+	private String room_status;
 	
 	
 }
