@@ -12,7 +12,24 @@ header#header .select {
 <body>
 	<div id="wrap">
 		<div id="index">
-			<div class="top_banner"></div>
+			<div class="top_banner">
+				<div class="search">
+					<form method="get" action="find/search">
+						<div class="input">
+							<img alt="" src="../img/main/search.png"> <input
+								type="text" placeholder="여행지나 숙소를 등록해보세요." name="search">
+						</div>
+
+						<div class="date gray">
+							<img alt="" src="../img/main/calendar.png"> <span>text</span>
+						</div>
+						<div class="personnel gray">
+							<img alt="" src="../img/main/personnel.png"> <span>text</span>
+						</div>
+						<input type="submit" class="btn" value="검색">
+					</form>
+				</div>
+			</div>
 			<div class="stay common">
 				<div class="center">
 					<div class="head">
@@ -27,8 +44,9 @@ header#header .select {
 							<c:forEach items="${imageDto}" var="image">
 								<c:if test="${room.room_id eq image.room_id}">
 									<c:if test="${firstImage}">
-										<a class="block" href="find/list/detail?room_id=${room.room_id }"> <img alt=""
-											src="${image.image_photo}">
+										<a class="block"
+											href="find/list/detail?room_id=${room.room_id }"> <img
+											alt="" src="${image.image_photo}">
 											<div class="text_box">
 												<span class="title">${room.room_name}</span> <span
 													class="text">${room.city} / ${room.district} / <fmt:formatNumber
@@ -40,7 +58,7 @@ header#header .select {
 									</c:if>
 								</c:if>
 							</c:forEach>
-						</c:forEach>					
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -99,7 +117,25 @@ header#header .select {
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 	<script>
-		// 추가적인 JavaScript 코드 필요 시 여기에 작성
+		$("#index .search form .input input").click(function() {
+			$(this).addClass("active");
+		});
+		$("#index .search form .gray").click(function() {
+			$(this).addClass("active");
+		});
+
+		$(document)
+				.click(
+						function(event) {
+							if (!$(event.target)
+									.closest(
+											"#index .search form .input input, #index .search form .gray").length) {
+								$("#index .search form .input input")
+										.removeClass("active");
+								$("#index .search form .gray").removeClass(
+										"active");
+							}
+						});
 	</script>
 </body>
 </html>
