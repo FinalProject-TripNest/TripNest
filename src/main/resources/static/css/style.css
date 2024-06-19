@@ -49,6 +49,10 @@ header#header .top_event {
 	letter-spacing: 10px;
 }
 
+header#header .top_event.active {
+	display: none;
+}
+
 header#header .top_event div span {
 	letter-spacing: 8px;
 }
@@ -677,3 +681,416 @@ header#header .menu ul.sub li {
 	text-transform: uppercase;
 }
 /*//promotion*/
+
+/*findList*/
+#findList {
+	max-width: 1740px;
+	margin: 0 auto;
+}
+
+#findList>.title {
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
+}
+
+#findList .title2 {
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
+}
+
+#findList .list {
+	display: flex;
+	flex-wrap: wrap;
+	padding-bottom: 60px;
+}
+
+#findList .list .block {
+	width: calc(( 100% - 100px)/6);
+	margin-right: 20px;
+	margin-bottom: 60px;
+}
+
+#findList .list .block:nth-child(6n) {
+	margin-right: 0;
+}
+
+#findList .list .block .img {
+	height: 270px;
+}
+
+#findList .list .block .img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 16px;
+}
+
+#findList .list .block .text_box {
+	padding-top: 20px;
+	line-height: 26px;
+}
+
+#findList .list .block .text_box .top {
+	display: flex;
+	justify-content: space-between;
+	font-weight: 500;
+}
+
+#findList .list .block .text_box .top .rating {
+	display: flex;
+	align-items: center;
+}
+
+#findList .list .block .text_box .top .rating img {
+	width: 16px;
+	margin-right: 6px;
+}
+
+#findList .list .block .text_box .top .title {
+	font-size: 20px;
+	color: #333;
+}
+
+#findList .list .block .text_box .location {
+	font-size: 14px;
+	color: #808080;
+}
+
+#findList .list .block .text_box .price {
+	font-size: 14px;
+}
+
+#findList .list .block .text_box .standard {
+	font-size: 14px;
+	color: #808080;
+}
+
+/*//findList*/
+
+/*findDetail*/
+#findDetail .center>.title {
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
+}
+
+#findDetail .center>.title>.title2 {
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
+}
+
+#findDetail .head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 20px;
+}
+
+#findDetail .head .title {
+	font-size: 26px;
+	font-weight: 500;
+	color: #000;
+}
+
+#findDetail .head .data_btn {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+#findDetail .head .data_btn img {
+	width: 18px;
+	transform: rotate(90deg);
+	margin-left: 10px;
+}
+
+#findDetail .head .payment_btn {
+	width: 240px;
+	height: 40px;
+	margin: 0;
+	background-color: #000;
+	border: 1px solid #000;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#findDetail .main {
+	display: flex;
+	justify-content: space-between;
+	padding: 40px 0;
+}
+
+#findDetail .main .infomation .info_title {
+	font-size: 12px;
+	color: #181818;
+}
+
+#findDetail .main .infomation .info_title span {
+	letter-spacing: 4px;
+}
+
+#findDetail .main .infomation .title {
+	margin-top: 20px;
+	font-size: 30px;
+	font-weight: 500;
+	margin-top: 20px;
+	line-height: 1.2;
+}
+
+#findDetail .main .infomation .price {
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+#findDetail .main .infomation .detail {
+	font-size: 14px;
+	color: #333;
+	line-height: 1.7;
+	margin-top: 20px;
+}
+
+#findDetail .main .infomation .info {
+	font-size: 14px;
+	color: #333;
+	line-height: 1.9;
+	margin-top: 20px;
+}
+
+#findDetail .main .slide {
+	min-width: 960px;
+	margin-left: 40px;
+}
+
+#findDetail .main .slide .detail_slide {
+	width: 100%;
+	overflow: hidden;
+	height: 540px;
+	border: none;
+	position: relative;
+}
+
+#findDetail .main .slide .detail_slide .swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#findDetail .main .slide .detail_slide .swiper-slide  img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#findDetail .main .slide .detail_slide .swiper_btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 960px;
+	z-index: 9999;
+}
+
+#findDetail .main .slide .detail_slide .swiper_btn .btn {
+	width: 60px;
+	height: 60px;
+	color: transparent;
+	background-color: rgb(57 55 55/ 50%);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 24px;
+	background-image: url("../../img/find/wh_arrow.png");
+}
+
+#findDetail .main .slide .detail_slide .swiper_btn .btn:hover {
+	background-color: rgb(169 169 169/ 50%);
+	transition: all .3s ease-in-out;
+}
+
+#findDetail .main .slide .detail_slide .swiper-button-next {
+	transform: rotate(90deg);
+	right: 0;
+}
+
+#findDetail .main .slide .detail_slide .swiper-button-prev {
+	left: 0;
+	background-image: url("../../img/main/main_event_bg.jpg");
+	transform: rotate(270deg);
+}
+
+#findDetail .amenities {
+	padding: 40px 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+}
+
+#findDetail .amenities .title {
+	font-size: 14px;
+	letter-spacing: 3.6px;
+	font-family: Abel;
+	width: 25%;
+	color: #181818;
+}
+
+#findDetail .amenities .text {
+	color: #777;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+#findDetail  .map {
+	padding: 120px 0;
+}
+
+#findDetail .notification {
+	background: #000;
+	color: #fff;
+	padding: 120px 0;
+}
+
+#findDetail .notification>.center ul {
+	line-height: 50px;
+	margin-right: 120px;
+}
+
+#findDetail .notification>.center .li_title {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+#findDetail .notification>.center ul li.margin {
+	margin-top: 20px;
+}
+
+#findDetail .notification>.center ul li.btn {
+	cursor: pointer;
+	color: #666;
+	width: 100px;
+}
+
+#findDetail .notification>.center ul li.btn.active {
+	color: #fff;
+}
+
+#findDetail .notification>.center {
+	display: flex;
+}
+
+#findDetail .notification>.center .container {
+	margin-top: 20px;
+}
+
+#findDetail .notification>.center .container .tab_view {
+	margin-top: 40px;
+}
+
+#findDetail .notification>.center .container .tab_view {
+	display: none
+}
+
+#findDetail .notification>.center .container .tab_view.active {
+	display: block
+}
+
+#findDetail .notification>.center .container .tab_view .tit {
+	font-size: 24px;
+	margin-bottom: 30px
+}
+
+#findDetail .notification>.center .container.tab_view dl {
+	overflow: hidden
+}
+
+#findDetail .notification>.center .container.tab_view dl dt {
+	width: 10%;
+	clear: both;
+	float: left;
+	font-size: 16px;
+	color: #ccc;
+	line-height: 28px;
+	padding-bottom: 30px
+}
+
+#findDetail .notification>.center .container .tab_view dl dd {
+	width: 90%;
+	float: left;
+	font-size: 14px;
+	color: #888;
+	line-height: 28px;
+	padding-bottom: 30px
+}
+
+#findDetail .notification>.center .container .tab_view .box_list {
+	width: 650px;
+	margin-top: 15px
+}
+
+#findDetail .notification>.center .container .tab_view .box_list li {
+	float: left;
+	border: 1px solid #444;
+	width: 50%;
+	line-height: 35px;
+}
+
+#findDetail .notification>.center .container .tab_view .box_list li span
+	{
+	display: inline-block;
+	margin-left: 15px;
+	width: 130px
+}
+
+#findDetail .notification>.center .container .tab_view table th,
+	#findDetail .notification>.center .container .tab_view table tr {
+	border: 1px solid #444;
+	width: 50%;
+	text-align: center;
+	height: 36px;
+}
+
+#findDetail .notification>.center .container table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 0;
+	table-layout: fixed;
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+
+#findDetail .notification>.center .container table td {
+	border-right: 1px solid #444;
+}
+
+#findDetail .notification>.center .container .tab_view dl dt {
+	width: 10%;
+	clear: both;
+	float: left;
+	font-size: 16px;
+	color: #ccc;
+	line-height: 28px;
+	padding-bottom: 30px;
+}
+
+#findDetail .notification>.center .container .tab_view dd ul li {
+	list-style-type: disc;
+	padding: 0 0 8px;
+	line-height: 1.8;
+	margin-left: 20px;
+	white-space: nowrap;
+}
+
+/*//findDetail*/

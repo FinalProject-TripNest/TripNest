@@ -10,7 +10,7 @@ import lombok.Data;
 public class ImagesDto {
 
 	private String image_id;
-	private int room_id;
+	private String room_id;
 	private String image_photo;
 	private MultipartFile photo;
 }

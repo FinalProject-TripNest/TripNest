@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @Alias("RoomsDto")
 public class RoomsDto {
-
 	private String room_id;
 	private String member_id;
 	private String room_name;
@@ -19,6 +18,8 @@ public class RoomsDto {
 	private String room_service;
 	private String room_detail;
 	private String room_staus;
-	
-	
+	private String room_hp;
+	private String city;
+	private String district;
+
 }
