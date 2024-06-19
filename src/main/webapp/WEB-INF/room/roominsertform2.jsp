@@ -272,6 +272,21 @@ input.service{
 				    					</div>
 				    				</td>
 				    			</tr>
+				    			<tr align="center">
+				    				<td>
+				    					<div>
+				    						<input type="checkbox" value="주차장" class="service" name="room_service[]">주차장
+				    					</div>
+				    				</td>
+				    				<td>
+				    					<input type="checkbox" value="수영장" class="service" name="room_service[]">수영장
+				    				</td>
+				    				<td>
+				    					<div>
+				    						<input type="checkbox" value="바베큐 그릴" class="service" name="room_service[]">바베큐 그릴
+				    					</div>
+				    				</td>
+				    			</tr>
 				    		</table>
 				    		<button type="submit" id="insertbtn">등록하기</button>
 				    	</div>
