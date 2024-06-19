@@ -8,7 +8,7 @@ import lombok.Data;
 @Alias("RoomsDto")
 public class RoomsDto {
 	private String room_id;
-	private String member_id;
+	private int member_id;
 	private String room_name;
 	private int room_price;
 	private String room_rating;
@@ -21,5 +21,7 @@ public class RoomsDto {
 	private String room_hp;
 	private String city;
 	private String district;
+	private String room_address_detail;
+	private String room_region;
 
 }

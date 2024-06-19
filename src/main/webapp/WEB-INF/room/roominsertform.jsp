@@ -143,8 +143,8 @@
 
 	.checkboxdiv{
 		border: 1px solid #ccc;
-		width:250px;
-		height: 80px;
+		width:200px;
+		height: 60px;
 		vertical-align: middle;
 		border-radius: 20px;
 		margin: 10px;
@@ -153,6 +153,9 @@
 	.servicediv input[type="checkbox"] {
 		transform: scale(0.8); /* 체크박스 크기를 줄입니다 */
 		margin-right: 5px; /* 체크박스와 텍스트 사이의 간격을 조정합니다 */
+		vertical-align: middle; /* 체크박스 세로 정렬 */
+		margin-right: 2px; /* 체크박스 오른쪽 여백 설정 */
+		accent-color: black;
 
 	}
 
@@ -174,12 +177,6 @@
 		align-items: center;
 	}
 
-	.servicediv input[type="checkbox"] {
-		vertical-align: middle; /* 체크박스 세로 정렬 */
-		margin-right: 2px; /* 체크박스 오른쪽 여백 설정 */
-		accent-color: black;
-	}
-
 	.servicediv{
 		display: flex;
 		align-items: center;
@@ -192,7 +189,7 @@
 		font-size: 20pt;
 		background-color: #05141F;
 		color: white;
-		border-radius: 20px;
+		border-radius: 10px;
 		margin-top: 5%;
 		cursor: pointer;
 	}
@@ -214,7 +211,6 @@
 	<div id="roominsertfrom">
 		<div class="center">
 			<form action="insert" method="post" enctype="multipart/form-data" id="roomform">
-				<input type="hidden" name="room_address" id="room_address">
 				<div class="swiper mySwiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
@@ -226,7 +222,15 @@
 											<span>숙소이름</span>
 										</th>
 										<td>
-											<input type="text" required="required" name="room_name" id="room_name">
+											<input type="text" required="required" name="room_name" id="room_name" placeholder="공간에 이름을 지어주세요">
+										</td>
+									</tr>
+										<tr>
+										<th>
+											<span>연락처</span>
+										</th>
+										<td>
+											<input type="text" required="required" name="room_hp" id="room_hp" placeholder="연락 가능한 번호 입력해 주세요">
 										</td>
 									</tr>
 									<tr>
@@ -234,7 +238,7 @@
 											<span>숙소사진</span>
 										</th>
 										<td class="full-width">
-											<input type="file" id="image_photo" multiple="multiple" required="required" accept="image/*"
+											<input type="file" id="image_photo" multiple="multiple" accept="image/*"
 												   name="image_upload">
 										</td>
 									</tr>
@@ -248,7 +252,7 @@
 											<span>숙소가격</span>
 										</th>
 										<td>
-											<input type="text" required="required" placeholder="1박 기준" name="room_price" id="room_price">
+											<input type="text" required="required" placeholder="1박당 기본 요금을 설정하세요" name="room_price" id="room_price">
 										</td>
 									</tr>
 									<tr>
@@ -270,7 +274,7 @@
 										</th>
 										<td>
 											<div>
-												<textarea name="room_detail" id="room_detail"></textarea>
+												<textarea name="room_detail" id="room_detail" placeholder="숙소에 대한 소개를 적어주세요"></textarea>
 											</div>
 										</td>
 									</tr>
@@ -286,9 +290,11 @@
 											<div>
 												<input type="text" class="addrinput" id="sample6_postcode" placeholder="우편번호">
 												<input type="button" class="addrinput" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-												<input type="text" class="addrinput" id="sample6_address" placeholder="주소" required="required"><br>
+												<input type="text" class="addrinput" id="room_address" placeholder="주소" required="required" name="room_address"><br>
 												<input type="text" class="addrinput" id="sample6_detailAddress" placeholder="상세주소" required="required">
 												<input type="text" class="addrinput" id="sample6_extraAddress" placeholder="참고항목">
+												<input type="hidden" id="room_address_detail" name="room_address_detail">
+												<input type="hidden" id="room_region" name="room_region">
 											</div>
 										</td>
 									</tr>
@@ -403,6 +409,26 @@
 											</div>
 										</td>
 									</tr>
+											<tr align="center">
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="빔프로젝트" class="service" name="room_service[]">
+												<div class="checkboxdiv">빔프로젝트</div>
+											</div>
+										</td>
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="보드게임" class="service" name="room_service[]">
+												<div class="checkboxdiv">보드게임</div>
+											</div>
+										</td>
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="빅테이블" class="service" name="room_service[]">
+												<div class="checkboxdiv">빅테이블</div>
+											</div>
+										</td>
+									</tr>
 
 								</table>
 								<div align="center">
@@ -478,7 +504,7 @@
 
 				// 우편번호와 주소 정보를 해당 필드에 넣는다.
 				document.getElementById('sample6_postcode').value = data.zonecode;
-				document.getElementById("sample6_address").value = addr;
+				document.getElementById("room_address").value = addr;
 				// 커서를 상세주소 필드로 이동한다.
 				document.getElementById("sample6_detailAddress").focus();
 			}
@@ -488,17 +514,18 @@
 	//도로명 주소로 검색한 주소를 input hidden안에 내용들어가게
 	$(document).ready(function() {
 		// 주소 입력 필드의 값이 변경될 때마다 room_address에 설정
-		$('#sample6_address, #sample6_detailAddress, #sample6_extraAddress').on('input', function() {
-			var address = $('#sample6_address').val();
+		$('#sample6_detailAddress, #sample6_extraAddress').on('input', function() {
 			var detailAddress = $('#sample6_detailAddress').val();
 			var extraAddress = $('#sample6_extraAddress').val();
 
-			var fullAddress = address + ' ' + detailAddress + ' ' + extraAddress;
-
-			$('#room_address').val(fullAddress);
+			var fullAddress = detailAddress + ' ' + extraAddress;
+			 console.log("fullAddress:", fullAddress);
+			$('#room_address_detail').val(fullAddress);
 		});
+		
 	});
 
+	
 	//사진 미리보기
 	document.getElementById('image_photo').addEventListener('change', function() {
 		const previewContainer = document.getElementById('imagePreviewContainer');
@@ -520,6 +547,8 @@
 			}
 		}
 	});
+	
+
 
 	//폼을 제출할때 빠진 정보가 없게끔. 비어있는 슬라이드로 이동함.
 	$(document).ready(function(){
@@ -532,6 +561,8 @@
 			var room_address=$("#room_address").val();
 			var services = $("input[name='room_service[]']:checked").length;
 
+			console.log(room_address);
+			
 			if(!room_name){
 
 				alert("숙소이름을 입력해 주세요.");
@@ -547,13 +578,13 @@
 				swiper.slideTo(0);
 				return false;
 			}
-			if (images == 0) {
+			/*if (images == 0) {
 				alert("숙소사진을 선택해 주세요.");
 				// 슬라이드를 첫 번째 페이지로 이동
 				var swiper = document.querySelector('.mySwiper').swiper;
 				swiper.slideTo(0);
 				return false;
-			}
+			}*/
 
 			if (!room_detail) {
 				alert("상세정보를 입력해 주세요.");
@@ -581,15 +612,13 @@
 
 
 
-
-
 </script>
 <script type="text/javascript">
 
 	//지도의 주소가 바뀔때마다 지도에 표시되는 위치 변경
 	$(document).ready(function() {
-		$('#sample6_detailAddress,#sample6_address').on('keyup', function() {
-			var address = $('#sample6_address').val().trim(); // 주소 입력 필드 값 가져오기
+		$('#sample6_detailAddress,#room_address').on('keyup', function() {
+			var address = $('#room_address').val().trim(); // 주소 입력 필드 값 가져오기
 
 			// 주소가 입력되어 있는 경우에만 지도 업데이트
 			if (address) {
@@ -615,7 +644,7 @@
 
 	// 주소로 좌표를 검색하는 함수
 	function searchAddress() {
-		var address = document.getElementById('sample6_address').value;
+		var address = document.getElementById('room_address').value;
 		//var detailAddress = document.getElementById('sample6_detailAddress').value;
 
 		// 주소와 상세주소를 합쳐서 주소로 사용합니다
@@ -637,7 +666,6 @@
 			}
 		});
 	}
-
 
 
 </script>
