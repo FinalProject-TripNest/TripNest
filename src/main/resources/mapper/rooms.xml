@@ -9,7 +9,8 @@
 	</insert>
 
 	<select id="getLastInsertedRoomId" resultType="int">
-		SELECT LAST_INSERT_ID()
+		SELECT
+		LAST_INSERT_ID()
 	</select>
 
 	<select id="dataList" resultType="RoomsDto">
@@ -21,4 +22,14 @@
 		parameterType="String">
 		select * from ROOMS where room_id = #{room_id}
 	</select>
+
+	<select id="searchRooms" parameterType="string"
+		resultType="RoomsDto">
+		SELECT *
+		FROM ROOMS
+		WHERE room_name LIKE CONCAT('%', #{search}, '%')
+		OR room_address LIKE CONCAT('%', #{search}, '%')
+		ORDER BY room_id DESC
+	</select>
+
 </mapper>

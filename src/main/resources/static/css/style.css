@@ -484,6 +484,9 @@ header#header .menu ul.sub li {
 	background-position: 0% 70%;
 	object-fit: cover;
 	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #index .common {
@@ -605,6 +608,101 @@ header#header .menu ul.sub li {
 #index .event a p.text {
 	margin-top: 20px;
 }
+
+#index .search {
+	width: 1200px;
+	background-color: #fff;
+	border-radius: 16px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+#index .search form {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+}
+
+#index .search form .input {
+	position: relative;
+}
+
+#index .search form .input input {
+	width: 400px;
+	height: 50px;
+	background-color: #ebebeb;
+	opacity: 0.6;
+	padding: 0 20px 0 50px;
+	border-radius: 8px;
+	font-weight: 700;
+	border-radius: 8px;
+	border: 1px solid #fff;
+}
+
+#index .search form .input input.active {
+	background-color: #fff;
+	border: 1px solid #000;
+}
+
+#index .search form .input img {
+	cursor: pointer;
+	position: absolute;
+	left: 20px;
+	z-index: 1;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#index .search form img {
+	width: 20px;
+	margin-right: 10px;
+	position: relative;
+	top: 2px;
+}
+
+#index .search form  div {
+	height: 50px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+#index .search form .gray {
+	width: 300px;
+	background-color: #ebebeb;
+	opacity: 0.6;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+	border: 1px solid #fff;
+}
+
+#index .search form .gray.active {
+	background-color: #fff;
+	border: 1px solid #000;
+}
+
+#index .search form input.btn {
+	width: 120px;
+	color: #fff;
+	background: #2e65c9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+#index .search form .btn:hover {
+	opacity: 0.8;
+	transition: all 0.3s ease-in-out;
+}
+
 /*//index*/
 
 /*promotion*/
@@ -950,10 +1048,6 @@ header#header .menu ul.sub li {
 	color: #777;
 	font-size: 14px;
 	line-height: 24px;
-}
-
-#findDetail  .map {
-	padding: 120px 0;
 }
 
 #findDetail .notification {

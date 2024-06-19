@@ -84,6 +84,7 @@
 					</div>
 				</div>
 
+
 				<div id="location" hidden>${detailDto.room_address}</div>
 
 				<!-- 지도 div 태그 -->
@@ -137,6 +138,7 @@
 										}
 									});
 				</script>
+
 
 				<!--//각 페이지 작업 코드  -->
 			</div>
