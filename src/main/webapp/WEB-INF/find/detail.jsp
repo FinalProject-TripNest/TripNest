@@ -29,8 +29,7 @@
 					</div>
 					<c:choose>
 						<c:when test="${sessionScope.loginok == null}">
-							<a href="../../login/loginform"
-								class="payment_btn">결제하기</a>
+							<a href="../../login/loginform" class="payment_btn">결제하기</a>
 						</c:when>
 						<c:otherwise>
 							<a href="../../find/reservation?room_id=${detailDto.room_id}"
@@ -83,10 +82,61 @@
 					<div class="text">
 						<p>${detailDto.room_service}</p>
 					</div>
-
 				</div>
 
-				<div class="map">${detailDto.room_location}</div>
+				<div id="location" hidden>${detailDto.room_address}</div>
+
+				<!-- 지도 div 태그 -->
+				<div id="map"
+					style="width: 100%; height: 400px; margin-bottom: 120px;"></div>
+
+				<script type="text/javascript"
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}&libraries=services"></script>
+				<script>
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+					mapOption = {
+						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+						level : 3
+					};
+
+					// 지도를 생성합니다
+					var map = new kakao.maps.Map(mapContainer, mapOption);
+
+					// 주소-좌표 변환 객체를 생성합니다
+					var geocoder = new kakao.maps.services.Geocoder();
+					var roomLocation = document.getElementById('location').innerText;
+
+					// 주소로 좌표를 검색합니다
+					geocoder
+							.addressSearch(
+									roomLocation,
+									function(result, status) {
+
+										// 정상적으로 검색이 완료됐으면
+										if (status === kakao.maps.services.Status.OK) {
+
+											var coords = new kakao.maps.LatLng(
+													result[0].y, result[0].x);
+
+											// 결과값으로 받은 위치를 마커로 표시합니다
+											var marker = new kakao.maps.Marker(
+													{
+														map : map,
+														position : coords
+													});
+
+											// 인포윈도우로 장소에 대한 설명을 표시합니다
+											var infowindow = new kakao.maps.InfoWindow(
+													{
+														content : '<div style="width:150px;text-align:center;padding:6px 0;">${detailDto.room_name}</div>'
+													});
+											infowindow.open(map, marker);
+
+											// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+											map.setCenter(coords);
+										}
+									});
+				</script>
 
 				<!--//각 페이지 작업 코드  -->
 			</div>
@@ -330,7 +380,7 @@
 			},
 
 			loop : false, // 슬라이드 반복 여부
-			loopAdditionalSlides : 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상 
+			loopAdditionalSlides : 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상
 		});
 
 		$("#findDetail .notification .center ul li.btn").click(

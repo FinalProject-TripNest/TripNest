@@ -3,6 +3,7 @@ package data.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,9 @@ public class FindController {
 
 	@Autowired
 	ImageService imageService;
+
+	@Value("${kakao-api-key}")
+	private String apikey;
 
 	@GetMapping("/find/list")
 	public ModelAndView journalPage() {
@@ -41,6 +45,9 @@ public class FindController {
 		detailModel.addObject("detailDto", detailDto); // 변수명 수정
 		detailModel.addObject("imageDto", imageDto); // 변수명 수정
 		detailModel.setViewName("find/detail");
+
+		detailModel.addObject("apikey",apikey);
+
 		return detailModel;
 	}
 
