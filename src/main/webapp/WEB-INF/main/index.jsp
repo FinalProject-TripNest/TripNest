@@ -14,10 +14,10 @@ header#header .select {
 		<div id="index">
 			<div class="top_banner">
 				<div class="search">
-					<form>
+					<form method="get" action="find/search">
 						<div class="input">
 							<img alt="" src="../img/main/search.png"> <input
-								type="text" placeholder="여행지나 숙소를 등록해보세요.">
+								type="text" placeholder="여행지나 숙소를 등록해보세요." name="search">
 						</div>
 
 						<div class="date gray">
@@ -26,7 +26,7 @@ header#header .select {
 						<div class="personnel gray">
 							<img alt="" src="../img/main/personnel.png"> <span>text</span>
 						</div>
-						<div class="btn">검색</div>
+						<input type="submit" class="btn" value="검색">
 					</form>
 				</div>
 			</div>

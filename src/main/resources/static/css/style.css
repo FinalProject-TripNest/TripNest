@@ -686,13 +686,16 @@ header#header .menu ul.sub li {
 	border: 1px solid #000;
 }
 
-#index .search form .btn {
+#index .search form input.btn {
 	width: 120px;
 	color: #fff;
 	background: #2e65c9;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 50px;
+	border-radius: 8px;
+	cursor: pointer;
 }
 
 #index .search form .btn:hover {
@@ -1046,7 +1049,6 @@ header#header .menu ul.sub li {
 	font-size: 14px;
 	line-height: 24px;
 }
-
 
 #findDetail .notification {
 	background: #000;
