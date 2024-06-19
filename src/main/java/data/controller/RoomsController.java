@@ -4,7 +4,9 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,7 @@ import data.service.RoomsService;
 import data.service.S3UploaderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RoomsController {
@@ -26,6 +29,17 @@ public class RoomsController {
 	ImageService imgservice;
 	@Autowired
 	S3UploaderService s3service;
+
+	@Value("${kakao-api-key}")
+	private String apikey;
+
+	@GetMapping("/room/roominsert")
+	public ModelAndView roomform() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("apikey", apikey);
+		model.setViewName("/room/roominsertform");
+		return model;
+	}
 
 	@PostMapping("/room/insert")
 	public String insert(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -68,7 +82,7 @@ public class RoomsController {
 
 		imgservice.insertImage(imgdto);
 
-		return "/room/roominsertform2";
+		return "redirect:/";
 
 	}
 
