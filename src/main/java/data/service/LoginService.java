@@ -23,4 +23,16 @@ public class LoginService implements LoginServiceInter {
         }
         return null;
     }
+
+    @Override
+    @Transactional
+    public MemberDto authenticateSocialUser(String socialId, String socialType) {
+        return memberMapper.findBySocialIdAndType(socialId, socialType);
+    }
+
+    @Override
+    @Transactional
+    public void registerMember(MemberDto memberDto) {
+        memberMapper.insertMember(memberDto);
+    }
 }

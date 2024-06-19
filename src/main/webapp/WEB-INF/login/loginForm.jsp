@@ -44,9 +44,28 @@
         border-radius: 4px;
         cursor: pointer;
     }
+    .social-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+    .social-buttons button {
+        flex: 1;
+        margin: 5px;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    .social-buttons img {
+        width: 100%;
+        height: 40px;
+        display: block;
+        object-fit: cover;
+        border-radius: 8px;
+    }
 </style>
 <body>
-	<div id="wrap">
+    <div id="wrap">
         <div id="login_loginForm">
             <div class="center">
                 <h1>TRIP NEST</h1>
@@ -64,6 +83,14 @@
                     <div class="form-group">
                         <button type="submit" class="btn">로그인</button>
                     </div>
+                    <div class="form-group social-buttons">
+                        <button type="button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&response_type=code'">
+                            <img alt="kakao_login" src="../img/register_login/kakao_login.png">
+                        </button>
+                        <button>
+                            <img alt="naver_login" src="../img/register_login/naver_login.png">
+                        </button>
+                    </div>
                     <div class="form-group">
                         <c:if test="${not empty error}">
                             <p style="color: red;">${error}</p>
@@ -76,8 +103,8 @@
     
 <%@ include file="../include/footer.jsp"%>
 
-	<script>
-	
-	</script>
+    <script>
+    
+    </script>
 </body>
 </html>
