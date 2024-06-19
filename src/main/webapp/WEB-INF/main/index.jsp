@@ -20,6 +20,7 @@ header#header .select {
 	<div id="wrap">
 		<div id="index">
 			<div class="top_banner">
+<<<<<<< HEAD
 			<!-- 호텔 검색 박스 -->
 				<div id="hotel_search">
 					<input id="hotel_search_address" type="button" value="어디로 떠나시나요?"></input>
@@ -46,6 +47,25 @@ header#header .select {
 				</div>
 			</div>
 			
+=======
+				<div class="search">
+					<form method="get" action="find/search">
+						<div class="input">
+							<img alt="" src="../img/main/search.png"> <input
+								type="text" placeholder="여행지나 숙소를 등록해보세요." name="search">
+						</div>
+
+						<div class="date gray">
+							<img alt="" src="../img/main/calendar.png"> <span>text</span>
+						</div>
+						<div class="personnel gray">
+							<img alt="" src="../img/main/personnel.png"> <span>text</span>
+						</div>
+						<input type="submit" class="btn" value="검색">
+					</form>
+				</div>
+			</div>
+>>>>>>> dcc69448d6195f6bc7b8a8a06b1ae19a55c8693b
 			<div class="stay common">
 				<div class="center">
 					<div class="head">
@@ -60,8 +80,9 @@ header#header .select {
 							<c:forEach items="${imageDto}" var="image">
 								<c:if test="${room.room_id eq image.room_id}">
 									<c:if test="${firstImage}">
-										<a class="block" href="javascript:;"> <img alt=""
-											src="${image.image_photo}">
+										<a class="block"
+											href="find/list/detail?room_id=${room.room_id }"> <img
+											alt="" src="${image.image_photo}">
 											<div class="text_box">
 												<span class="title">${room.room_name}</span> <span
 													class="text">${room.city} / ${room.district} / <fmt:formatNumber
@@ -73,7 +94,7 @@ header#header .select {
 									</c:if>
 								</c:if>
 							</c:forEach>
-						</c:forEach>					
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -100,7 +121,7 @@ header#header .select {
 				</div>
 			</div>
 			<div class="event">
-				<a href="javascript:;">
+				<a href="find/list">
 					<div>
 						<p class="title">Experience Tripnest Daily</p>
 						<p class="text">트립네스트에서의 경험을 일상으로</p>
@@ -132,6 +153,7 @@ header#header .select {
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 	<script>
+<<<<<<< HEAD
 		// 추가적인 JavaScript 코드 필요 시 여기에 작성
 		
 		//모달 창 띄우기, 모달창 닫기
@@ -160,6 +182,27 @@ header#header .select {
                 }
             });
         });
+=======
+		$("#index .search form .input input").click(function() {
+			$(this).addClass("active");
+		});
+		$("#index .search form .gray").click(function() {
+			$(this).addClass("active");
+		});
+
+		$(document)
+				.click(
+						function(event) {
+							if (!$(event.target)
+									.closest(
+											"#index .search form .input input, #index .search form .gray").length) {
+								$("#index .search form .input input")
+										.removeClass("active");
+								$("#index .search form .gray").removeClass(
+										"active");
+							}
+						});
+>>>>>>> dcc69448d6195f6bc7b8a8a06b1ae19a55c8693b
 	</script>
 </body>
 </html>

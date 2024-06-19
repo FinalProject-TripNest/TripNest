@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TripNest
+Bundle-SymbolicName: TripNest
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Automatic-Module-Name: TripNest
+Export-Package: data.controller,
+ data.dto,
+ data.mapper,
+ data.service,
+ sist.last.project

@@ -9,6 +9,7 @@ spring:
  devtools:
    livereload:
      enabled: true
+
 #mybatis
 mybatis:
   type-aliases-package: data.*

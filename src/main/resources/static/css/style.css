@@ -49,6 +49,10 @@ header#header .top_event {
 	letter-spacing: 10px;
 }
 
+header#header .top_event.active {
+	display: none;
+}
+
 header#header .top_event div span {
 	letter-spacing: 8px;
 }
@@ -480,9 +484,10 @@ header#header .menu ul.sub li {
 	background-position: 0% 70%;
 	object-fit: cover;
 	background-repeat: no-repeat;
-	display: flex; /* flexbox를 사용하여 레이아웃 설정 */
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 }
 
 #index .common {
@@ -605,151 +610,102 @@ header#header .menu ul.sub li {
 	margin-top: 20px;
 }
 
-#index #hotel_search { /* 박범수 수정 */
-	width: 70%;
-    background: #fff;
-    min-height: 120px;
-    padding: 24px;
-    float: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 280px;
-    
-}
 
-#index #hotel_search_address {
-	height: 52px;
-	width: 35%;
-	background: #222;
-	border-radius: 5px;
-	color: #fff;
-	cursor: pointer;
- 	background-image: url("../img/common/header_back2.png"); /* 아이콘 이미지 URL */
-    background-size: 16px 16px; /* 이미지 크기 설정 */
-    background-repeat: no-repeat; /* 이미지 반복 방지 */
-    background-position: 90px center; /* 이미지 위치를 왼쪽 가운데로 설정 */
-    padding-left: 24px; /* 아이콘과 텍스트 사이의 간격 설정 */
-}
-
-#index #search_address_modal {
-	display: none;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: white;
+#index .search {
+	width: 1200px;
+	background-color: #fff;
+	border-radius: 16px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	padding: 20px;
-	width:800px;
-	height:500px;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-	z-index: 3;
 }
-#index #address_search_title {
+
+#index .search form {
+	display: flex;
+	justify-content: space-between;
 	width: 100%;
-	height: 20%;
+	align-items: center;
 }
 
-#index #address_input_div {
- 	display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 20%;
+#index .search form .input {
+	position: relative;
 }
 
-#index #address_input {
-	width: 60%;
-	height: 52px;
-	border-radius: 5px;
-	background-color: #f5f5f5;
-	background-image: url("../img/common/magnifying-glass.png"); /* 아이콘 이미지 URL */
-    background-size: 16px 16px; /* 이미지 크기 설정 */
-    background-repeat: no-repeat; /* 이미지 반복 방지 */
-    background-position: 20px; /* 이미지 위치를 왼쪽 가운데로 설정 */
-    padding-left: 48px;
+#index .search form .input input {
+	width: 400px;
+	height: 50px;
+	background-color: #ebebeb;
+	opacity: 0.6;
+	padding: 0 20px 0 50px;
+	border-radius: 8px;
+	font-weight: 700;
+	border-radius: 8px;
+	border: 1px solid #fff;
 }
 
-#index #hotel_search_date {
-	height: 52px;
-	width: 35%;
-	background: #222;
-	border-radius: 5px;
+#index .search form .input input.active {
+	background-color: #fff;
+	border: 1px solid #000;
+}
+
+#index .search form .input img {
+	cursor: pointer;
+	position: absolute;
+	left: 20px;
+	z-index: 1;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#index .search form img {
+	width: 20px;
+	margin-right: 10px;
+	position: relative;
+	top: 2px;
+}
+
+#index .search form  div {
+	height: 50px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+#index .search form .gray {
+	width: 300px;
+	background-color: #ebebeb;
+	opacity: 0.6;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+	border: 1px solid #fff;
+}
+
+#index .search form .gray.active {
+	background-color: #fff;
+	border: 1px solid #000;
+}
+
+#index .search form input.btn {
+	width: 120px;
 	color: #fff;
-	cursor: pointer;
-	background-image: url("../img/common/header_location2.png"); /* 아이콘 이미지 URL */
-    background-size: 16px 16px; /* 이미지 크기 설정 */
-    background-repeat: no-repeat; /* 이미지 반복 방지 */
-    background-position: 100px center; /* 이미지 위치를 왼쪽 가운데로 설정 */
-    padding-left: 24px; /* 아이콘과 텍스트 사이의 간격 설정 */
-}
-
-#index #search_date_modal {
-	 display: none;
-	 position: fixed;
-	 top: 50%;
-	 left: 50%;
-	 transform: translate(-50%, -50%);
-	 background-color: white;
-	 padding: 20px;
-	 width:400px;
-	 height:500px;
-	 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-	 z-index: 3;
-}
-
-#index #hotel_search_capacity {
-	height: 52px;
-	width: 20%;
-	background: #222;
-	border-radius: 5px;
-	color: #fff;
-	cursor: pointer;
-	background-image: url("../img/common/friend.png"); /* 아이콘 이미지 URL */
-    background-size: 16px 16px; /* 이미지 크기 설정 */
-    background-repeat: no-repeat; /* 이미지 반복 방지 */
-    background-position: 30px center; /* 이미지 위치를 왼쪽 가운데로 설정 */
-    padding-left: 32px; /* 아이콘과 텍스트 사이의 간격 설정 */
-}
-
-#index #search_capacity_modal {
-	 display: none;
-	 position: fixed;
-	 top: 50%;
-	 left: 50%;
-	 transform: translate(-50%, -50%);
-	 background-color: white;
-	 padding: 20px;
-	 width:400px;
-	 height:500px;
-	 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-	 z-index: 3;
-}
-
-#index #hotel_search_button {
-	height: 52px;
-	width: 52px;
-	background: #fff;
-	border-radius: 5px;
-	background-image: url("../img/common/magnifying-glass.png"); /* 아이콘 이미지 URL */
-	background-size: 32px 32px; /* 이미지 크기를 버튼에 맞춤 */
-	background-repeat: no-repeat; /* 이미지 반복 방지 */
-	background-position: center; /* 이미지 위치를 버튼의 중앙으로 */
+	background: #2e65c9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	border-radius: 8px;
 	cursor: pointer;
 }
 
-#index .search_modal_overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 배경을 어둡게 설정 */
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
+#index .search form .btn:hover {
+	opacity: 0.8;
+	transition: all 0.3s ease-in-out;
 }
+
+
 /*//index*/
 
 /*promotion*/
@@ -916,3 +872,322 @@ header#header .menu ul.sub li {
 }
 
 /*//findList*/
+
+/*findDetail*/
+#findDetail .center>.title {
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
+}
+
+#findDetail .center>.title>.title2 {
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
+}
+
+#findDetail .head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 20px;
+}
+
+#findDetail .head .title {
+	font-size: 26px;
+	font-weight: 500;
+	color: #000;
+}
+
+#findDetail .head .data_btn {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+#findDetail .head .data_btn img {
+	width: 18px;
+	transform: rotate(90deg);
+	margin-left: 10px;
+}
+
+#findDetail .head .payment_btn {
+	width: 240px;
+	height: 40px;
+	margin: 0;
+	background-color: #000;
+	border: 1px solid #000;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#findDetail .main {
+	display: flex;
+	justify-content: space-between;
+	padding: 40px 0;
+}
+
+#findDetail .main .infomation .info_title {
+	font-size: 12px;
+	color: #181818;
+}
+
+#findDetail .main .infomation .info_title span {
+	letter-spacing: 4px;
+}
+
+#findDetail .main .infomation .title {
+	margin-top: 20px;
+	font-size: 30px;
+	font-weight: 500;
+	margin-top: 20px;
+	line-height: 1.2;
+}
+
+#findDetail .main .infomation .price {
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+#findDetail .main .infomation .detail {
+	font-size: 14px;
+	color: #333;
+	line-height: 1.7;
+	margin-top: 20px;
+}
+
+#findDetail .main .infomation .info {
+	font-size: 14px;
+	color: #333;
+	line-height: 1.9;
+	margin-top: 20px;
+}
+
+#findDetail .main .slide {
+	min-width: 960px;
+	margin-left: 40px;
+}
+
+#findDetail .main .slide .detail_slide {
+	width: 100%;
+	overflow: hidden;
+	height: 540px;
+	border: none;
+	position: relative;
+}
+
+#findDetail .main .slide .detail_slide .swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#findDetail .main .slide .detail_slide .swiper-slide  img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#findDetail .main .slide .detail_slide .swiper_btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 960px;
+	z-index: 9999;
+}
+
+#findDetail .main .slide .detail_slide .swiper_btn .btn {
+	width: 60px;
+	height: 60px;
+	color: transparent;
+	background-color: rgb(57 55 55/ 50%);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 24px;
+	background-image: url("../../img/find/wh_arrow.png");
+}
+
+#findDetail .main .slide .detail_slide .swiper_btn .btn:hover {
+	background-color: rgb(169 169 169/ 50%);
+	transition: all .3s ease-in-out;
+}
+
+#findDetail .main .slide .detail_slide .swiper-button-next {
+	transform: rotate(90deg);
+	right: 0;
+}
+
+#findDetail .main .slide .detail_slide .swiper-button-prev {
+	left: 0;
+	background-image: url("../../img/main/main_event_bg.jpg");
+	transform: rotate(270deg);
+}
+
+#findDetail .amenities {
+	padding: 40px 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+}
+
+#findDetail .amenities .title {
+	font-size: 14px;
+	letter-spacing: 3.6px;
+	font-family: Abel;
+	width: 25%;
+	color: #181818;
+}
+
+#findDetail .amenities .text {
+	color: #777;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+#findDetail .notification {
+	background: #000;
+	color: #fff;
+	padding: 120px 0;
+}
+
+#findDetail .notification>.center ul {
+	line-height: 50px;
+	margin-right: 120px;
+}
+
+#findDetail .notification>.center .li_title {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+#findDetail .notification>.center ul li.margin {
+	margin-top: 20px;
+}
+
+#findDetail .notification>.center ul li.btn {
+	cursor: pointer;
+	color: #666;
+	width: 100px;
+}
+
+#findDetail .notification>.center ul li.btn.active {
+	color: #fff;
+}
+
+#findDetail .notification>.center {
+	display: flex;
+}
+
+#findDetail .notification>.center .container {
+	margin-top: 20px;
+}
+
+#findDetail .notification>.center .container .tab_view {
+	margin-top: 40px;
+}
+
+#findDetail .notification>.center .container .tab_view {
+	display: none
+}
+
+#findDetail .notification>.center .container .tab_view.active {
+	display: block
+}
+
+#findDetail .notification>.center .container .tab_view .tit {
+	font-size: 24px;
+	margin-bottom: 30px
+}
+
+#findDetail .notification>.center .container.tab_view dl {
+	overflow: hidden
+}
+
+#findDetail .notification>.center .container.tab_view dl dt {
+	width: 10%;
+	clear: both;
+	float: left;
+	font-size: 16px;
+	color: #ccc;
+	line-height: 28px;
+	padding-bottom: 30px
+}
+
+#findDetail .notification>.center .container .tab_view dl dd {
+	width: 90%;
+	float: left;
+	font-size: 14px;
+	color: #888;
+	line-height: 28px;
+	padding-bottom: 30px
+}
+
+#findDetail .notification>.center .container .tab_view .box_list {
+	width: 650px;
+	margin-top: 15px
+}
+
+#findDetail .notification>.center .container .tab_view .box_list li {
+	float: left;
+	border: 1px solid #444;
+	width: 50%;
+	line-height: 35px;
+}
+
+#findDetail .notification>.center .container .tab_view .box_list li span
+	{
+	display: inline-block;
+	margin-left: 15px;
+	width: 130px
+}
+
+#findDetail .notification>.center .container .tab_view table th,
+	#findDetail .notification>.center .container .tab_view table tr {
+	border: 1px solid #444;
+	width: 50%;
+	text-align: center;
+	height: 36px;
+}
+
+#findDetail .notification>.center .container table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border: 0;
+	table-layout: fixed;
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+
+#findDetail .notification>.center .container table td {
+	border-right: 1px solid #444;
+}
+
+#findDetail .notification>.center .container .tab_view dl dt {
+	width: 10%;
+	clear: both;
+	float: left;
+	font-size: 16px;
+	color: #ccc;
+	line-height: 28px;
+	padding-bottom: 30px;
+}
+
+#findDetail .notification>.center .container .tab_view dd ul li {
+	list-style-type: disc;
+	padding: 0 0 8px;
+	line-height: 1.8;
+	margin-left: 20px;
+	white-space: nowrap;
+}
+
+/*//findDetail*/

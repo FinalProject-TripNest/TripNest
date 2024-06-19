@@ -39,4 +39,10 @@ public class RoomsService implements RoomsServiceInter {
 		return roomsList;
 	}
 
+	@Override
+	public RoomsDto getOneData(String room_id) {
+		// TODO Auto-generated method stub
+		return roommapper.getOneData(room_id);
+	}
+
 }

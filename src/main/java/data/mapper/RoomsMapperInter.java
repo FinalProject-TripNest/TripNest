@@ -12,4 +12,5 @@ public interface RoomsMapperInter {
 	public void insertRoom(RoomsDto dto);
 	public int getLastInsertedRoomId();
 	public List<RoomsDto> dataList();
+	public RoomsDto getOneData(String room_id);
 }
