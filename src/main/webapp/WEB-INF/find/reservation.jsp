@@ -20,12 +20,20 @@
 <style>
 /* 각 페이지 스타일 */
 #reservation .title {
-	font-size: 18px;
-	letter-spacing: 14px;
-	color: #000;
-	font-weight: bold;
-	padding: 70px 0px;
+    text-align: center;
+    padding: 60px 0;
+    justify-content: center;
 }
+
+#reservation .title2 {
+    font-size: 20px;
+    line-height: 33px;
+    font-weight: 500;
+    color: #000;
+    border-bottom: 3px solid #000;
+    text-transform: uppercase;
+}
+
 
 #reservation .titlebox {
 	text-align: center;
@@ -557,8 +565,8 @@
 		<div id="reservation">
 			<div class="center">
 				<!-- 각 페이지 작업 코드 -->
-				<div class="titlebox">
-					<div class="title">BOOKING</div>
+				<div class="title" data-aos="fade-up">
+					<a class="title2">BOOKING</a>
 				</div>
 
 				<div class="titlebox1">
@@ -569,7 +577,8 @@
 						2024. 07. 01 - 2024. 07. 02 <span>1 박</span>
 					</div>
 					<div class="price">
-					    <fmt:formatNumber value="${roomsDto.room_price}" type="currency" currencySymbol="₩ " groupingUsed="true"/>
+						<fmt:formatNumber value="${roomsDto.room_price}" type="currency"
+							currencySymbol="₩ " groupingUsed="true" />
 					</div>
 
 
@@ -579,18 +588,19 @@
 
 				<div class="detailbox">
 					<form action="reservationInfo" method="post" class="bookingfrm">
-						<input type="hidden" name="MEMBER_ID" value="${memberDto.member_id }">
-						<input type="hidden" name="ROOM_ID" value="${roomsDto.room_id }">
+						<input type="hidden" name="MEMBER_ID"
+							value="${memberDto.member_id }"> <input type="hidden"
+							name="ROOM_ID" value="${roomsDto.room_id }">
 						<div class="frm_tit">Reservations</div>
 						<ul class="stay_list">
 							<li><div class="tit">예약 스테이</div>
 								<div class="cont">${roomsDto.room_name }</div></li>
 							<li><div class="tit">예약일</div>
 								<div class="cont day">
-									<input type="hidden" name="RESERVATION_CHECKIN" value="2024-06-19">
-									<input type="hidden" name="RESERVATION_CHECKOUT" value="2024-06-20">
-									2024-07-08 ~ 2024-07-09
-									<span>1 박</span>
+									<input type="hidden" name="RESERVATION_CHECKIN"
+										value="2024-06-19"> <input type="hidden"
+										name="RESERVATION_CHECKOUT" value="2024-06-20">
+									2024-07-08 ~ 2024-07-09 <span>1 박</span>
 								</div></li>
 							<li><div class="tit">이름</div>
 								<div class="cont">
@@ -638,22 +648,20 @@
 											<option value="3">3명</option>
 											<option value="4">4명</option></select>
 									</div>
-									<span>(최대 ${roomsDto.room_max_capacity }명)</span> <span class="member_txt"> 아동:
-										24개월~12세 &nbsp; <br>영아: 24개월 미만
+									<span>(최대 ${roomsDto.room_max_capacity }명)</span> <span
+										class="member_txt"> 아동: 24개월~12세 &nbsp; <br>영아:
+										24개월 미만
 									</span>
 								</div></li>
 
 							<li><div class="tit">이용안내</div>
 								<div class="cont">
 									<div class="guide">
-										<span>숙소 이용규칙</span><br>
-										<br> <span
+										<span>숙소 이용규칙</span><br> <br> <span
 											style="color: #777; font-size: 14px; line-height: 1.4;">
 											트립네스트 숙소는 다른 사람이 실제로 거주하는 집인 경우가 많으므로,<br> 숙소 시설을 소중히
 											다뤄주세요.
-										</span><br>
-										<br>
-										<br> <span>체크인 및 체크아웃</span><br>
+										</span><br> <br> <br> <span>체크인 및 체크아웃</span><br>
 										<br> <span
 											style="color: #777; font-size: 14px; line-height: 1.4; display: block;">
 											체크인: 오후 3:00 이후<br> 체크아웃: 오전 11:00 전까지<br> 셀프 체크인:
@@ -669,9 +677,8 @@
 											<label class="check_skin" id="labelSize">
 												<div style="display: flex;">
 													<input type="checkbox" id="sub_Allagree"
-														name="sub_Allagree">
-													<span class="check-agree-btn" style="font-size: 16px;">전체
-														동의 (필수)</span>
+														name="sub_Allagree"> <span class="check-agree-btn"
+														style="font-size: 16px;">전체 동의 (필수)</span>
 												</div> <br>
 												<div class="txt" style="color: #777;">아래 모든 항목에 대한 내용을
 													확인했으며, 모두 동의합니다.</div>
@@ -762,17 +769,20 @@
 								<div class="cont">
 									<dl>
 										<dt>
-											객실 요금<span class="plus_option">
-												<fmt:formatNumber value="${roomsDto.room_price}" type="currency" currencySymbol="₩ " groupingUsed="true"/>
-												 * 1 박</span>
+											객실 요금<span class="plus_option"> <fmt:formatNumber
+													value="${roomsDto.room_price}" type="currency"
+													currencySymbol="₩ " groupingUsed="true" /> * 1 박
+											</span>
 										</dt>
 										<dd>₩350,000</dd>
 										<dt>할인 금액</dt>
 										<dd>₩30,000</dd>
 										<dt class="total"></dt>
 										<dd class="total">
-											<input type="hidden" name="RESERVATION_PRICE" id="RESERVATION_PRICE" value="${roomsDto.room_price}">
-											<fmt:formatNumber value="${roomsDto.room_price}" type="currency" currencySymbol="₩ " groupingUsed="true"/>
+											<input type="hidden" name="RESERVATION_PRICE"
+												id="RESERVATION_PRICE" value="${roomsDto.room_price}">
+											<fmt:formatNumber value="${roomsDto.room_price}"
+												type="currency" currencySymbol="₩ " groupingUsed="true" />
 										</dd>
 									</dl>
 								</div></li>
@@ -815,7 +825,7 @@
 									<!-- -->
 									<br>
 									<!-- -->
-									<br> - 제공 받는 자 : 트립네스트
+									<br> - 제공 받는 자 : ${roomsDto.room_name }
 									<!-- -->
 									<br> - 제공 목적: 제휴 판매자(숙소)와 이용자(회원)의 예약에 대한 서비스 제공, 계약의
 									이행(예약확인, 이용자 확인), 민원 처리 등 소비자 분쟁 해결을 위한 기록 보존
@@ -846,7 +856,7 @@
 								</div>
 								<li><label class="check_skin" id="booking-agree-check-skin"
 									for="refundAgree"><input type="checkbox"
-										id="refundAgree" name="chk" class="agree_check"><span>트립네스트<!-- -->
+										id="refundAgree" name="chk" class="agree_check"><span>${roomsDto.room_name }<!-- -->
 											- <!-- -->환불규정에 대한 동의 (필수)<!-- --></span></label>
 									<div class="tit" role="presentation"></div> <img alt=""
 									src="../img/reservation/bottomicon.png" class="arrow_btn"></li>
@@ -919,6 +929,227 @@
 					</form>
 				</div>
 				<!--//각 페이지 작업 코드  -->
+			</div>
+			<div class="notification">
+				<div class="center">
+					<div class="flex">
+						<div class="li_title">안내사항</div>
+						<ul class="list">
+							<li class="btn margin active">예약 안내</li>
+							<li class="btn">이용 안내</li>
+							<li class="btn">환불 규정</li>
+						</ul>
+					</div>
+
+
+					<div class="container">
+						<div class="fixed_title">
+							<span> 숙소 이용에 대한 상세한 안내를 확인해 보세요.</span>
+						</div>
+						<div class="tab_view active">
+							<div class="tit">예약 안내</div>
+							<div class="cont">
+								<dl>
+									<dt>
+										요금 기준
+										<!-- -->
+										<div class="line-break"></div>
+									</dt>
+									<dd>
+										<table>
+											<thead>
+												<tr>
+													<th>숙소</th>
+													<th>인원(기준/최대)</th>
+													<th>요금</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>${roomsDto.room_name }</td>
+													<td>${roomsDto.room_min_capacity }/${roomsDto.room_max_capacity }</td>
+													<td><fmt:formatNumber value="${roomsDto.room_price }"
+															type="currency" />~</td>
+												</tr>
+											</tbody>
+										</table>
+										<ul>
+											<li>기준인원 ${roomsDto.room_min_capacity}인이며, 최대인원
+												${roomsDto.room_max_capacity}인(영유아 포함)까지 이용 가능한 숙소입니다.</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+							<div class="cont">
+								<dl>
+									<dt>
+										반려 동물
+										<!-- -->
+										<div class="line-break"></div>
+									</dt>
+									<dd>
+										<ul>
+											<li>반려 동물 동반이 불가한 숙소입니다.</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+							<div class="cont">
+								<dl>
+									<dt>
+										문의하기
+										<!-- -->
+										<div class="line-break"></div>
+									</dt>
+									<dd>
+										<ul>
+											<li>예약과 이용 문의 ${roomsDto.room_hp }</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+						<div class="tab_view">
+							<div class="tit">이용 안내</div>
+							<div class="cont">
+								<dl>
+									<dt>
+										이용 규칙
+										<!-- -->
+										<div class="line-break"></div>
+									</dt>
+									<dd>
+										<ul>
+											<li>체크인 시간은 오후 4시, 체크아웃 시간은 오전 11시입니다.</li>
+											<li>예약하신 당일 오전에, 체크인 안내 문자를 보내드립니다.</li>
+											<li>최대인원을 초과하는 인원은 입실이 불가합니다.</li>
+											<li>예약인원 외 방문객의 출입을 엄격히 제한합니다.</li>
+											<li>미성년자의 경우 보호자(법정대리인)의 동행 없이 투숙이 불가합니다.</li>
+											<li>모든 공간에서 절대 금연입니다. 위반 시 특수청소비가 청구됩니다.</li>
+											<li>취사 가능한 숙소이나, 연기와 냄새가 나는 음식(고기, 해산물 등)의 조리를 금지합니다.</li>
+											<li>침구나 비품, 시설 등에 오염, 파손 및 분실이 발생한 경우 변상비가 청구됩니다.</li>
+											<li>협의되지 않은 상업 사진 및 영상 촬영(광고용, 제품사진, 쇼핑몰, SNS마켓 포함), 드론
+												촬영은 불가합니다.</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+							<div class="cont">
+								<dl>
+									<dt>
+										노천탕,
+										<!-- -->
+										<div class="line-break"></div>
+										실내욕조
+										<!-- -->
+									</dt>
+									<dd>
+										<ul>
+											<li>이용시간 제한 없이 이용하실 수 있습니다.</li>
+											<li>동절기(12-3월)에는 날씨에 따라 이용이 어려울 수 있습니다.</li>
+											<li>액체, 분말, 거품류의 입욕제 사용이 가능합니다.</li>
+											<li>배수의 문제가 발생할 수 있는 입욕 용품(각종 꽃잎, 포프리, 약초 등)의 사용을 제한합니다.</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+							<div class="cont">
+								<dl>
+									<dt>
+										CCTV
+										<!-- -->
+										<div class="line-break"></div>
+									</dt>
+									<dd>
+										<ul>
+											<li>안전과 방범을 위해 외부에 CCTV가 설치되어 있는 숙소입니다.</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+							<div class="cont">
+								<dl>
+									<dt>
+										주차
+										<!-- -->
+										<div class="line-break"></div>
+									</dt>
+									<dd>
+										<ul>
+											<li>건물 뒤편에 글림스 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
+												2대까지 주차 가능합니다.</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+						</div>
+						<div class="tab_view">
+							<div class="tit">환불 규정</div>
+							<div class="cont">
+								<dl>
+									<dt>환불 규정</dt>
+									<dd>
+										<table>
+											<thead>
+												<tr>
+													<th>기준일</th>
+													<th>환불 금액</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>체크인 10일전까지</td>
+													<td>총 결제금액의 100% 환불</td>
+												</tr>
+												<tr>
+													<td>체크인 9일전까지</td>
+													<td>총 결제금액의 90% 환불</td>
+												</tr>
+												<tr>
+													<td>체크인 8일전까지</td>
+													<td>총 결제금액의 80% 환불</td>
+												</tr>
+												<tr>
+													<td>체크인 7일전까지</td>
+													<td>총 결제금액의 70% 환불</td>
+												</tr>
+												<tr>
+													<td>체크인 6일전까지</td>
+													<td>총 결제금액의 60% 환불</td>
+												</tr>
+												<tr>
+													<td>체크인 5일전까지</td>
+													<td>총 결제금액의 50% 환불</td>
+												</tr>
+												<tr>
+													<td>체크인 4일전까지</td>
+													<td>총 결제금액의 40% 환불</td>
+												</tr>
+												<tr>
+													<td>체크인 3일전부터</td>
+													<td>변경 / 환불 불가</td>
+												</tr>
+											</tbody>
+										</table>
+									</dd>
+									<dt>
+										숙박권
+										<!-- -->
+										<div class="line-break"></div>
+										양도
+										<!-- -->
+									</dt>
+									<dd>
+										<ul>
+											<li>숙박권의 재판매를 비롯하여 양도, 양수, 교환을 금지합니다.</li>
+										</ul>
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -1031,6 +1262,20 @@
 				}
 			});
 		}
+		
+		$(".notification .center ul li.btn").click(
+				function() {
+					$(".notification .center ul li.btn")
+							.removeClass("active");
+					$(this).addClass("active");
+
+					var idx = $(this).index();
+					console.log(idx);
+					$(this).closest(".center").find(".container .tab_view")
+							.removeClass("active");
+					$(this).closest(".center").find(".container .tab_view").eq(
+							idx).addClass("active");
+				});
 	</script>
 
 </body>
