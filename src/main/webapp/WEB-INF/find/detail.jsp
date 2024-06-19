@@ -27,8 +27,17 @@
 						<span>날짜를 선택해주세요.</span> <img alt=""
 							src="../../img/main/right_arrow.png">
 					</div>
-					<a href="../../find/reservation?room_id=${detailDto.room_id}"
-						class="payment_btn">결제하기</a>
+					<c:choose>
+						<c:when test="${sessionScope.loginok == null}">
+							<a href="../../login/loginform"
+								class="payment_btn">결제하기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="../../find/reservation?room_id=${detailDto.room_id}"
+								class="payment_btn">결제하기</a>
+						</c:otherwise>
+					</c:choose>
+
 
 				</div>
 				<div class="main">
@@ -125,7 +134,8 @@
 											</tbody>
 										</table>
 										<ul>
-											<li>기준인원 ${detailDto.room_min_capacity}인이며, 최대인원 ${detailDto.room_max_capacity}인(영유아 포함)까지 이용 가능한 숙소입니다.</li>
+											<li>기준인원 ${detailDto.room_min_capacity}인이며, 최대인원
+												${detailDto.room_max_capacity}인(영유아 포함)까지 이용 가능한 숙소입니다.</li>
 										</ul>
 									</dd>
 								</dl>

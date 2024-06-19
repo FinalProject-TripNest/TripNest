@@ -49,6 +49,10 @@ header#header .top_event {
 	letter-spacing: 10px;
 }
 
+header#header .top_event.active {
+	display: none;
+}
+
 header#header .top_event div span {
 	letter-spacing: 8px;
 }
@@ -932,7 +936,6 @@ header#header .menu ul.sub li {
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	display: flex;
-	justify-content: space-between;
 }
 
 #findDetail .amenities .title {
