@@ -24,6 +24,7 @@ $(function() {
 		var st = $(this).scrollTop();
 		if (st > lastScroll) {
 			$("header#header .top_event").addClass("active");
+			$("#wrap").addClass("active");
 
 		}
 		else {
@@ -33,6 +34,7 @@ $(function() {
 
 		if ($(this).scrollTop() == 0) {
 			$("header#header .top_event").removeClass("active");
+			$("#wrap").removeClass("active");
 
 		}
 	});

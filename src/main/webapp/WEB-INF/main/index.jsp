@@ -130,8 +130,22 @@ header#header .select {
 			</div>
 		</div>
 	</div>
+
+	<div class="pop_up search">
+		<div class="dimd"></div>
+		<div class="main">text</div>
+	</div>
+	<div class="pop_up date">
+		<div class="dimd"></div>
+		<div class="main">text</div>
+	</div>
+	<div class="pop_up personnel ">
+		<div class="dimd"></div>
+		<div class="main">text</div>
+	</div>
 	<%@ include file="../include/footer.jsp"%>
 	<script>
+<<<<<<< HEAD
 		// 추가적인 JavaScript 코드 필요 시 여기에 작성
 		
 		//모달 창 띄우기, 모달창 닫기
@@ -160,6 +174,35 @@ header#header .select {
                 }
             });
         });
+=======
+		$(document)
+				.click(
+						function(event) {
+							if (!$(event.target)
+									.closest(
+											"#index .search form .input input, #index .search form .gray").length) {
+								$("#index .search form .input input")
+										.removeClass("active");
+								$("#index .search form .gray").removeClass(
+										"active");
+							}
+						});
+		
+		$("#index .search form .input input").click(function(){
+			$(".pop_up.search").addClass("active");
+		});
+		$("#index .search form .date").click(function(){
+			$(".pop_up.date").addClass("active");
+		});
+		$("#index .search form .personnel").click(function(){
+			$(".pop_up.personnel").addClass("active");
+		});
+		$(".dimd").click(function(){
+			$(".pop_up").removeClass("active");
+		});
+		
+	
+>>>>>>> 0601fe7ddf753b374a0eabab01a3f8539adb1d81
 	</script>
 </body>
 </html>

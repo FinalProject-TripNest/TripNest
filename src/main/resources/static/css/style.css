@@ -1,5 +1,9 @@
 @charset "EUC-KR";
 
+#wrap.active {
+	margin-top: 100px;
+}
+
 body {
 	font-family: 'Noto Sans KR';
 }
@@ -683,11 +687,6 @@ header#header .menu ul.sub li {
 	border: 1px solid #fff;
 }
 
-#index .search form .gray.active {
-	background-color: #fff;
-	border: 1px solid #000;
-}
-
 #index .search form input.btn {
 	width: 120px;
 	color: #fff;
@@ -703,6 +702,40 @@ header#header .menu ul.sub li {
 #index .search form .btn:hover {
 	opacity: 0.8;
 	transition: all 0.3s ease-in-out;
+}
+
+.pop_up {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	align-items: center;
+	justify-content: center;
+	display: none;
+}
+
+.pop_up.active {
+	display: flex;
+}
+
+.pop_up .dimd {
+	background-color: rgb(87 87 87/ 80%);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.pop_up .main {
+	background-color: #fff;
+	width: 1200px;
+	z-index: 2;
+	padding: 20px;
+	border-radius: 10px;
 }
 
 
