@@ -36,7 +36,7 @@
 		select * from ROOMS where room_id = #{room_id}
 	</select>
 
-	<select id="getRoomImgByRoomId" resultType="String" parameterType="String">
+	<select id="getImgsByRoomId" resultType="String" parameterType="String">
 		select image_photo from IMAGES where room_id = #{room_id}
 	</select>
 
@@ -72,7 +72,17 @@
 			ROOMS.room_id ASC;
 	</select>
 
-	<select id="getSixRoomsData" resultType="RoomsDto">
+	<select id="getLackRoomId" parameterType="map" resultType="String">
+		SELECT room_id
+		FROM ROOMS
+		WHERE room_id NOT IN
+		<foreach item="id" index="index" collection="excludedIds" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+		order by room_id desc limit #{num};
+	</select>
+
+	<select id="getSimpleRoomsDataByRoomId" parameterType="String" resultType="RoomsDto">
 		SELECT
 			ROOMS.room_id,
 			ROOMS.room_name,
@@ -100,11 +110,11 @@
 					room_id
 			) AS min_images ON ROOMS.room_id = min_images.room_id
 				LEFT JOIN IMAGES ON min_images.min_image_id = IMAGES.image_id
+		WHERE
+			ROOMS.room_id = #{room_id}
 		ORDER BY
-			ROOMS.room_id DESC
-			LIMIT 6;
+			ROOMS.room_id ASC;
 	</select>
-
 
 
 
