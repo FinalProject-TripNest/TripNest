@@ -8,4 +8,6 @@ import data.dto.PromotionDto;
 public interface JournalServiceInter {
 
 	public List<JournalDto> dataList();
+	
+	public JournalDto getOneData(String journal_id);
 }
