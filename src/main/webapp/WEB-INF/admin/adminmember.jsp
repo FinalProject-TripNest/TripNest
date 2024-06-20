@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/adminpageheader.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +10,22 @@
 </head>
 <title>TRIP NEST</title>
 <style>
-/* 阿 其捞瘤 胶鸥老 */
-
-/* //阿 其捞瘤 胶鸥老 */
 </style>
 <body>
 
 
 	<div id="wrap">
-		<div id="其捞瘤 捞抚 抗矫:promotion_detail.jsp id=promotion_detail">
+		<div id="adminMember">
 			<div class="center">
-				<!-- 阿 其捞瘤 累诀 内靛 -->
-				
-				<!--//阿 其捞瘤 累诀 内靛  -->
+				<table>
+					<thead>
+						<tr>
+							<th>鞚措</th>
+							<th>鞚措</th>
+							<th>鞚措</th>
+						</tr>
+					</thead>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -32,9 +35,7 @@
 
 	<%@ include file="../include/footer.jsp"%>
 	<script>
-	//阿 其捞瘤 磊官胶农赋飘
-
-	//阿 其捞瘤 磊官胶农赋飘
+		
 	</script>
 </body>
 </html>

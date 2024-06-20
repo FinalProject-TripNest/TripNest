@@ -26,7 +26,7 @@
 							</c:when>
 							<c:otherwise>
 								<!-- 기본 이미지 추가하기 -->
-								<img alt="" src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/roomphoto/noimage.jpg">
+								<img alt="" src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/roomphoto/noimage.jpg" style="border: 1px solid #ddd;">
 							</c:otherwise>
 						</c:choose>
 					</div>

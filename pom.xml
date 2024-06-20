@@ -95,6 +95,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		
+		<!-- 소셜로그인 -->
+		<dependency>
+		    <groupId>com.github.scribejava</groupId>
+		    <artifactId>scribejava-apis</artifactId>
+		    <version>6.9.0</version>
+		</dependency>
 
 		<!--https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws -->
 		<dependency>

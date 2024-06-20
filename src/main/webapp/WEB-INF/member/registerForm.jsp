@@ -138,7 +138,7 @@
 				        <div class="password-input">
 				            <input type="password" id="member_password" name="member_password" placeholder="비밀번호를 입력하세요." required="required">
 				            <button type="button" class="password-toggle">
-				                <img id="toggleIcon" alt="Show Password" src="../img/password_deactivate.ico">
+				                <img id="toggleIcon" alt="Show Password" src="../img/register_login/password_deactivate.ico">
 				            </button>
 				        </div>
 				        <ul>
@@ -153,7 +153,7 @@
 				        <input type="tel" id="member_phone" name="member_phone" placeholder="휴대폰 번호를 입력하세요." required="required">
 				    </div>
 				    <div class="form-group">
-				        <label for="birthday">생일</label>
+				        <label for="birthday">생년월일</label>
 				        <input type="date" id="member_birth_date" name="member_birth_date" placeholder="생일을 입력하세요." required="required">
 				    </div>
 				    <div class="form-group">
@@ -221,10 +221,10 @@
         passwordVisible = !passwordVisible;
         if (passwordVisible) {
             passwordInput.type = 'text';
-            toggleIcon.src = '../img/password_activate.ico';
+            toggleIcon.src = '../img/register_login/password_activate.ico';
         } else {
             passwordInput.type = 'password';
-            toggleIcon.src = '../img/password_deactivate.ico';
+            toggleIcon.src = '../img/register_login/password_deactivate.ico';
         }
     });
 
