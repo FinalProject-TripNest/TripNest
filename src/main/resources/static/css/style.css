@@ -1297,7 +1297,7 @@ header#header .menu ul.sub li {
 /*journal_detail*/
 #journal_detail .bg {
 	height: 440px;
-	background-image: url("../img/journal/detail_bg.jpg");
+	background-image: url("https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/journal/detail_bg.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;

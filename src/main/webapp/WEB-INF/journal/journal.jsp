@@ -29,7 +29,7 @@
 									<p class="miniTitle">${list.journal_title}</p>
 									<!-- 예시로 추가한 이미지 -->
 									<c:if test="${dateDiff <= 15}">
-										<img alt="" src="../img/journal/new.png" width="15"
+										<img alt="" src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/journal/new.png" width="15"
 											height="15">
 									</c:if>
 								</div>
