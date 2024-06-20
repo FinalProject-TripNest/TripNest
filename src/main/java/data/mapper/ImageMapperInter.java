@@ -11,5 +11,5 @@ public interface ImageMapperInter {
 
 	public void insertImage(ImagesDto dto);
 	public List<ImagesDto> getAllRoomPhoto();
-	public ImagesDto getDataRoomImg(String room_id);
+	public List<ImagesDto> getDataRoomImg(String room_id);
 }

@@ -217,15 +217,18 @@
     <div class="close-btn">×</div>
         <div class="custom-model-wrap">
             <div class="pop-up-content-wrap">
-            	<input type="hidden" id="room_id">
+            	<input type="text" id="room_id">
             	<div>[숙소이름]&nbsp;&nbsp;<span id="room_name"></span></div><br>
+            	<div>[연락처]&nbsp;&nbsp;<span id="room_hp"></span></div><br>
             	<div>[숙소가격]&nbsp;&nbsp;<span id="room_price"></span>원</div><br>
             	<div>[숙소주소]&nbsp;&nbsp;<span id="room_address"></span></div><br>
             	<div id="map" style="width: 400px; height: 300px;"></div>
             	<div>[제공되는 서비스]&nbsp;&nbsp;<br><span id="room_service"></span></div><br>
             	<div>[수용가능 인원]&nbsp;&nbsp;최소 <span id="room_min"> </span> 명 / 최대 <span id="room_max"></span>명</div><br>
             	<div>[숙소에 관하여]&nbsp;&nbsp;<br><span id="room_detail"></span></div><br>
-            	<div>[등록한 사진]<br><img alt="" src="" id="room_photo"> </div><br>
+            	<div >[등록한 사진]
+            		<div id="imageGallery"></div>
+            	</div><br>
             	
             	<div align="center">     	
             		<button type="button" class="adminacc">승인</button>
@@ -322,10 +325,22 @@
 					 			$("#room_min").text(res.roommin);
 					 			$("#room_max").text(res.roommax);
 					 			$("#room_detail").text(res.roomdetail);
+					 			$("#room_hp").text(res.roomhp);
 					 			$("#room_id").val(res.roomid);
 					 			
 					 			//console.log("Image URL: " + res.roomimg);
-					      $("#room_photo").attr("src", res.roomimg);
+					      //$("#room_photo").attr("src", res.roomimg);
+					      
+					      
+					      
+					       var imageGallery = $('#imageGallery');
+                    imageGallery.empty(); // 이미지 갤러리 초기화
+                    
+                        res.photoList.forEach(function(photoUrl) {
+                            var img = $('<img>').attr('src', photoUrl).css({'width': '170px', 'height': '200px', 'margin': '5px'});
+                            imageGallery.append(img);
+                        });
+					  
 					 			
 					 			 initializeMap(res.roomaddr);
 					 		}

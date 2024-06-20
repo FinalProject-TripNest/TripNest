@@ -1,5 +1,6 @@
 package data.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import data.dto.ImagesDto;
 import data.dto.InqueryDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
@@ -35,7 +37,7 @@ public class AdminController {
 	
 	//숙소리스트
 	@GetMapping("/admin/roomlist")
-	public ModelAndView list(@RequestParam(value = "currentPage",defaultValue = "1")int currentPage) {
+	public ModelAndView list(@RequestParam(value = "currentPage",defaultValue = "1")int currentPage, String room_id) {
 		
 		ModelAndView mview=new ModelAndView();
 		
@@ -77,6 +79,7 @@ public class AdminController {
 		
 		List<RoomsDto> list=rservice.getAllRooms(start, perPage);
 		
+		
 		//리퀘스에 저장
 		mview.addObject("totalCount", totalCount);
 		mview.addObject("list", list);
@@ -109,9 +112,17 @@ public class AdminController {
 		String roomdetail=rservice.getDataRoom(room_id).getRoom_detail();
 		String roomid=rservice.getDataRoom(room_id).getRoom_id();
 		String roomstatus=rservice.getDataRoom(room_id).getRoom_status();
+		String roomhp=rservice.getDataRoom(room_id).getRoom_hp();
 		
 		//images테이블의 photo담기
-		String roomimg=imgservice.getDataRoomImg(room_id).getImage_photo();
+		//String roomimg=imgservice.getDataRoomImg(room_id).getImage_photo();
+		
+		List<ImagesDto> imgList = imgservice.getDataRoomImg(room_id);
+	    List<String> photoList = new ArrayList<>();
+	    for (ImagesDto imgDto : imgList) {
+	        photoList.add(imgDto.getImage_photo());
+	    }
+	    map.put("photoList", photoList); // 이미지 리스트를 배열로 담아 전달
 		
 		map.put("roomname", roomname);
 		map.put("roomprice", roomprice);
@@ -121,11 +132,13 @@ public class AdminController {
 		map.put("roommax", roommax);
 		map.put("roomdetail", roomdetail);
 		map.put("roomid", roomid);
-		map.put("roomimg", roomimg);
+		//map.put("roomimg", roomimg);
 		map.put("roomstatus", roomstatus);
+		map.put("roomhp", roomhp);
 		
 		return map;
 	}
+	
 	
 	//room_status 미승인을 승인으로 수정
 	@PostMapping("/admin/roomacc")
@@ -201,11 +214,11 @@ public class AdminController {
 	
 	//관리자 페이지에서 답변달때 사용 하는 매서드
 	@PostMapping("/admin/updateanswer")
-	public String update(InqueryDto dto, String inquery_id) {
+	public String update(InqueryDto dto) {
 		
-		iqservice.updateInqueryAnswer(inquery_id);
+		iqservice.updateInqueryAnswer(dto);
 		
-		return "redirect:/";
+		return "/admin/admininquery";
 	}
 	
 }

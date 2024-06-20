@@ -20,11 +20,7 @@ public class InqueryService implements InqueryServiceInter {
 		mapper.insertInquery(dto);
 		
 	}
-	@Override
-	public void updateInqueryAnswer(String inquery_id) {
-		// TODO Auto-generated method stub
-		mapper.updateInqueryAnswer(inquery_id);
-	}
+
 	@Override
 	public List<InqueryDto> getInqueryList(int start,int perpage) {
 		// TODO Auto-generated method stub
@@ -37,6 +33,12 @@ public class InqueryService implements InqueryServiceInter {
 	public int getTotalInquery() {
 		// TODO Auto-generated method stub
 		return mapper.getTotalInquery();
+	}
+
+	@Override
+	public void updateInqueryAnswer(InqueryDto dto) {
+		// TODO Auto-generated method stub
+		mapper.updateInqueryAnswer(dto);
 	}
 
 

@@ -11,7 +11,7 @@ import data.dto.InqueryDto;
 public interface InqueryMapperInter {
 
 	public void insertInquery(InqueryDto dto);
-	public void updateInqueryAnswer(String inquery_id);
+	public void updateInqueryAnswer(InqueryDto dto);
 	public List<InqueryDto> getInqueryList(HashMap<String, Integer> map);
 	public int getTotalInquery();
 }

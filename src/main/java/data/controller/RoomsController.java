@@ -57,13 +57,12 @@ public class RoomsController {
        
 		//SimpleDateFormat sdf=new SimpleDateFormat("yyyMMdd");
 		for(MultipartFile multi:image_upload) {
-			//String newName=sdf.format(new Date())+"_"+multi.getOriginalFilename();
-			//photo+=newName+",";
+
 			try {
 				
 				//roomphohto 는 s3에 등록할 파일명?같은거 path
 				String imageUrl = s3service.upload(multi, "roomphoto");
-                //photo += imageUrl + ",";
+				
 				ImagesDto imgdto=new ImagesDto();
 				imgdto.setRoom_id(String.valueOf(room_id));
 				imgdto.setImage_photo(imageUrl);
@@ -77,7 +76,6 @@ public class RoomsController {
 				e.printStackTrace();
 			}
 		}
-		//photo=photo.substring(0, photo.length()-1);	
 
 		return "redirect:/";
 
