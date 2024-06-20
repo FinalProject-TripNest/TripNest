@@ -1084,66 +1084,66 @@ header#header .menu ul.sub li {
 	line-height: 24px;
 }
 
-#findDetail .notification {
+.notification {
 	background: #000;
 	color: #fff;
 	padding: 120px 0;
 }
 
-#findDetail .notification>.center ul {
+.notification>.center ul {
 	line-height: 50px;
 	margin-right: 120px;
 }
 
-#findDetail .notification>.center .li_title {
+.notification>.center .li_title {
 	font-size: 18px;
 	font-weight: 600;
 }
 
-#findDetail .notification>.center ul li.margin {
+.notification>.center ul li.margin {
 	margin-top: 20px;
 }
 
-#findDetail .notification>.center ul li.btn {
+.notification>.center ul li.btn {
 	cursor: pointer;
 	color: #666;
 	width: 100px;
 }
 
-#findDetail .notification>.center ul li.btn.active {
+.notification>.center ul li.btn.active {
 	color: #fff;
 }
 
-#findDetail .notification>.center {
+.notification>.center {
 	display: flex;
 }
 
-#findDetail .notification>.center .container {
+.notification>.center .container {
 	margin-top: 20px;
 }
 
-#findDetail .notification>.center .container .tab_view {
+.notification>.center .container .tab_view {
 	margin-top: 40px;
 }
 
-#findDetail .notification>.center .container .tab_view {
+.notification>.center .container .tab_view {
 	display: none
 }
 
-#findDetail .notification>.center .container .tab_view.active {
+.notification>.center .container .tab_view.active {
 	display: block
 }
 
-#findDetail .notification>.center .container .tab_view .tit {
+.notification>.center .container .tab_view .tit {
 	font-size: 24px;
 	margin-bottom: 30px
 }
 
-#findDetail .notification>.center .container.tab_view dl {
+.notification>.center .container.tab_view dl {
 	overflow: hidden
 }
 
-#findDetail .notification>.center .container.tab_view dl dt {
+.notification>.center .container.tab_view dl dt {
 	width: 10%;
 	clear: both;
 	float: left;
@@ -1153,7 +1153,7 @@ header#header .menu ul.sub li {
 	padding-bottom: 30px
 }
 
-#findDetail .notification>.center .container .tab_view dl dd {
+.notification>.center .container .tab_view dl dd {
 	width: 90%;
 	float: left;
 	font-size: 14px;
@@ -1162,34 +1162,33 @@ header#header .menu ul.sub li {
 	padding-bottom: 30px
 }
 
-#findDetail .notification>.center .container .tab_view .box_list {
+.notification>.center .container .tab_view .box_list {
 	width: 650px;
 	margin-top: 15px
 }
 
-#findDetail .notification>.center .container .tab_view .box_list li {
+.notification>.center .container .tab_view .box_list li {
 	float: left;
 	border: 1px solid #444;
 	width: 50%;
 	line-height: 35px;
 }
 
-#findDetail .notification>.center .container .tab_view .box_list li span
-	{
+.notification>.center .container .tab_view .box_list li span {
 	display: inline-block;
 	margin-left: 15px;
 	width: 130px
 }
 
-#findDetail .notification>.center .container .tab_view table th,
-	#findDetail .notification>.center .container .tab_view table tr {
+.notification>.center .container .tab_view table th, .notification>.center .container .tab_view table tr
+	{
 	border: 1px solid #444;
 	width: 50%;
 	text-align: center;
 	height: 36px;
 }
 
-#findDetail .notification>.center .container table {
+.notification>.center .container table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 100%;
@@ -1199,11 +1198,11 @@ header#header .menu ul.sub li {
 	margin-bottom: 10px;
 }
 
-#findDetail .notification>.center .container table td {
+.notification>.center .container table td {
 	border-right: 1px solid #444;
 }
 
-#findDetail .notification>.center .container .tab_view dl dt {
+.notification>.center .container .tab_view dl dt {
 	width: 10%;
 	clear: both;
 	float: left;
@@ -1213,7 +1212,7 @@ header#header .menu ul.sub li {
 	padding-bottom: 30px;
 }
 
-#findDetail .notification>.center .container .tab_view dd ul li {
+.notification>.center .container .tab_view dd ul li {
 	list-style-type: disc;
 	padding: 0 0 8px;
 	line-height: 1.8;
