@@ -102,7 +102,7 @@ width: 100px;
 			
 			
 				<c:forEach var="a" items="${list }">
-				<input type="hidden" value="${a.inquery_id }" name="inquery_id">
+				<input type="hidden" value="${a.inquery_id }" name="inquery_id_${a.inquery_id}">
 					<div class=" inquiry-item">
 						<div class="inquiry-div num">${no }</div>
 							<c:set var="no" value="${no-1 }"/>
@@ -124,17 +124,16 @@ width: 100px;
 							<input type="text" value="문의내용">
 							<span> ${a.inquery_content}</span>
 						</div>
+						<div>
+							<span class="adminanswer"></span>
+						</div>
 						<div class="inquery_reanswer" align="center">
 							<span>문의답변</span>
-							<input name="inquery_answer" placeholder="답변등록" class="inquery_answer">
-							<button type="button" class="dddd">등록</button>
+							<input name="inquery_answer_${a.inquery_id}" placeholder="답변등록" class="inquery_answer">
+							<button type="button" class="adminanswerbtn">등록</button>
 						</div>
 					</div>
 				</c:forEach>
-				<form id="updateAnswerForm" action="updateanswer" method="post">
-                <input type="hidden" id="inqueryIdInput" name="inquery_id">
-                <input type="hidden" id="inqueryAnswerInput" name="inquery_answer">
-            </form>
 			</div>
 		</div>
 	</div>
@@ -190,16 +189,24 @@ width: 100px;
 		                   }
 		               });
 		           });
-		    	   
-		    	   $(".dddd").click(function() {
-		               var inqueryId = $(this).closest(".iqdiv").data("inquery-id");
-		               var inqueryAnswer = $(this).closest(".inquery_reanswer").find(".inquery_answer").val();
 
-		               $("#inqueryIdInput").val(inqueryId);
-		               $("#inqueryAnswerInput").val(inqueryAnswer);
-
-		               $("#updateAnswerForm").submit();
-		           });
+		    	   $(".adminanswerbtn").click(function() {
+		    		   var inquery_id = $(this).closest(".iqdiv").data("inquery-id");
+		    		   var inquery_answer = $(this).closest(".inquery_reanswer").find(".inquery_answer").val();
+		    		   //alert(inqueryAnswer+","+inqueryId);
+		    		   
+		    		   $.ajax({
+		    			   type:"post",
+		    			   url:"/admin/updateanswer",
+		    			   data:{"inquery_id":inquery_id,"inquery_answer":inquery_answer},
+		    			   dataTyle:"html",
+		    			   success:function(){
+		    				   alert("성공");
+		    			   }
+		    			   
+		    		   })
+		    		   
+		    	   })		    	   
     });
 	</script>
 </body>

@@ -217,7 +217,7 @@
     <div class="close-btn">×</div>
         <div class="custom-model-wrap">
             <div class="pop-up-content-wrap">
-            	<input type="text" id="room_id">
+            	<input type="hidden" id="room_id">
             	<div>[숙소이름]&nbsp;&nbsp;<span id="room_name"></span></div><br>
             	<div>[연락처]&nbsp;&nbsp;<span id="room_hp"></span></div><br>
             	<div>[숙소가격]&nbsp;&nbsp;<span id="room_price"></span>원</div><br>
