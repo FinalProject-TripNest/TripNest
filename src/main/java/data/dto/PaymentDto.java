@@ -11,6 +11,7 @@ import lombok.Data;
 public class PaymentDto {
 	
 	private int idx;
+	private int member_id; // RESERVATIONS 테이블과 외래키로 참조
 	private String member_useremail; //사용자 회원 아이디
 	private String imp_uid; // 결제 고유 ID : 아임포트(IMP)에서 제공하는 고유 결제 ID
 	private String merchant_uid; // 상점 주문 번호 : 상점에서 관리하는 주문 번호

@@ -89,6 +89,21 @@
 	font-size: 34px;
 }
 
+#reservation_success  a.mapconfirm {
+    width: 240px;
+    height: 40px;
+    margin: 0;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
 /* //각 페이지 스타일 */
 </style>
 <body>
@@ -128,8 +143,8 @@
 										<p>
 											<span>결제금액</span> : 10000
 										</p>
-									</div>
-
+											<a href="#" class="mapconfirm" style="margin-top: 30px;">숙소 위치 확인</a>
+									</div>		
 								</div>
 							</div>
 						</div>

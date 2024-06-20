@@ -3,7 +3,7 @@
 <mapper namespace="data.mapper.PaymentMapperInter">
 	<insert id="savePayment" parameterType="PaymentDto">
 		insert into
-		PAYMENT(idx,member_useremail,imp_uid,merchant_uid,paid_amount,pg_provider,pg_tid,buyer_name,paid_date)
-		values(null,#{member_useremail},#{imp_uid},#{merchant_uid},#{paid_amount},#{pg_provider},#{pg_tid},#{buyer_name}, now())
+		PAYMENT(idx,member_id,member_useremail,imp_uid,merchant_uid,paid_amount,pg_provider,pg_tid,buyer_name,paid_date)
+		values(null,#{member_id},#{member_useremail},#{imp_uid},#{merchant_uid},#{paid_amount},#{pg_provider},#{pg_tid},#{buyer_name}, now())
 	</insert>
 </mapper>

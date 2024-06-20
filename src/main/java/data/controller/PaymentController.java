@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import data.dto.PaymentDto;
 import data.service.PaymentService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PaymentController {
@@ -22,11 +23,21 @@ public class PaymentController {
 
 	@PostMapping("/payment/complete")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> paymentComplete(@RequestBody PaymentDto paymentDto) {
+	public ResponseEntity<Map<String, Object>> paymentComplete(@RequestBody PaymentDto paymentDto, HttpSession session) {
 
 		Map<String, Object> response = new HashMap<>();
-
+		
 		try {
+			// 세션에서 member_id를 가져옴
+            Integer memberId = (Integer) session.getAttribute("member_id");
+			
+            // PaymentDto에 memberId 설정
+            if (memberId != null) {
+                paymentDto.setMember_id(memberId);
+            } else {
+                throw new IllegalArgumentException("member_id not found in session.");
+            }
+			
 			// PaymentDto를 데이터베이스에 저장하는 로직
 			paymentService.savePayment(paymentDto);
 
