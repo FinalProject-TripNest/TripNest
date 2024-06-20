@@ -66,6 +66,7 @@ public class LoginController {
 
                 session.setAttribute("myid", memberDto.getMember_useremail());
                 session.setAttribute("myname", memberDto.getMember_name());
+                session.setAttribute("member_id", memberDto.getMember_id());
                 session.setAttribute("loginok", "yes");
                 session.setAttribute("member", memberDto);
 
@@ -99,7 +100,6 @@ public class LoginController {
             session.setMaxInactiveInterval(60 * 60 * 8);
             session.setAttribute("myid", memberDto.getMember_useremail());
             session.setAttribute("myname", memberDto.getMember_name());
-            session.setAttribute("member_id", memberDto.getMember_id());
             session.setAttribute("loginok", "yes");
             session.setAttribute("member", memberDto);
             session.setAttribute("accessToken", accessToken);
