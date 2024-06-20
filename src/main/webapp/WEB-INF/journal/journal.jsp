@@ -22,7 +22,7 @@
 							value="${(currentDate.time - list.journal_date.time) / (1000 * 60 * 60 * 24)}" />
 
 						<a href="/journal/detail?journal_id=${list.journal_id}" class="block"> <img alt=""
-							src="../img/journal/${list.journal_photo}" class="img1">
+							src="${list.journal_photo}" class="img1">
 							<div class="content"
 								style="display: flex; align-items: center; justify-content: space-between;">
 								<div style="display: flex; align-items: center;">

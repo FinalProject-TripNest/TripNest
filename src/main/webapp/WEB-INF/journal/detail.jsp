@@ -23,7 +23,7 @@
 			<div class="center">
 				<div class="main">
 					<div class="img">
-						<img alt="" src="../img/journal/${dto.journal_photo}">
+						<img alt="" src="${dto.journal_photo}">
 					</div>
 					<div class="text">
 						<p>${dto.journal_content}</p>
