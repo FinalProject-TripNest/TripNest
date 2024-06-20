@@ -780,7 +780,8 @@
 										<dt class="total"></dt>
 										<dd class="total">
 											<input type="hidden" name="RESERVATION_PRICE"
-												id="RESERVATION_PRICE" value="${roomsDto.room_price}">
+												id="RESERVATION_PRICE" value="100">
+<%-- 												${roomsDto.room_price} --%>
 											<fmt:formatNumber value="${roomsDto.room_price}"
 												type="currency" currencySymbol="₩ " groupingUsed="true" />
 										</dd>
@@ -1253,12 +1254,38 @@
 				// 3개월, 4개월, 5개월, 6개월 할부 옵션 추가
 				}
 			}, function(rsp) { // callback
-				if (rsp.success) { // 결제 성공 시 로직ㄱ
-					$(".bookingfrm").submit(); // 폼 제출
+				if (rsp.success) { // 결제 성공 시 로직
+					// 결제 성공 시 결제 정보 서버로 전송
+					$.ajax({
+						type: "POST",
+						url: "/payment/complete", // 서버의 결제 정보 처리 URL
+						contentType: "application/json", // Content-Type 명시
+						data: JSON.stringify({
+					        imp_uid: rsp.imp_uid,
+					        merchant_uid: rsp.merchant_uid,
+					        paid_amount: rsp.paid_amount,
+					        pg_provider: rsp.pg_provider,
+					        pg_tid: rsp.pg_tid,
+					        buyer_name: rsp.buyer_name,
+					        member_useremail: rsp.buyer_email
+					    }),
+						success: function(response) {
+							if (response.success) {
+								$(".bookingfrm").submit(); // 폼 제출
+							} else {
+								alert("결제 정보 저장에 실패했습니다.");
+							}
+						},
+						error: function(error) {
+							alert("서버 통신 오류가 발생했습니다.");
+						}
+					});
+					
 				} else { // 결제 실패 시
 					alert("결제를 취소했습니다.");
 					console.log(rsp);
-					$(".bookingfrm").submit(); // 폼 제출
+					 // $(".bookingfrm").submit(); // 폼 제출
+				
 				}
 			});
 		}

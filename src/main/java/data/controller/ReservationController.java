@@ -52,5 +52,4 @@ public class ReservationController {
 		model.setViewName("/find/reservation_success");
 		return model;
 	}
-
 }
