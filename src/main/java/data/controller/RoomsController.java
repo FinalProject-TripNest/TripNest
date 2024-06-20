@@ -1,7 +1,7 @@
 package data.controller;
+
 import java.io.IOException;
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
 import data.dto.RoomsDto;
@@ -19,7 +20,7 @@ import data.service.RoomsService;
 import data.service.S3UploaderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class RoomsController {
@@ -43,12 +44,6 @@ public class RoomsController {
 		model.setViewName("/room/roominsertform");
 		return model;
 	}
-	
-	//차유지 보기 편하게 만든거 나중에 삭제 예정
-	@GetMapping("/room/roomsuccess")
-	public String success() {
-		return "/room/roominsertsuccess";
-	}
 
 	@PostMapping("/room/insert")
 	public String insert(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -70,17 +65,21 @@ public class RoomsController {
 		dto.setMember_id(memid);
 		
 		service.insertRoom(dto);
+		
+		 // 방 정보 삽입 후, room 의 마지막에 등록된 romm_id값을 가져와서 images테이블에 넣어줌.
+        int room_id = service.getLastInsertedRoomId(); 
+       
+		//SimpleDateFormat sdf=new SimpleDateFormat("yyyMMdd");
+		for(MultipartFile multi:image_upload) {
 
-		// 방 정보 삽입 후, room 의 마지막에 등록된 romm_id값을 가져와서 images테이블에 넣어줌.
-		int room_id = service.getLastInsertedRoomId();
 
-		for (MultipartFile multi : image_upload) {
-			
 			try {
 
 				///roomphohto 는 s3에 등록할 파일명?같은거 path
 				String imageUrl = s3service.upload(multi, "roomphoto");
+
                 //images 테이블에 image_id당 하나의 이미지만 들어가게끔
+
 				ImagesDto imgdto=new ImagesDto();
 				imgdto.setRoom_id(String.valueOf(room_id));
 				imgdto.setImage_photo(imageUrl);
@@ -97,6 +96,9 @@ public class RoomsController {
 
 		return "/room/roominsertsuccess";
 
+
 	}
+	
+
 
 }

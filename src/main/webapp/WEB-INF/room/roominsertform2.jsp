@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c890ddd8c7f2607257a2db412525f318&libraries=services"></script>
 
@@ -38,6 +38,8 @@
       height: 100%;
       object-fit: cover;
     }
+
+    
      .number-input {
             display: flex;
             align-items: center;
@@ -46,13 +48,6 @@
             width: 50px;
             text-align: center;
         }
-     /*.number-input button {
-            width: 30px;
-            height: 30px;
-            border-radius: 100px;
-            border: 1px solid #ccc;
-            background-color: white;
-        }*/
         
     input{
     	 border: 1px solid #ccc; /* 테두리 설정 */
@@ -84,7 +79,7 @@
         object-fit: cover;
     }
     table tr,th,td {
-    	border: 2px solid black;
+    	border: 0px solid black;
 }
 
     .form-table,.service-table {
@@ -110,7 +105,7 @@
     	margin: 0 auto;
     	width: 80%;
     	margin-bottom: 5%;
-    	margin-top: 5%;
+    	margin-top: 8%;
     }
     caption {
 	    font-size: 20pt;
@@ -126,7 +121,7 @@
 	margin-bottom: 5%;
 }
 #map{
- width:100%;
+ width:96%;
  height:450px;
 }
 .image-preview-container {
@@ -141,6 +136,62 @@ input.service{
 	width: 50px;
 }
 
+.checkboxdiv{
+	border: 1px solid #ccc;
+	width:250px;
+	height: 80px;
+	vertical-align: middle;
+	border-radius: 20px;
+	margin: 10px;
+}
+
+.servicediv input[type="checkbox"] {
+    transform: scale(0.8); /* 체크박스 크기를 줄입니다 */
+    margin-right: 5px; /* 체크박스와 텍스트 사이의 간격을 조정합니다 */
+
+}
+
+.service-table {
+    width: 100%;
+    border-collapse: collapse; /* 테이블 셀 경계 병합 */
+}
+
+.service-table td {
+    text-align: center; /* 셀 내용 가운데 정렬 */
+    vertical-align: top; /* 셀 내용 상단 정렬 */
+    width: 33.33%; /* 셀 폭을 세 등분으로 설정 */
+    padding: 10px; /* 셀 여백 설정 */
+}
+
+.checkboxdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.servicediv input[type="checkbox"] {
+    vertical-align: middle; /* 체크박스 세로 정렬 */
+    margin-right: 2px; /* 체크박스 오른쪽 여백 설정 */
+     accent-color: black;
+}
+
+.servicediv{
+ 		display: flex;
+    align-items: center;
+}
+
+#insertbtn{
+	width: 300px;
+	height: 100px;
+	background-color: white;
+	font-size: 20pt;
+	border: 3px solid #ccc;
+	border-radius: 20px;
+	margin-top: 5%;
+	cursor: pointer;
+}
+
+
 </style>
 <body>
 
@@ -148,7 +199,7 @@ input.service{
 	<div id="wrap">
 		<div id="roominsertfrom">
 			<div class="center">
-				<form action="/room/insert" method="post" enctype="multipart/form-data">
+				<form action="insert" method="post" enctype="multipart/form-data" id="roomform">
 				 <input type="hidden" name="room_address" id="room_address">
 					<swiper-container class="mySwiper" pagination="true" pagination-type="progressbar" navigation="true">
 				    <swiper-slide>
@@ -222,8 +273,8 @@ input.service{
 				    				<div>
 										<input type="text" id="sample6_postcode" placeholder="우편번호">
 										<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" id="sample6_address" placeholder="주소"><br>
-										<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+										<input type="text" id="sample6_address" placeholder="주소" required="required"><br>
+										<input type="text" id="sample6_detailAddress" placeholder="상세주소" required="required">
 										<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 									</div>
 				    			</td>
@@ -244,36 +295,87 @@ input.service{
 				    			<caption align="top"><b>편의시설 선택하기</b></caption>
 				    			<tr align="center">
 				    				<td>
-				    					<div>
-				    						<input type="checkbox" value="와이파이" class="service" name="room_service[]"><span>와이파이</span>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="와이파이" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">와이파이</div>
 				    					</div>
 				    				</td>
 				    				<td>
-				    					<input type="checkbox" value="TV" class="service" name="room_service[]">TV
-				    				</td>
-				    				<td>
-				    					<div>
-				    						<input type="checkbox" value="주방" class="service" name="room_service[]">주방
-				    					</div>
-				    				</td>
-				    			</tr>
-				    			<tr align="center">
-				    				<td>
-				    					<div>
-				    						<input type="checkbox" value="세탁기" class="service" name="room_service[]">세탁기
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="TV" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">TV</div>
 				    					</div>
 				    				</td>
 				    				<td>
-				    					<input type="checkbox" value="에어컨" class="service" name="room_service[]">에어컨
-				    				</td>
-				    				<td>
-				    					<div>
-				    						<input type="checkbox" value="전자렌지" class="service" name="room_service[]">전자렌지
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="주방" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">주방</div>
 				    					</div>
 				    				</td>
 				    			</tr>
 				    			<tr align="center">
 				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="세탁기" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">세탁기</div>
+				    					</div>
+				    				</td>
+				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="에어컨" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">에어컨</div>
+				    					</div>
+				    				</td>
+				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="전자렌지" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">전자렌지</div>
+				    					</div>
+				    				</td>
+				    			</tr>
+				    			<tr align="center">
+				    				<td>
+<<<<<<< HEAD
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="수영장" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">수영장</div>
+				    					</div>
+				    				</td>
+				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="바베큐 그릴" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">바베큐 그릴</div>
+				    					</div>
+				    				</td>
+				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="주차장" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">주차장</div>
+				    					</div>
+				    				</td>
+				    			</tr>
+				    			<tr align="center">
+				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="반려동물 입장가능" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">반려동물 입장가능</div>
+				    					</div>
+				    				</td>
+				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="셀프체크인" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">셀프체크인</div>
+				    					</div>
+				    				</td>
+				    				<td>
+				    					<div class="servicediv">
+				    						<input type="checkbox" value="건조기" class="service" name="room_service[]">
+				    						<div class="checkboxdiv">건조기</div>
+				    					</div>
+				    				</td>
+				    			</tr>
+
+=======
 				    					<div>
 				    						<input type="checkbox" value="주차장" class="service" name="room_service[]">주차장
 				    					</div>
@@ -287,8 +389,11 @@ input.service{
 				    					</div>
 				    				</td>
 				    			</tr>
+>>>>>>> 580c76a36c102119185aedcffba56751f727102d
 				    		</table>
-				    		<button type="submit" id="insertbtn">등록하기</button>
+				    		<div align="center">
+				    			<button type="submit" id="insertbtn">등록하기</button>
+				    		</div>	
 				    	</div>
 				    </swiper-slide>
 				  </swiper-container>
@@ -301,6 +406,7 @@ input.service{
 
 
 	<%@ include file="../include/footer.jsp"%>
+
 	<script>
 	
 	//도로명주소 검색
@@ -388,7 +494,7 @@ input.service{
          }
      });
     
-     
+
 	</script>
 	<script type="text/javascript">
 	//카카오 지도

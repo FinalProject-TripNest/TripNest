@@ -48,7 +48,7 @@ public class FindController {
 		ModelAndView detailModel = new ModelAndView();
 
 		RoomsDto detailDto = roomsService.getRoomsDataByRoomId(room_id);
-		detailDto.setRoomImgList(roomsService.getImgsByRoomId(room_id));
+		detailDto.setRoomImgList (roomsService.getImgsByRoomId(room_id));
 		detailModel.addObject("detailDto", detailDto);
 		detailModel.setViewName("find/detail");
 

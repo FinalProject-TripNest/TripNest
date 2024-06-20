@@ -10,8 +10,16 @@ public interface RoomsServiceInter {
 
 	public int getLastInsertedRoomId();
 
+	public List<RoomsDto> getAllRooms(int start,int perpage);
+	public int getTotalRooms();
+	public RoomsDto getDataRoom(String room_id);
+	public void updateRoomAcc(String room_id);
+	public void updateRoomHold(String room_id);
+
+
 	public List<RoomsDto> dataList();
 
 	public RoomsDto getOneData(String room_id);
 
 }
+
