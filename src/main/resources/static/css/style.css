@@ -1010,6 +1010,7 @@ header#header .menu ul.sub li {
 	height: 540px;
 	border: none;
 	position: relative;
+	width: 960px!important;
 }
 
 #findDetail .main .slide .detail_slide .swiper-slide {
@@ -1296,7 +1297,8 @@ header#header .menu ul.sub li {
 /*journal_detail*/
 #journal_detail .bg {
 	height: 440px;
-	background-image: url("https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/journal/detail_bg.jpg");
+	background-image:
+		url("https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/journal/detail_bg.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -1342,3 +1344,78 @@ header#header .menu ul.sub li {
 }
 
 /*//journal_detail*/
+
+/*promotion_detail*/
+#promotion_detail .bg {
+	height: 440px;
+	background-image:
+		url("https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/promotion/promotion_bg_02.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+}
+
+#promotion_detail .bg .title {
+	font-size: 40px;
+	font-weight: 700;
+}
+
+#promotion_detail .bg  .date {
+	position: absolute;
+	bottom: 20px;
+}
+
+#promotion_detail .bg  .event {
+	position: absolute;
+	bottom: 150px;
+}
+
+#promotion_detail  .center {
+	max-width: 900px;
+}
+
+#promotion_detail  .main {
+	padding: 120px 0;
+}
+
+#promotion_detail  .main .img {
+	height: 630px;
+}
+
+#promotion_detail .main  .img  img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#promotion_detail .main .text {
+	color: #4d4d4d;
+	margin-top: 40px;
+	line-height: 26px;
+}
+
+#promotion_detail .main .btn {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+#promotion_detail .main .btn div {
+	width: 140px;
+	color: #fff;
+	background: #2e65c9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+/*//promotion_detail*/

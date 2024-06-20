@@ -2,6 +2,7 @@ package data.controller;
 
 import java.util.List;
 
+import data.service.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,9 @@ public class MainController {
    @Autowired
    ImageService imageService;
 
+   @Autowired
+   RedisService redisService;
+
    @GetMapping("/")
    public String start() {
       return "redirect:index";
@@ -39,15 +43,26 @@ public class MainController {
    @GetMapping("index")
    public ModelAndView index() {
       ModelAndView model = new ModelAndView();
+//      List<JournalDto> journalDto = journalService.dataList();
+//      List<PromotionDto> promotionDto = promotionService.dataList();
+//      List<RoomsDto> roomsDto = roomsService.dataList();
+//      List<ImagesDto> imageDto = imageService.dataList();
+//      model.addObject("journalDto", journalDto);
+//      model.addObject("promotionDto", promotionDto);
+//      model.addObject("roomsDto", roomsDto);
+//      model.addObject("imageDto", imageDto);
+//
+
+
       List<JournalDto> journalDto = journalService.dataList();
       List<PromotionDto> promotionDto = promotionService.dataList();
-      List<RoomsDto> roomsDto = roomsService.dataList();
-      List<ImagesDto> imageDto = imageService.dataList();
+      List<RoomsDto> roomDtoList = roomsService.getTopRoomsId();
+
       model.addObject("journalDto", journalDto);
       model.addObject("promotionDto", promotionDto);
-      model.addObject("roomsDto", roomsDto);
-      model.addObject("imageDto", imageDto);
+      model.addObject("roomDtoList", roomDtoList);
       model.setViewName("/main/index");
+
       return model;
    }
 
