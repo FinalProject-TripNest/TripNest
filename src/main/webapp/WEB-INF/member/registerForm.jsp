@@ -153,7 +153,7 @@
 				        <input type="tel" id="member_phone" name="member_phone" placeholder="휴대폰 번호를 입력하세요." required="required">
 				    </div>
 				    <div class="form-group">
-				        <label for="birthday">생일</label>
+				        <label for="birthday">생년월일</label>
 				        <input type="date" id="member_birth_date" name="member_birth_date" placeholder="생일을 입력하세요." required="required">
 				    </div>
 				    <div class="form-group">

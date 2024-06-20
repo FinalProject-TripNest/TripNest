@@ -58,10 +58,14 @@
     }
     .social-buttons img {
         width: 100%;
-        height: 40px;
+        height: 30px;
         display: block;
         object-fit: cover;
         border-radius: 8px;
+    }
+    .forgot-password {
+        text-align: center;
+        margin-top: 40px;
     }
 </style>
 <body>
@@ -74,26 +78,32 @@
                 <form action="${pageContext.request.contextPath}/login/loginprocess" method="post">
                     <div class="form-group">
                         <label for="email">이메일</label>
-                        <input type="email" id="email" name="email" placeholder="이메일을 입력하세요." required="required">
+                        <input type="email" id="email" name="email" placeholder="이메일 아이디" required="required">
                     </div>
                     <div class="form-group">
                         <label for="password">비밀번호</label>
-                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요." required="required">
+                        <input type="password" id="password" name="password" placeholder="비밀번호 (영문,숫자,특수문자)" required="required">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn">로그인</button>
+                        <button type="submit" class="btn">LOGIN</button>
                     </div>
                     <div class="form-group social-buttons">
                         <button type="button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&response_type=code'">
                             <img alt="kakao_login" src="../img/register_login/kakao_login.png">
                         </button>
-                        <button>
+                        <button type="button" onclick="location.href='https://nid.naver.com/oauth2.0/authorize?client_id=${naverClientId}&redirect_uri=${naverRedirectUri}&response_type=code&state=STATE_STRING'">
                             <img alt="naver_login" src="../img/register_login/naver_login.png">
                         </button>
                     </div>
+                    <div class="form-group forgot-password">
+                        <a href="${pageContext.request.contextPath}/findId">아이디 찾기</a>	
+                        <a href="${pageContext.request.contextPath}/findPass">비밀번호 찾기</a>	
+                    </div>
                     <div class="form-group">
                         <c:if test="${not empty error}">
-                            <p style="color: red;">${error}</p>
+                            <script>
+	                            alert("${error}");
+	                        </script>
                         </c:if>
                     </div>
                 </form>
