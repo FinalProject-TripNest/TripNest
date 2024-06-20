@@ -15,14 +15,12 @@
 				<div class="list">
 
 					<c:forEach items="${dto}" var="list">
-						<a href="javascript:;" class="block"> <img alt=""
+						<a href="/promotion/detail?promotion_id=${list.promotion_id }" class="block"> <img alt=""
 							src="../img/promotion/${list.promotion_photo}" class="img1">
 							<div class="content"
 								style="display: flex; align-items: center; justify-content: space-between;">
 								<div style="display: flex; align-items: center;">
 									<p class="miniTitle">${list.promotion_title}</p>
-									<!-- 예시로 추가한 이미지 -->
-									<img alt="" src="../img/journal/new.png" width="15" height="15">
 								</div>
 								<p style="font-size: 14px; color: #4D4D4D;">
 									<fmt:formatDate value="${list.promotion_date }"
