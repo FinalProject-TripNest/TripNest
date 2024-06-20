@@ -1,5 +1,7 @@
 package data.dto;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
@@ -21,5 +23,6 @@ public class RoomsDto {
 	private String room_hp;
 	private String city;
 	private String district;
+	private List<String> imgList;
 
 }
