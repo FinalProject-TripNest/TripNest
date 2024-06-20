@@ -62,11 +62,13 @@
 					<div class="slide">
 						<div class="detail_slide">
 							<div class="swiper-wrapper">
-								<div class="swiper-slide">
-									<c:forEach items="${detailDto.roomImgList}" var="image">
+
+								<c:forEach items="${detailDto.roomImgList}" var="image">
+									<div class="swiper-slide">
 										<img alt="" src="${image}">
-									</c:forEach>
-								</div>
+									</div>
+								</c:forEach>
+
 							</div>
 							<div class="swiper_btn">
 								<div class="swiper-button-next btn"></div>
