@@ -221,4 +221,14 @@ public class AdminController {
 		return "/admin/admininquery";
 	}
 	
+	//회원 관리 페이지
+	@GetMapping("/admin/memberList")
+	public ModelAndView member() {
+		ModelAndView model = new ModelAndView();
+		
+		
+		model.setViewName("/admin/adminMember");
+		return model;
+	}
+	
 }
