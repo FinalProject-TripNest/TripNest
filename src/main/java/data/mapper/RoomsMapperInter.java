@@ -13,4 +13,8 @@ public interface RoomsMapperInter {
 	public int getLastInsertedRoomId();
 	public List<RoomsDto> dataList();
 	public RoomsDto getOneData(String room_id);
+	public List<RoomsDto> getAllRoomsData();
+	public List<RoomsDto> getSixRoomsData();
+	public RoomsDto getRoomsDataByRoomId(String room_id);
+	public List<String> getRoomImgByRoomId(String room_id);
 }

@@ -45,4 +45,20 @@ public class RoomsService implements RoomsServiceInter {
 		return roommapper.getOneData(room_id);
 	}
 
+	public List<RoomsDto> getAllRoomsData() {
+		return roommapper.getAllRoomsData();
+	}
+	public RoomsDto getRoomsDataByRoomId(String room_id) {
+		return roommapper.getRoomsDataByRoomId(room_id);
+	}
+	public List<RoomsDto> getSixRoomsData() {
+		return roommapper.getSixRoomsData();
+	}
+
+	public List<String> getRoomImgByRoomId(String room_id) {
+		return roommapper.getRoomImgByRoomId(room_id);
+	}
+
+
+
 }

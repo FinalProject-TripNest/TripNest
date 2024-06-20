@@ -29,22 +29,28 @@ public class FindController {
 	@GetMapping("/find/list")
 	public ModelAndView journalPage() {
 		ModelAndView model = new ModelAndView();
-		List<RoomsDto> roomsDto = roomsService.dataList();
-		List<ImagesDto> imageDto = imageService.dataList();
-		model.addObject("roomsDto", roomsDto);
-		model.addObject("imageDto", imageDto);
-		model.setViewName("/find/list");
+
+		List<RoomsDto> roomDtoList = roomsService.getAllRoomsData();
+		model.addObject("roomDtoList", roomDtoList);
+		model.setViewName("find/list");
+		System.out.println("roomDtoList.size() = " + roomDtoList.size());
+
 		return model;
 	}
 
 	@GetMapping("/find/list/detail")
 	public ModelAndView detail(@RequestParam("room_id") String room_id) {
 		ModelAndView detailModel = new ModelAndView();
-		RoomsDto detailDto = roomsService.getOneData(room_id);
-		List<ImagesDto> imageDto = imageService.imgList(room_id); // 이미지 서비스에서 String으로 전달
-		detailModel.addObject("detailDto", detailDto); // 변수명 수정
-		detailModel.addObject("imageDto", imageDto); // 변수명 수정
+
+		RoomsDto detailDto = roomsService.getRoomsDataByRoomId(room_id);
+		detailDto.setRoomImgList(roomsService.getRoomImgByRoomId(room_id));
+		detailModel.addObject("detailDto", detailDto);
 		detailModel.setViewName("find/detail");
+
+		for(String img : detailDto.getRoomImgList()) {
+			System.out.println("img = " + img);
+		}
+
 
 		detailModel.addObject("apikey",apikey);
 
