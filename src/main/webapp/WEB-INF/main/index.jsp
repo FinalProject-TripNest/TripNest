@@ -100,7 +100,7 @@ header#header .select {
 					<div class="list">
 						<c:forEach items="${journalDto}" var="journal" begin="0" end="5">
 							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/journal/${journal.journal_photo}">
+								src="${journal.journal_photo}">
 								<div class="text_box">
 									<span class="title">${journal.journal_title}</span> <span
 										class="text">${journal.journal_content}</span>
