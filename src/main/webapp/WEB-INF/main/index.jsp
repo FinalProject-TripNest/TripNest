@@ -39,25 +39,22 @@ header#header .select {
 						<a href="find/list" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<c:forEach items="${roomsDto}" var="room" begin="0" end="5">
-							<c:set var="firstImage" value="true" />
-							<c:forEach items="${imageDto}" var="image">
-								<c:if test="${room.room_id eq image.room_id}">
-									<c:if test="${firstImage}">
-										<a class="block"
-											href="find/list/detail?room_id=${room.room_id }"> <img
-											alt="" src="${image.image_photo}">
-											<div class="text_box">
-												<span class="title">${room.room_name}</span> <span
-													class="text">${room.city} / ${room.district} / <fmt:formatNumber
-														value="${room.room_price}" type="currency" />~
-												</span>
-											</div>
-										</a>
-										<c:set var="firstImage" value="false" />
-									</c:if>
-								</c:if>
-							</c:forEach>
+						<c:forEach items="${roomDtoList}" var="room">
+							<a class="block"
+							   href="find/list/detail?room_id=${room.room_id}">
+								<c:choose>
+									<c:when test="${room.image_photo != null}">
+										<img alt="" src="${room.image_photo}">
+									</c:when>
+									<c:otherwise>
+										<img alt="" src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/roomphoto/noimage.jpg">
+									</c:otherwise>
+								</c:choose>
+								<div class="text_box">
+									<span class="title">${room.room_name}</span>
+									<span class="text">${room.city} / ${room.district} / <fmt:formatNumber value="${room.room_price}" type="currency" />~</span>
+								</div>
+							</a>
 						</c:forEach>
 					</div>
 				</div>

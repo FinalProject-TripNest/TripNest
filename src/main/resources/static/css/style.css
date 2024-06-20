@@ -1010,6 +1010,7 @@ header#header .menu ul.sub li {
 	height: 540px;
 	border: none;
 	position: relative;
+	width: 960px!important;
 }
 
 #findDetail .main .slide .detail_slide .swiper-slide {
