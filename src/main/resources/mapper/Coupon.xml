@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.CouponMapperInter">
+    <insert id="insertCouponGroup" parameterType="data.dto.coupon.NewEventDto">
+        insert into COUPON_GROUP
+            (promotion_id, discount_amount, quantity)
+        values
+            (#{promotionId}, #{discountAmount}, #{quantity})
+    </insert>
+
+    <insert id="insertCoupon" parameterType="data.dto.coupon.CouponDto">
+        insert into COUPONS
+            (coupon_number, coupon_group_id, member_id, issued_date, expire_date, is_used)
+        values
+            (#{couponNumber}, #{couponGroupId}, #{memberId}, #{issuedDate}, #{expireDate}, #{isUsed})
+    </insert>
+
+    <select id="isValidCoupon" resultType="boolean" parameterType="string">
+        SELECT EXISTS (
+            SELECT 1
+            FROM COUPONS
+            WHERE coupon_id = #{couponId}
+              AND expire_date > NOW()
+              AND is_used = 0
+        ) AS is_valid_coupon
+    </select>
+
+    <update id="updateCouponStatus" parameterType="String">
+        update COUPONS
+        set is_used = 1
+        where coupon_id = #{couponId}
+    </update>
+
+    <select id="getCouponByMemberId" parameterType="String" resultType="data.dto.coupon.CouponDto">
+        SELECT coupon_id, coupon_number, coupon_group_id, member_id, issued_date, expire_date, is_used
+        FROM COUPONS
+        WHERE member_id = #{memberId} and is_used = 0 and expire_date > NOW()
+    </select>
+
+</mapper>
