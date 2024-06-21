@@ -20,6 +20,7 @@ import java.util.UUID;
 public class CouponService {
 
     private static final int EXPIRATION_DURATION_MONTHS = 3;
+    private static final int UN_USED = 0;
 
     private final CouponMapperInter mapper;
     public void getCoupons() {
@@ -62,7 +63,7 @@ public class CouponService {
                 .memberId(createCouponReq.getMemberId())
                 .issuedDate(issueDate)
                 .expireDate(expireDate)
-                .isUsed(0)
+                .isUsed(UN_USED) // 초기값: 사용안함
                 .build();
 
         mapper.insertCoupon(couponDto);
@@ -82,7 +83,7 @@ public class CouponService {
 
 
     public List<CouponDto> getMemberCoupons(String memberId) {
-        // 사용자의 쿠폰 조회
+        // 사용자의 "유효한" 쿠폰 조회
         return mapper.getCouponByMemberId(memberId);
     }
 }
