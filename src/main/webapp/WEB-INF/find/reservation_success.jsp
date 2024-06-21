@@ -120,9 +120,9 @@
 							<div class="title">Receipt</div>
 							<div class="content">
 								<div class="complete">예약이 완료되었습니다.</div>
-								<div class="hotelname">글림스</div>
+								<div class="hotelname">${roomsDto.room_name}</div>
 								<div class="location">
-									<span>구로구 구로동</span>
+									<span>${roomsDto.room_address}&nbsp;&nbsp;${roomsDto.room_address_detail}</span>
 								</div>
 								<a href="javascript:;" class="hotelimg"> <img alt=""
 									src="${root }/img/find/room_03.png">

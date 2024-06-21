@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.PaymentDto;
 import data.dto.Reservation_successDto;
+import data.dto.RoomsDto;
 import data.service.PaymentService;
+import data.service.RoomsService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -24,6 +26,9 @@ public class PaymentController {
 
 	@Autowired
 	PaymentService paymentService;
+	
+	@Autowired
+	RoomsService roomsService;
 
 	@PostMapping("/payment/complete")
 	@ResponseBody
@@ -66,7 +71,15 @@ public class PaymentController {
 		
 		Reservation_successDto successDto=paymentService.getSuccessOneData(merchant_uid);
 		
+		int room_id=successDto.getROOM_ID();
+		String room_id_str = String.valueOf(room_id);
+		
+		RoomsDto roomsDto=roomsService.getOneData(room_id_str);
+//		String roomimage=roomsService.getImgsByRoomId(room_id_str);
+		
 		model.addObject("successDto",successDto);
+		model.addObject("roomsDto",roomsDto);
+		
 		
 		model.setViewName("/find/reservation_success");
 		return model;
