@@ -227,7 +227,7 @@ public class AdminController {
 		ModelAndView model = new ModelAndView();
 		
 		
-		model.setViewName("/admin/adminMember");
+		model.setViewName("/admin/adminmember");
 		return model;
 	}
 	

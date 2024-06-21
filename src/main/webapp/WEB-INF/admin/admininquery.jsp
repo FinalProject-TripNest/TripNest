@@ -25,10 +25,12 @@
     margin: 0 auto;
 }
 .admin-i-table th, .admin-i-table td {
-    border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
     vertical-align: middle;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
 }
 .inquiry-item {
     border: 0px solid gray;
@@ -45,9 +47,10 @@ justify-content: center;
 border-bottom: 1px solid #ccc;
 }
 .inquery_content,.inquery_reanswer{
-border:0px solid gray;
-height: 100px;
+border:0px solid red;
+height: 200px;
 border-bottom: 1px solid #ccc;
+display: flex;
 }
 
 .num{
@@ -65,21 +68,57 @@ width: 100px;
 .reanswerbtn{
 	background-color: white;
 	border-radius: 5px;
+	cursor: pointer;
 }
-.inquery_content>input{
-	text-align: center;
+
+.inquery_answer{
+	width: 30%;
+	height: 30%;
+}
+.contentdiv,.answerdiv{
+	display: flex;
+	align-items: center;
+	height: 200px;
+	border: 0px solid black;
+	width: 300px;
+	justify-content: center;
+}
+.Qicondiv,.Aicondiv{
+	border-radius: 100px;
+	width: 25px;
+	height: 25px;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.Aicondiv{
+	background-color: gray;
+}
+.Qicondiv{
+	background-color: #2196F3;
+}
+.aaaaa,.inquery_answer{
+	display: flex;
+	align-items: center;
+	height: 80%;
+	border: 0px solid black;
+	width: 50%;
+	display: flex;
+	margin-left: 5%;
+}
+.inquery_answer{
+	margin-top: 20px;
+}
+button.adminanswerbtn{
+	height: 60px;
 	width: 100px;
-	height: 100px;
-	border: 1px solid #ccc;
-	/*background-color: #ccc;*/
-}
-.inquery_content>span{
-	border: 0px solid green;
-	height: 100px;
-	width: 100%;
-}
-.inquery_reanswer>textarea{
-	border: 1px solid black;
+	margin-top: 6%;
+  margin-left: 5%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
 <body>
@@ -120,17 +159,23 @@ width: 100px;
 						</div>
 					</div>
 					<div class="iqdiv" data-inquery-id="${a.inquery_id}">
-						<div class="inquery_content">
-							<input type="text" value="문의내용">
-							<span> ${a.inquery_content}</span>
+						<div class="inquery_content" align="center">
+							<div class="contentdiv"><div class="Qicondiv">Q</div> 문의내용</div><br>
+							<div class="aaaaa"> ${a.inquery_content}</div>
 						</div>
 						<div>
 							<span class="adminanswer"></span>
 						</div>
 						<div class="inquery_reanswer" align="center">
-							<span>문의답변</span>
-							<input name="inquery_answer_${a.inquery_id}" placeholder="답변등록" class="inquery_answer">
-							<button type="button" class="adminanswerbtn">등록</button>
+							<div class="answerdiv"><div class="Aicondiv">A</div> 문의답변</div><br>
+							<c:if test="${a.inquery_answer==null }">
+								<textarea name="inquery_answer_${a.inquery_id}" placeholder="답변등록" class="inquery_answer"></textarea><br>
+									<button type="button" class="adminanswerbtn">등록</button>
+							</c:if>	
+							<c:if test="${a.inquery_answer!=null }">
+								<div class="aaaaa">${a.inquery_answer }</div>
+							</c:if>	
+							
 						</div>
 					</div>
 				</c:forEach>

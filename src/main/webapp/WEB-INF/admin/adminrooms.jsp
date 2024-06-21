@@ -15,9 +15,16 @@
 	width: 80%;
 	height: 80%;
 }
-.admin-r-table tr,td{
-	border: 1px solid gray;
+.admin-r-table tr,.admin-r-table td{
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #ccc;
 	vertical-align: middle;
+}
+.admin-d-table tr,.admin-d-table td{
+	vertical-align: middle;
+	height: 30px;
+	line-height: 1.8;
+	padding: 10px;
 }
 
 .Click-here {
@@ -64,7 +71,7 @@
   transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
   display: inline-block;
   vertical-align: middle;
-  width: 600px;
+  width: 700px;
   margin: 30px auto;
   max-width: 97%;
 }
@@ -158,7 +165,6 @@
     position: fixed;
     width: 100%;
 }
-
 </style>
 <body>
 
@@ -218,22 +224,71 @@
         <div class="custom-model-wrap">
             <div class="pop-up-content-wrap">
             	<input type="hidden" id="room_id">
-            	<div>[숙소이름]&nbsp;&nbsp;<span id="room_name"></span></div><br>
-            	<div>[연락처]&nbsp;&nbsp;<span id="room_hp"></span></div><br>
-            	<div>[숙소가격]&nbsp;&nbsp;<span id="room_price"></span>원</div><br>
-            	<div>[숙소주소]&nbsp;&nbsp;<span id="room_address"></span></div><br>
-            	<div id="map" style="width: 400px; height: 300px;"></div>
-            	<div>[제공되는 서비스]&nbsp;&nbsp;<br><span id="room_service"></span></div><br>
-            	<div>[수용가능 인원]&nbsp;&nbsp;최소 <span id="room_min"> </span> 명 / 최대 <span id="room_max"></span>명</div><br>
-            	<div>[숙소에 관하여]&nbsp;&nbsp;<br><span id="room_detail"></span></div><br>
-            	<div >[등록한 사진]
-            		<div id="imageGallery"></div>
-            	</div><br>
-            	
-            	<div align="center">     	
-            		<button type="button" class="adminacc">승인</button>
-            		<button type="button" class="adminhold">보류</button>   		
-            	</div>
+            	<table class="admin-d-table">
+            		<tr>
+            			<td><b>숙소이름</b></td>
+            			<td>
+            				<span id="room_name"></span>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td><b>연락처</b></td>
+            			<td><span id="room_hp"></span></td>
+            		</tr>
+            		<tr>
+            			<td><b>숙소가격</b></td>
+            			<td>
+            				<span id="room_price"></span>원
+            			</td>
+            		</tr>
+            		<tr>
+            			<td><b>숙소주소</b></td>
+            			<td>
+            				<span id="room_address"></span>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td colspan="2">
+            				<br><div id="map" style="width: 600px; height: 300px;"></div><br>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td width="150px;"><b>제공되는 서비스</b></td>
+            			<td>
+            				<span id="room_service"></span>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td><b>수용가능 인원</b></td>
+            			<td>
+            				최소 <span id="room_min"> </span> 명 / 최대 <span id="room_max"></span>명
+            			</td>
+            		</tr>
+            		<tr>
+            			<td><b>숙소에 관하여</b></td>
+            			<td>
+            				<span id="room_detail"></span>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td><b>등록 사진</b></td>
+            			
+            		</tr>
+            		<tr>
+            			<td colspan="2">
+            				<div id="imageGallery"></div>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td colspan="2">	            	
+			            	<div align="center">     	
+			            		<button type="button" class="adminacc">승인</button>
+			            		<button type="button" class="adminhold">보류</button>   		
+			            	</div>
+            			</td>
+            		</tr>
+            	</table>
+
             </div>
         </div>  
     </div>  
