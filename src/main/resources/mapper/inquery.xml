@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="data.mapper.InqueryMapperInter">
 	<insert id="insertInquery" parameterType="InqueryDto">
-		insert into INQUERY (inquery_title,inquery_content,inquery_answer,inquery_category,inquery_date)
-		values(#{inquery_title},#{inquery_content},#{inquery_answer},#{inquery_category},now())
+		insert into INQUERY (inquery_title,inquery_content,inquery_answer,inquery_category,inquery_date,member_id)
+		values(#{inquery_title},#{inquery_content},#{inquery_answer},#{inquery_category},now(),#{member_id})
 	</insert>
 	
 	<select id="getInqueryList" parameterType="HashMap" resultType="InqueryDto">

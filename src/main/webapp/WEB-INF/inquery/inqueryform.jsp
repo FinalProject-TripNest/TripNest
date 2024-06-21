@@ -11,7 +11,7 @@
 </head>
 <title>TRIP NEST</title>
 <style>
-.inquerytable tr,th,td{
+.inquerytable tr,.inquerytable th,.inquerytable td{
 border: 0px solid gray;
 padding:10px;
 vertical-align: middle;
@@ -65,7 +65,7 @@ div.submitdiv{
 	width: 150px;
 	height: 50px;
 	border: 0px solid gray;
-	background-color: #e5e5e5;
+	background-color: #E9E9E9;
 	cursor: pointer;
 }
 #submitbtn{
@@ -86,7 +86,7 @@ div.submitdiv{
 					<table class="inquerytable">
 						<caption align="top"><b>문의 작성하기</b></caption>
 						<tr style="height: 50px;">
-							<th colspan="2" align="left" style="background-color: #e5e5e5; font-size: 1.2em; padding-left: 100px;"><span>상세항목입력</span> </th>
+							<th colspan="2" align="left" style="background-color: #E9E9E9; font-size: 1.2em; padding-left: 100px;"><span>상세항목입력</span> </th>
 						</tr>
 						<tr style="height: 50px;">
 							<th>

@@ -206,7 +206,7 @@ public class AdminController {
 		mview.addObject("currentPage", currentPage);
 		mview.addObject("totalPage", totalPage);
 		
-		//관리자 페이지 완성하면 매핑주소 바꿀것
+		
 		mview.setViewName("/admin/admininquery");
 		
 		return mview;
