@@ -25,6 +25,12 @@ public class PaymentService implements PaymentServiceInter {
 		return mapperInter.getSuccessOneData(merchant_uid);
 	}
 
+	@Override
+	public String getImgByRoomId(String room_id) {
+		// TODO Auto-generated method stub
+		return mapperInter.getImgByRoomId(room_id);
+	}
+
 	
 	
 	

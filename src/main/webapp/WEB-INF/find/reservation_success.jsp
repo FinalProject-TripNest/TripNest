@@ -125,7 +125,7 @@
 									<span>${roomsDto.room_address}&nbsp;&nbsp;${roomsDto.room_address_detail}</span>
 								</div>
 								<a href="javascript:;" class="hotelimg"> <img alt=""
-									src="${root }/img/find/room_03.png">
+									src="${roomimage }">
 								</a>
 								<div class="text_box">
 									<div>

@@ -75,8 +75,9 @@ public class PaymentController {
 		String room_id_str = String.valueOf(room_id);
 		
 		RoomsDto roomsDto=roomsService.getOneData(room_id_str);
-//		String roomimage=roomsService.getImgsByRoomId(room_id_str);
+		String roomimage=paymentService.getImgByRoomId(room_id_str);
 		
+		model.addObject("roomimage",roomimage);
 		model.addObject("successDto",successDto);
 		model.addObject("roomsDto",roomsDto);
 		
