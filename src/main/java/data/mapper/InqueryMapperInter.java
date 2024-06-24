@@ -14,4 +14,7 @@ public interface InqueryMapperInter {
 	public void updateInqueryAnswer(InqueryDto dto);
 	public List<InqueryDto> getInqueryList(HashMap<String, Integer> map);
 	public int getTotalInquery();
+	public InqueryDto inqueryAdminAnswerList(String inquery_id);
+	public int getCountAnswer();
+	public List<InqueryDto> getNullInquery();
 }

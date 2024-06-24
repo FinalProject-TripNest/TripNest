@@ -62,6 +62,8 @@ public class RoomsController {
 		//member_id 구해오기
 		String memberemail=(String)session.getAttribute("myid");
 		int memid=mservice.findByEmail(memberemail).getMember_id();
+		System.out.println("memberemail:"+memberemail);
+		
 		dto.setMember_id(memid);
 		
 		service.insertRoom(dto);

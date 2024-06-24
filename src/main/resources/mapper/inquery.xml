@@ -18,4 +18,16 @@
 		update INQUERY set inquery_answer=#{inquery_answer} where inquery_id=#{inquery_id}
 	</update>
 	
+	<select id="inqueryAdminAnswerList" parameterType="String" resultType="InqueryDto">
+		select * from INQUERY where inquery_id=#{inquery_id}
+	</select>
+	
+	<select id="getCountAnswer" resultType="int">
+		select count(*) from INQUERY where inquery_answer is null
+	</select>
+	
+	<!-- 관리자 메인페이지에서 최신 글 5개만 보이게끔 -->
+	<select id="getNullInquery" resultType="InqueryDto">
+		select * from INQUERY order by inquery_id desc limit 0,5
+	</select>
 </mapper>

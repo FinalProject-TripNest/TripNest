@@ -17,4 +17,5 @@ public class InqueryDto {
 	private String inquery_category;
 	private int member_id;
 	private String inquery_answer;
+	private String mememail;
 }

@@ -37,4 +37,16 @@ public class MemberService implements MemberServiceInter {
     public boolean checkEmailExists(String email) {
         return memberMapper.findByEmail(email) != null;
     }
+    
+	@Override
+	public MemberDto findMemberEmail(int member_id) {
+		// TODO Auto-generated method stub
+		return memberMapper.findMemberEmail(member_id);
+	}
+
+	@Override
+	public int getTotalMember() {
+		// TODO Auto-generated method stub
+		return memberMapper.getTotalMember();
+	}
 }

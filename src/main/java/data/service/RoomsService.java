@@ -127,6 +127,18 @@ public class RoomsService implements RoomsServiceInter {
 		return topRooms;
 	}
 
+	@Override
+	public int getCountNoRoom() {
+		// TODO Auto-generated method stub
+		return roommapper.getCountNoRoom();
+	}
+
+	@Override
+	public List<RoomsDto> getRecentRoom() {
+		// TODO Auto-generated method stub
+		return roommapper.getRecentRoom();
+	}
+
 
 
 

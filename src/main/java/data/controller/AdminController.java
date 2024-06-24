@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import ch.qos.logback.core.model.Model;
 import data.dto.ImagesDto;
 import data.dto.InqueryDto;
+import data.dto.MemberDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
 import data.service.InqueryService;
+import data.service.MemberService;
 import data.service.RoomsService;
 
 @Controller
@@ -29,11 +32,13 @@ public class AdminController {
 	ImageService imgservice;
 	@Autowired
 	InqueryService iqservice;
+	@Autowired
+	MemberService memservice;
 	
-	@GetMapping("/admin/adminmain")
+	/*@GetMapping("/admin/adminmain")
 	public String admin() {
 		return "/admin/adminpage";
-	}
+	}*/
 	
 	//숙소리스트
 	@GetMapping("/admin/roomlist")
@@ -162,7 +167,7 @@ public class AdminController {
 		//페이징에 필요한 변수
 		int totalCount=iqservice.getTotalInquery();
 		
-		int perPage=3; //한페이지당 보여질 글의 갯수
+		int perPage=10; //한페이지당 보여질 글의 갯수
 		int perBlock=5; //한블럭당 보여질 페이지 갯수
 		int start; //db에서 가져올 글의 시작번호(mysql은 첫글이 0번,oracle은 1번)
 		int startPage; //각 블럭에서 보여질 시작페이지
@@ -197,6 +202,26 @@ public class AdminController {
 		
 		List<InqueryDto> list=iqservice.getInqueryList(start, perPage);
 		
+		/*for (InqueryDto inquery : list) {
+		        String mememail = memservice.findMemberEmail(inquery.getMember_id()).getMember_useremail();
+		        inquery.setMememail(mememail); 
+
+		    }*/
+		
+		
+		
+		   for (InqueryDto inquery : list) {
+		        MemberDto memberDto = memservice.findMemberEmail(inquery.getMember_id());
+		        if (memberDto != null) {
+		            String mememail = memberDto.getMember_useremail();
+		            inquery.setMememail(mememail); 
+		        } else {
+		            inquery.setMememail("탈퇴한 사용자입니다.");
+		        }
+		   }
+		
+		
+		
 		//리퀘스에 저장
 		mview.addObject("totalCount", totalCount);
 		mview.addObject("list", list);
@@ -205,7 +230,6 @@ public class AdminController {
 		mview.addObject("endPage", endPage);
 		mview.addObject("currentPage", currentPage);
 		mview.addObject("totalPage", totalPage);
-		
 		
 		mview.setViewName("/admin/admininquery");
 		
@@ -221,6 +245,7 @@ public class AdminController {
 		return "/admin/admininquery";
 	}
 	
+	
 	//회원 관리 페이지
 	@GetMapping("/admin/memberList")
 	public ModelAndView member() {
@@ -230,5 +255,64 @@ public class AdminController {
 		model.setViewName("/admin/adminmember");
 		return model;
 	}
+	
+	
+	@GetMapping("/admin/iqlist")
+	@ResponseBody
+	public InqueryDto iqlist(@RequestParam String inquery_id){
+		
+		return iqservice.inqueryAdminAnswerList(inquery_id);
+	}
+	
+	@GetMapping("/admin/adminmain")
+	public ModelAndView getcount() {
+		ModelAndView mview=new ModelAndView();
+		
+		int noiqcount=iqservice.getCountAnswer();
+		mview.addObject("noiqcount", noiqcount);
+		int totaliqcount=iqservice.getTotalInquery();
+		mview.addObject("totaliqcount", totaliqcount);
+		
+		
+		List<InqueryDto> iqlist=iqservice.getNullInquery();
+		mview.addObject("iqlist", iqlist);
+		
+		   for (InqueryDto inquery : iqlist) {
+		        MemberDto memberDto = memservice.findMemberEmail(inquery.getMember_id());
+		        if (memberDto != null) {
+		            String mememail = memberDto.getMember_useremail();
+		            inquery.setMememail(mememail); 
+		        } else {
+		            inquery.setMememail("탈퇴한 사용자입니다.");
+		        }
+		   }
+		 int noroomcount=rservice.getCountNoRoom();
+		 mview.addObject("noroomcount", noroomcount);
+		 List<RoomsDto> roomlist=rservice.getRecentRoom();
+		 mview.addObject("roomlist", roomlist);
+		 
+		   for (RoomsDto rooms : roomlist) {
+		        MemberDto memberDto = memservice.findMemberEmail(rooms.getMember_id());
+		        if (memberDto != null) {
+		            String mememail = memberDto.getMember_useremail();
+		            rooms.setMememail(mememail);
+		        } else {
+		        	rooms.setMememail("탈퇴한 사용자입니다.");
+		        }
+		   }
+		   
+		  
+		  int memcount=memservice.getTotalMember();
+		  mview.addObject("memcount", memcount);
+		  
+		  int roomscount=rservice.getTotalRooms();
+		  mview.addObject("roomscount", roomscount);
+
+		 
+		mview.setViewName("/admin/adminpage");
+		//System.out.println("Inquiry Count: " + noiqcount);
+		return mview;
+	}
+	
 	
 }

@@ -59,8 +59,15 @@ display: flex;
 .cate,.id,.date{
 	width: 200px;
 }
-.title{
-width: 250px;
+div.inquiry-divtitle{
+border-bottom: 1px solid #ccc;
+ width: 250px; /* 제목의 최대 너비 지정 */
+    white-space: nowrap; /* 줄바꿈을 방지하여 한 줄에 표시 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+    text-overflow: ellipsis; /* 넘치는 부분을 ...으로 표시 */
+    text-align: center;
+    padding: 15px 0;
+    padding-left: 15px;
 }
 .answer,.reanswer{
 width: 100px;
@@ -71,10 +78,6 @@ width: 100px;
 	cursor: pointer;
 }
 
-.inquery_answer{
-	width: 30%;
-	height: 30%;
-}
 .contentdiv,.answerdiv{
 	display: flex;
 	align-items: center;
@@ -98,27 +101,47 @@ width: 100px;
 .Qicondiv{
 	background-color: #2196F3;
 }
-.aaaaa,.inquery_answer{
-	display: flex;
+.aaaaa,.contentbb{
 	align-items: center;
 	height: 80%;
 	border: 0px solid black;
 	width: 50%;
 	display: flex;
-	margin-left: 5%;
+	margin-left: 50px;
+	font-size: 12pt;
+	text-align: left;
 }
-.inquery_answer{
+
+textarea.inquery_answer{
 	margin-top: 20px;
+	align-items: center;
+	height: 80%;
+	border: 0px solid red;
+	width: 100%;
+	display: flex;
+	margin-left: 50px;
 }
-button.adminanswerbtn{
+button.adminanswerbtn,.admineditbtn{
 	height: 60px;
 	width: 100px;
-	margin-top: 6%;
   margin-left: 5%;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
+}
+.paging{
+	 margin: 0 auto; 
+	 text-align: center; 
+	 padding-top: 5%;
+	 padding-bottom: 5%;
+}
+.answer-areafirst,.answer-areasecond {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: space-between; /* 요소들 사이의 간격을 자동으로 조절 */
+    margin-top: 10px; /* 필요한 경우 상단 마진을 조절 */
+    width: 70%;
 }
 </style>
 <body>
@@ -141,51 +164,59 @@ button.adminanswerbtn{
 			
 			
 				<c:forEach var="a" items="${list }">
-				<input type="hidden" value="${a.inquery_id }" name="inquery_id_${a.inquery_id}">
+				<input type="hidden" value="${a.inquery_id }" name="inquery_id_${a.inquery_id}" class="inquery_id">
 					<div class=" inquiry-item">
 						<div class="inquiry-div num">${no }</div>
 							<c:set var="no" value="${no-1 }"/>
 						<div class="inquiry-div cate" >${a.inquery_category }</div>
-						<div class="inquiry-div id">${a.member_id }</div>
-						<div class="inquiry-div title">${a.inquery_title}</div>
+						<c:if test="${a.member_id==0}">
+							<div class="inquiry-div id">탈퇴한 사용자입니다.</div>
+						</c:if>
+						<c:if test="${a.member_id>0}">
+							<div class="inquiry-div id">${a.mememail}</div>
+						</c:if>
+						<div class="inquiry-divtitle">${a.inquery_title}</div>
 						<div class="inquiry-div date"><fmt:formatDate value="${a.inquery_date}"
 									pattern="yyyy-MM-dd" /></div>
 						<div class="inquiry-div answer">
-							<c:if test="${a.inquery_answer==null }"><span>미답변</span> </c:if>	
-							<c:if test="${a.inquery_answer!=null }"><span>답변완료</span> </c:if>	
+							<c:if test="${a.inquery_answer==null }"><span style="color: #2196F3" class="ans">미답변</span> </c:if>	
+							<c:if test="${a.inquery_answer!=null }"><span class="ans">답변완료</span> </c:if>	
 						</div>
 						<div class="inquiry-div reanswer" >
-							<button type="button" class="reanswerbtn" data-inquery-id="${a.inquery_id}">답변달기</button>
+							<c:if test="${a.inquery_answer==null }">
+								<button type="button" class="reanswerbtn" data-inquery-id="${a.inquery_id}">답변달기</button>
+							</c:if>	
+							<c:if test="${a.inquery_answer!=null }">
+								<button type="button" class="reanswerbtn" data-inquery-id="${a.inquery_id}">수정하기</button>
+							</c:if>	
 						</div>
 					</div>
 					<div class="iqdiv" data-inquery-id="${a.inquery_id}">
-						<div class="inquery_content" align="center">
+						<div class="inquery_content">
 							<div class="contentdiv"><div class="Qicondiv">Q</div> 문의내용</div><br>
-							<div class="aaaaa"> ${a.inquery_content}</div>
-						</div>
-						<div>
-							<span class="adminanswer"></span>
+							<div class="aaaaa"> <pre>${a.inquery_content}</pre></div>
 						</div>
 						<div class="inquery_reanswer" align="center">
 							<div class="answerdiv"><div class="Aicondiv">A</div> 문의답변</div><br>
-							<c:if test="${a.inquery_answer==null }">
-								<textarea name="inquery_answer_${a.inquery_id}" placeholder="답변등록" class="inquery_answer"></textarea><br>
-									<button type="button" class="adminanswerbtn">등록</button>
-							</c:if>	
-							<c:if test="${a.inquery_answer!=null }">
-								<div class="aaaaa">${a.inquery_answer }</div>
-							</c:if>	
 							
+							<div class="answer-areafirst">
+								<!--<c:if test="${a.inquery_answer==null }"></c:if>-->					
+									<textarea name="inquery_answer_${a.inquery_id}" placeholder="답변등록" class="inquery_answer"></textarea>
+										<button type="button" class="adminanswerbtn">등록</button>
+							</div>
+							<div class="answer-areasecond">
+								<!--<c:if test="${a.inquery_answer!=null }"></c:if>-->
+									<div class="bbbbb_${a.inquery_id } contentbb"><pre>${a.inquery_answer }</pre></div>
+									<button type="button" class="admineditbtn" data-inquery-id="${a.inquery_id}" value="edit">수정</button>
+								</div>
 						</div>
 					</div>
 				</c:forEach>
-			</div>
-		</div>
-	</div>
-
-	<!-- 페이징 -->
-	<div
-		style="margin: 0 auto; width: 80%; text-align: center; padding-top: 5%;">
+				
+				
+				
+				<!-- 페이징 -->
+	<div class="paging">
 		<ul class="pagination justify-content-center">
 
 			<!-- 이전 -->
@@ -217,42 +248,143 @@ button.adminanswerbtn{
 			</c:if>
 		</ul>
 	</div>
+				
+				
+			</div>
+		</div>
+	</div>
 
+	
 
 	<%@ include file="../include/footer.jsp"%>
 	<script>
-		
+	
 		    $(function(){
 		    	$(".iqdiv").hide();
-
+		    	
+		    	$(".inquery_id").each(function(){
+		    		var inquery_id = $(this).val();
+		    		//console.log(inquery_id);
+		    	})
+		    	
+		    	
+		    	//답변달기를 눌렀을때 이벤트
 		    	   $(".reanswerbtn").click(function(){
-				    	 var id = $(this).data("inquery-id");
-		              //alert(id);
+				    	 var inquery_id = $(this).data("inquery-id");
+		              //alert(inquery_id);
+		              
+		              $.ajax({
+		            	  url:"/admin/iqlist",
+		            	  type:"get",
+		            	  data:{"inquery_id":inquery_id},
+		            	  dataType:"json",
+		            	  success:function(res){
+		            		  
+		            	            if (res != null) {
+		                                var inquery_answer = res.inquery_answer;
+		                                if (inquery_answer == null) {
+		                                    $("div.answer-areasecond").hide();
+		                                    $("div.answer-areafirst").show();
+		                                } else {
+		                                    $("div.answer-areafirst").hide();
+		                                    $("div.answer-areasecond").show();
+		                                }
+		                            }       
+		            	            
+		            	     
+		            	  }
+		              });
+
+
+		              
+		              
 		               $(".iqdiv").each(function(){
-		                   if ($(this).data("inquery-id") === id) {
+		                   if ($(this).data("inquery-id") === inquery_id) {
 		                       $(this).slideToggle();
 		                   }
 		               });
 		           });
-
+		    	
+		    	
+		    	//수정하기 버튼을 눌렀을때
+		    	$(".admineditbtn").click(function(){
+		    			
+		    		var inquery_id = $(this).data("inquery-id");
+		    		//alert(inquery_id);
+		    		
+		    		$("div.answer-areasecond").hide();
+	          $("div.answer-areafirst").show();
+		    		
+		    			$.ajax({
+		    			url:"/admin/iqlist",
+		    			type:"get",
+		    			data:{"inquery_id":inquery_id},
+		    			dataType:"json",
+		    			success:function(res){
+		    				
+		    				//관리자가 달았던 답글이 textarea에 입력되어있는 상태로
+		    				$("textarea[name='inquery_answer_" + inquery_id + "']").val(res.inquery_answer);
+		    				console.log(res.inquery_answer);
+		    			}
+		    		})
+		    		
+		    	});
+		    	   
+		    	    
+    });
+		    //등록버튼을 눌렀을때
+		    $(document).ready(function(){
+		    	
 		    	   $(".adminanswerbtn").click(function() {
+		    		   
+
+		    		   
 		    		   var inquery_id = $(this).closest(".iqdiv").data("inquery-id");
 		    		   var inquery_answer = $(this).closest(".inquery_reanswer").find(".inquery_answer").val();
-		    		   //alert(inqueryAnswer+","+inqueryId);
+		    		   //alert(inquery_id+","+inquery_answer);
+		    		   
+		    		   //inquery_answer = inquery_answer.replace(/\n/g, "<br>");
 		    		   
 		    		   $.ajax({
 		    			   type:"post",
 		    			   url:"/admin/updateanswer",
 		    			   data:{"inquery_id":inquery_id,"inquery_answer":inquery_answer},
-		    			   dataTyle:"html",
+		    			   dataType:"html",
 		    			   success:function(){
-		    				   alert("성공");
+		    				   
+				    		   $("div.answer-areafirst").hide();
+				           $("div.answer-areasecond").show();
+
+		    					   alert("등록완료");
+		    					   list(inquery_id)
+
 		    			   }
 		    			   
 		    		   })
 		    		   
-		    	   })		    	   
-    });
+		    	   });  
+		    	   
+		    	   
+		    });
+		    
+		    //답글이 바로바로 반영되게
+		    function list(inquery_id){
+		    	
+	    		
+	    		$.ajax({
+	    			url:"/admin/iqlist",
+	    			type:"get",
+	    			data:{"inquery_id":inquery_id},
+	    			dataType:"json",
+	    			success:function(res){
+	    				$("div.bbbbb_"+inquery_id).find("pre").html(res.inquery_answer);
+		          $("div.answer").find(".ans").text("답변완료").css("color","black");
+	    			}
+	    		})
+		    	
+		    }
+			
+		
 	</script>
 </body>
 </html>

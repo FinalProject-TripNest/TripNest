@@ -21,5 +21,7 @@ public interface RoomsServiceInter {
 
 	public RoomsDto getOneData(String room_id);
 
+	public int getCountNoRoom();
+	public List<RoomsDto> getRecentRoom();
 }
 

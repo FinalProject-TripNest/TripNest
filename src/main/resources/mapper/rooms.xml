@@ -126,6 +126,15 @@
 		ORDER BY
 			ROOMS.room_id ASC;
 	</select>
-
+	
+	<!-- 미승인된 room의 갯수를 파악하기 위해서)차유지-->
+	<select id="getCountNoRoom" resultType="int">
+		select count(*) from ROOMS where room_status='no' or room_status='보류'
+	</select>
+	
+	<!-- 최신 추가된 방 5개의 정보list 출력하려고) 유지 -->
+	<select id="getRecentRoom" resultType="RoomsDto">
+		select * from ROOMS order by room_id desc limit 0,5
+	</select>
 
 </mapper>

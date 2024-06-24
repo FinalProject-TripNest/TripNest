@@ -13,4 +13,13 @@
     <select id="findBySocialIdAndType" parameterType="map" resultType="data.dto.MemberDto">
         SELECT * FROM MEMBERS WHERE member_social_id = #{social_id} AND member_social_type = #{social_type}
     </select>
+    
+    <!-- 회원 아이디가 필요해서... 차유지 작성함 -->
+    <select id="findMemberEmail" parameterType="int" resultType="MemberDto">
+    	select member_useremail from MEMBERS where member_id=#{member_id}
+    </select>
+    
+    <select id="getTotalMember" resultType="int">
+    	select count(*) from MEMBERS
+    </select>
 </mapper>

@@ -41,6 +41,26 @@ public class InqueryService implements InqueryServiceInter {
 		mapper.updateInqueryAnswer(dto);
 	}
 
+	@Override
+	public InqueryDto inqueryAdminAnswerList(String inquery_id) {
+		// TODO Auto-generated method stub
+		return mapper.inqueryAdminAnswerList(inquery_id);
+	}
+
+	@Override
+	public int getCountAnswer() {
+		// TODO Auto-generated method stub
+
+		return mapper.getCountAnswer();
+	}
+
+	@Override
+	public List<InqueryDto> getNullInquery() {
+		// TODO Auto-generated method stub
+		return mapper.getNullInquery();
+	}
+
+
 
 
 }
