@@ -6,6 +6,9 @@ import data.service.KakaoServiceInter;
 import data.service.LoginServiceInter;
 import data.service.NaverServiceInter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -87,28 +90,70 @@ public class LoginController {
             String accessToken = kakaoService.getKakaoAccessToken(code);
             MemberDto kakaoUser = kakaoService.getKakaoUserInfo(accessToken);
 
-            if (kakaoUser.getMember_useremail() == null) {
-                throw new RuntimeException("Kakao user email is null");
-            }
-
-            MemberDto memberDto = loginService.authenticateSocialUser(kakaoUser.getMember_social_id(), kakaoUser.getMember_social_type());
-            if (memberDto == null) {
-                loginService.registerMember(kakaoUser);
-                memberDto = kakaoUser;
+            MemberDto existingMember = loginService.authenticateSocialUser(kakaoUser.getMember_social_id(), kakaoUser.getMember_social_type());
+            if (existingMember == null) {
+                session.setAttribute("kakaoUser", kakaoUser);
+                session.setAttribute("accessToken", accessToken);
+                return "redirect:/login/kakaoAdditionalInfo";
             }
 
             session.setMaxInactiveInterval(60 * 60 * 8);
-            session.setAttribute("myid", memberDto.getMember_useremail());
-            session.setAttribute("myname", memberDto.getMember_name());
+            session.setAttribute("myid", existingMember.getMember_useremail());
+            session.setAttribute("myname", existingMember.getMember_name());
+            session.setAttribute("member_id", existingMember.getMember_id());
             session.setAttribute("loginok", "yes");
-            session.setAttribute("member", memberDto);
-            session.setAttribute("accessToken", accessToken);
+            session.setAttribute("member", existingMember);
 
             return "redirect:/index";
         } catch (RuntimeException e) {
             session.invalidate();
             throw e;
         }
+    }
+
+    @GetMapping("/kakaoAdditionalInfo")
+    public String kakaoAdditionalInfoForm(HttpSession session, Model model) {
+        MemberDto kakaoUser = (MemberDto) session.getAttribute("kakaoUser");
+        if (kakaoUser == null) {
+            return "redirect:/login/loginform";
+        }
+
+        model.addAttribute("kakaoUser", kakaoUser);
+        return "/login/kakaoAdditionalInfo";
+    }
+
+    @PostMapping("/kakaoAdditionalInfo")
+    public String kakaoAdditionalInfoSubmit(@RequestParam String member_phone, @RequestParam String member_birth_date, HttpSession session) {
+        MemberDto kakaoUser = (MemberDto) session.getAttribute("kakaoUser");
+        if (kakaoUser == null) {
+            return "redirect:/login/loginform";
+        }
+
+        kakaoUser.setMember_phone(member_phone);
+
+        // 생년월일 변환
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            kakaoUser.setMember_birth_date(sdf.parse(member_birth_date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "redirect:/login/kakaoAdditionalInfo";
+        }
+
+        MemberDto existingMember = loginService.authenticateSocialUser(kakaoUser.getMember_social_id(), kakaoUser.getMember_social_type());
+        if (existingMember == null) {
+            loginService.registerMember(kakaoUser);
+            existingMember = kakaoUser;
+        }
+
+        session.setMaxInactiveInterval(60 * 60 * 8);
+        session.setAttribute("myid", existingMember.getMember_useremail());
+        session.setAttribute("myname", existingMember.getMember_name());
+        session.setAttribute("member_id", existingMember.getMember_id());
+        session.setAttribute("loginok", "yes");
+        session.setAttribute("member", existingMember);
+
+        return "redirect:/index";
     }
     
     @GetMapping("/naver")
@@ -117,28 +162,70 @@ public class LoginController {
             String accessToken = naverService.getNaverAccessToken(code, state);
             MemberDto naverUser = naverService.getNaverUserInfo(accessToken);
 
-            if (naverUser.getMember_useremail() == null) {
-                throw new RuntimeException("Naver user email is null");
-            }
-
-            MemberDto memberDto = loginService.authenticateSocialUser(naverUser.getMember_social_id(), naverUser.getMember_social_type());
-            if (memberDto == null) {
-                loginService.registerMember(naverUser);
-                memberDto = naverUser;
+            MemberDto existingMember = loginService.authenticateSocialUser(naverUser.getMember_social_id(), naverUser.getMember_social_type());
+            if (existingMember == null) {
+                session.setAttribute("naverUser", naverUser);
+                session.setAttribute("accessToken", accessToken);
+                return "redirect:/login/naverAdditionalInfo";
             }
 
             session.setMaxInactiveInterval(60 * 60 * 8);
-            session.setAttribute("myid", memberDto.getMember_useremail());
-            session.setAttribute("myname", memberDto.getMember_name());
+            session.setAttribute("myid", existingMember.getMember_useremail());
+            session.setAttribute("myname", existingMember.getMember_name());
+            session.setAttribute("member_id", existingMember.getMember_id());
             session.setAttribute("loginok", "yes");
-            session.setAttribute("member", memberDto);
-            session.setAttribute("accessToken", accessToken);
+            session.setAttribute("member", existingMember);
 
             return "redirect:/index";
         } catch (RuntimeException e) {
             session.invalidate();
             throw e;
         }
+    }
+
+    @GetMapping("/naverAdditionalInfo")
+    public String naverAdditionalInfoForm(HttpSession session, Model model) {
+        MemberDto naverUser = (MemberDto) session.getAttribute("naverUser");
+        if (naverUser == null) {
+            return "redirect:/login/loginform";
+        }
+
+        model.addAttribute("naverUser", naverUser);
+        return "/login/naverAdditionalInfo";
+    }
+
+    @PostMapping("/naverAdditionalInfo")
+    public String naverAdditionalInfoSubmit(@RequestParam String member_phone, @RequestParam String member_birth_date, HttpSession session) {
+        MemberDto naverUser = (MemberDto) session.getAttribute("naverUser");
+        if (naverUser == null) {
+            return "redirect:/login/loginform";
+        }
+
+        naverUser.setMember_phone(member_phone);
+
+        // 생년월일 변환
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            naverUser.setMember_birth_date(sdf.parse(member_birth_date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "redirect:/login/naverAdditionalInfo";
+        }
+
+        MemberDto existingMember = loginService.authenticateSocialUser(naverUser.getMember_social_id(), naverUser.getMember_social_type());
+        if (existingMember == null) {
+            loginService.registerMember(naverUser);
+            existingMember = naverUser;
+        }
+
+        session.setMaxInactiveInterval(60 * 60 * 8);
+        session.setAttribute("myid", existingMember.getMember_useremail());
+        session.setAttribute("myname", existingMember.getMember_name());
+        session.setAttribute("member_id", existingMember.getMember_id());
+        session.setAttribute("loginok", "yes");
+        session.setAttribute("member", existingMember);
+
+        return "redirect:/index";
     }
 
     @GetMapping("/logout")

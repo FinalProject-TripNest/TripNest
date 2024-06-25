@@ -77,16 +77,18 @@ public class NaverService implements NaverServiceInter {
             member.setMember_phone((String) responseMap.get("mobile"));
 
             // 생년월일 정보 파싱
-            try {
-                String birthYear = (String) responseMap.get("birthyear");
-                String birthday = (String) responseMap.get("birthday");
-                String birthDateString = birthYear + "-" + birthday.replace("-", "-");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date birthDate = dateFormat.parse(birthDateString);
-                member.setMember_birth_date(birthDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                throw new RuntimeException("Failed to parse birth date from Naver account information");
+            String birthYear = (String) responseMap.get("birthyear");
+            String birthday = (String) responseMap.get("birthday");
+            if (birthYear != null && birthday != null) {
+                try {
+                    String birthDateString = birthYear + "-" + birthday.replace("-", "-");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date birthDate = dateFormat.parse(birthDateString);
+                    member.setMember_birth_date(birthDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("Failed to parse birth date from Naver account information");
+                }
             }
         }
 
