@@ -1,4 +1,5 @@
-<%-- <%@ page language="java" contentType="text/html; charset=utf-8"
+
+<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -103,25 +104,22 @@ td button:hover {
 	<script>
 		$("button.btn").click(function() {
 			var member_id = $(this).attr("name");
+
 			$.ajax({
-				type : "POST",
-				url : "/admin/memberList",
-				contentType : "application/json", // JSON 형식으로 데이터 전송
-				data : JSON.stringify({
+				type : "GET", // POST 방식으로 변경
+				url : "/admin/memberDelete",
+				dataType : "html",
+				data : {
 					"member_id" : member_id
-				}),
-				success : function(response) {
-					alert("회원 삭제가 성공적으로 처리되었습니다.");
-					// 추가적인 동작을 여기에 추가하세요 (예: 페이지 리로딩 등)
 				},
-				error : function(xhr, status, error) {
-					alert("회원 삭제 중 오류가 발생하였습니다.");
-					console.error(xhr.responseText);
+				success : function(response) {
+					location.reload();
 				}
 			});
 		});
 	</script>
 
 
+
 </body>
-</html> --%>
+</html>

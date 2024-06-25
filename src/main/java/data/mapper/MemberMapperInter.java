@@ -16,5 +16,5 @@ public interface MemberMapperInter {
 
 	public List<MemberDto> dataList();
 
-	public void dataDelete(String member_id);
+	public void dataDelete(int member_id);
 }

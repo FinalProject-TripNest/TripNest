@@ -9,5 +9,5 @@ public interface MemberServiceInter {
     MemberDto findByEmail(String email);
     boolean checkEmailExists(String email);
     public List<MemberDto> dataList();
-    public void dataDelete(String member_id);
+    public void dataDelete(int member_id);
 }

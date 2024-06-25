@@ -48,7 +48,7 @@ public class MemberService implements MemberServiceInter {
 	}
 
 	@Override
-	public void dataDelete(String member_id) {
+	public void dataDelete(int member_id) {
 		memberMapper.dataDelete(member_id);
 
 	}

@@ -223,12 +223,25 @@ public class AdminController {
 	}
 
 	// 회원 관리 페이지
-	/*
-	 * @GetMapping("/admin/memberList") public ModelAndView
-	 * member(@RequestParam("member_id") String member_id) { ModelAndView model =
-	 * new ModelAndView(); List<MemberDto> dto = memberService.dataList();
-	 * memberService.dataDelete(member_id); model.addObject("dto", dto);
-	 * model.setViewName("/admin/adminMember"); return model; }
-	 */
+	@GetMapping("/admin/memberList")
+	public ModelAndView member() {
+		ModelAndView model = new ModelAndView();
+		List<MemberDto> dto = memberService.dataList();
+		model.addObject("dto", dto);
+		model.setViewName("/admin/adminMember");
+		return model;
+	}
+	
+	@ResponseBody
+	@GetMapping("/admin/memberDelete") 
+	public String memberDelete(@RequestParam("member_id") int member_id) {
+		memberService.dataDelete(member_id);
+		return "/admin/memberDelete";
+	}
+		
+	
+	
+	
+	
 
 }
