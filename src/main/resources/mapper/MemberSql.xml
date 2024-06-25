@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="data.mapper.MemberMapperInter">
-    <insert id="insertMember" parameterType="data.dto.MemberDto">
-	    INSERT INTO MEMBERS (member_name, member_useremail, member_password, member_phone, member_registration_date, member_birth_date, member_social_id, member_social_type)
-	    VALUES (#{member_name}, #{member_useremail}, #{member_password}, #{member_phone}, NOW(), #{member_birth_date}, #{member_social_id}, #{member_social_type})
+	<insert id="insertMember" parameterType="data.dto.MemberDto">
+		INSERT INTO MEMBERS
+		(member_name, member_useremail, member_password,
+		member_phone,
+		member_registration_date, member_birth_date,
+		member_social_id,
+		member_social_type)
+		VALUES (#{member_name}, #{member_useremail},
+		#{member_password},
+		#{member_phone}, NOW(), #{member_birth_date},
+		#{member_social_id},
+		#{member_social_type})
 	</insert>
 
     <select id="findByEmail" parameterType="String" resultType="MemberDto">
@@ -18,8 +27,19 @@
     <select id="findMemberEmail" parameterType="int" resultType="MemberDto">
     	select member_useremail from MEMBERS where member_id=#{member_id}
     </select>
-    
+    <!-- 차유지 작성함 -->
     <select id="getTotalMember" resultType="int">
     	select count(*) from MEMBERS
     </select>
+
+	<select id="dataList" resultType="MemberDto">
+		select * from MEMBERS order by
+		member_id desc
+	</select>
+
+	<delete id="dataDelete" parameterType="String">
+		delete from MEMBERS where
+		member_id = #{member_id}
+	</delete>
+
 </mapper>
