@@ -6,4 +6,5 @@ public interface MemberServiceInter {
     void registerMember(MemberDto dto, String token);
     MemberDto findByEmail(String email);
     boolean checkEmailExists(String email);
+	MemberDto getMemberByEmail(String email);
 }
