@@ -19,7 +19,7 @@
 <title>TRIP NEST</title>
 <style>
 /* 각 페이지 스타일 */
-#reservation .title {
+#reservation .center>.title {
 	text-align: center;
 	padding: 60px 0;
 	justify-content: center;
@@ -56,7 +56,6 @@
 #reservation .titlebox1 .day {
 	font-size: 17px;
 	color: #000;
-	cursor: pointer;
 	padding: 0 23px 0 0;
 	/*     background: #fff url(/web/images/arw_select.png) no-repeat 100% 50%; */
 	/*     background-size: 20px 20px; */
@@ -352,6 +351,7 @@
 	width: 280px;
 	height: 40px;
 	cursor: pointer;
+	position: relative;
 }
 
 #reservation ._bookings-new_coupon_trigger_wrapper__J9j8p ._bookings-new_selector__DJU6E ._bookings-new_coupon_title__PlGl_
@@ -556,57 +556,116 @@
 }
 
 #reservation .warning-box {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0 0 0px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 0 0 0px;
 }
 
 #reservation .warning-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
-    font-weight: 700;
-    border-radius: 50%;
-    background-color: #f08300;
-    color: #fff;
-    position: relative;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
+	font-weight: 700;
+	border-radius: 50%;
+	background-color: #f08300;
+	color: #fff;
+	position: relative;
 }
 
 #reservation .warning-icon::before {
-    content: "!";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	content: "!";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #reservation .warning-title {
-    height: 14px;
-    flex-grow: 0;
-    margin: 0 0 7px;
-    font-family: SpoqaHanSans;
-    font-size: 13px;
-    line-height: 1.08;
-    text-align: left;
-    color: #f08300;
+	height: 14px;
+	flex-grow: 0;
+	margin: 0 0 7px;
+	font-family: SpoqaHanSans;
+	font-size: 13px;
+	line-height: 1.08;
+	text-align: left;
+	color: #f08300;
 }
 
 #reservation .warning-desc {
-	padding-top : 5px;
-    font-family: SpoqaHanSans;
-    font-size: 12px;
-    line-height: 1.67;
-    text-align: left;
-    color: gray;
+	padding-top: 5px;
+	font-family: SpoqaHanSans;
+	font-size: 12px;
+	line-height: 1.67;
+	text-align: left;
+	color: gray;
 }
 
+#reservation .select_coupon {
+	position: absolute;
+	border-radius: 10px;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 16px 0px;
+	z-index: 9000;
+	top: 60px;
+	padding: 20px;
+	width: 390px;
+	right: 0;
+	display: none;
+}
 
+#reservation .select_coupon.active {
+	display: block;
+}
 
+#reservation .select_coupon>div>.title {
+	font-size: 18px;
+	font-weight: 500;
+	text-align: center;
+	color: #333;
+	padding-bottom: 20px;
+}
 
+#reservation .select_coupon .main {
+	padding-top: 20px;
+	border-top: 1px solid #ddd;
+	text-align: center;
+}
+
+#reservation .select_coupon .main .on .block {
+	text-align: left;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+#reservation .select_coupon .main .on .block:first-child {
+	margin-top: 0
+}
+
+#reservation .select_coupon .main .on .block span {
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	width: 240px;
+	padding: 10px;
+	color: #333;
+}
+
+#reservation .select_coupon .main .on .block span.btncoupon {
+	width: 100px;
+	text-align: center;
+	cursor: pointer;
+	background: #000;
+	border: 1px solid #000;
+	color: #fff;
+}
+
+#reservation .select_coupon .main .off {
+	color: #333;
+}
 /* //각 페이지 스타일 */
 </style>
 <body>
@@ -625,7 +684,7 @@
 					<div class="day" role="presentation">
 						<!-- 						<div class="btn_select ">날짜를 선택해주세요. -->
 						<!-- 						</div> -->
-						2024. 07. 01 - 2024. 07. 02 <span>1 박</span>
+						${checkin } ~ ${checkout } <span id="numNights"></span>
 					</div>
 					<div class="price">
 						<fmt:formatNumber value="${roomsDto.room_price}" type="currency"
@@ -639,9 +698,10 @@
 
 				<div class="detailbox">
 					<form action="reservationInfo" method="post" class="bookingfrm">
-						<input type="hidden" name="MEMBER_ID" value="${memberDto.member_id }"> 
-							<input type="hidden" name="ROOM_ID" value="${roomsDto.room_id }">
-							<input type="hidden" id="merchant_uid" name="merchant_uid" value="">
+						<input type="hidden" name="MEMBER_ID"
+							value="${memberDto.member_id }"> <input type="hidden"
+							name="ROOM_ID" value="${roomsDto.room_id }"> <input
+							type="hidden" id="merchant_uid" name="merchant_uid" value="">
 						<div class="frm_tit">Reservations</div>
 						<ul class="stay_list">
 							<li><div class="tit">예약 스테이</div>
@@ -649,9 +709,9 @@
 							<li><div class="tit">예약일</div>
 								<div class="cont day">
 									<input type="hidden" name="RESERVATION_CHECKIN"
-										value="2024-06-19"> <input type="hidden"
-										name="RESERVATION_CHECKOUT" value="2024-06-20">
-									2024-07-08 ~ 2024-07-09 <span>1 박</span>
+										value="${checkin }"> <input type="hidden"
+										name="RESERVATION_CHECKOUT" value="${checkout }">
+									${checkin } ~ ${checkout } <span id="numNight"></span>
 								</div></li>
 							<li><div class="tit">이름</div>
 								<div class="cont">
@@ -807,12 +867,42 @@
 														</div>
 													</div>
 												</div>
-											</div>
+												<div class="select_coupon">
+													<div>
+														<div class="title">쿠폰</div>
+														<div class="main">
+															<c:choose>
+																<c:when test="${not empty couponDto}">
+																	<div class="on">
+																		<c:forEach var="coupon" items="${couponDto}">
+																			<div class="block">
+																					<input type="hidden" name="coupon_id" value="${coupon.couponId}"> 
+																					<input type="hidden" name="coupon_group_id" value="${coupon.couponGroupId}"> 
+																					<input type="hidden" name="member_id" value="${coupon.memberId}"> 
+																					<span class="title">50000원 쿠폰 
+																					<fmt:formatDate value="${coupon.expireDate}" pattern="(~MM/dd)" />
+																					</span>
+																				<span class="btncoupon">적용</span>
+																			</div>
+																		</c:forEach>
+																	</div>
+																</c:when>
+																<c:otherwise>
+																	<div class="off">
+																		<p>사용 가능한 쿠폰이 없습니다.</p>
+																	</div>
+																</c:otherwise>
+															</c:choose>
+														</div>
+													</div>
+												</div>
 										</dd>
 									</dl>
 									<dl style="overflow: unset;">
 										<dt class="total">총 할인 금액</dt>
-										<dd class="total">₩30,000</dd>
+										<dd class="total">
+											<span style="font-size: 20px;" id="discount1">-</span>
+										</dd>
 									</dl>
 								</div></li>
 							<li class="total-price-list-wrapper"><div class="tit">예상
@@ -822,12 +912,17 @@
 										<dt>
 											객실 요금<span class="plus_option"> <fmt:formatNumber
 													value="${roomsDto.room_price}" type="currency"
-													currencySymbol="₩ " groupingUsed="true" /> * 1 박
+													currencySymbol="₩ " groupingUsed="true" /> * <span
+												id="numNightcal"></span>
 											</span>
 										</dt>
-										<dd>₩350,000</dd>
+										<dd>
+											<span id="totalprice1"></span>
+										</dd>
 										<dt>할인 금액</dt>
-										<dd>₩30,000</dd>
+										<dd>
+											<span id="discount2"></span>
+										</dd>
 										<dt class="total"></dt>
 										<dd class="total">
 											<input type="hidden" name="RESERVATION_PRICE"
@@ -848,11 +943,13 @@
 												결제</span>
 										</label> <span style="color: #777;">할부는 최대 6개월까지 가능하며, <br>무이자
 											할부 조건은 카드사별로 다릅니다.<br>
-										</span> 
+										</span>
 										<div class="warning-box">
 											<div class="aman-warning">
-												<div class="warning-title"><span class="warning-icon"></span>&nbsp;정상적인 결제가 가능한
-													카드인지 꼭 확인해 주세요.</div>
+												<div class="warning-title">
+													<span class="warning-icon"></span>&nbsp;정상적인 결제가 가능한 카드인지 꼭
+													확인해 주세요.
+												</div>
 												<div class="warning-desc">유효기간 만료, 사용한도 초과, 잔액 부족,
 													도난/분실 신청, 거래 거절 등의 이유로 결제 불가 시 예약이 취소될 수 있습니다.</div>
 												<br>
@@ -1364,6 +1461,73 @@
 					$(this).closest(".center").find(".container .tab_view").eq(
 							idx).addClass("active");
 				});
+		
+		$("#reservation ._bookings-new_coupon_trigger_wrapper__J9j8p ._bookings-new_selector__DJU6E").click(function(){
+			$("#reservation .select_coupon").toggleClass("active");
+		});
+		
+		
+		  $(document).click(function(event) {
+		        var $target = $(event.target);
+		        if (!$target.closest('#reservation .select_coupon').length && !$target.closest('#reservation ._bookings-new_coupon_trigger_wrapper__J9j8p ._bookings-new_selector__DJU6E').length) {
+		            $("#reservation .select_coupon").removeClass("active");
+		        }
+		    });
+		  
+		  //String으로 받아온 체크인, 체크아웃 날짜를 윤년을 고려하여 계산하고 몇박인지 출력해줌
+		    // 체크인과 체크아웃 날짜 문자열
+		    var checkinString = "${checkin}"; // 예: "2024-06-25"
+		    var checkoutString = "${checkout}"; // 예: "2024-06-27"
+
+		    // 문자열을 Date 객체로 변환
+		    var checkinDate = new Date(checkinString);
+		    var checkoutDate = new Date(checkoutString);
+
+		    // 윤년 여부 판별 함수
+		    function isLeapYear(year) {
+		        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+		    }
+
+		    // 날짜 차이 계산 (박수 계산)
+		    function getNightCount(checkin, checkout) {
+		        var oneDay = 24 * 60 * 60 * 1000; // 하루를 밀리초로 계산
+		        var diffDays = Math.round(Math.abs((checkout - checkin) / oneDay));
+
+		        // 체크인 날짜의 연도와 체크아웃 날짜의 연도가 다를 경우
+		        var checkinYear = checkin.getFullYear();
+		        var checkoutYear = checkout.getFullYear();
+
+		        if (checkoutYear > checkinYear) {
+		            // 체크인 연도의 2월 일 수 계산
+		            var febDays = isLeapYear(checkinYear) ? 29 : 28; // 윤년 여부에 따른 2월 일 수
+
+		            // 체크인 연도의 2월 일수가 diffDays보다 작으면 하루를 빼서 박수를 계산
+		            if (checkout.getMonth() === 1 && checkout.getDate() === 29) {
+		                diffDays--;
+		            }
+		        }
+
+		        return diffDays;
+		    }
+		    
+
+		    // 결과를 HTML에 출력
+		    var diffDays = getNightCount(checkinDate, checkoutDate);
+			$("#numNights").text(diffDays+ " 박");
+		    $("#numNight").text(diffDays+ " 박");
+		    $("#numNightcal").text(diffDays+ " 박");
+		    
+		    // 서버에서 받아온 객실 요금
+	        var roomPrice = ${roomsDto.room_price};
+			
+	    	 // 총 요금 계산
+	        var totalPrice = roomPrice * diffDays;
+	    	
+	    	// 총 요금을 화폐 단위로 포맷하여 HTML에 출력
+	        var formattedTotalPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice);
+	        $("#totalprice1").text(formattedTotalPrice);
+		    
+
 	</script>
 
 </body>

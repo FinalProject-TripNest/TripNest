@@ -9,8 +9,8 @@ import java.util.Date;
 @Builder
 public class CouponDto {
     private String couponId;
-    private String couponGroupId;
     private String couponNumber;
+    private String couponGroupId;
     private String memberId;
     private Date issuedDate;
     private Date expireDate;
