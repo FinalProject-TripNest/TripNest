@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ch.qos.logback.core.model.Model;
 import data.dto.ImagesDto;
 import data.dto.InqueryDto;
 import data.dto.MemberDto;
@@ -82,6 +81,18 @@ public class AdminController {
 		no = totalCount - (currentPage - 1) * perPage;
 
 		List<RoomsDto> list = rservice.getAllRooms(start, perPage);
+		
+		
+		
+		   for (RoomsDto roomdto : list) {
+		        MemberDto memberDto = memservice.findMemberEmail(roomdto.getMember_id());
+		        if (memberDto != null) {
+		            String mememail = memberDto.getMember_useremail();
+		            roomdto.setMememail(mememail); 
+		        } else {
+		        	roomdto.setMememail("탈퇴한 사용자입니다.");
+		        }
+		   }
 
 		// 리퀘스에 저장
 		mview.addObject("totalCount", totalCount);
@@ -200,14 +211,6 @@ public class AdminController {
 			
 			List<InqueryDto> list=iqservice.getInqueryList(start, perPage);
 			
-			/*for (InqueryDto inquery : list) {
-			        String mememail = memservice.findMemberEmail(inquery.getMember_id()).getMember_useremail();
-			        inquery.setMememail(mememail); 
-
-			    }*/
-			
-			
-			
 			   for (InqueryDto inquery : list) {
 			        MemberDto memberDto = memservice.findMemberEmail(inquery.getMember_id());
 			        if (memberDto != null) {
@@ -305,6 +308,9 @@ public class AdminController {
 		        	rooms.setMememail("탈퇴한 사용자입니다.");
 		        }
 		   }
+		   
+		   List<MemberDto> memlist=memservice.getRecentMember();
+		   mview.addObject("memlist", memlist);
 		   
 		  
 		  int memcount=memservice.getTotalMember();

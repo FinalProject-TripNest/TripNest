@@ -15,5 +15,7 @@ public interface MemberServiceInter {
 
     List<MemberDto> dataList();
     void dataDelete(int member_id);
+    
+    List<MemberDto> getRecentMember();
 
 }

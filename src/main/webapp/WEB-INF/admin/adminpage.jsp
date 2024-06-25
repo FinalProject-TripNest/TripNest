@@ -46,11 +46,16 @@ table td{
 }
 .adminmaindivone button,.adminmaindivtwo button{
 	float: right;
-	background-color:#333333;
-	color: white;
+	background-color:#ccc;
+	color: black;
 	width: 140px;
 	cursor: pointer;
 	margin-bottom: 5px;
+}
+.mainaa td{
+	border: 1px solid white;
+	width: 33.3%;
+	vertical-align: middle;
 }
 
 </style>
@@ -112,7 +117,7 @@ table td{
 			</div>
 			<div class="adminmaindivone">
 					<div style="border: 0px solid black;" class="admin_mainmem">
-						<button type="button">회원관리 바로가기</button>
+						<button type="button" onclick="location.href='/admin/memberList'">회원관리 바로가기</button>
 						<span>최근 회원가입</span>
 						<table class="mainmemtable">
 							<tr style="background-color: #F8F8F8;">
@@ -120,7 +125,19 @@ table td{
 								<td>이름</td>
 								<td>아아디/이메일</td>
 								<td>가입일시</td>
+								<td>ROLE</td>
 							</tr>
+							<c:forEach var="memdto" items="${memlist}">
+								<tr>
+									<td>${memdto.member_id }</td>
+									<td>${memdto.member_name }</td>
+									<td>${memdto.member_useremail }</td>
+									<td>
+										<fmt:formatDate value="${memdto.member_registration_date }" pattern="yy-MM-dd"/>
+									</td>
+									<td>${memdto.member_role}</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 					
@@ -130,7 +147,7 @@ table td{
 						<table class="mainroomtable">
 							<tr style="background-color: #F8F8F8;">
 								<td>번호</td>
-								<td>등록인</td>
+								<td>호스트</td>
 								<td>숙소이름</td>
 								<td>위치</td>
 								<td>상태</td>
@@ -191,15 +208,15 @@ table td{
 						</table>
 					</div>
 					<div style="border: 0px solid pink;" class="admin_pay">
-						<button>아무거나 바로가기</button>
+						<button>결제내역 바로가기</button>
 						<span>최근 결제내역</span>
 						<table class="maintable">
 							<tr style="background-color: #F8F8F8;">
-								<td>번호</td>
-								<td>카테고리</td>
-								<td>아이디</td>
-								<td>내용</td>
-								<td>상태</td>
+								<td>결제번호</td>
+								<td>게스트명</td>
+								<td>연락처</td>
+								<td>결제금액</td>
+								<td>결제일</td>
 							</tr>
 						</table>
 					</div>

@@ -116,7 +116,7 @@ textarea.inquery_answer{
 	margin-top: 20px;
 	align-items: center;
 	height: 80%;
-	border: 0px solid red;
+	border: 1px solid #ccc;
 	width: 100%;
 	display: flex;
 	margin-left: 50px;
@@ -150,8 +150,9 @@ button.adminanswerbtn,.admineditbtn{
 	<div id="wrap">
 		<div id="admininquery">
 			<div class="center">
+			<div style="font-size: 1.2em; text-align: center;margin-bottom: 20px;"><b>1:1문의 현황</b></div>
 			<table class="admin-i-table">
-				<tr>
+				<tr style="background-color: #F8F8F8;">
 					<td width="100">번호</td>
 					<td width="200">카테고리</td>
 					<td width="200">아이디</td>

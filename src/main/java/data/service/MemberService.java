@@ -64,4 +64,10 @@ public class MemberService implements MemberServiceInter {
 		memberMapper.dataDelete(member_id);
 
 	}
+
+	@Override
+	public List<MemberDto> getRecentMember() {
+		// TODO Auto-generated method stub
+		return memberMapper.getRecentMember();
+	}
 }

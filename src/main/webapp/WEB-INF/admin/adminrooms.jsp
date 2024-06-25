@@ -165,6 +165,11 @@
     position: fixed;
     width: 100%;
 }
+.admin-room span{
+	font-size: 1.2em;
+	margin-left: 570px;
+}
+
 </style>
 <body>
 
@@ -173,11 +178,13 @@
 		<div id="adminrooms">
 			<div class="center">
 				<div class="admin-room">
+				<div style="font-size: 1.2em; text-align: center; margin-bottom: 20px;"><b>숙소 목록 및 승인 관리</b></div>
 					<table class="admin-r-table">
-						<tr style="height:50px;" align="center">
+						<tr style="height:50px;background-color: #F8F8F8;" align="center">
 							<td width="50">번호</td>
-							<td width="200">숙소이름</td>
-							<td width="300">위치</td>
+							<td width="150">호스트</td>
+							<td width="250">숙소이름</td>
+							<td width="350">위치</td>
 							<td width="150">숙소가격</td>
 							<td width="100">평점</td>
 							<td width="100">승인/미승인</td>
@@ -187,6 +194,7 @@
 								<tr>
 									<td align="center">${no }</td>
 									<c:set var="no" value="${no-1 }"/>
+									<td align="center" style="font-size: 0.9em;">${rlist.mememail}</td>
 									<td>
 										<div class="Click-here" id="Click-here">${ rlist.room_name}</div>
 										<input type="hidden" value="${rlist.room_id }" name="room_id" class="r_id">

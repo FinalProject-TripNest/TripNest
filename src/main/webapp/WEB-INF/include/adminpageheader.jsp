@@ -26,17 +26,17 @@ header#header .menu ul.main::after {
 <c:set var="root" value="<%=request.getContextPath()%>" />
 <header id="header">
 
-	<nav>
+	<nav style="background-color: #393B3F;">
 		<div>
 			<a class="logo" href="adminmain"> <img alt=""
-				src="../img/common/logo.png">
+				src="../img/common/adminlogo.png">
 			</a>
-
+			<div style="font-size: 1.7em; color: white;"><b>관리자 페이지</b></div>
 			<div class="menu">
 				<ul class="main">
-					<li><a href="${root }/admin/memberList">회원관리</a></li>
-					<li><a href="${root }/admin/roomlist">숙소목록</a></li>
-					<li><a href="${root }/admin/inquerylist">1:1문의</a></li>
+					<li ><a href="${root }/admin/memberList"  style=" color: white;">회원관리</a></li>
+					<li><a href="${root }/admin/roomlist" style=" color: white;">숙소목록</a></li>
+					<li><a href="${root }/admin/inquerylist" style=" color: white;">1:1문의</a></li>
 				</ul>
 			</div>
 		</div>

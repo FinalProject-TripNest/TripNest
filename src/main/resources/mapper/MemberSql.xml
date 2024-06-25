@@ -41,5 +41,9 @@
 		delete from MEMBERS where
 		member_id = #{member_id}
 	</delete>
+	
+	<select id="getRecentMember" resultType="MemberDto">
+		select * from MEMBERS order by member_id desc limit 0,5
+	</select>
 
 </mapper>
