@@ -81,5 +81,18 @@ public class MemberController {
     public String registerSuccess() {
         return "/member/registerSuccess";
     }
+    
+    @GetMapping("/mypage")
+    public String myPage(HttpSession session, Model model) {
+        String userEmail = (String) session.getAttribute("myid");
+        if (userEmail == null) {
+            return "redirect:/login/loginform";
+        }
+        
+        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+        model.addAttribute("memberDto", memberDto);
+        
+        return "/member/myPage";
+    }
 
 }

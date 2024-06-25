@@ -68,6 +68,11 @@
             </div>
         </div>
     </div>
+    
 <%@ include file="../include/footer.jsp"%>
+
+	<script>
+	
+	</script>
 </body>
 </html>
