@@ -15,17 +15,22 @@
 		#{member_social_type})
 	</insert>
 
-	<select id="findByEmail" parameterType="String"
-		resultType="MemberDto">
-		SELECT * FROM MEMBERS WHERE member_useremail = #{email}
-	</select>
-
-	<select id="findBySocialIdAndType" parameterType="map"
-		resultType="data.dto.MemberDto">
-		SELECT * FROM MEMBERS WHERE member_social_id = #{social_id}
-		AND
-		member_social_type = #{social_type}
-	</select>
+    <select id="findByEmail" parameterType="String" resultType="MemberDto">
+        SELECT * FROM MEMBERS WHERE member_useremail = #{email}
+    </select>
+    
+    <select id="findBySocialIdAndType" parameterType="map" resultType="data.dto.MemberDto">
+        SELECT * FROM MEMBERS WHERE member_social_id = #{social_id} AND member_social_type = #{social_type}
+    </select>
+    
+    <!-- 회원 아이디가 필요해서... 차유지 작성함 -->
+    <select id="findMemberEmail" parameterType="int" resultType="MemberDto">
+    	select member_useremail from MEMBERS where member_id=#{member_id}
+    </select>
+    <!-- 차유지 작성함 -->
+    <select id="getTotalMember" resultType="int">
+    	select count(*) from MEMBERS
+    </select>
 
 	<select id="dataList" resultType="MemberDto">
 		select * from MEMBERS order by
@@ -36,4 +41,9 @@
 		delete from MEMBERS where
 		member_id = #{member_id}
 	</delete>
+	
+	<select id="getRecentMember" resultType="MemberDto">
+		select * from MEMBERS order by member_id desc limit 0,5
+	</select>
+
 </mapper>

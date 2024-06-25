@@ -30,5 +30,6 @@ public class RoomsDto {
 	private String image_photo;
 
 	private List<String> imgList;
+	private String mememail;
 }
 

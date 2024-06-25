@@ -15,6 +15,7 @@ public class InqueryDto {
 	private String inquery_content;
 	private Timestamp inquery_date;
 	private String inquery_category;
-	private String member_id;
+	private int member_id;
 	private String inquery_answer;
+	private String mememail;
 }

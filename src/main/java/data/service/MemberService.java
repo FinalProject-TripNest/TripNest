@@ -36,11 +36,23 @@ public class MemberService implements MemberServiceInter {
 		return memberMapper.findByEmail(email);
 	}
 
+    @Override
+    public boolean checkEmailExists(String email) {
+        return memberMapper.findByEmail(email) != null;
+    }
+    
 	@Override
-	public boolean checkEmailExists(String email) {
-		return memberMapper.findByEmail(email) != null;
+	public MemberDto findMemberEmail(int member_id) {
+		// TODO Auto-generated method stub
+		return memberMapper.findMemberEmail(member_id);
 	}
 
+	@Override
+	public int getTotalMember() {
+		// TODO Auto-generated method stub
+		return memberMapper.getTotalMember();
+
+	}
 	@Override
 	public List<MemberDto> dataList() {
 		// TODO Auto-generated method stub
@@ -51,5 +63,11 @@ public class MemberService implements MemberServiceInter {
 	public void dataDelete(int member_id) {
 		memberMapper.dataDelete(member_id);
 
+	}
+
+	@Override
+	public List<MemberDto> getRecentMember() {
+		// TODO Auto-generated method stub
+		return memberMapper.getRecentMember();
 	}
 }

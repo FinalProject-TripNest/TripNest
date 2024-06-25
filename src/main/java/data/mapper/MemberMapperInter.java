@@ -8,13 +8,19 @@ import data.dto.MemberDto;
 
 @Mapper
 public interface MemberMapperInter {
-	void insertMember(MemberDto dto);
 
-	MemberDto findByEmail(@Param("email") String email);
+    void insertMember(MemberDto dto);
+    MemberDto findByEmail(@Param("email") String email);
+    MemberDto findBySocialIdAndType(@Param("social_id") String social_id, @Param("social_type") String social_type);
+    
+    //유지
+    MemberDto findMemberEmail(int member_id);
+    int getTotalMember();
 
-	MemberDto findBySocialIdAndType(@Param("social_id") String social_id, @Param("social_type") String social_type);
+	 List<MemberDto> dataList();
 
-	public List<MemberDto> dataList();
+	 void dataDelete(int member_id);
+	 
+	 List<MemberDto> getRecentMember();
 
-	public void dataDelete(int member_id);
 }

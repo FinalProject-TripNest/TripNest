@@ -28,5 +28,8 @@ public interface RoomsMapperInter {
 	public List<String> getImgsByRoomId(String room_id);
 	public List<String> getLackRoomId(Map params);
 	public RoomsDto getSimpleRoomsDataByRoomId(String room_id);
+	
+	public int getCountNoRoom();
+	public List<RoomsDto> getRecentRoom();
 }
 
