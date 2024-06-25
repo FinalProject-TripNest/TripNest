@@ -20,20 +20,19 @@
 <style>
 /* 각 페이지 스타일 */
 #reservation .title {
-    text-align: center;
-    padding: 60px 0;
-    justify-content: center;
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
 }
 
 #reservation .title2 {
-    font-size: 20px;
-    line-height: 33px;
-    font-weight: 500;
-    color: #000;
-    border-bottom: 3px solid #000;
-    text-transform: uppercase;
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
 }
-
 
 #reservation .titlebox {
 	text-align: center;
@@ -556,6 +555,58 @@
 	color: #888;
 }
 
+#reservation .warning-box {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0 0 0px;
+}
+
+#reservation .warning-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 50%;
+    background-color: #f08300;
+    color: #fff;
+    position: relative;
+}
+
+#reservation .warning-icon::before {
+    content: "!";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#reservation .warning-title {
+    height: 14px;
+    flex-grow: 0;
+    margin: 0 0 7px;
+    font-family: SpoqaHanSans;
+    font-size: 13px;
+    line-height: 1.08;
+    text-align: left;
+    color: #f08300;
+}
+
+#reservation .warning-desc {
+	padding-top : 5px;
+    font-family: SpoqaHanSans;
+    font-size: 12px;
+    line-height: 1.67;
+    text-align: left;
+    color: gray;
+}
+
+
+
+
 /* //각 페이지 스타일 */
 </style>
 <body>
@@ -588,9 +639,9 @@
 
 				<div class="detailbox">
 					<form action="reservationInfo" method="post" class="bookingfrm">
-						<input type="hidden" name="MEMBER_ID"
-							value="${memberDto.member_id }"> <input type="hidden"
-							name="ROOM_ID" value="${roomsDto.room_id }">
+						<input type="hidden" name="MEMBER_ID" value="${memberDto.member_id }"> 
+							<input type="hidden" name="ROOM_ID" value="${roomsDto.room_id }">
+							<input type="hidden" id="merchant_uid" name="merchant_uid" value="">
 						<div class="frm_tit">Reservations</div>
 						<ul class="stay_list">
 							<li><div class="tit">예약 스테이</div>
@@ -781,7 +832,7 @@
 										<dd class="total">
 											<input type="hidden" name="RESERVATION_PRICE"
 												id="RESERVATION_PRICE" value="100">
-<%-- 												${roomsDto.room_price} --%>
+											<%-- 												${roomsDto.room_price} --%>
 											<fmt:formatNumber value="${roomsDto.room_price}"
 												type="currency" currencySymbol="₩ " groupingUsed="true" />
 										</dd>
@@ -793,11 +844,20 @@
 									<div class="paymethod_radio Generalpay">
 										<label class="radio_skin" for="Generalpay"> <input
 											id="Generalpay" type="radio" name="payRadio"
-											value="Generalpay" checked="checked"><span>일반
+											value="Generalpay" checked="checked"><span>카드
 												결제</span>
 										</label> <span style="color: #777;">할부는 최대 6개월까지 가능하며, <br>무이자
-											할부 조건은 카드사별로 다릅니다.
-										</span>
+											할부 조건은 카드사별로 다릅니다.<br>
+										</span> 
+										<div class="warning-box">
+											<div class="aman-warning">
+												<div class="warning-title"><span class="warning-icon"></span>&nbsp;정상적인 결제가 가능한
+													카드인지 꼭 확인해 주세요.</div>
+												<div class="warning-desc">유효기간 만료, 사용한도 초과, 잔액 부족,
+													도난/분실 신청, 거래 거절 등의 이유로 결제 불가 시 예약이 취소될 수 있습니다.</div>
+												<br>
+											</div>
+										</div>
 									</div>
 								</div></li>
 						</ul>
@@ -1271,6 +1331,7 @@
 					    }),
 						success: function(response) {
 							if (response.success) {
+								 $("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
 								$(".bookingfrm").submit(); // 폼 제출
 							} else {
 								alert("결제 정보 저장에 실패했습니다.");
