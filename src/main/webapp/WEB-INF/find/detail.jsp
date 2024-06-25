@@ -79,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="amenities">
+				<div class="amenities" id="amenities">
 					<div class="title">AMENITIES</div>
 					<div class="text">
 						<p>${detailDto.room_service}</p>
