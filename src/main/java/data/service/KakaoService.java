@@ -31,7 +31,7 @@ public class KakaoService implements KakaoServiceInter {
         params.add("grant_type", "authorization_code");
         params.add("client_id", clientId);
         params.add("redirect_uri", redirectUri);
-        params.add("code", code);
+        params.add("code", code);	
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
@@ -74,8 +74,7 @@ public class KakaoService implements KakaoServiceInter {
             if (kakaoAccount != null && kakaoAccount.containsKey("email")) {
                 member.setMember_useremail((String) kakaoAccount.get("email"));
             } else {
-                // 이메일이 없는 경우 가상 이메일 생성
-                member.setMember_useremail("kakao_" + responseBody.get("id") + "@temp.com");
+                throw new RuntimeException("Kakao user email is null");
             }
         }
 
