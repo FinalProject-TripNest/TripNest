@@ -244,15 +244,15 @@ public class AdminController {
 	}
 	
 	
-	//회원 관리 페이지
-	@GetMapping("/admin/memberList")
-	public ModelAndView member() {
-		ModelAndView model = new ModelAndView();
-		
-		
-		model.setViewName("/admin/adminmember");
-		return model;
-	}
+	// 회원 관리 페이지
+		@GetMapping("/admin/memberList")
+		public ModelAndView member() {
+			ModelAndView model = new ModelAndView();
+			List<MemberDto> dto = memservice.dataList();
+			model.addObject("dto", dto);
+			model.setViewName("/admin/adminmember");
+			return model;
+		}
 	
 	
 	@GetMapping("/admin/iqlist")

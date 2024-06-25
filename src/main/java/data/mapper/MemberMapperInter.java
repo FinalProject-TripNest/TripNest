@@ -17,8 +17,8 @@ public interface MemberMapperInter {
     MemberDto findMemberEmail(int member_id);
     int getTotalMember();
 
-	public List<MemberDto> dataList();
+	 List<MemberDto> dataList();
 
-	public void dataDelete(int member_id);
+	 void dataDelete(int member_id);
 
 }

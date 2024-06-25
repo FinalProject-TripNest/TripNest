@@ -13,7 +13,7 @@ public interface MemberServiceInter {
     MemberDto findMemberEmail(int member_id);
     int getTotalMember();
 
-    public List<MemberDto> dataList();
-    public void dataDelete(int member_id);
+    List<MemberDto> dataList();
+    void dataDelete(int member_id);
 
 }

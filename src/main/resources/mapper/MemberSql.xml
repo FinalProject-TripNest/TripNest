@@ -37,7 +37,7 @@
 		member_id desc
 	</select>
 
-	<delete id="dataDelete" parameterType="String">
+	<delete id="dataDelete" parameterType="int">
 		delete from MEMBERS where
 		member_id = #{member_id}
 	</delete>
