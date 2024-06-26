@@ -698,8 +698,7 @@
 
 				<div class="detailbox">
 					<form action="reservationInfo" method="post" class="bookingfrm">
-						<input type="hidden" name="MEMBER_ID"
-							value="${memberDto.member_id }"> <input type="hidden"
+						<input type="hidden" name="MEMBER_ID" id="MEMBER_ID" value="${memberDto.member_id }"> <input type="hidden"
 							name="ROOM_ID" id ="ROOM_ID" value="${roomsDto.room_id }"> <input
 							type="hidden" id="merchant_uid" name="merchant_uid" value="">
 						<div class="frm_tit">Reservations</div>
@@ -708,9 +707,8 @@
 								<div class="cont">${roomsDto.room_name }</div></li>
 							<li><div class="tit">예약일</div>
 								<div class="cont day">
-									<input type="hidden" name="RESERVATION_CHECKIN"
-										value="${checkin }"> <input type="hidden"
-										name="RESERVATION_CHECKOUT" value="${checkout }">
+									<input type="hidden" name="RESERVATION_CHECKIN" id="RESERVATION_CHECKIN" value="${checkin }"> 
+									<input type="hidden" name="RESERVATION_CHECKOUT" id="RESERVATION_CHECKOUT" value="${checkout }">
 									${checkin } ~ ${checkout } <span id="numNight"></span>
 								</div></li>
 							<li><div class="tit">이름</div>
@@ -843,7 +841,7 @@
 								<div class="cont">
 									<textarea
 										placeholder="사전에 협의되지 않은 상업 목적의 사진/영상 촬영(광고, 쇼핑몰, SNS 마켓 등)과 드론 촬영은 불가합니다. "
-										name="RESERVATION_REQUIRE"></textarea>
+										name="RESERVATION_REQUIRE" id="RESERVATION_REQUIRE"></textarea>
 								</div></li>
 							<li><div class="tit">할인 혜택</div>
 								<div class="cont">
@@ -1395,8 +1393,20 @@
 				alert("모든 항목에 동의해주세요.");
 			}
 		});
+		
+		
 
 		function requestPay() {
+			
+			var memberId = $("#MEMBER_ID").val();
+			var roomId = $("#ROOM_ID").val();
+			var reservationCheckin = $("#RESERVATION_CHECKIN").val();
+			var reservationCheckout = $("#RESERVATION_CHECKOUT").val();
+			var reservationCapacity = totalCount; // totalCount는 다른 곳에서 정의된 변수로 가정
+			var reservationRequire = $("#RESERVATION_REQUIRE").val();
+			var reservationPrice = $("#RESERVATION_PRICE").val();
+			var merchantUid = $("#merchant_uid").val();
+			
 			//IMP.request_pay(param, callback) // 결제창 호출
 			IMP.init("imp16144603");
 			IMP.request_pay({ // param
@@ -1422,6 +1432,17 @@
 						url: "/payment/complete", // 서버의 결제 정보 처리 URL
 						contentType: "application/json", // Content-Type 명시
 						data: JSON.stringify({
+							reservationDto:{
+								//TODO: 예약 정보 넣어주기
+								memberId: memberId,
+								roomId: roomId,
+								reservationCheckin: reservationCheckin,
+								reservationCheckout: reservationCheckout,
+								reservationCapacity: reservationCapacity,
+								reservationRequire: reservationRequire,
+								reservationPrice: reservationPrice,
+								merchantUid: rsp.merchant_uid
+					        },
 							paymentDto : {
 								imp_uid: rsp.imp_uid,
 								merchant_uid: rsp.merchant_uid,
@@ -1431,29 +1452,18 @@
 								buyer_name: rsp.buyer_name,
 								member_useremail: rsp.buyer_email
 							},
-							reservationDto:{
-								//TODO: 예약 정보 넣어주기
-								MEMBER_ID: $("input[name='MEMBER_ID']").val(),
-				                ROOM_ID: $("#ROOM_ID").val(),
-				                RESERVATION_CHECKIN: $("input[name='RESERVATION_CHECKIN']").val(),
-				                RESERVATION_CHECKOUT: $("input[name='RESERVATION_CHECKOUT']").val(),
-				                RESERVATION_CAPACITY: totalCount,
-				                RESERVATION_REQUIRE: $("#RESERVATION_REQUIRE").val(),
-				                RESERVATION_PRICE: $("#RESERVATION_PRICE").val(),
-				                MERCHANT_UID: $("#merchant_uid").val()	
-							},
 							//TODO: 쿠폰 id 확인 하기
 // 							"couponId": $("#coupon_id").val(),
 							couponId: 89,
 	
 						}),
 						success: function(response) {
-							if (response.success) {
-								 $("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
-								//$(".bookingfrm").submit(); // 폼 제출
-							} else {
-								alert("결제 정보 저장에 실패했습니다.");
-							}
+// 							if (response.success) {
+// 								 //$("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
+// 								//$(".bookingfrm").submit(); // 폼 제출
+// 							} else {
+// 								alert("결제 정보 저장에 실패했습니다.");
+// 							}
 						},
 						error: function(error) {
 							alert("서버 통신 오류가 발생했습니다.");

@@ -33,6 +33,7 @@ public class ReservationService implements ReservationServiceInter {
 			mapperInter.insertReservation(reservationDto);
 		}catch (Exception e) {
 			throw new RuntimeException("[error] 숙소 예약 처리 실패,", e);
+			
 		}
 	}
 	

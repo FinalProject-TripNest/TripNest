@@ -10,6 +10,6 @@
 	<insert id="insertReservation" parameterType="ReservationDto">
 		insert into
 		RESERVATIONS(RESERVATION_ID,MEMBER_ID,ROOM_ID,RESERVATION_CHECKIN,RESERVATION_CHECKOUT,RESERVATION_CAPACITY,RESERVATION_REQUIRE,RESERVATION_PRICE,MERCHANT_UID,RESERVATION_DATE)
-		values(null,#{MEMBER_ID},#{ROOM_ID},#{RESERVATION_CHECKIN},#{RESERVATION_CHECKOUT},#{RESERVATION_CAPACITY},#{RESERVATION_REQUIRE},#{RESERVATION_PRICE},#{MERCHANT_UID}, now())
+		values(null,#{memberId},#{roomId},#{reservationCheckin},#{reservationCheckout},#{reservationCapacity},#{reservationRequire},#{reservationPrice},#{merchantUid}, now())
 	</insert>
 </mapper>
