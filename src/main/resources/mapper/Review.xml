@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="data.mapper.ReviewMapperInter">
-	<select id="dataList" resultType="ReviewJoinDto" parameterType="String">
+	<select id="dataList" resultType="ReviewJoinDto"
+		parameterType="String">
 		SELECT r.review_id,
-		r.member_id, r.room_id, r.review_content, r.review_rating,
+		r.member_id, r.room_id,
+		r.review_content, r.review_rating,
 		r.review_date, m.member_name
-		FROM review r
+		FROM
+		review r
 		JOIN MEMBERS m ON r.member_id
 		= m.member_id
-		WHERE r.room_id = #{room_id}
+		WHERE r.room_id =
+		#{room_id}
 		ORDER BY r.review_id DESC;
 	</select>
+
+	<select id="adminReview" resultType="ReviewJoinDto">
+		SELECT
+		r.review_id,
+		r.member_id,
+		r.room_id,
+		r.review_content,
+		r.review_rating,
+		r.review_date,
+		m.member_useremail,
+		rt.room_name
+		FROM
+		review r
+		JOIN
+		MEMBERS m ON
+		r.member_id = m.member_id
+		JOIN
+		ROOMS rt ON r.room_id = rt.room_id
+		ORDER
+		BY
+		r.review_id DESC;
+	</select>
+
+	<delete id="dataDelete" parameterType="String">
+		delete from review where
+		review_id = #{review_id}
+	</delete>
+
 </mapper>
