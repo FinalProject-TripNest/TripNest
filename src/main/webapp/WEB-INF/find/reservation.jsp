@@ -698,10 +698,11 @@
 
 				<div class="detailbox">
 					<form action="reservationInfo" method="post" class="bookingfrm">
-						<input type="hidden" name="MEMBER_ID"
+						<input type="hidden" name="MEMBER_ID" id="MEMBER_ID"
 							value="${memberDto.member_id }"> <input type="hidden"
-							name="ROOM_ID" value="${roomsDto.room_id }"> <input
-							type="hidden" id="merchant_uid" name="merchant_uid" value="">
+							name="ROOM_ID" id="ROOM_ID" value="${roomsDto.room_id }">
+						<input type="hidden" id="merchant_uid" name="merchant_uid"
+							value="">
 						<div class="frm_tit">Reservations</div>
 						<ul class="stay_list">
 							<li><div class="tit">예약 스테이</div>
@@ -709,8 +710,9 @@
 							<li><div class="tit">예약일</div>
 								<div class="cont day">
 									<input type="hidden" name="RESERVATION_CHECKIN"
-										value="${checkin }"> <input type="hidden"
-										name="RESERVATION_CHECKOUT" value="${checkout }">
+										id="RESERVATION_CHECKIN" value="${checkin }"> <input
+										type="hidden" name="RESERVATION_CHECKOUT"
+										id="RESERVATION_CHECKOUT" value="${checkout }">
 									${checkin } ~ ${checkout } <span id="numNight"></span>
 								</div></li>
 							<li><div class="tit">이름</div>
@@ -843,7 +845,7 @@
 								<div class="cont">
 									<textarea
 										placeholder="사전에 협의되지 않은 상업 목적의 사진/영상 촬영(광고, 쇼핑몰, SNS 마켓 등)과 드론 촬영은 불가합니다. "
-										name="RESERVATION_REQUIRE"></textarea>
+										name="RESERVATION_REQUIRE" id="RESERVATION_REQUIRE"></textarea>
 								</div></li>
 							<li><div class="tit">할인 혜택</div>
 								<div class="cont">
@@ -876,13 +878,15 @@
 																	<div class="on">
 																		<c:forEach var="coupon" items="${couponDto}">
 																			<div class="block">
-																					<input type="hidden" name="coupon_id" value="${coupon.couponId}"> 
-																					<input type="hidden" name="coupon_group_id" value="${coupon.couponGroupId}"> 
-																					<input type="hidden" name="member_id" value="${coupon.memberId}"> 
-																					<span class="title">50000원 쿠폰 
-																					<fmt:formatDate value="${coupon.expireDate}" pattern="(~MM/dd)" />
-																					</span>
-																				<span class="btncoupon">적용</span>
+																				<input type="hidden" name="coupon_id"
+																					value="${coupon.couponId}"> <input
+																					type="hidden" name="coupon_group_id"
+																					value="${coupon.couponGroupId}"> <input
+																					type="hidden" name="member_id"
+																					value="${coupon.memberId}"> <span
+																					class="title">${coupon.discountAmount}원 쿠폰 <fmt:formatDate
+																						value="${coupon.expireDate}" pattern="(~MM/dd)" />
+																				</span> <span class="btncoupon">적용</span>
 																			</div>
 																		</c:forEach>
 																	</div>
@@ -1361,6 +1365,8 @@
 		/*******************************
 		결제 하기
 		 ********************************/
+		 var totalCount;
+		 
 		$("#money-btn").click(function(e) {
 			e.preventDefault(); // 폼 제출 방지
 
@@ -1374,7 +1380,7 @@
 			var adultCount = parseInt($(".adult-select").val());
 			var childCount = parseInt($(".child-select").val());
 			var babyCount = parseInt($(".baby-select").val());
-			var totalCount = adultCount + childCount + babyCount;
+			totalCount = adultCount + childCount + babyCount;
 
 			// 조건 확인
 			if (allAgreeChecked && subAllAgreeChecked) {
@@ -1391,8 +1397,20 @@
 				alert("모든 항목에 동의해주세요.");
 			}
 		});
+		
+		
 
 		function requestPay() {
+			
+			var memberId = $("#MEMBER_ID").val();
+			var roomId = $("#ROOM_ID").val();
+			var reservationCheckin = $("#RESERVATION_CHECKIN").val();
+			var reservationCheckout = $("#RESERVATION_CHECKOUT").val();
+			var reservationCapacity = totalCount; // totalCount는 다른 곳에서 정의된 변수로 가정
+			var reservationRequire = $("#RESERVATION_REQUIRE").val();
+			var reservationPrice = $("#RESERVATION_PRICE").val();
+			var merchantUid = $("#merchant_uid").val();
+			
 			//IMP.request_pay(param, callback) // 결제창 호출
 			IMP.init("imp16144603");
 			IMP.request_pay({ // param
@@ -1418,32 +1436,56 @@
 						url: "/payment/complete", // 서버의 결제 정보 처리 URL
 						contentType: "application/json", // Content-Type 명시
 						data: JSON.stringify({
-					        imp_uid: rsp.imp_uid,
-					        merchant_uid: rsp.merchant_uid,
-					        paid_amount: rsp.paid_amount,
-					        pg_provider: rsp.pg_provider,
-					        pg_tid: rsp.pg_tid,
-					        buyer_name: rsp.buyer_name,
-					        member_useremail: rsp.buyer_email
-					    }),
+							reservationDto:{
+								//TODO: 예약 정보 넣어주기
+								memberId: memberId,
+								roomId: roomId,
+								reservationCheckin: reservationCheckin,
+								reservationCheckout: reservationCheckout,
+								reservationCapacity: reservationCapacity,
+								reservationRequire: reservationRequire,
+								reservationPrice: reservationPrice,
+								merchantUid: rsp.merchant_uid
+					        },
+							paymentDto : {
+								imp_uid: rsp.imp_uid,
+								merchant_uid: rsp.merchant_uid,
+								paid_amount: rsp.paid_amount,
+								pg_provider: rsp.pg_provider,
+								pg_tid: rsp.pg_tid,
+								buyer_name: rsp.buyer_name,
+								member_useremail: rsp.buyer_email
+							},
+							//TODO: 쿠폰 id 확인 하기
+// 							"couponId": $("#coupon_id").val(),
+							couponId: 89,
+	
+						}),
 						success: function(response) {
-							if (response.success) {
-								 $("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
-								$(".bookingfrm").submit(); // 폼 제출
-							} else {
-								alert("결제 정보 저장에 실패했습니다.");
-							}
+// 							if (response.success) {
+// 								 //$("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
+// 								//$(".bookingfrm").submit(); // 폼 제출
+// 							} else {
+// 								alert("결제 정보 저장에 실패했습니다.");
+// 							}
+					        if (response.success) {
+					            // 리다이렉트 URL로 페이지 이동
+					            window.location.href = response.redirectUrl;
+					        } else {
+					            // 실패 시 처리
+					            alert('결제 처리 중 오류가 발생했습니다: ' + response.message);
+					        }
 						},
 						error: function(error) {
 							alert("서버 통신 오류가 발생했습니다.");
 						}
 					});
-					
+
 				} else { // 결제 실패 시
 					alert("결제를 취소했습니다.");
 					console.log(rsp);
 					 // $(".bookingfrm").submit(); // 폼 제출
-				
+
 				}
 			});
 		}

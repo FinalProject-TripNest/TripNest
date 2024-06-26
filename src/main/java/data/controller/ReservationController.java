@@ -64,10 +64,10 @@ public class ReservationController {
 		ModelAndView model = new ModelAndView();
 		
 		int totalCount=adultCount+childCount+babyCount;
-		dto.setRESERVATION_CAPACITY(totalCount);
+		dto.setReservationCapacity(totalCount);
 		
 		//결제되면서 만들어진 주문번호 reservation 테이블에 넣기
-		dto.setMERCHANT_UID(merchant_uid);
+		dto.setMerchantUid(merchant_uid);
 		
 		reservationService.insertReservation(dto);
 		

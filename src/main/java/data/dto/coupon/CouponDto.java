@@ -15,4 +15,6 @@ public class CouponDto {
     private Date issuedDate;
     private Date expireDate;
     private int isUsed;
+
+    private int discountAmount;
 }

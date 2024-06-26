@@ -16,7 +16,11 @@ public class PaymentService implements PaymentServiceInter {
 	@Override
 	public void insertPayment(PaymentDto paymentDto) {
 		// TODO Auto-generated method stub
-		mapperInter.insertPayment(paymentDto);
+		try{
+			mapperInter.insertPayment(paymentDto);
+		}catch (Exception e) {
+			throw new RuntimeException("[error] 결제 처리 실패,", e);
+		}
 	}
 
 	@Override

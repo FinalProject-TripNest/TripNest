@@ -29,7 +29,12 @@ public class ReservationService implements ReservationServiceInter {
 	@Override
 	public void insertReservation(ReservationDto reservationDto) {
 		// TODO Auto-generated method stub
-		mapperInter.insertReservation(reservationDto);
+		try{
+			mapperInter.insertReservation(reservationDto);
+		}catch (Exception e) {
+			throw new RuntimeException("[error] 숙소 예약 처리 실패,", e);
+			
+		}
 	}
 	
 	
