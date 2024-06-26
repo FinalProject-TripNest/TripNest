@@ -700,7 +700,7 @@
 					<form action="reservationInfo" method="post" class="bookingfrm">
 						<input type="hidden" name="MEMBER_ID"
 							value="${memberDto.member_id }"> <input type="hidden"
-							name="ROOM_ID" value="${roomsDto.room_id }"> <input
+							name="ROOM_ID" id ="ROOM_ID" value="${roomsDto.room_id }"> <input
 							type="hidden" id="merchant_uid" name="merchant_uid" value="">
 						<div class="frm_tit">Reservations</div>
 						<ul class="stay_list">
@@ -876,13 +876,15 @@
 																	<div class="on">
 																		<c:forEach var="coupon" items="${couponDto}">
 																			<div class="block">
-																					<input type="hidden" name="coupon_id" value="${coupon.couponId}"> 
-																					<input type="hidden" name="coupon_group_id" value="${coupon.couponGroupId}"> 
-																					<input type="hidden" name="member_id" value="${coupon.memberId}"> 
-																					<span class="title">50000원 쿠폰 
-																					<fmt:formatDate value="${coupon.expireDate}" pattern="(~MM/dd)" />
-																					</span>
-																				<span class="btncoupon">적용</span>
+																				<input type="hidden" name="coupon_id"
+																					value="${coupon.couponId}"> <input
+																					type="hidden" name="coupon_group_id"
+																					value="${coupon.couponGroupId}"> <input
+																					type="hidden" name="member_id"
+																					value="${coupon.memberId}"> <span
+																					class="title">${coupon.discountAmount}원 쿠폰 <fmt:formatDate
+																						value="${coupon.expireDate}" pattern="(~MM/dd)" />
+																				</span> <span class="btncoupon">적용</span>
 																			</div>
 																		</c:forEach>
 																	</div>
@@ -1361,6 +1363,8 @@
 		/*******************************
 		결제 하기
 		 ********************************/
+		 var totalCount;
+		 
 		$("#money-btn").click(function(e) {
 			e.preventDefault(); // 폼 제출 방지
 
@@ -1374,7 +1378,7 @@
 			var adultCount = parseInt($(".adult-select").val());
 			var childCount = parseInt($(".child-select").val());
 			var babyCount = parseInt($(".baby-select").val());
-			var totalCount = adultCount + childCount + babyCount;
+			totalCount = adultCount + childCount + babyCount;
 
 			// 조건 확인
 			if (allAgreeChecked && subAllAgreeChecked) {
@@ -1418,7 +1422,7 @@
 						url: "/payment/complete", // 서버의 결제 정보 처리 URL
 						contentType: "application/json", // Content-Type 명시
 						data: JSON.stringify({
-							"paymentDto" : {
+							paymentDto : {
 								imp_uid: rsp.imp_uid,
 								merchant_uid: rsp.merchant_uid,
 								paid_amount: rsp.paid_amount,
@@ -1427,16 +1431,26 @@
 								buyer_name: rsp.buyer_name,
 								member_useremail: rsp.buyer_email
 							},
-							"reservationDto":{
+							reservationDto:{
 								//TODO: 예약 정보 넣어주기
+								MEMBER_ID: $("input[name='MEMBER_ID']").val(),
+				                ROOM_ID: $("#ROOM_ID").val(),
+				                RESERVATION_CHECKIN: $("input[name='RESERVATION_CHECKIN']").val(),
+				                RESERVATION_CHECKOUT: $("input[name='RESERVATION_CHECKOUT']").val(),
+				                RESERVATION_CAPACITY: totalCount,
+				                RESERVATION_REQUIRE: $("#RESERVATION_REQUIRE").val(),
+				                RESERVATION_PRICE: $("#RESERVATION_PRICE").val(),
+				                MERCHANT_UID: $("#merchant_uid").val()	
 							},
 							//TODO: 쿠폰 id 확인 하기
-							"couponId": $("#coupon_id").val(),
+// 							"couponId": $("#coupon_id").val(),
+							couponId: 89,
+	
 						}),
 						success: function(response) {
 							if (response.success) {
 								 $("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
-								$(".bookingfrm").submit(); // 폼 제출
+								//$(".bookingfrm").submit(); // 폼 제출
 							} else {
 								alert("결제 정보 저장에 실패했습니다.");
 							}

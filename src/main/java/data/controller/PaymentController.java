@@ -1,5 +1,7 @@
 package data.controller;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,8 +98,10 @@ public class PaymentController {
 
 	@PostMapping("/payment/complete")
 	@ResponseBody
-	public ResponseEntity<String> paymentComplete(@RequestBody RequestData requestData, HttpSession session) {
-
+	public ModelAndView paymentComplete(@RequestBody RequestData requestData, HttpSession session) {
+		
+		ModelAndView model=new ModelAndView();
+		
 		PaymentDto paymentDto = requestData.getPaymentDto();
 		ReservationDto reservationDto = requestData.getReservationDto();
 		UseCouponReq useCouponReq = new UseCouponReq();
@@ -122,13 +126,17 @@ public class PaymentController {
 			reservationTransactionManager.processBookingTransaction(useCouponReq, paymentDto, reservationDto);
 
 			log.info("결제 성공 : 주문 번호 {}", paymentDto.getImp_uid());
+			
+			// merchant_uid를 URL 인코딩하여 리다이렉트 URL에 포함
+		    String encodedMerchantUid = URLEncoder.encode(paymentDto.getMerchant_uid(), StandardCharsets.UTF_8);
+		    model.setViewName("redirect:/find/reservation_success?merchant_uid=" + encodedMerchantUid);
 
-			return ResponseEntity.ok().body("결제 성공");
+			return model;
 		} catch (Exception e) {
 			
 			//TODO: 결제 취소(환불) 로직 수행하기
-			
-			return ResponseEntity.internalServerError().body("[error] 결제 실패, " + e.getMessage());
+			//에러페이지
+			return model;
 		}
 
 	}
