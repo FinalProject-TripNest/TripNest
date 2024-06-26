@@ -47,6 +47,8 @@ public class CouponController {
      */
     @PostMapping("/coupons/{couponGroupId}/issue")
     public ResponseEntity<String> assignCoupon(@PathVariable String couponGroupId, @RequestBody CreateCouponReq createCouponReq) {
+        log.info("CouponController.assignCoupon - couponGroupId: {}", couponGroupId);
+        log.info("CouponController.assignCoupon - memberId: {}", createCouponReq.getMemberId());
         try{
             createCouponReq.setCouponGroupId(couponGroupId);
             couponService.assignCoupon(createCouponReq);

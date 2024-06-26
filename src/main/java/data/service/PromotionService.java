@@ -26,4 +26,8 @@ public class PromotionService implements PromotionServiceInter {
 		return mapperInter.getOneData(Promotion_id);
 	}
 
+	public String getCouponGroupId(String promotion_id) {
+		return mapperInter.getCouponGroupId(promotion_id);
+	}
+
 }

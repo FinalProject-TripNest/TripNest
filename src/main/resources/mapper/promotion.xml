@@ -11,4 +11,8 @@
 
 		select * from promotion where promotion_id = #{promotion_id}
 	</select>
+
+	<select id="getCouponGroupId" resultType="String" parameterType="String">
+		select coupon_group_id from COUPON_GROUP where promotion_id = #{promotion_id}
+	</select>
 </mapper>

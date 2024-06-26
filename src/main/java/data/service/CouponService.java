@@ -37,6 +37,8 @@ public class CouponService {
 
 
         //TODO : 쿠폰 수량 체크 로직 추가
+        //TODO : 계정당 쿠폰은 하나만 생성할 수 있다.
+
 
 //        if(true){
 //            throw new RuntimeException("====================== test error ======================");
