@@ -27,7 +27,12 @@ public class CouponController {
 
     private final CouponService couponService;
 
-    // 쿠폰 생성 (관리자)
+
+    /**
+     * 쿠폰 이벤트 생성
+     * @param newEventDto
+     * @return
+     */
     @PostMapping("/coupons")
     public ResponseEntity<String> createCoupon(@RequestBody NewEventDto newEventDto) {
         couponService.createNewEvent(newEventDto);
