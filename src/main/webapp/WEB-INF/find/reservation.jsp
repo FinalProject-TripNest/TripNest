@@ -1546,12 +1546,6 @@
 	
 						}),
 						success: function(response) {
-// 							if (response.success) {
-// 								 //$("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
-// 								//$(".bookingfrm").submit(); // 폼 제출
-// 							} else {
-// 								alert("결제 정보 저장에 실패했습니다.");
-// 							}
 					        if (response.success) {
 					            // 리다이렉트 URL로 페이지 이동
 					            window.location.href = response.redirectUrl;
