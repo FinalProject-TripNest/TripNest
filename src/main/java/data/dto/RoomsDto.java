@@ -4,6 +4,8 @@ import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Alias("RoomsDto")
 public class RoomsDto {
@@ -15,13 +17,16 @@ public class RoomsDto {
 	private String room_min_capacity;
 	private String room_max_capacity;
 	private String room_address;
+	private String room_address_detail;
+	private String room_region;
 	private String room_service;
 	private String room_detail;
 	private String room_status;
 	private String room_hp;
+	private String image_photo;
+	private List<String> roomImgList;
+
 	private String city;
 	private String district;
-	private String room_address_detail;
-	private String room_region;
 
 }
