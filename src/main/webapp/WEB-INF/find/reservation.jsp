@@ -698,17 +698,21 @@
 
 				<div class="detailbox">
 					<form action="reservationInfo" method="post" class="bookingfrm">
-						<input type="hidden" name="MEMBER_ID" id="MEMBER_ID" value="${memberDto.member_id }"> <input type="hidden"
-							name="ROOM_ID" id ="ROOM_ID" value="${roomsDto.room_id }"> <input
-							type="hidden" id="merchant_uid" name="merchant_uid" value="">
+						<input type="hidden" name="MEMBER_ID" id="MEMBER_ID"
+							value="${memberDto.member_id }"> <input type="hidden"
+							name="ROOM_ID" id="ROOM_ID" value="${roomsDto.room_id }">
+						<input type="hidden" id="merchant_uid" name="merchant_uid"
+							value="">
 						<div class="frm_tit">Reservations</div>
 						<ul class="stay_list">
 							<li><div class="tit">예약 스테이</div>
 								<div class="cont">${roomsDto.room_name }</div></li>
 							<li><div class="tit">예약일</div>
 								<div class="cont day">
-									<input type="hidden" name="RESERVATION_CHECKIN" id="RESERVATION_CHECKIN" value="${checkin }"> 
-									<input type="hidden" name="RESERVATION_CHECKOUT" id="RESERVATION_CHECKOUT" value="${checkout }">
+									<input type="hidden" name="RESERVATION_CHECKIN"
+										id="RESERVATION_CHECKIN" value="${checkin }"> <input
+										type="hidden" name="RESERVATION_CHECKOUT"
+										id="RESERVATION_CHECKOUT" value="${checkout }">
 									${checkin } ~ ${checkout } <span id="numNight"></span>
 								</div></li>
 							<li><div class="tit">이름</div>
@@ -1464,6 +1468,13 @@
 // 							} else {
 // 								alert("결제 정보 저장에 실패했습니다.");
 // 							}
+					        if (response.success) {
+					            // 리다이렉트 URL로 페이지 이동
+					            window.location.href = response.redirectUrl;
+					        } else {
+					            // 실패 시 처리
+					            alert('결제 처리 중 오류가 발생했습니다: ' + response.message);
+					        }
 						},
 						error: function(error) {
 							alert("서버 통신 오류가 발생했습니다.");
