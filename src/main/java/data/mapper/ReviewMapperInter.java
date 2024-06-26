@@ -12,4 +12,8 @@ public interface ReviewMapperInter {
 
 	public List<ReviewJoinDto> dataList(String room_id);
 
+    public List<ReviewJoinDto> adminReview();
+    
+    public void dataDelete(String review_id);
+
 }

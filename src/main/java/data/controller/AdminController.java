@@ -16,10 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import data.dto.ImagesDto;
 import data.dto.InqueryDto;
 import data.dto.MemberDto;
+import data.dto.ReviewDto;
+import data.dto.ReviewJoinDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
 import data.service.InqueryService;
 import data.service.MemberService;
+import data.service.ReviewService;
 import data.service.RoomsService;
 
 @Controller
@@ -33,6 +36,8 @@ public class AdminController {
 	InqueryService iqservice;
 	@Autowired
 	MemberService memservice;
+	@Autowired
+	ReviewService reviewservice;
 
 	/*
 	 * @GetMapping("/admin/adminmain") public String admin() { return
@@ -318,11 +323,20 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/reviewlist")
-	public ModelAndView review() {
-		ModelAndView model = new ModelAndView();
-
+	public ModelAndView reviewList() {
+		ModelAndView model = new ModelAndView(); // 괄호 추가하여 생성자 호출
+		List<ReviewJoinDto> review = reviewservice.adminReview();
+		model.addObject("review", review);
 		model.setViewName("/admin/adminReview");
+
 		return model;
+	}
+
+	@ResponseBody
+	@GetMapping("/admin/reviewDelete")
+	public String reviewDelete(@RequestParam("review_id") String review_id) {
+		reviewservice.dataDelete(review_id);
+		return "/admin/reviewDelete";
 	}
 
 }

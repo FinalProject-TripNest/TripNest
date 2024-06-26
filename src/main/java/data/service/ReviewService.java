@@ -22,8 +22,16 @@ public class ReviewService implements ReviewServiceInter {
 		return reviewMapper.dataList(room_id);
 	}
 
+	@Override
+	public List<ReviewJoinDto> adminReview() {
+		// TODO Auto-generated method stub
+		return reviewMapper.adminReview();
+	}
 
+	@Override
+	public void dataDelete(String review_id) {
+		reviewMapper.dataDelete(review_id);
 
-
+	}
 
 }
