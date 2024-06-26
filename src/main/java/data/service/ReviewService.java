@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import data.dto.MemberDto;
+import data.dto.ReviewDto;
+import data.dto.ReviewJoinDto;
 import data.mapper.ReviewMapperInter;
 
 @Service
@@ -15,10 +17,12 @@ public class ReviewService implements ReviewServiceInter {
 	private ReviewMapperInter reviewMapper;
 
 	@Override
-	public List<data.dto.ReviewDto> ReviewDto() {
+	public List<ReviewJoinDto> dataList(String room_id) {
 		// TODO Auto-generated method stub
-		return null;
+		return reviewMapper.dataList(room_id);
 	}
+
+
 
 
 

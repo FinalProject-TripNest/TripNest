@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="data.mapper.ReviewMapperInter">
-	<select id="dataList" resultType="ReviewDto">
-		select * from review order by
-		review_id desc
+	<select id="dataList" resultType="ReviewJoinDto" parameterType="String">
+		SELECT r.review_id,
+		r.member_id, r.room_id, r.review_content, r.review_rating,
+		r.review_date, m.member_name
+		FROM review r
+		JOIN MEMBERS m ON r.member_id
+		= m.member_id
+		WHERE r.room_id = #{room_id}
+		ORDER BY r.review_id DESC;
 	</select>
 </mapper>

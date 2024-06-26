@@ -1010,7 +1010,7 @@ header#header .menu ul.sub li {
 	height: 540px;
 	border: none;
 	position: relative;
-	width: 960px!important;
+	width: 960px !important;
 }
 
 #findDetail .main .slide .detail_slide .swiper-slide {
@@ -1218,6 +1218,71 @@ header#header .menu ul.sub li {
 	line-height: 1.8;
 	margin-left: 20px;
 	white-space: nowrap;
+}
+
+#findDetail .review {
+	padding-bottom: 120px;
+}
+
+#findDetail .review>.title {
+	text-align: center;
+	padding: 60px 0;
+	justify-content: center;
+}
+
+#findDetail .review>.title>.title2 {
+	font-size: 20px;
+	line-height: 33px;
+	font-weight: 500;
+	color: #000;
+	border-bottom: 3px solid #000;
+	text-transform: uppercase;
+}
+
+#findDetail .review  .list {
+	border-top: 1px solid #ddd;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#findDetail .review  .list .block {
+	padding: 20px 0;
+	border-bottom: 1px solid #ddd;
+	width: 50%;
+	border-right: 1px solid #ddd;
+	padding: 20px;
+}
+
+#findDetail .review  .list .block:nth-child(2n) {
+	border-right: none;
+}
+
+#findDetail .review  .list .block  .name {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+#findDetail .review  .list .block .text {
+	margin-top: 20px;
+}
+
+#findDetail .review  .list .block .bottom {
+	margin-top: 20px;
+	color: #ccc;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+}
+
+#findDetail .review  .list .block img.star {
+	width: 16px;
+	margin-right: 10px;
+}
+
+#findDetail .star-container {
+	margin-left: 20px;
+	position: relative;
+	top: 2px;
 }
 
 /*//findDetail*/

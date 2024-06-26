@@ -37,6 +37,7 @@ header#header .menu ul.main::after {
 					<li ><a href="${root }/admin/memberList"  style=" color: white;">회원관리</a></li>
 					<li><a href="${root }/admin/roomlist" style=" color: white;">숙소목록</a></li>
 					<li><a href="${root }/admin/inquerylist" style=" color: white;">1:1문의</a></li>
+					<li><a href="${root }/admin/reviewlist" style=" color: white;">리뷰목록</a></li>
 				</ul>
 			</div>
 		</div>
