@@ -47,6 +47,7 @@ public class ReservationController {
 		MemberDto memberDto = reservationService.getOneData_member(myid);
 		List<CouponDto> couponDto= couponService.getMemberCoupons(member_id);
 		
+		
 		model.addObject("checkin", checkin);	
 		model.addObject("checkout", checkout);
 		model.addObject("memberDto", memberDto);
