@@ -70,17 +70,20 @@ public class CouponService {
     }
 
     public void useCoupon(UseCouponReq useCouponReq) {
-        // 1. 쿠폰 사용 여부, 만료 여부 체크
-        boolean validCoupon = mapper.isValidCoupon(useCouponReq.getCouponId());
-        log.info("CouponService.useCoupon - validCoupon : {}", validCoupon);
-        if(!validCoupon){
-            throw new RuntimeException("이미 사용되었거나 만료된 쿠폰입니다.");
+        try{
+            // 1. 쿠폰 사용 여부, 만료 여부 체크
+            boolean validCoupon = mapper.isValidCoupon(useCouponReq.getCouponId());
+            log.info("CouponService.useCoupon - validCoupon : {}", validCoupon);
+            if(!validCoupon){
+                throw new RuntimeException("이미 사용되었거나 만료된 쿠폰입니다.");
+            }
+            // 2. 쿠폰 사용 처리
+            mapper.updateCouponStatus(useCouponReq.getCouponId());
+            log.info("CouponService.useCoupon - 쿠폰(coupon_id:{}) 사용 완료", useCouponReq.getCouponId());
+        }catch (Exception e) {
+            throw new RuntimeException("[error] 쿠폰 사용 처리 실패", e);
         }
-        // 2. 쿠폰 사용 처리
-        mapper.updateCouponStatus(useCouponReq.getCouponId());
-        log.info("CouponService.useCoupon - 쿠폰(coupon_id:{}) 사용 완료", useCouponReq.getCouponId());
     }
-
 
     public List<CouponDto> getMemberCoupons(String memberId) {
         // 사용자의 "유효한" 쿠폰 조회

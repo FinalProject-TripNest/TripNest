@@ -3,6 +3,11 @@ package data.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import data.dto.RequestData;
+import data.dto.ReservationDto;
+import data.dto.coupon.UseCouponReq;
+import data.service.ReservationTransactionManager;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +27,7 @@ import data.service.RoomsService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@Slf4j
 public class PaymentController {
 
 	@Autowired
@@ -29,40 +35,42 @@ public class PaymentController {
 	
 	@Autowired
 	RoomsService roomsService;
+	@Autowired
+	ReservationTransactionManager reservationTransactionManager;
 
-	@PostMapping("/payment/complete")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> paymentComplete(@RequestBody PaymentDto paymentDto, HttpSession session) {
-
-		Map<String, Object> response = new HashMap<>();
-		
-		try {
-			// 세션에서 member_id를 가져옴
-            Integer memberId = (Integer) session.getAttribute("member_id");
-			
-            // PaymentDto에 memberId 설정
-            if (memberId != null) {
-                paymentDto.setMember_id(memberId);
-            } else {
-                throw new IllegalArgumentException("member_id not found in session.");
-            }
-			
-			// PaymentDto를 데이터베이스에 저장하는 로직
-			paymentService.insertPayment(paymentDto);
-
-			response.put("success", true);
-			response.put("message", "결제 정보가 성공적으로 저장되었습니다.");
-			return ResponseEntity.ok(response);
-
-		} catch (Exception e) {
-			response.put("success", false);
-			response.put("message", "결제 정보 저장에 실패했습니다.");
-			
-			e.printStackTrace(); // 예외 스택 트레이스 출력
-			return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(response);
-		}
-
-	}
+//	@PostMapping("/payment/complete")
+//	@ResponseBody
+//	public ResponseEntity<Map<String, Object>> paymentComplete(@RequestBody PaymentDto paymentDto, HttpSession session) {
+//
+//		Map<String, Object> response = new HashMap<>();
+//
+//		try {
+//			// 세션에서 member_id를 가져옴
+//            Integer memberId = (Integer) session.getAttribute("member_id");
+//
+//            // PaymentDto에 memberId 설정
+//            if (memberId != null) {
+//                paymentDto.setMember_id(memberId);
+//            } else {
+//                throw new IllegalArgumentException("member_id not found in session.");
+//            }
+//
+//			// PaymentDto를 데이터베이스에 저장하는 로직
+//			paymentService.insertPayment(paymentDto);
+//
+//			response.put("success", true);
+//			response.put("message", "결제 정보가 성공적으로 저장되었습니다.");
+//			return ResponseEntity.ok(response);
+//
+//		} catch (Exception e) {
+//			response.put("success", false);
+//			response.put("message", "결제 정보 저장에 실패했습니다.");
+//
+//			e.printStackTrace(); // 예외 스택 트레이스 출력
+//			return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(response);
+//		}
+//
+//	}
 	
 	@GetMapping("/find/reservation_success")
 	public ModelAndView success_page(@RequestParam String merchant_uid) 
@@ -85,5 +93,47 @@ public class PaymentController {
 		model.setViewName("/find/reservation_success");
 		return model;
 	}
+
+	@PostMapping("/payment/complete")
+	@ResponseBody
+	public ResponseEntity<String> paymentComplete(@RequestBody RequestData requestData, HttpSession session) {
+
+		PaymentDto paymentDto = requestData.getPaymentDto();
+		ReservationDto reservationDto = requestData.getReservationDto();
+		UseCouponReq useCouponReq = new UseCouponReq();
+		useCouponReq.setCouponId(requestData.getCouponId());
+
+		log.info("paymentDto : {}", paymentDto);
+		log.info("reservationDto : {}", reservationDto);
+		log.info("useCouponReq : {}", useCouponReq);
+
+		try {
+			// 세션에서 member_id를 가져옴
+			Integer memberId = (Integer) session.getAttribute("member_id");
+
+			// PaymentDto에 memberId 설정, UseCouponReq에 memberId 설정
+			if (memberId != null) {
+				paymentDto.setMember_id(memberId);
+				useCouponReq.setMemberId(memberId.toString());
+			} else {
+				throw new IllegalArgumentException("member_id not found in session.");
+			}
+
+			reservationTransactionManager.processBookingTransaction(useCouponReq, paymentDto, reservationDto);
+
+			log.info("결제 성공 : 주문 번호 {}", paymentDto.getImp_uid());
+
+			return ResponseEntity.ok().body("결제 성공");
+		} catch (Exception e) {
+			
+			//TODO: 결제 취소(환불) 로직 수행하기
+			
+			return ResponseEntity.internalServerError().body("[error] 결제 실패, " + e.getMessage());
+		}
+
+	}
+
+
+
 
 }

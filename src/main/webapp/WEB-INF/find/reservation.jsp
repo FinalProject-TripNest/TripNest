@@ -1418,14 +1418,21 @@
 						url: "/payment/complete", // 서버의 결제 정보 처리 URL
 						contentType: "application/json", // Content-Type 명시
 						data: JSON.stringify({
-					        imp_uid: rsp.imp_uid,
-					        merchant_uid: rsp.merchant_uid,
-					        paid_amount: rsp.paid_amount,
-					        pg_provider: rsp.pg_provider,
-					        pg_tid: rsp.pg_tid,
-					        buyer_name: rsp.buyer_name,
-					        member_useremail: rsp.buyer_email
-					    }),
+							"paymentDto" : {
+								imp_uid: rsp.imp_uid,
+								merchant_uid: rsp.merchant_uid,
+								paid_amount: rsp.paid_amount,
+								pg_provider: rsp.pg_provider,
+								pg_tid: rsp.pg_tid,
+								buyer_name: rsp.buyer_name,
+								member_useremail: rsp.buyer_email
+							},
+							"reservationDto":{
+								//TODO: 예약 정보 넣어주기
+							},
+							//TODO: 쿠폰 id 확인 하기
+							"couponId": $("#coupon_id").val(),
+						}),
 						success: function(response) {
 							if (response.success) {
 								 $("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
@@ -1438,12 +1445,12 @@
 							alert("서버 통신 오류가 발생했습니다.");
 						}
 					});
-					
+
 				} else { // 결제 실패 시
 					alert("결제를 취소했습니다.");
 					console.log(rsp);
 					 // $(".bookingfrm").submit(); // 폼 제출
-				
+
 				}
 			});
 		}

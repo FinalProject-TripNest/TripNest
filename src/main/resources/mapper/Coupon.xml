@@ -32,9 +32,12 @@
     </update>
 
     <select id="getCouponByMemberId" parameterType="String" resultType="data.dto.coupon.CouponDto">
-        SELECT coupon_id, coupon_number, coupon_group_id, member_id, issued_date, expire_date, is_used
-        FROM COUPONS
-        WHERE member_id = #{memberId} and is_used = 0 and expire_date > NOW()
+        SELECT c.coupon_id, c.coupon_number, c.coupon_group_id, c.member_id, c.issued_date, c.expire_date, c.is_used, cg.discount_amount
+        FROM COUPONS c
+        JOIN COUPON_GROUP cg ON c.coupon_group_id = cg.coupon_group_id
+        WHERE c.member_id = #{memberId}
+          AND c.is_used = 0
+          AND c.expire_date > NOW();
     </select>
 
 </mapper>
