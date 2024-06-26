@@ -13,4 +13,7 @@ public interface RoomsMapperInter {
 	public int getLastInsertedRoomId();
 	public List<RoomsDto> dataList();
 	public RoomsDto getOneData(String room_id);
+	public void deleteRoom(String room_id);
+	public List<RoomsDto> getRoomDataByMyid(int member_id);
+	public void updateRoom(RoomsDto dto);
 }

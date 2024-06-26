@@ -31,5 +31,18 @@
 		OR room_address LIKE CONCAT('%', #{search}, '%')
 		ORDER BY room_id DESC
 	</select>
+	
+	<delete id="deleteRoom" parameterType="String">
+		delete from ROOMS where room_id=#{room_id}
+	</delete>
+	
+	<select id="getRoomDataByMyid" parameterType="int" resultType="RoomsDto">
+		select * from ROOMS where member_id=#{member_id}
+	</select>
+	
+	<update id="updateRoom" parameterType="RoomsDto">
+		update ROOMS set room_name=#{room_name},room_price=#{room_price},room_min_capacity=#{room_min_capacity},room_max_capacity=#{room_max_capacity},room_address=#{room_address},
+		room_address_detail=#{room_address_detail},room_service=#{room_service},room_detail=#{room_detail},room_hp=#{room_hp},room_region=#{room_region} where room_id=#{room_id}
+	</update>
 
 </mapper>
