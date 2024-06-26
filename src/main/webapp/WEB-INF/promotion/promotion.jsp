@@ -15,7 +15,7 @@
 				<div class="list">
 
 					<c:forEach items="${dto}" var="list">
-						<a href="javascript:;" class="block"> <img alt=""
+						<a href="/promotion/detail?promotion_id=${list.promotion_id }" class="block"> <img alt=""
 							src="../img/promotion/${list.promotion_photo}" class="img1">
 							<div class="content"
 								style="display: flex; align-items: center; justify-content: space-between;">

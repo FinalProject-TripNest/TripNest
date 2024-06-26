@@ -100,7 +100,7 @@ header#header .select {
 					<div class="list">
 						<c:forEach items="${journalDto}" var="journal" begin="0" end="5">
 							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/journal/${journal.journal_photo}">
+								src="${journal.journal_photo}">
 								<div class="text_box">
 									<span class="title">${journal.journal_title}</span> <span
 										class="text">${journal.journal_content}</span>
@@ -112,15 +112,21 @@ header#header .select {
 			</div>
 		</div>
 	</div>
+
+	<div class="pop_up search">
+		<div class="dimd"></div>
+		<div class="main">text</div>
+	</div>
+	<div class="pop_up date">
+		<div class="dimd"></div>
+		<div class="main">text</div>
+	</div>
+	<div class="pop_up personnel ">
+		<div class="dimd"></div>
+		<div class="main">text</div>
+	</div>
 	<%@ include file="../include/footer.jsp"%>
 	<script>
-		$("#index .search form .input input").click(function() {
-			$(this).addClass("active");
-		});
-		$("#index .search form .gray").click(function() {
-			$(this).addClass("active");
-		});
-
 		$(document)
 				.click(
 						function(event) {
@@ -133,6 +139,21 @@ header#header .select {
 										"active");
 							}
 						});
+		
+		$("#index .search form .input input").click(function(){
+			$(".pop_up.search").addClass("active");
+		});
+		$("#index .search form .date").click(function(){
+			$(".pop_up.date").addClass("active");
+		});
+		$("#index .search form .personnel").click(function(){
+			$(".pop_up.personnel").addClass("active");
+		});
+		$(".dimd").click(function(){
+			$(".pop_up").removeClass("active");
+		});
+		
+	
 	</script>
 </body>
 </html>

@@ -32,8 +32,8 @@
 							<a href="../../login/loginform" class="payment_btn">결제하기</a>
 						</c:when>
 						<c:otherwise>
-							<a href="../../find/reservation?room_id=${detailDto.room_id}"
-								class="payment_btn">결제하기</a>
+							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=2024-06-25&checkout=2024-06-27" class="payment_btn">
+							결제하기</a>
 						</c:otherwise>
 					</c:choose>
 
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="amenities">
+				<div class="amenities" id="amenities">
 					<div class="title">AMENITIES</div>
 					<div class="text">
 						<p>${detailDto.room_service}</p>

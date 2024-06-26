@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="data.mapper.PromotionMapperInter">
 	<select id="dataList" resultType="PromotionDto">
-		select * from promotion order by promotion_id desc
+		select * from promotion order
+		by promotion_id desc
+	</select>
+
+	<select id="getOneData" resultType="PromotionDto"
+		parameterType="String">
+
+		select * from promotion where promotion_id = #{promotion_id}
+	</select>
+
+	<select id="getCouponGroupId" resultType="String" parameterType="String">
+		select coupon_group_id from COUPON_GROUP where promotion_id = #{promotion_id}
 	</select>
 </mapper>
