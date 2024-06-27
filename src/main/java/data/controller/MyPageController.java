@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import data.dto.MemberDto;
 import data.service.MemberServiceInter;
@@ -51,12 +53,35 @@ public class MyPageController {
     }
 
     @GetMapping("/edit")
-    public String edit() {
+    public String edit(HttpSession session, Model model) {
+        String userEmail = (String) session.getAttribute("myid");
+        if (userEmail == null) {
+            return "redirect:/login/loginform";
+        }
+
+        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+        model.addAttribute("memberDto", memberDto);
+
         return "/mypage/edit";
     }
+    
+    @PostMapping("/updateProfile")
+    public String updateProfile(HttpSession session, @RequestParam String name, 
+                                @RequestParam String phone, @RequestParam String birthday, 
+                                Model model) {
+        String userEmail = (String) session.getAttribute("myid");
+        if (userEmail == null) {
+            return "redirect:/login/loginform";
+        }
 
-    @GetMapping("/message")
-    public String message() {
-        return "/mypage/message";
+        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+        memberDto.setMember_name(name);
+        memberDto.setMember_phone(phone);
+        memberDto.setMember_birth_date(java.sql.Date.valueOf(birthday));
+
+        memberService.updateMember(memberDto);
+
+        model.addAttribute("memberDto", memberDto);
+        return "redirect:/mypage/main";
     }
 }

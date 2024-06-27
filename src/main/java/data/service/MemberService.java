@@ -42,4 +42,9 @@ public class MemberService implements MemberServiceInter {
 	public MemberDto getMemberByEmail(String email) {
 		return memberMapper.findByEmail(email);
 	}
+
+	@Override
+	public void updateMember(MemberDto memberDto) {
+		memberMapper.updateMember(memberDto);
+	}
 }

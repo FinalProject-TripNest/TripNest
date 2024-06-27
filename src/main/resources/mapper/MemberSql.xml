@@ -13,4 +13,9 @@
     <select id="findBySocialIdAndType" parameterType="map" resultType="data.dto.MemberDto">
         SELECT * FROM MEMBERS WHERE member_social_id = #{social_id} AND member_social_type = #{social_type}
     </select>
+    
+    <update id="updateMember" parameterType="data.dto.MemberDto">
+        UPDATE MEMBERS SET member_name = #{member_name}, member_password = #{member_password}, member_phone = #{member_phone}, member_birth_date = #{member_birth_date}
+        WHERE member_useremail = #{member_useremail}
+    </update>
 </mapper>

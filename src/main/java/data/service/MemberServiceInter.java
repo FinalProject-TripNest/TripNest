@@ -7,4 +7,5 @@ public interface MemberServiceInter {
     MemberDto findByEmail(String email);
     boolean checkEmailExists(String email);
 	MemberDto getMemberByEmail(String email);
+	void updateMember(MemberDto memberDto);
 }
