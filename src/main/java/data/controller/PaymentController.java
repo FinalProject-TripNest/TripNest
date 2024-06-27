@@ -1,17 +1,22 @@
 package data.controller;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.siot.IamportRestClient.IamportClient;
 import data.dto.RequestData;
 import data.dto.ReservationDto;
 import data.dto.coupon.UseCouponReq;
+import data.service.RefundService;
 import data.service.ReservationTransactionManager;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,45 +39,25 @@ public class PaymentController {
 
 	@Autowired
 	PaymentService paymentService;
-	
 	@Autowired
 	RoomsService roomsService;
 	@Autowired
 	ReservationTransactionManager reservationTransactionManager;
+	@Autowired
+	RefundService refundService;
 
-//	@PostMapping("/payment/complete")
-//	@ResponseBody
-//	public ResponseEntity<Map<String, Object>> paymentComplete(@RequestBody PaymentDto paymentDto, HttpSession session) {
-//
-//		Map<String, Object> response = new HashMap<>();
-//
-//		try {
-//			// 세션에서 member_id를 가져옴
-//            Integer memberId = (Integer) session.getAttribute("member_id");
-//
-//            // PaymentDto에 memberId 설정
-//            if (memberId != null) {
-//                paymentDto.setMember_id(memberId);
-//            } else {
-//                throw new IllegalArgumentException("member_id not found in session.");
-//            }
-//
-//			// PaymentDto를 데이터베이스에 저장하는 로직
-//			paymentService.insertPayment(paymentDto);
-//
-//			response.put("success", true);
-//			response.put("message", "결제 정보가 성공적으로 저장되었습니다.");
-//			return ResponseEntity.ok(response);
-//
-//		} catch (Exception e) {
-//			response.put("success", false);
-//			response.put("message", "결제 정보 저장에 실패했습니다.");
-//
-//			e.printStackTrace(); // 예외 스택 트레이스 출력
-//			return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(response);
-//		}
-//
-//	}
+	@Value("${imp.api.key}")
+	private String apiKey;
+
+	@Value("${imp.api.secretkey}")
+	private String secretKey;
+
+	private IamportClient iamportClient;
+	@PostConstruct
+	public void init() {
+		this.iamportClient = new IamportClient(apiKey, secretKey);
+	}
+
 	
 	@GetMapping("/find/reservation_success")
 	public ModelAndView success_page(@RequestParam String merchant_uid) 
@@ -98,14 +83,14 @@ public class PaymentController {
 
 	@PostMapping("/payment/complete")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> paymentComplete(@RequestBody RequestData requestData, HttpSession session) {
+	public ResponseEntity<Map<String, Object>> paymentComplete(@RequestBody RequestData requestData, HttpSession session) throws IOException {
 	    
 	    Map<String, Object> response = new HashMap<>();
 	    
 	    PaymentDto paymentDto = requestData.getPaymentDto();
 	    ReservationDto reservationDto = requestData.getReservationDto();
-	    UseCouponReq useCouponReq = new UseCouponReq();
-	    useCouponReq.setCouponId(requestData.getCouponId());
+	    UseCouponReq useCouponReq = requestData.getUseCouponReq();
+
 
 	    log.info("paymentDto : {}", paymentDto);
 	    log.info("reservationDto : {}", reservationDto);
@@ -125,7 +110,7 @@ public class PaymentController {
 
 	        reservationTransactionManager.processBookingTransaction(useCouponReq, paymentDto, reservationDto);
 
-	        log.info("결제 성공 : 주문 번호 {}", paymentDto.getImp_uid());
+	        log.info("결제 성공 : 주문 번호 {}", paymentDto.getMerchant_uid());
 	        
 	        // merchant_uid를 URL 인코딩하여 응답 데이터에 포함
 	        String encodedMerchantUid = URLEncoder.encode(paymentDto.getMerchant_uid(), StandardCharsets.UTF_8);
@@ -134,8 +119,13 @@ public class PaymentController {
 
 	        return ResponseEntity.ok(response);
 	    } catch (Exception e) {
+
+			String token = refundService.getToken(apiKey, secretKey);
+			refundService.refundRequest(token, paymentDto.getMerchant_uid(), e.getMessage());
+
 	        response.put("success", false);
-	        response.put("message", "결제 처리 중 오류가 발생했습니다.");
+	        response.put("message", "결제 처리 중 오류가 발생했습니다.\n" + e.getMessage());
+			response.put("redirectUrl", "/find/list/detail?room_id="+reservationDto.getRoomId());
 
 	        return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(response);
 	    }

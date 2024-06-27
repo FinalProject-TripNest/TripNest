@@ -1,5 +1,6 @@
 package data.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import data.dto.RoomsDto;
 import data.mapper.ReservationMapperInter;
 
 @Service
+@Slf4j
 public class ReservationService implements ReservationServiceInter {
 
 	@Autowired
@@ -32,8 +34,8 @@ public class ReservationService implements ReservationServiceInter {
 		try{
 			mapperInter.insertReservation(reservationDto);
 		}catch (Exception e) {
-			throw new RuntimeException("[error] 숙소 예약 처리 실패,", e);
-			
+			log.error("[error] 숙소 예약 처리 실패,", e);
+			throw new RuntimeException("숙소 예약을 실패하였습니다.",e);
 		}
 	}
 	

@@ -646,7 +646,8 @@
 	margin-top: 0
 }
 
-#reservation .select_coupon .main .on .block span {
+#reservation .select_coupon .main .on .block span.btncoupon,
+	#reservation .select_coupon .main .on .block span.title {
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	width: 240px;
@@ -884,8 +885,9 @@
 																					value="${coupon.couponGroupId}"> <input
 																					type="hidden" name="member_id"
 																					value="${coupon.memberId}"> <span
-																					class="title">${coupon.discountAmount}원 쿠폰 <fmt:formatDate
-																						value="${coupon.expireDate}" pattern="(~MM/dd)" />
+																					class="title"> <span class="discountmoney">${coupon.discountAmount}</span>원
+																					쿠폰 <fmt:formatDate value="${coupon.expireDate}"
+																						pattern="(~MM/dd)" />
 																				</span> <span class="btncoupon">적용</span>
 																			</div>
 																		</c:forEach>
@@ -1318,259 +1320,261 @@
 
 	<%@ include file="../include/footer.jsp"%>
 	<script>
-		// 클릭할 때마다 active 클래스를 토글합니다.
-		$("#reservation .agree_box .board_fold li").click(function(e) {
-			// 클릭된 요소가 체크박스가 아닐 때만 실행합니다.
-			if (!$(e.target).is("input[type=checkbox]")) {
-				$(this).next(".view").toggleClass("active");
-				$(this).toggleClass("active");
-			}
+	// 클릭할 때마다 active 클래스를 토글합니다.
+	$("#reservation .agree_box .board_fold li").click(function(e) {
+		// 클릭된 요소가 체크박스가 아닐 때만 실행합니다.
+		if (!$(e.target).is("input[type=checkbox]")) {
+			$(this).next(".view").toggleClass("active");
+			$(this).toggleClass("active");
+		}
 
-			$(this).children(".arrow_btn").toggleClass("active");
-		});
+		$(this).children(".arrow_btn").toggleClass("active");
+	});
 
-		// 전체 동의 체크박스를 클릭했을 때 모든 개별 동의 체크박스를 선택 또는 해제합니다.
-		$("#allAgree").click(function() {
-			if ($(this).is(":checked")) {
-				$("input[name=chk]").prop("checked", true);
-			} else {
-				$("input[name=chk]").prop("checked", false);
-			}
-		});
+	// 전체 동의 체크박스를 클릭했을 때 모든 개별 동의 체크박스를 선택 또는 해제합니다.
+	$("#allAgree").click(function() {
+		if ($(this).is(":checked")) {
+			$("input[name=chk]").prop("checked", true);
+		} else {
+			$("input[name=chk]").prop("checked", false);
+		}
+	});
 
-		// 개별 동의 체크박스를 클릭했을 때 전체 동의 체크박스의 상태를 변경합니다.
-		$(".agree_check").click(function() {
-			if ($(".agree_check:checked").length === $(".agree_check").length) {
-				$("#allAgree").prop("checked", true);
-			} else {
-				$("#allAgree").prop("checked", false);
-			}
-		});
+	// 개별 동의 체크박스를 클릭했을 때 전체 동의 체크박스의 상태를 변경합니다.
+	$(".agree_check").click(function() {
+		if ($(".agree_check:checked").length === $(".agree_check").length) {
+			$("#allAgree").prop("checked", true);
+		} else {
+			$("#allAgree").prop("checked", false);
+		}
+	});
 
-		//**********************************************************************
-		// 전체 동의 체크박스를 클릭했을 때 모든 개별 동의 체크박스를 선택 또는 해제합니다.
-		$("#sub_Allagree").click(function() {
-			var isChecked = $(this).is(":checked");
-			$("input[name^='sub_agree']").prop("checked", isChecked);
-		});
+	//**********************************************************************
+	// 전체 동의 체크박스를 클릭했을 때 모든 개별 동의 체크박스를 선택 또는 해제합니다.
+	$("#sub_Allagree").click(function() {
+		var isChecked = $(this).is(":checked");
+		$("input[name^='sub_agree']").prop("checked", isChecked);
+	});
 
-		// 개별 동의 체크박스를 클릭했을 때 전체 동의 체크박스의 상태를 변경합니다.
-		$("input[name^='sub_agree']")
-				.click(
-						function() {
-							var allChecked = $("input[name^='sub_agree']:checked").length === $("input[name^='sub_agree']").length;
-							$("#sub_Allagree").prop("checked", allChecked);
-						});
-	
-		/*******************************
-		결제 하기
-		 ********************************/
-		 var totalCount;
-		 
-		$("#money-btn").click(function(e) {
-			e.preventDefault(); // 폼 제출 방지
-
-			// 전체 동의 체크 여부
-			var allAgreeChecked = $("#allAgree").prop("checked");
-
-			// 개별 동의 체크 여부
-			var subAllAgreeChecked = $("#sub_Allagree").prop("checked");
-
-			// 성인, 아동, 영아 선택된 인원 수 확인
-			var adultCount = parseInt($(".adult-select").val());
-			var childCount = parseInt($(".child-select").val());
-			var babyCount = parseInt($(".baby-select").val());
-			totalCount = adultCount + childCount + babyCount;
-
-			// 조건 확인
-			if (allAgreeChecked && subAllAgreeChecked) {
-				// 모든 체크박스가 선택된 경우
-				if (totalCount > ${roomsDto.room_max_capacity }) {
-					// 최대인원 초과인 경우
-					alert("최대 인원을 초과하였습니다.");
-				} else {
-					// 최대인원 이하인 경우
-					requestPay(); // 결제 요청 함수 호출
-				}
-			} else {
-				// 어느 하나라도 선택되지 않은 경우
-				alert("모든 항목에 동의해주세요.");
-			}
-		});
-		
-		
-
-		function requestPay() {
-			
-			var memberId = $("#MEMBER_ID").val();
-			var roomId = $("#ROOM_ID").val();
-			var reservationCheckin = $("#RESERVATION_CHECKIN").val();
-			var reservationCheckout = $("#RESERVATION_CHECKOUT").val();
-			var reservationCapacity = totalCount; // totalCount는 다른 곳에서 정의된 변수로 가정
-			var reservationRequire = $("#RESERVATION_REQUIRE").val();
-			var reservationPrice = $("#RESERVATION_PRICE").val();
-			var merchantUid = $("#merchant_uid").val();
-			
-			//IMP.request_pay(param, callback) // 결제창 호출
-			IMP.init("imp16144603");
-			IMP.request_pay({ // param
-				pg : "html5_inicis",
-				pay_method : "card",
-				merchant_uid : $("#name").val() + new Date().getTime(),
-				name : $(".name").text(),
-				amount : $("#RESERVATION_PRICE").val(),
-				buyer_email : $("#email").val(),
-				buyer_name : $("#name").val(),
-				buyer_tel : $(".phone").text().trim(),
-				buyer_addr : "",
-				buyer_postcode : "",
-				display : {
-					card_quota : [ 3, 4, 5, 6 ]
-				// 3개월, 4개월, 5개월, 6개월 할부 옵션 추가
-				}
-			}, function(rsp) { // callback
-				if (rsp.success) { // 결제 성공 시 로직
-					// 결제 성공 시 결제 정보 서버로 전송
-					$.ajax({
-						type: "POST",
-						url: "/payment/complete", // 서버의 결제 정보 처리 URL
-						contentType: "application/json", // Content-Type 명시
-						data: JSON.stringify({
-							reservationDto:{
-								//TODO: 예약 정보 넣어주기
-								memberId: memberId,
-								roomId: roomId,
-								reservationCheckin: reservationCheckin,
-								reservationCheckout: reservationCheckout,
-								reservationCapacity: reservationCapacity,
-								reservationRequire: reservationRequire,
-								reservationPrice: reservationPrice,
-								merchantUid: rsp.merchant_uid
-					        },
-							paymentDto : {
-								imp_uid: rsp.imp_uid,
-								merchant_uid: rsp.merchant_uid,
-								paid_amount: rsp.paid_amount,
-								pg_provider: rsp.pg_provider,
-								pg_tid: rsp.pg_tid,
-								buyer_name: rsp.buyer_name,
-								member_useremail: rsp.buyer_email
-							},
-							//TODO: 쿠폰 id 확인 하기
-// 							"couponId": $("#coupon_id").val(),
-							couponId: 89,
-	
-						}),
-						success: function(response) {
-// 							if (response.success) {
-// 								 //$("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
-// 								//$(".bookingfrm").submit(); // 폼 제출
-// 							} else {
-// 								alert("결제 정보 저장에 실패했습니다.");
-// 							}
-					        if (response.success) {
-					            // 리다이렉트 URL로 페이지 이동
-					            window.location.href = response.redirectUrl;
-					        } else {
-					            // 실패 시 처리
-					            alert('결제 처리 중 오류가 발생했습니다: ' + response.message);
-					        }
-						},
-						error: function(error) {
-							alert("서버 통신 오류가 발생했습니다.");
-						}
+	// 개별 동의 체크박스를 클릭했을 때 전체 동의 체크박스의 상태를 변경합니다.
+	$("input[name^='sub_agree']")
+			.click(
+					function() {
+						var allChecked = $("input[name^='sub_agree']:checked").length === $("input[name^='sub_agree']").length;
+						$("#sub_Allagree").prop("checked", allChecked);
 					});
 
-				} else { // 결제 실패 시
-					alert("결제를 취소했습니다.");
-					console.log(rsp);
-					 // $(".bookingfrm").submit(); // 폼 제출
+	/*******************************
+	 결제 하기
+	 ********************************/
+	var totalCount;
 
-				}
-			});
+	$("#money-btn").click(function(e) {
+		e.preventDefault(); // 폼 제출 방지
+
+		// 전체 동의 체크 여부
+		var allAgreeChecked = $("#allAgree").prop("checked");
+
+		// 개별 동의 체크 여부
+		var subAllAgreeChecked = $("#sub_Allagree").prop("checked");
+
+		// 성인, 아동, 영아 선택된 인원 수 확인
+		var adultCount = parseInt($(".adult-select").val());
+		var childCount = parseInt($(".child-select").val());
+		var babyCount = parseInt($(".baby-select").val());
+		totalCount = adultCount + childCount + babyCount;
+
+		// 조건 확인
+		if (allAgreeChecked && subAllAgreeChecked) {
+			// 모든 체크박스가 선택된 경우
+			if (totalCount > ${roomsDto.room_max_capacity }) {
+				// 최대인원 초과인 경우
+				alert("최대 인원을 초과하였습니다.");
+			} else {
+				// 최대인원 이하인 경우
+				requestPay(); // 결제 요청 함수 호출
+			}
+		} else {
+			// 어느 하나라도 선택되지 않은 경우
+			alert("모든 항목에 동의해주세요.");
 		}
-		
-		$(".notification .center ul li.btn").click(
-				function() {
-					$(".notification .center ul li.btn")
-							.removeClass("active");
-					$(this).addClass("active");
+	});
+	
+	//전역변수 생성
+	var selectedCouponId = null;
+	
+	$(document).on('click', '.btncoupon', function() {
+        // 부모 요소 .block를 찾고, 그 안의 필요한 요소들을 찾음
+        var $block = $(this).closest('.block');
+        var discountAmount = parseInt($block.find('.discountmoney').text()); // 할인 금액을 정수로 변환하여 가져옴
+        var couponId = $block.find('input[name="coupon_id"]').val(); // coupon_id 값
 
-					var idx = $(this).index();
-					console.log(idx);
-					$(this).closest(".center").find(".container .tab_view")
-							.removeClass("active");
-					$(this).closest(".center").find(".container .tab_view").eq(
-							idx).addClass("active");
+        selectedCouponId = couponId;  // 선택된 쿠폰 ID를 전역 변수에 저장
+        
+        alert(discountAmount + "," + couponId);
+        $("#reservation .select_coupon").removeClass("active");
+    });
+
+
+	function requestPay() {
+
+		var memberId = $("#MEMBER_ID").val();
+		var roomId = $("#ROOM_ID").val();
+		var reservationCheckin = $("#RESERVATION_CHECKIN").val();
+		var reservationCheckout = $("#RESERVATION_CHECKOUT").val();
+		var reservationCapacity = totalCount; // totalCount는 다른 곳에서 정의된 변수로 가정
+		var reservationRequire = $("#RESERVATION_REQUIRE").val();
+		var reservationPrice = $("#RESERVATION_PRICE").val();
+		var merchantUid = $("#merchant_uid").val();
+
+		//IMP.request_pay(param, callback) // 결제창 호출
+		IMP.init("imp16144603");
+		IMP.request_pay({ // param
+			pg : "html5_inicis",
+			pay_method : "card",
+			merchant_uid : $("#name").val() + new Date().getTime(),
+			name : $(".name").text(),
+			amount : $("#RESERVATION_PRICE").val(),
+			buyer_email : $("#email").val(),
+			buyer_name : $("#name").val(),
+			buyer_tel : $(".phone").text().trim(),
+			buyer_addr : "",
+			buyer_postcode : "",
+			display : {
+				card_quota : [ 3, 4, 5, 6 ]
+				// 3개월, 4개월, 5개월, 6개월 할부 옵션 추가
+			}
+		}, function(rsp) { // callback
+			if (rsp.success) { // 결제 성공 시 로직
+				// 결제 성공 시 결제 정보 서버로 전송
+				$.ajax({
+					type: "POST",
+					url: "/payment/complete", // 서버의 결제 정보 처리 URL
+					contentType: "application/json", // Content-Type 명시
+					data: JSON.stringify({
+						paymentDto : {
+							imp_uid: rsp.imp_uid,
+							merchant_uid: rsp.merchant_uid,
+							paid_amount: rsp.paid_amount,
+							pg_provider: rsp.pg_provider,
+							pg_tid: rsp.pg_tid,
+							buyer_name: rsp.buyer_name,
+							member_useremail: rsp.buyer_email
+						},
+						reservationDto:{
+							memberId: memberId,
+							roomId: roomId,
+							reservationCheckin: reservationCheckin,
+							reservationCheckout: reservationCheckout,
+							reservationCapacity: reservationCapacity,
+							reservationRequire: reservationRequire,
+							reservationPrice: reservationPrice,
+							merchantUid: rsp.merchant_uid
+						},
+						//TODO: 쿠폰 id 확인 하기
+						useCouponReq: {
+							selected: false,
+							couponId: selectedCouponId // 선택된 쿠폰 ID 전송
+						}
+					}),
+					success: function(response) {
+						// 결제 완료 페이지로 이동
+						window.location.href = response.redirectUrl;
+					},
+					error: function(error) {
+						alert(error.responseJSON.message);
+						//결제 실패시 디테일 페이지로 이동
+						window.location.href = error.responseJSON.redirectUrl;
+					}
 				});
-		
-		$("#reservation ._bookings-new_coupon_trigger_wrapper__J9j8p ._bookings-new_selector__DJU6E").click(function(){
-			$("#reservation .select_coupon").toggleClass("active");
+			} else { // 결제 실패 시
+				console.log(rsp);
+				alert("결제를 취소했습니다.");
+			}
 		});
-		
-		
-		  $(document).click(function(event) {
-		        var $target = $(event.target);
-		        if (!$target.closest('#reservation .select_coupon').length && !$target.closest('#reservation ._bookings-new_coupon_trigger_wrapper__J9j8p ._bookings-new_selector__DJU6E').length) {
-		            $("#reservation .select_coupon").removeClass("active");
-		        }
-		    });
-		  
-		  //String으로 받아온 체크인, 체크아웃 날짜를 윤년을 고려하여 계산하고 몇박인지 출력해줌
-		    // 체크인과 체크아웃 날짜 문자열
-		    var checkinString = "${checkin}"; // 예: "2024-06-25"
-		    var checkoutString = "${checkout}"; // 예: "2024-06-27"
+	}
 
-		    // 문자열을 Date 객체로 변환
-		    var checkinDate = new Date(checkinString);
-		    var checkoutDate = new Date(checkoutString);
+	$(".notification .center ul li.btn").click(
+			function() {
+				$(".notification .center ul li.btn")
+						.removeClass("active");
+				$(this).addClass("active");
 
-		    // 윤년 여부 판별 함수
-		    function isLeapYear(year) {
-		        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-		    }
+				var idx = $(this).index();
+				console.log(idx);
+				$(this).closest(".center").find(".container .tab_view")
+						.removeClass("active");
+				$(this).closest(".center").find(".container .tab_view").eq(
+						idx).addClass("active");
+			});
 
-		    // 날짜 차이 계산 (박수 계산)
-		    function getNightCount(checkin, checkout) {
-		        var oneDay = 24 * 60 * 60 * 1000; // 하루를 밀리초로 계산
-		        var diffDays = Math.round(Math.abs((checkout - checkin) / oneDay));
+	$("#reservation ._bookings-new_coupon_trigger_wrapper__J9j8p ._bookings-new_selector__DJU6E").click(function(){
+		$("#reservation .select_coupon").toggleClass("active");
+	});
 
-		        // 체크인 날짜의 연도와 체크아웃 날짜의 연도가 다를 경우
-		        var checkinYear = checkin.getFullYear();
-		        var checkoutYear = checkout.getFullYear();
 
-		        if (checkoutYear > checkinYear) {
-		            // 체크인 연도의 2월 일 수 계산
-		            var febDays = isLeapYear(checkinYear) ? 29 : 28; // 윤년 여부에 따른 2월 일 수
+	$(document).click(function(event) {
+		var $target = $(event.target);
+		if (!$target.closest('#reservation .select_coupon').length && !$target.closest('#reservation ._bookings-new_coupon_trigger_wrapper__J9j8p ._bookings-new_selector__DJU6E').length) {
+			$("#reservation .select_coupon").removeClass("active");
+		}
+	});
 
-		            // 체크인 연도의 2월 일수가 diffDays보다 작으면 하루를 빼서 박수를 계산
-		            if (checkout.getMonth() === 1 && checkout.getDate() === 29) {
-		                diffDays--;
-		            }
-		        }
+	//String으로 받아온 체크인, 체크아웃 날짜를 윤년을 고려하여 계산하고 몇박인지 출력해줌
+	// 체크인과 체크아웃 날짜 문자열
+	var checkinString = "${checkin}"; // 예: "2024-06-25"
+	var checkoutString = "${checkout}"; // 예: "2024-06-27"
 
-		        return diffDays;
-		    }
-		    
+	// 문자열을 Date 객체로 변환
+	var checkinDate = new Date(checkinString);
+	var checkoutDate = new Date(checkoutString);
 
-		    // 결과를 HTML에 출력
-		    var diffDays = getNightCount(checkinDate, checkoutDate);
-			$("#numNights").text(diffDays+ " 박");
-		    $("#numNight").text(diffDays+ " 박");
-		    $("#numNightcal").text(diffDays+ " 박");
-		    
-		    // 서버에서 받아온 객실 요금
-	        var roomPrice = ${roomsDto.room_price};
-			
-	    	 // 총 요금 계산
-	        var totalPrice = roomPrice * diffDays;
-	    	
-	    	// 총 요금을 화폐 단위로 포맷하여 HTML에 출력
-	        var formattedTotalPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice);
-	        $("#totalprice1").text(formattedTotalPrice);
-		    
+	// 윤년 여부 판별 함수
+	function isLeapYear(year) {
+		return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+	}
 
-	</script>
+	// 날짜 차이 계산 (박수 계산)
+	function getNightCount(checkin, checkout) {
+		var oneDay = 24 * 60 * 60 * 1000; // 하루를 밀리초로 계산
+		var diffDays = Math.round(Math.abs((checkout - checkin) / oneDay));
+
+		// 체크인 날짜의 연도와 체크아웃 날짜의 연도가 다를 경우
+		var checkinYear = checkin.getFullYear();
+		var checkoutYear = checkout.getFullYear();
+
+		if (checkoutYear > checkinYear) {
+			// 체크인 연도의 2월 일 수 계산
+			var febDays = isLeapYear(checkinYear) ? 29 : 28; // 윤년 여부에 따른 2월 일 수
+
+			// 체크인 연도의 2월 일수가 diffDays보다 작으면 하루를 빼서 박수를 계산
+			if (checkout.getMonth() === 1 && checkout.getDate() === 29) {
+				diffDays--;
+			}
+		}
+
+		return diffDays;
+	}
+
+
+	// 결과를 HTML에 출력
+	var diffDays = getNightCount(checkinDate, checkoutDate);
+	$("#numNights").text(diffDays+ " 박");
+	$("#numNight").text(diffDays+ " 박");
+	$("#numNightcal").text(diffDays+ " 박");
+
+	// 서버에서 받아온 객실 요금
+	var roomPrice = ${roomsDto.room_price};
+
+	// 총 요금 계산
+	var totalPrice = roomPrice * diffDays;
+
+	// 총 요금을 화폐 단위로 포맷하여 HTML에 출력
+	var formattedTotalPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice);
+	$("#totalprice1").text(formattedTotalPrice);
+
+
+</script>
 
 </body>
 </html>
