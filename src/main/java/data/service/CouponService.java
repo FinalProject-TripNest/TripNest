@@ -1,5 +1,6 @@
 package data.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import data.dto.coupon.CouponDto;
 import data.dto.coupon.CreateCouponReq;
 import data.dto.coupon.NewEventDto;
@@ -7,6 +8,13 @@ import data.dto.coupon.UseCouponReq;
 import data.mapper.CouponMapperInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.ExchangeTypes;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +32,7 @@ public class CouponService {
     private static final int UN_USED = 0;
 
     private final CouponMapperInter mapper;
-    public void getCoupons() {
-        // 전체 쿠폰 조회 로직
 
-    }
     public void createNewEvent(NewEventDto newEventDto) {
         // 이벤트 생성 로직
         mapper.insertCouponGroup(newEventDto);
