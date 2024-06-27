@@ -21,4 +21,5 @@ public interface ImageMapperInter {
 	public void deleteImage(String room_id);
 	
 	public void updateimage(ImagesDto dto);
+	
 }

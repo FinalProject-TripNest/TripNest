@@ -22,26 +22,19 @@ table  tr, td{
 			<div class="center">
 				<div>
 				<input type="hidden" value="${memberId}" class="memid">
-					<table>
+					<table id="roomTable">
+					<thead>
 						<tr>
-							<td>번호</td>
+							<td>숙소번호</td>
 							<td>숙소이름</td>
 							<td>위치</td>
 							<td>상태</td>
 							<td>비고</td>
 						</tr>
-							<c:forEach var="rlist" items="${roomlist}">
-							<tr>
-								<td>${rlist.room_id}</td>
-								<td>${rlist.room_name}</td>
-								<td>${rlist.room_address}</td>
-								<td>${rlist.room_status}</td>
-								<td>
-									<button type="button" class="roomdel" value="${rlist.room_id}">삭제</button>
-									<button type="button" class="roomedit" value="${rlist.room_id}" onclick="location.href='updateform?room_id=${rlist.room_id}'">수정</button>
-								</td>
-							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+						<!-- 여기에 list 옵니다 -->
+					</tbody>
 					</table>
 				</div>
 			</div>
@@ -54,8 +47,7 @@ table  tr, td{
 	<%@ include file="../include/footer.jsp"%>
 	<script>
 	$(function(){
-		
-		
+		list();
 			
 		 $(document).on('click', '.roomdel', function(){
 				var room_id=$(this).val();
@@ -70,6 +62,7 @@ table  tr, td{
 						dataType:"html",
 						success:function(){
 							alert("삭제되었습니다.");
+							list();
 				
 						}
 						
@@ -78,10 +71,34 @@ table  tr, td{
 				
 
 			});
+		 
 	});
 	
-
-	}
+	function list(){
+		$.ajax({
+			type:"get",
+			url:"/room/myroomlist",
+			dataType:"json",
+			success:function(data){
+	              var tbody = $('#roomTable tbody');
+	                tbody.empty();
+	                $.each(data, function(index, room){
+	                    var s = '<tr>' +
+	                        '<td>' + room.room_id + '</td>' +
+	                        '<td>' + room.room_name + '</td>' +
+	                        '<td>' + room.room_address + '</td>' +
+	                        '<td>' + room.room_status + '</td>' +
+	                        '<td>' +
+	                            '<button type="button" class="roomdel" value="' + room.room_id + '">삭제</button>' +
+	                            '<button type="button" class="roomedit" value="' + room.room_id + '" onclick="location.href=\'updateform?room_id=' + room.room_id + '\'">수정</button>' +
+	                        '</td>' +
+	                    '</tr>';
+	                    tbody.append(s);
+	                });
+			}
+		})
+	};
+	
 	</script>
 </body>
 </html>

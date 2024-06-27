@@ -5,7 +5,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
 
-
+import org.eclipse.angus.mail.auth.MD4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -151,6 +152,19 @@ public class RoomsController {
 		return mview;
 		
 	}
+	
+	@GetMapping("/room/myroomlist")
+	@ResponseBody
+	public List<RoomsDto> roomlistid(HttpSession session){
+		
+		 // 세션에서 member_id 가져오기
+        String memberEmail = (String) session.getAttribute("myid");
+        Integer memberId = mservice.findByEmail(memberEmail).getMember_id();
+		
+		List<RoomsDto> list=service.getRoomDataByMyid(memberId);
+		
+		return list;
+	}
 
 	@PostMapping("/room/update")
 	public String update(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -167,31 +181,49 @@ public class RoomsController {
 		dto.setRoom_region(roomregion);
 		
 		service.updateRoom(dto);
-
-		for (MultipartFile multi : image_upload) {
+		
+		
+		
+		try {
 			
-			try {
+			List<ImagesDto> oldImageUrl=imgservice.imgList(dto.getRoom_id());
+			
+				//사진을 수정했을 경우에만 기존의 사진을 s3와 DB 에서 삭제(사진 수정없을 시에는 기존 사진으로 유지)
+			    if (image_upload != null && !image_upload.isEmpty() && !image_upload.get(0).isEmpty()) {
+			    	
+                    for (ImagesDto imgdto : oldImageUrl) {
+                        String oldFileName = extractFilePath(imgdto.getImage_photo());
+                        s3service.deleteFile(oldFileName);
+                        imgservice.deleteImage(dto.getRoom_id());
+                    }
 
-				ImagesDto imgdto=new ImagesDto();
-				 String imgphoto = imgdto.getImage_photo();
-			     String oldFileName = extractFilePath(imgphoto);
-				String imageUrl = s3service.updateFile(multi, oldFileName, "roomphoto");
-
-				imgdto.setImage_photo(imageUrl);
-				imgservice.updateimage(imgdto);
-
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+                
+			    
+		        // 그리고 새 이미지 s3 업로드 및 DB 업데이트
+		        for (MultipartFile file : image_upload) {
+		            if (!file.isEmpty()) {
+		                String imageUrl = s3service.upload(file, "roomphoto");
+		                ImagesDto imgDto = new ImagesDto();
+		                imgDto.setRoom_id(dto.getRoom_id());
+		                imgDto.setImage_photo(imageUrl);
+		                imgservice.insertImage(imgDto);
+		            }
+		        }
+			 }
+	        
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		return "/room/roomlist";
+
+		return "redirect:roomlist";
 
 	}
+	
 	@GetMapping("/room/updateform")
 	public String getOneData(String room_id, Model model,HttpSession session) {
 		RoomsDto rdto=service.getOneData(room_id);
@@ -212,6 +244,7 @@ public class RoomsController {
 		return "/room/roomupdateform";
 		
 	}
+	
 	
 	
 }
