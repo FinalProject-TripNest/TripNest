@@ -55,7 +55,7 @@ public class CouponController {
         }catch (Exception e) {
             log.error("[error] fail to create coupon(coupon_group_id:{}) for user(user_id:{})",
                     couponGroupId,createCouponReq.getMemberId(),e);
-            return ResponseEntity.badRequest().body("쿠폰 발급 실패");
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok().body("쿠폰 발급 성공");
     }

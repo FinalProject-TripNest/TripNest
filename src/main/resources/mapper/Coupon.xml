@@ -15,6 +15,36 @@
             (#{couponNumber}, #{couponGroupId}, #{memberId}, #{issuedDate}, #{expireDate}, #{isUsed})
     </insert>
 
+    <update id="decreaseCouponCount" parameterType="String">
+        update COUPON_GROUP
+        set quantity = quantity - 1
+        where coupon_group_id = #{couponGroupId}
+    </update>
+
+    <select id="checkCouponExist" resultType="boolean" parameterType="CreateCouponReq">
+        SELECT EXISTS (
+            SELECT 1
+            FROM COUPONS
+            WHERE coupon_group_id = #{couponGroupId}
+            AND member_id = #{memberId}
+        ) AS is_exist
+    </select>
+
+    <select id="isValidEvent" resultType="boolean" parameterType="String">
+        SELECT EXISTS (
+            SELECT 1
+            FROM COUPON_GROUP
+            WHERE coupon_group_id = #{couponGroupId}
+        ) AS is_valid_event
+    </select>
+
+    <select id="getCouponCount" resultType="int" parameterType="String">
+        SELECT QUANTITY
+        FROM COUPON_GROUP
+        WHERE coupon_group_id = #{couponGroupId}
+    </select>
+
+
     <select id="isValidCoupon" resultType="boolean" parameterType="string">
         SELECT EXISTS (
             SELECT 1
