@@ -46,11 +46,6 @@ public class RoomsService implements RoomsServiceInter {
 		return roomsList;
 	}
 
-	@Override
-	public RoomsDto getOneData(String room_id) {
-		// TODO Auto-generated method stub
-		return roommapper.getOneData(room_id);
-	}
 
 	public List<RoomsDto> getAllRoomsData() {
 		return roommapper.getAllRoomsData();
@@ -94,6 +89,30 @@ public class RoomsService implements RoomsServiceInter {
 		return topRooms;
 	}
 
+	@Override
+	public RoomsDto getOneData(String room_id) {
+		// TODO Auto-generated method stub
+		return roommapper.getOneData(room_id);
+	}
+
+	@Override
+	public void deleteRoom(String room_id) {
+		// TODO Auto-generated method stub
+	 roommapper.deleteRoom(room_id);
+		
+	}
+
+	@Override
+	public List<RoomsDto> getRoomDataByMyid(int member_id) {
+		// TODO Auto-generated method stub
+		return roommapper.getRoomDataByMyid(member_id);
+	}
+
+	@Override
+	public void updateRoom(RoomsDto dto) {
+		// TODO Auto-generated method stub
+		roommapper.updateRoom(dto);
+	}
 
 
 }

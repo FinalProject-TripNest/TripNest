@@ -23,7 +23,7 @@ public class RoomsDto {
 	private String room_region;
 	private String room_service;
 	private String room_detail;
-	private String room_staus;
+	private String room_status;
 	private String room_hp;
 	private String image_photo;
 	private List<String> roomImgList;

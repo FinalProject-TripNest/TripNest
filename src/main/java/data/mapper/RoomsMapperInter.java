@@ -19,4 +19,9 @@ public interface RoomsMapperInter {
 	public List<String> getImgsByRoomId(String room_id);
 	public List<String> getLackRoomId(Map params);
 	public RoomsDto getSimpleRoomsDataByRoomId(String room_id);
+	
+	public void deleteRoom(String room_id);
+	public List<RoomsDto> getRoomDataByMyid(int member_id);
+	public void updateRoom(RoomsDto dto);
+
 }

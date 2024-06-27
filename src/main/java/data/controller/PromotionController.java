@@ -34,6 +34,12 @@ public class PromotionController {
 		PromotionDto dto = service.getOneData(promotion_id);
 		model.addObject("dto", dto);
 		model.setViewName("/promotion/detail");
+
+		// 해당 프로모션에 쿠폰 이벤트가 있는 경우 coupon_group_id를 전달함
+		// coupon_group 테이블에서 promotion_id로 조회하여 coupon_group_id가 있으면 전달, 없으면 null
+		String couponGroupId = service.getCouponGroupId(promotion_id);
+		model.addObject("couponGroupId", couponGroupId);
+
 		return model;
 	}
 

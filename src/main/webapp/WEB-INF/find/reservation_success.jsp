@@ -145,7 +145,7 @@
 											<span>결제금액</span> : <fmt:formatNumber value="${successDto.paid_amount}" type="currency"
 							currencySymbol="₩ " groupingUsed="true" />
 										</p>
-											<a href="#" class="mapconfirm" style="margin-top: 30px;">숙소 위치 확인</a>
+											<a href="${root }/find/list/detail?room_id=${roomsDto.room_id}#amenities" class="mapconfirm" style="margin-top: 30px;">숙소 위치 확인</a>
 									</div>		
 								</div>
 							</div>

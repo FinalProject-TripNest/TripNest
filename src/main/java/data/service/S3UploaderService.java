@@ -36,10 +36,8 @@ public class S3UploaderService {
         String originalFileName = multipartFile.getOriginalFilename();
 
         String uuid = UUID.randomUUID().toString();
-        //파일이름을 줄이기위해 사용) 글자수는 줄었지만 놀랍게도 더 길어진것같은 효과가 있다. 
-        String shortUuid = Base64.getUrlEncoder().withoutPadding().encodeToString(uuid.getBytes(StandardCharsets.UTF_8));
-        
-        String uniqueFileName = shortUuid + "_" + originalFileName.replaceAll("\\s", "_");
+     
+        String uniqueFileName = uuid + "_" + originalFileName.replaceAll("\\s", "_");
 
         String fileName = dirName + "/" + uniqueFileName;
         log.info("fileName: " + fileName);
