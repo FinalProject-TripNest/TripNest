@@ -696,20 +696,23 @@
 
 			</div>
 
-<<<<<<< HEAD
 			<div class="detailbox">
 				<form action="reservationInfo" method="post" class="bookingfrm">
-					<input type="hidden" name="MEMBER_ID" id="MEMBER_ID" value="${memberDto.member_id }"> <input type="hidden"
-																												 name="ROOM_ID" id ="ROOM_ID" value="${roomsDto.room_id }"> <input
-						type="hidden" id="merchant_uid" name="merchant_uid" value="">
+					<input type="hidden" name="MEMBER_ID" id="MEMBER_ID"
+						   value="${memberDto.member_id }"> <input type="hidden"
+																   name="ROOM_ID" id="ROOM_ID" value="${roomsDto.room_id }">
+					<input type="hidden" id="merchant_uid" name="merchant_uid"
+						   value="">
 					<div class="frm_tit">Reservations</div>
 					<ul class="stay_list">
 						<li><div class="tit">예약 스테이</div>
 							<div class="cont">${roomsDto.room_name }</div></li>
 						<li><div class="tit">예약일</div>
 							<div class="cont day">
-								<input type="hidden" name="RESERVATION_CHECKIN" id="RESERVATION_CHECKIN" value="${checkin }">
-								<input type="hidden" name="RESERVATION_CHECKOUT" id="RESERVATION_CHECKOUT" value="${checkout }">
+								<input type="hidden" name="RESERVATION_CHECKIN"
+									   id="RESERVATION_CHECKIN" value="${checkin }"> <input
+									type="hidden" name="RESERVATION_CHECKOUT"
+									id="RESERVATION_CHECKOUT" value="${checkout }">
 								${checkin } ~ ${checkout } <span id="numNight"></span>
 							</div></li>
 						<li><div class="tit">이름</div>
@@ -760,77 +763,6 @@
 								</div>
 								<span>(최대 ${roomsDto.room_max_capacity }명)</span> <span
 									class="member_txt"> 아동: 24개월~12세 &nbsp; <br>영아:
-=======
-				</div>
-
-				<div class="detailbox">
-					<form action="reservationInfo" method="post" class="bookingfrm">
-						<input type="hidden" name="MEMBER_ID" id="MEMBER_ID"
-							value="${memberDto.member_id }"> <input type="hidden"
-							name="ROOM_ID" id="ROOM_ID" value="${roomsDto.room_id }">
-						<input type="hidden" id="merchant_uid" name="merchant_uid"
-							value="">
-						<div class="frm_tit">Reservations</div>
-						<ul class="stay_list">
-							<li><div class="tit">예약 스테이</div>
-								<div class="cont">${roomsDto.room_name }</div></li>
-							<li><div class="tit">예약일</div>
-								<div class="cont day">
-									<input type="hidden" name="RESERVATION_CHECKIN"
-										id="RESERVATION_CHECKIN" value="${checkin }"> <input
-										type="hidden" name="RESERVATION_CHECKOUT"
-										id="RESERVATION_CHECKOUT" value="${checkout }">
-									${checkin } ~ ${checkout } <span id="numNight"></span>
-								</div></li>
-							<li><div class="tit">이름</div>
-								<div class="cont">
-									<div class="inpt_inner">
-										<input type="text" id="name" class="input-width"
-											placeholder="이름" readonly="" value="${memberDto.member_name}">
-									</div>
-								</div></li>
-							<li><div class="tit">휴대전화</div>
-								<div class="cont">
-									<div class="phone">${memberDto.member_phone}</div>
-								</div></li>
-							<li><div class="tit">이메일</div>
-								<div class="cont">
-									<div class="inpt_inner">
-										<input type="email" id="email" class="input-width"
-											placeholder="이메일" readonly=""
-											value="${memberDto.member_useremail}">
-									</div>
-								</div></li>
-							<li><div class="tit">인원</div>
-								<div class="cont member ">
-									<div class="select">
-										<span>성인</span><select class="adult-select" name="adultCount"><option
-												value="1">1명</option>
-											<option value="2">2명</option>
-											<option value="3">3명</option>
-											<option value="4">4명</option>
-											<option value="5">5명</option>
-											<option value="6">6명</option></select>
-									</div>
-									<div class="select">
-										<span>아동</span><select class="child-select" name="childCount"><option
-												value="0">0명</option>
-											<option value="1">1명</option>
-											<option value="2">2명</option>
-											<option value="3">3명</option>
-											<option value="4">4명</option></select>
-									</div>
-									<div class="select">
-										<span>영아</span><select class="baby-select" name="babyCount"><option
-												value="0">0명</option>
-											<option value="1">1명</option>
-											<option value="2">2명</option>
-											<option value="3">3명</option>
-											<option value="4">4명</option></select>
-									</div>
-									<span>(최대 ${roomsDto.room_max_capacity }명)</span> <span
-										class="member_txt"> 아동: 24개월~12세 &nbsp; <br>영아:
->>>>>>> 4d12d730ed902f5c38c2d2f41254efea065ad516
 										24개월 미만
 									</span>
 							</div></li>
@@ -912,7 +844,6 @@
 						<li><div class="tit">요청사항</div>
 							<div class="cont">
 									<textarea
-<<<<<<< HEAD
 											placeholder="사전에 협의되지 않은 상업 목적의 사진/영상 촬영(광고, 쇼핑몰, SNS 마켓 등)과 드론 촬영은 불가합니다. "
 											name="RESERVATION_REQUIRE" id="RESERVATION_REQUIRE"></textarea>
 							</div></li>
@@ -926,21 +857,6 @@
 											<div class="css-1ayjtrs">
 												<div class="css-13cz8p3">
 													<div class="_bookings-new_coupon_trigger_container__dACyr">
-=======
-										placeholder="사전에 협의되지 않은 상업 목적의 사진/영상 촬영(광고, 쇼핑몰, SNS 마켓 등)과 드론 촬영은 불가합니다. "
-										name="RESERVATION_REQUIRE" id="RESERVATION_REQUIRE"></textarea>
-								</div></li>
-							<li><div class="tit">할인 혜택</div>
-								<div class="cont">
-									<dl class="_bookings-new_coupon_trigger_wrapper__J9j8p"
-										style="padding-top: 10px;">
-										<dt>쿠폰 할인</dt>
-										<dd>
-											<div>
-												<div class="css-1ayjtrs">
-													<div class="css-13cz8p3">
-														<div class="_bookings-new_coupon_trigger_container__dACyr">
->>>>>>> 4d12d730ed902f5c38c2d2f41254efea065ad516
 
 														<div class="_bookings-new_selector__DJU6E">
 															<div class="_bookings-new_coupon_title__PlGl_">
@@ -1438,125 +1354,12 @@
 		$("input[name^='sub_agree']").prop("checked", isChecked);
 	});
 
-		// 개별 동의 체크박스를 클릭했을 때 전체 동의 체크박스의 상태를 변경합니다.
-		$("input[name^='sub_agree']")
-				.click(
-						function() {
-							var allChecked = $("input[name^='sub_agree']:checked").length === $("input[name^='sub_agree']").length;
-							$("#sub_Allagree").prop("checked", allChecked);
-						});
-	
-		/*******************************
-		결제 하기
-		 ********************************/
-		 var totalCount;
-		 
-		$("#money-btn").click(function(e) {
-			e.preventDefault(); // 폼 제출 방지
-
-			// 전체 동의 체크 여부
-			var allAgreeChecked = $("#allAgree").prop("checked");
-
-			// 개별 동의 체크 여부
-			var subAllAgreeChecked = $("#sub_Allagree").prop("checked");
-
-			// 성인, 아동, 영아 선택된 인원 수 확인
-			var adultCount = parseInt($(".adult-select").val());
-			var childCount = parseInt($(".child-select").val());
-			var babyCount = parseInt($(".baby-select").val());
-			totalCount = adultCount + childCount + babyCount;
-
-			// 조건 확인
-			if (allAgreeChecked && subAllAgreeChecked) {
-				// 모든 체크박스가 선택된 경우
-				if (totalCount > ${roomsDto.room_max_capacity }) {
-					// 최대인원 초과인 경우
-					alert("최대 인원을 초과하였습니다.");
-				} else {
-					// 최대인원 이하인 경우
-					requestPay(); // 결제 요청 함수 호출
-				}
-			} else {
-				// 어느 하나라도 선택되지 않은 경우
-				alert("모든 항목에 동의해주세요.");
-			}
-		});
-		
-		
-
-		function requestPay() {
-			
-			var memberId = $("#MEMBER_ID").val();
-			var roomId = $("#ROOM_ID").val();
-			var reservationCheckin = $("#RESERVATION_CHECKIN").val();
-			var reservationCheckout = $("#RESERVATION_CHECKOUT").val();
-			var reservationCapacity = totalCount; // totalCount는 다른 곳에서 정의된 변수로 가정
-			var reservationRequire = $("#RESERVATION_REQUIRE").val();
-			var reservationPrice = $("#RESERVATION_PRICE").val();
-			var merchantUid = $("#merchant_uid").val();
-			
-			//IMP.request_pay(param, callback) // 결제창 호출
-			IMP.init("imp16144603");
-			IMP.request_pay({ // param
-				pg : "html5_inicis",
-				pay_method : "card",
-				merchant_uid : $("#name").val() + new Date().getTime(),
-				name : $(".name").text(),
-				amount : $("#RESERVATION_PRICE").val(),
-				buyer_email : $("#email").val(),
-				buyer_name : $("#name").val(),
-				buyer_tel : $(".phone").text().trim(),
-				buyer_addr : "",
-				buyer_postcode : "",
-				display : {
-					card_quota : [ 3, 4, 5, 6 ]
-				// 3개월, 4개월, 5개월, 6개월 할부 옵션 추가
-				}
-			}, function(rsp) { // callback
-				if (rsp.success) { // 결제 성공 시 로직
-					// 결제 성공 시 결제 정보 서버로 전송
-					$.ajax({
-						type: "POST",
-						url: "/payment/complete", // 서버의 결제 정보 처리 URL
-						contentType: "application/json", // Content-Type 명시
-						data: JSON.stringify({
-							reservationDto:{
-								//TODO: 예약 정보 넣어주기
-								memberId: memberId,
-								roomId: roomId,
-								reservationCheckin: reservationCheckin,
-								reservationCheckout: reservationCheckout,
-								reservationCapacity: reservationCapacity,
-								reservationRequire: reservationRequire,
-								reservationPrice: reservationPrice,
-								merchantUid: rsp.merchant_uid
-					        },
-							paymentDto : {
-								imp_uid: rsp.imp_uid,
-								merchant_uid: rsp.merchant_uid,
-								paid_amount: rsp.paid_amount,
-								pg_provider: rsp.pg_provider,
-								pg_tid: rsp.pg_tid,
-								buyer_name: rsp.buyer_name,
-								member_useremail: rsp.buyer_email
-							},
-							//TODO: 쿠폰 id 확인 하기
-// 							"couponId": $("#coupon_id").val(),
-							couponId: 89,
-	
-						}),
-						success: function(response) {
-					        if (response.success) {
-					            // 리다이렉트 URL로 페이지 이동
-					            window.location.href = response.redirectUrl;
-					        } else {
-					            // 실패 시 처리
-					            alert('결제 처리 중 오류가 발생했습니다: ' + response.message);
-					        }
-						},
-						error: function(error) {
-							alert("서버 통신 오류가 발생했습니다.");
-						}
+	// 개별 동의 체크박스를 클릭했을 때 전체 동의 체크박스의 상태를 변경합니다.
+	$("input[name^='sub_agree']")
+			.click(
+					function() {
+						var allChecked = $("input[name^='sub_agree']:checked").length === $("input[name^='sub_agree']").length;
+						$("#sub_Allagree").prop("checked", allChecked);
 					});
 
 	/*******************************
@@ -1633,17 +1436,6 @@
 					url: "/payment/complete", // 서버의 결제 정보 처리 URL
 					contentType: "application/json", // Content-Type 명시
 					data: JSON.stringify({
-						reservationDto:{
-							//TODO: 예약 정보 넣어주기
-							memberId: memberId,
-							roomId: roomId,
-							reservationCheckin: reservationCheckin,
-							reservationCheckout: reservationCheckout,
-							reservationCapacity: reservationCapacity,
-							reservationRequire: reservationRequire,
-							reservationPrice: reservationPrice,
-							merchantUid: rsp.merchant_uid
-						},
 						paymentDto : {
 							imp_uid: rsp.imp_uid,
 							merchant_uid: rsp.merchant_uid,
@@ -1653,29 +1445,33 @@
 							buyer_name: rsp.buyer_name,
 							member_useremail: rsp.buyer_email
 						},
+						reservationDto:{
+							memberId: memberId,
+							roomId: roomId,
+							reservationCheckin: reservationCheckin,
+							reservationCheckout: reservationCheckout,
+							reservationCapacity: reservationCapacity,
+							reservationRequire: reservationRequire,
+							reservationPrice: reservationPrice,
+							merchantUid: rsp.merchant_uid
+						},
 						//TODO: 쿠폰 id 확인 하기
 // 							"couponId": $("#coupon_id").val(),
 						couponId: 89,
-
 					}),
 					success: function(response) {
-// 							if (response.success) {
-// 								 //$("#merchant_uid").val(rsp.merchant_uid); // merchant_uid 설정
-// 								//$(".bookingfrm").submit(); // 폼 제출
-// 							} else {
-// 								alert("결제 정보 저장에 실패했습니다.");
-// 							}
+						// 결제 완료 페이지로 이동
+						window.location.href = response.redirectUrl;
 					},
 					error: function(error) {
-						alert("서버 통신 오류가 발생했습니다.");
+						alert(error.responseJSON.message);
+						//결제 실패시 디테일 페이지로 이동
+						window.location.href = error.responseJSON.redirectUrl;
 					}
 				});
-
 			} else { // 결제 실패 시
-				alert("결제를 취소했습니다.");
 				console.log(rsp);
-				// $(".bookingfrm").submit(); // 폼 제출
-
+				alert("결제를 취소했습니다.");
 			}
 		});
 	}

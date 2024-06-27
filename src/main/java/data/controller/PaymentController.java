@@ -124,7 +124,8 @@ public class PaymentController {
 			refundService.refundRequest(token, paymentDto.getMerchant_uid(), e.getMessage());
 
 	        response.put("success", false);
-	        response.put("message", "결제 처리 중 오류가 발생했습니다.");
+	        response.put("message", "결제 처리 중 오류가 발생했습니다.\n" + e.getMessage());
+			response.put("redirectUrl", "/find/list/detail?room_id="+reservationDto.getRoomId());
 
 	        return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(response);
 	    }

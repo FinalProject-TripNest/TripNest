@@ -20,17 +20,15 @@ public class ReservationTransactionManager {
     @Transactional
     public void processBookingTransaction(UseCouponReq useCouponReq, PaymentDto paymentDto, ReservationDto reservationDto) {
         try{
-        	
         	// 1. 결제 정보 저장
             paymentService.insertPayment(paymentDto);
             // 2. 예약 정보 저장
             reservationService.insertReservation(reservationDto);
             // 3. 쿠폰 사용
             couponService.useCoupon(useCouponReq);
-            
         }catch (Exception e) {
-            log.error("[error] fail to make reservation", e);
-            throw new RuntimeException("[error] fail to make reservation", e);
+            log.error("[error] processBookingTransaction - fail to make reservation", e);
+            throw new RuntimeException(e.getMessage(),e);
         }
 
     }

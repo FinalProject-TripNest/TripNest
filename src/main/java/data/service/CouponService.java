@@ -75,13 +75,14 @@ public class CouponService {
             boolean validCoupon = mapper.isValidCoupon(useCouponReq.getCouponId());
             log.info("CouponService.useCoupon - validCoupon : {}", validCoupon);
             if(!validCoupon){
-                throw new RuntimeException("이미 사용되었거나 만료된 쿠폰입니다.");
+                throw new RuntimeException("사용이 불가능한 쿠폰입니다.");
             }
             // 2. 쿠폰 사용 처리
             mapper.updateCouponStatus(useCouponReq.getCouponId());
             log.info("CouponService.useCoupon - 쿠폰(coupon_id:{}) 사용 완료", useCouponReq.getCouponId());
         }catch (Exception e) {
-            throw new RuntimeException("[error] 쿠폰 사용 처리 실패", e);
+            log.error("[error] 쿠폰 사용 처리 실패", e);
+            throw new RuntimeException(e.getMessage(),e);
         }
     }
 
