@@ -36,5 +36,10 @@ public class ImageService implements ImageServiceInter {
 	public List<ImagesDto> imgList(String room_id) {
 		return imgmapper.imgList(room_id);
 	}
+	
+	@Override
+	public List<ImagesDto> hotelNearbyImages(List<String> roomIds) {
+		return imgmapper.hotelNearbyImages(roomIds);
+	}
 
 }

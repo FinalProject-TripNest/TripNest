@@ -14,4 +14,13 @@
 		select * from IMAGES
 		where room_id = #{room_id}
 	</select>
+	<select id="hotelNearbyImages" resultType="ImagesDto" parameterType="java.util.List">
+        select *
+        from IMAGES
+        where room_id IN
+        <foreach item="roomId" index="index" collection="list" 
+                 open="(" separator="," close=")">
+            #{roomId}
+        </foreach>
+    </select>
 </mapper>

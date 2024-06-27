@@ -5,47 +5,63 @@
 <%@ include file="../include/header.jsp"%>
 <title>TRIP NEST</title>
 <style>
-header#header .select {
+header #header .select {
 	display: none;
 }
 
-#index #search_address_modal {
-    position:absolute;
-    display:none;
-     
-    box-sizing: border-box;
+.flatpickr-calendar {
+	width: 460px; /* 원하는 너비로 설정 */
 }
 </style>
-<body>
+<body onload="initAutocomplete()">
 	<div id="wrap">
 		<div id="index">
 			<div class="top_banner">
-			<!-- 호텔 검색 박스 -->
-				<div id="hotel_search">
-					<input id="hotel_search_address" type="button" value="어디로 떠나시나요?"></input>
-					<input id="hotel_search_date" type="button" value="언제 떠나시나요?"></input>
-					<input id="hotel_search_capacity" type="button" value="누구와 떠날까요?"></input>
-					<input id="hotel_search_button" type="button"></input>
+				<div class="search">
+					<form method="get" action="find/search" id="searchForm">
+						<div id="address_parent">
+							<input id="address" type="text" placeholder="여행 갈 곳을 검색해보세요"
+								name="address" value="${defaultAddress }">
+						</div>
+
+						<div id="date">
+							<input id="checkin" class="datepicker" name="checkin"
+								placeholder="체크인 날짜를 선택하세요" value="${defaultCheckin}"> <input
+								id="checkout" class="datepicker" name="checkout"
+								placeholder="체크아웃 날짜를 선택하세요" value="${defaultCheckout}">
+						</div>
+
+						<div id="personnel">
+							<input name="personnel" value="인원 수" id="personnelinput">
+							<input type="hidden" name="personnelCount" id="personnelCount">
+
+						</div>
+
+						<input type="hidden" id="latitude" name="latitude"
+							value="${defaultLatitude }"> <input type="hidden"
+							id="longitude" name="longitude" value="${defaultLongitude }">
+
+						<input type="submit" class="btn" value="검색">
+					</form>
 				</div>
-			</div>
-			<!-- 검색 박스 모달창 -->
-			<div class="search_modal_overlay">
-				<div id="search_address_modal">
-					<div id="address_search_title">
-						<h2>어디로 떠날까요?</h2>
-					</div> 
-					<div id="address_input_div">
-						<input id="address_input" value="원하는 호텔 혹은 지역을 검색해 보세요.">
+
+				<!-- 인원 모달창 -->
+				<div class="modal-background"></div>
+				<div class="modal-content">
+					<div class="counter">
+						<label>총 인원</label>
+						<button class="decrement">-</button>
+						<span id="totalCount">0</span>
+						<button class="increment">+</button>
+					</div>
+					<div class="button-container">
+						<button id="savePersonnel">저장</button>
 					</div>
 				</div>
-				<div id="search_date_modal">
-									
-				</div>
-				<div id="search_capacity_modal">
-					
-				</div>
+
+
+
 			</div>
-			
 			<div class="stay common">
 				<div class="center">
 					<div class="head">
@@ -60,8 +76,9 @@ header#header .select {
 							<c:forEach items="${imageDto}" var="image">
 								<c:if test="${room.room_id eq image.room_id}">
 									<c:if test="${firstImage}">
-										<a class="block" href="javascript:;"> <img alt=""
-											src="${image.image_photo}">
+										<a class="block"
+											href="find/list/detail?room_id=${room.room_id }"> <img
+											alt="" src="${image.image_photo}">
 											<div class="text_box">
 												<span class="title">${room.room_name}</span> <span
 													class="text">${room.city} / ${room.district} / <fmt:formatNumber
@@ -73,7 +90,7 @@ header#header .select {
 									</c:if>
 								</c:if>
 							</c:forEach>
-						</c:forEach>					
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -100,7 +117,7 @@ header#header .select {
 				</div>
 			</div>
 			<div class="event">
-				<a href="javascript:;">
+				<a href="find/list">
 					<div>
 						<p class="title">Experience Tripnest Daily</p>
 						<p class="text">트립네스트에서의 경험을 일상으로</p>
@@ -131,78 +148,152 @@ header#header .select {
 		</div>
 	</div>
 
-	<div class="pop_up search">
-		<div class="dimd"></div>
-		<div class="main">text</div>
-	</div>
-	<div class="pop_up date">
-		<div class="dimd"></div>
-		<div class="main">text</div>
-	</div>
-	<div class="pop_up personnel ">
-		<div class="dimd"></div>
-		<div class="main">text</div>
-	</div>
+
+
 	<%@ include file="../include/footer.jsp"%>
 	<script>
-<<<<<<< HEAD
-		// 추가적인 JavaScript 코드 필요 시 여기에 작성
-		
-		//모달 창 띄우기, 모달창 닫기
-		$(document).ready(function() {
-            $('#hotel_search_address').on('click', function() {
-            	 $('.search_modal_overlay').css('display', 'flex');
-                $('#search_address_modal').css('display', 'flex');
-            });
-            
-            $('#hotel_search_date').on('click', function() {
-           		 $('.search_modal_overlay').css('display', 'flex');
-                $('#search_date_modal').css('display', 'flex');
-            });
-            
-            $('#hotel_search_capacity').on('click', function() {
-           		 $('.search_modal_overlay').css('display', 'flex');
-                $('#search_capacity_modal').css('display', 'flex');
-            });
-            
-            $('.search_modal_overlay').on('click', function(e) {
-                if (e.target === this) {
-                    $('.search_modal_overlay').css('display', 'none');
-                    $('#search_date_modal').css('display','none');
-                    $('#search_capacity_modal').css('display','none');
-                    $('#search_address_modal').css('display', 'none');
-                }
-            });
-        });
-=======
+		// flat pickr에서 날짜 선택하면 input에 넣어주는 함수
+
 		$(document)
-				.click(
-						function(event) {
-							if (!$(event.target)
-									.closest(
-											"#index .search form .input input, #index .search form .gray").length) {
-								$("#index .search form .input input")
-										.removeClass("active");
-								$("#index .search form .gray").removeClass(
-										"active");
-							}
+				.ready(
+						function() {
+
+							// Flatpickr 한국어 로컬라이제이션 설정
+							flatpickr.localize(flatpickr.l10ns.ko);
+
+							const dateRangePicker = flatpickr(
+									"#checkin",
+									{
+										mode : "range",
+										dateFormat : "Y-m-d",
+										locale : "ko",
+										onChange : function(selectedDates,
+												dateStr, instance) {
+											if (selectedDates.length === 2) {
+												const checkinDate = selectedDates[0]
+														.toLocaleDateString(
+																'ko-KR',
+																{
+																	year : 'numeric',
+																	month : '2-digit',
+																	day : '2-digit'
+																}).split('. ')
+														.join('-').slice(0, -1);
+												const checkoutDate = selectedDates[1]
+														.toLocaleDateString(
+																'ko-KR',
+																{
+																	year : 'numeric',
+																	month : '2-digit',
+																	day : '2-digit'
+																}).split('. ')
+														.join('-').slice(0, -1);
+												document
+														.getElementById('checkin').value = checkinDate;
+												document
+														.getElementById('checkout').value = checkoutDate;
+											}
+										}
+									});
+
+							// 체크인 또는 체크아웃 입력 필드를 클릭하면 캘린더가 열리도록 설정
+
+							document.getElementById('checkin')
+									.addEventListener('focus', function() {
+										dateRangePicker.open();
+									});
+
+							document.getElementById('checkout')
+									.addEventListener('focus', function() {
+										dateRangePicker.open();
+									});
+
+							// 인원 input 창에 인원 선택해주는 modal 창 함수
+							const $counter = $('.counter');
+							const $decrementBtn = $counter.find('.decrement');
+							const $incrementBtn = $counter.find('.increment');
+							const $countDisplay = $counter.find('span');
+							let count = parseInt($countDisplay.text());
+
+							$decrementBtn.on('click', function() {
+								if (count > 0) {
+									count--;
+									$countDisplay.text(count);
+								}
+							});
+
+							$incrementBtn.on('click', function() {
+								count++;
+								$countDisplay.text(count);
+							});
+
+							const $saveBtn = $('#savePersonnel');
+							$saveBtn.on('click', function() {
+								const inputCount = count + '명';
+								$('#personnelinput').val(inputCount);
+								$('#personnelCount').val(count); // 숫자 값만 숨겨진 필드에 저장
+								$('.modal-content').hide();
+								$('.modal-background').hide();
+							});
+
+							$('#personnelinput').on('click', function(event) {
+						        event.stopPropagation();
+						        const $personnel = $('#personnel');
+						        const offset = $personnel.offset();
+						        const height = $personnel.outerHeight();
+						        $('.modal-content').css({
+						            top: offset.top + height + 'px',
+						            left: offset.left + 'px'
+						        }).show();
+						        $('.modal-background').show();
+						    });
+
+							$(document)
+									.on(
+											'click',
+											function(event) {
+												if (!$(event.target)
+														.closest(
+																'#personnelinput, .modal-content').length) {
+													$('.modal-content').hide();
+													$('.modal-background')
+															.hide();
+												}
+											});
+
+							$('.modal-background').on('click', function() {
+								$('.modal-content').hide();
+								$(this).hide();
+							});
+
 						});
-		
-		$("#index .search form .input input").click(function(){
-			$(".pop_up.search").addClass("active");
-		});
-		$("#index .search form .date").click(function(){
-			$(".pop_up.date").addClass("active");
-		});
-		$("#index .search form .personnel").click(function(){
-			$(".pop_up.personnel").addClass("active");
-		});
-		$(".dimd").click(function(){
-			$(".pop_up").removeClass("active");
-		});
-		
-	
->>>>>>> 0601fe7ddf753b374a0eabab01a3f8539adb1d81
+
+		// 구글지도 검색추천 함수
+		function initAutocomplete() {
+			var input = document.getElementById('address');
+			var autocomplete = new google.maps.places.Autocomplete(input);
+
+			autocomplete.addListener('place_changed', function() {
+				var place = autocomplete.getPlace();
+
+				console.log(place);
+
+				// 경도, 위도 전달 함수
+				if (place.geometry) {
+					var latitude = place.geometry.location.lat();
+					var longitude = place.geometry.location.lng();
+
+					document.getElementById('latitude').value = latitude;
+					document.getElementById('longitude').value = longitude;
+
+					console.log('Latitude:', latitude);
+					console.log('Longitude:', longitude);
+				} else {
+					console.log("google maps api에 없는 장소입니다");
+				}
+			});
+		}
 	</script>
+
 </body>
 </html>

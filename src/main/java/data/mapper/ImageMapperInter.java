@@ -18,4 +18,6 @@ public interface ImageMapperInter {
 	
 	public List<ImagesDto> imgList(String room_id);
 	
+	public List<ImagesDto> hotelNearbyImages(List<String> roomIds);
+	
 }

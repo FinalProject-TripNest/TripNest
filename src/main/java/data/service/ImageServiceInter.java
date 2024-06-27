@@ -13,4 +13,6 @@ public interface ImageServiceInter {
 	public ImagesDto getOneData(String image_id);
 
 	public List<ImagesDto> imgList(String room_id);
+	
+	public List<ImagesDto> hotelNearbyImages(List<String> roomIds); 
 }

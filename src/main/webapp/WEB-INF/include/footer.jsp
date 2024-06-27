@@ -66,6 +66,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- flatpickr, flatpickr 한국어 -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO7HTv_-lT3XqT_R-FwjiUdjiGJT6NRsI&libraries=places"></script>
 <script src="${root }/js/parallax_scroll.js" type="module"></script>
 <script src="${root }/js/ukiyo.js"></script>
 <script src="${root }/js/index.js"></script>
