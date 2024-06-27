@@ -247,9 +247,13 @@
         }).toString();
         xhr.send(params);
         xhr.onload = function() {
-            if (xhr.status === 200) {
-                alert("인증번호가 전송되었습니다.");
-                document.getElementById('verificationCodeGroup').style.display = 'block';
+        	if (xhr.status === 200) {
+                if (xhr.responseText === "이미 사용 중인 이메일입니다.") {
+                    alert("이미 사용 중인 이메일입니다.");
+                } else {
+                    alert("인증번호가 전송되었습니다.");
+                    document.getElementById('verificationCodeGroup').style.display = 'block';
+                }
             } else {
                 alert("인증번호 전송에 실패했습니다. 다시 시도해주세요.");
             }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="data.mapper.ReservationMapperInter">
+	<select id="getOneData" resultType="RoomsDto" parameterType="int">
+		select * from ROOMS where room_id=#{room_id}
+	</select>
+	<select id="getOneData_member" resultType="MemberDto" parameterType="String">
+		select * from MEMBERS where member_useremail=#{member_useremail}
+	</select>
+	<insert id="insertReservation" parameterType="ReservationDto">
+		insert into
+		RESERVATIONS(RESERVATION_ID,MEMBER_ID,ROOM_ID,RESERVATION_CHECKIN,RESERVATION_CHECKOUT,RESERVATION_CAPACITY,RESERVATION_REQUIRE,RESERVATION_PRICE,MERCHANT_UID,RESERVATION_DATE)
+		values(null,#{memberId},#{roomId},#{reservationCheckin},#{reservationCheckout},#{reservationCapacity},#{reservationRequire},#{reservationPrice},#{merchantUid}, now())
+	</insert>
+</mapper>
