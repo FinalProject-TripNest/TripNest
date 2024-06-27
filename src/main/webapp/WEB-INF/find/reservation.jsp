@@ -647,7 +647,8 @@
 }
 
 #reservation .select_coupon .main .on .block span.btncoupon,
-	#reservation .select_coupon .main .on .block span.title {
+	#reservation .select_coupon .main .on .block span.title,
+	#reservation .select_coupon .main .on .block span.nocount {
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	width: 240px;
@@ -655,7 +656,8 @@
 	color: #333;
 }
 
-#reservation .select_coupon .main .on .block span.btncoupon {
+#reservation .select_coupon .main .on .block span.btncoupon,
+#reservation .select_coupon .main .on .block span.nocount {
 	width: 100px;
 	text-align: center;
 	cursor: pointer;
@@ -861,8 +863,7 @@
 
 															<div class="_bookings-new_selector__DJU6E">
 																<div class="_bookings-new_coupon_title__PlGl_">
-																	<p
-																		class="_bookings-new_title__HZVPb _bookings-new_full__Ee2PM">사용안함</p>
+																	<p class="_bookings-new_title__HZVPb _bookings-new_full__Ee2PM" id="couponname">사용안함</p>
 																</div>
 																<img src="../img/reservation/righticon.png"
 																	alt="arrow-next">
@@ -884,13 +885,18 @@
 																					type="hidden" name="coupon_group_id"
 																					value="${coupon.couponGroupId}"> <input
 																					type="hidden" name="member_id"
-																					value="${coupon.memberId}"> <span
-																					class="title"> <span class="discountmoney">${coupon.discountAmount}</span>원
-																					쿠폰 <fmt:formatDate value="${coupon.expireDate}"
-																						pattern="(~MM/dd)" />
-																				</span> <span class="btncoupon">적용</span>
+																					value="${coupon.memberId}"> 
+																					<span class="title"> <span class="discountmoney">${coupon.discountAmount}</span>원
+																					쿠폰 
+																					<fmt:formatDate value="${coupon.expireDate}" pattern="(~MM/dd)" />
+																				    </span> 
+																				    <span class="btncoupon" id="applycoupon">적용</span>
 																			</div>
 																		</c:forEach>
+																			<div class="block">
+																				<span class="title">쿠폰 사용 안함</span>
+																				<span class="nocount" id="applycoupon">적용</span>
+																			</div>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -927,15 +933,12 @@
 										</dd>
 										<dt>할인 금액</dt>
 										<dd>
-											<span id="discount2"></span>
+											<span id="discount2">-</span>
 										</dd>
 										<dt class="total"></dt>
 										<dd class="total">
-											<input type="hidden" name="RESERVATION_PRICE"
-												id="RESERVATION_PRICE" value="100">
-											<%-- 												${roomsDto.room_price} --%>
-											<fmt:formatNumber value="${roomsDto.room_price}"
-												type="currency" currencySymbol="₩ " groupingUsed="true" />
+											<input type="hidden" name="RESERVATION_PRICE" id="RESERVATION_PRICE" value="">
+											<span id="pgmoney"></span>
 										</dd>
 									</dl>
 								</div></li>
@@ -1185,7 +1188,7 @@
 									</dt>
 									<dd>
 										<ul>
-											<li>체크인 시간은 오후 4시, 체크아웃 시간은 오전 11시입니다.</li>
+											<li>체크인 시간은 오후 3시, 체크아웃 시간은 오전 11시입니다.</li>
 											<li>예약하신 당일 오전에, 체크인 안내 문자를 보내드립니다.</li>
 											<li>최대인원을 초과하는 인원은 입실이 불가합니다.</li>
 											<li>예약인원 외 방문객의 출입을 엄격히 제한합니다.</li>
@@ -1241,7 +1244,7 @@
 									</dt>
 									<dd>
 										<ul>
-											<li>건물 뒤편에 글림스 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
+											<li>건물 뒤편에 ${roomsDto.room_name } 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
 												2대까지 주차 가능합니다.</li>
 										</ul>
 									</dd>
@@ -1371,7 +1374,7 @@
 
 	$("#money-btn").click(function(e) {
 		e.preventDefault(); // 폼 제출 방지
-
+		
 		// 전체 동의 체크 여부
 		var allAgreeChecked = $("#allAgree").prop("checked");
 
@@ -1392,6 +1395,8 @@
 				alert("최대 인원을 초과하였습니다.");
 			} else {
 				// 최대인원 이하인 경우
+				// 결과를 hidden input에 설정
+
 				requestPay(); // 결제 요청 함수 호출
 			}
 		} else {
@@ -1399,23 +1404,76 @@
 			alert("모든 항목에 동의해주세요.");
 		}
 	});
-	
 	//전역변수 생성
 	var selectedCouponId = null;
+	var isCouponSelected = false;
+	// 실 결제금액
+	var pgMoney;
+	//할인 금액
+	var discountAmount;
 	
 	$(document).on('click', '.btncoupon', function() {
         // 부모 요소 .block를 찾고, 그 안의 필요한 요소들을 찾음
         var $block = $(this).closest('.block');
-        var discountAmount = parseInt($block.find('.discountmoney').text()); // 할인 금액을 정수로 변환하여 가져옴
+        discountAmount = parseInt($block.find('.discountmoney').text()); // 할인 금액을 정수로 변환하여 가져옴
         var couponId = $block.find('input[name="coupon_id"]').val(); // coupon_id 값
 
         selectedCouponId = couponId;  // 선택된 쿠폰 ID를 전역 변수에 저장
+        isCouponSelected = true;  // 쿠폰이 선택되었음을 표시
         
-        alert(discountAmount + "," + couponId);
+        //alert(discountAmount + "," + couponId);
         $("#reservation .select_coupon").removeClass("active");
     });
 
+	$(document).on('click', '.nocount', function() {
+	    isCouponSelected = false;  // 쿠폰 사용 안함을 선택
+	    selectedCouponId = null;  // 선택된 쿠폰 ID를 초기화
+	    discountAmount=0;
+	    
+	    //alert("쿠폰 사용 안함이 선택되었습니다.");
+	    $("#reservation .select_coupon").removeClass("active");
+	    
+	});
+	
+	$(document).on('click', '#applycoupon', function() {
+	    var couponTitle = $(this).closest('.block').find('.title').text();
+	    $("#couponname").text(couponTitle);
+	    
+		 // 클릭된 쿠폰 블록을 찾음
+	    var $block = $(this).closest('.block');
+		 
+		 
+		 
+	 // 할인 금액이 0이면 '-'을 표시하도록 처리
+	    if (discountAmount === 0) {
+	        discountAmount = '-';
+	        pgMoney=totalPrice;
+	    } else {
+	    	pgMoney=totalPrice-discountAmount;
+	    	
+	    	// pgMoney가 0보다 작으면 0으로 설정
+	        if (pgMoney < 0) {
+	            pgMoney = 0;
+	        }
+	        // 숫자로 변환 후 포맷팅
+	        discountAmount = discountAmount.toLocaleString('ko-KR', {
+	            style: 'currency',
+	            currency: 'KRW'
+	        });
+	    }
+	    $('#RESERVATION_PRICE').val(pgMoney);
+	    
+	    pgMoney = pgMoney.toLocaleString('ko-KR', {
+            style: 'currency',
+            currency: 'KRW'
+        });
+	    
+	    $('#discount1').text(discountAmount); // #discount1에 할인 금액 표시
+	    $('#discount2').text(discountAmount); // #discount2에 할인 금액 표시
+	    $('#pgmoney').text(pgMoney);
 
+	});
+	
 	function requestPay() {
 
 		var memberId = $("#MEMBER_ID").val();
@@ -1426,7 +1484,7 @@
 		var reservationRequire = $("#RESERVATION_REQUIRE").val();
 		var reservationPrice = $("#RESERVATION_PRICE").val();
 		var merchantUid = $("#merchant_uid").val();
-
+		totalPrice
 		//IMP.request_pay(param, callback) // 결제창 호출
 		IMP.init("imp16144603");
 		IMP.request_pay({ // param
@@ -1468,12 +1526,12 @@
 							reservationCheckout: reservationCheckout,
 							reservationCapacity: reservationCapacity,
 							reservationRequire: reservationRequire,
-							reservationPrice: reservationPrice,
+							reservationPrice: totalPrice,
 							merchantUid: rsp.merchant_uid
 						},
 						//TODO: 쿠폰 id 확인 하기
 						useCouponReq: {
-							selected: false,
+							selected: isCouponSelected, //쿠폰 선택여부 전송 boolean
 							couponId: selectedCouponId // 선택된 쿠폰 ID 전송
 						}
 					}),
@@ -1572,6 +1630,9 @@
 	// 총 요금을 화폐 단위로 포맷하여 HTML에 출력
 	var formattedTotalPrice = new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(totalPrice);
 	$("#totalprice1").text(formattedTotalPrice);
+	$("#pgmoney").text(formattedTotalPrice);
+	$('#RESERVATION_PRICE').val(totalPrice);
+	
 
 
 </script>
