@@ -60,7 +60,7 @@ public class CouponService {
 
         }catch (Exception e) {
             log.error("[error] assignCoupon - 쿠폰 발급 실패", e);
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

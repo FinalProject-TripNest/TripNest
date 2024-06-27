@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -46,7 +48,8 @@ public class CouponController {
      * @return
      */
     @PostMapping("/coupons/{couponGroupId}/issue")
-    public ResponseEntity<String> assignCoupon(@PathVariable String couponGroupId, @RequestBody CreateCouponReq createCouponReq) {
+    public ResponseEntity<Map<String, Object>> assignCoupon(@PathVariable String couponGroupId, @RequestBody CreateCouponReq createCouponReq) {
+        Map<String, Object> response = new HashMap<>();
         log.info("CouponController.assignCoupon - couponGroupId: {}", couponGroupId);
         log.info("CouponController.assignCoupon - memberId: {}", createCouponReq.getMemberId());
         try{
@@ -55,9 +58,10 @@ public class CouponController {
         }catch (Exception e) {
             log.error("[error] fail to create coupon(coupon_group_id:{}) for user(user_id:{})",
                     couponGroupId,createCouponReq.getMemberId(),e);
-            return ResponseEntity.badRequest().body(e.getMessage());
+            response.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
-        return ResponseEntity.ok().body("쿠폰 발급 성공");
+        return ResponseEntity.ok().body(response);
     }
 
     /**
@@ -75,7 +79,7 @@ public class CouponController {
                     useCouponReq.getMemberId(), couponId, e);
             return ResponseEntity.badRequest().body("쿠폰 사용 실패");
         }
-        return ResponseEntity.ok().body("쿠폰 사용 성공");
+        return ResponseEntity.ok("쿠폰 사용 성공");
     }
 
 
