@@ -1472,8 +1472,10 @@
 							merchantUid: rsp.merchant_uid
 						},
 						//TODO: 쿠폰 id 확인 하기
-// 						couponId: 86,
-						couponId: selectedCouponId // 선택된 쿠폰 ID 전송
+						useCouponReq: {
+							selected: false,
+							couponId: selectedCouponId // 선택된 쿠폰 ID 전송
+						}
 					}),
 					success: function(response) {
 						// 결제 완료 페이지로 이동

@@ -89,8 +89,8 @@ public class PaymentController {
 	    
 	    PaymentDto paymentDto = requestData.getPaymentDto();
 	    ReservationDto reservationDto = requestData.getReservationDto();
-	    UseCouponReq useCouponReq = new UseCouponReq();
-	    useCouponReq.setCouponId(requestData.getCouponId());
+	    UseCouponReq useCouponReq = requestData.getUseCouponReq();
+
 
 	    log.info("paymentDto : {}", paymentDto);
 	    log.info("reservationDto : {}", reservationDto);

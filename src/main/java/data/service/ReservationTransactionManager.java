@@ -25,7 +25,8 @@ public class ReservationTransactionManager {
             // 2. 예약 정보 저장
             reservationService.insertReservation(reservationDto);
             // 3. 쿠폰 사용
-            couponService.useCoupon(useCouponReq);
+            if(useCouponReq.isSelected())
+                couponService.useCoupon(useCouponReq);
         }catch (Exception e) {
             log.error("[error] processBookingTransaction - fail to make reservation", e);
             throw new RuntimeException(e.getMessage(),e);
