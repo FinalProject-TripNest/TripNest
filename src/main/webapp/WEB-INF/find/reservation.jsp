@@ -647,8 +647,8 @@
 }
 
 #reservation .select_coupon .main .on .block span.btncoupon,
-	#reservation .select_coupon .main .on .block span.title,
-	#reservation .select_coupon .main .on .block span.nocount {
+	#reservation .select_coupon .main .on .block span.title, #reservation .select_coupon .main .on .block span.nocount
+	{
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	width: 240px;
@@ -657,7 +657,7 @@
 }
 
 #reservation .select_coupon .main .on .block span.btncoupon,
-#reservation .select_coupon .main .on .block span.nocount {
+	#reservation .select_coupon .main .on .block span.nocount {
 	width: 100px;
 	text-align: center;
 	cursor: pointer;
@@ -863,7 +863,9 @@
 
 															<div class="_bookings-new_selector__DJU6E">
 																<div class="_bookings-new_coupon_title__PlGl_">
-																	<p class="_bookings-new_title__HZVPb _bookings-new_full__Ee2PM" id="couponname">사용안함</p>
+																	<p
+																		class="_bookings-new_title__HZVPb _bookings-new_full__Ee2PM"
+																		id="couponname">사용안함</p>
 																</div>
 																<img src="../img/reservation/righticon.png"
 																	alt="arrow-next">
@@ -885,18 +887,17 @@
 																					type="hidden" name="coupon_group_id"
 																					value="${coupon.couponGroupId}"> <input
 																					type="hidden" name="member_id"
-																					value="${coupon.memberId}"> 
-																					<span class="title"> <span class="discountmoney">${coupon.discountAmount}</span>원
-																					쿠폰 
-																					<fmt:formatDate value="${coupon.expireDate}" pattern="(~MM/dd)" />
-																				    </span> 
-																				    <span class="btncoupon" id="applycoupon">적용</span>
+																					value="${coupon.memberId}"> <span
+																					class="title"> <span class="discountmoney">${coupon.discountAmount}</span>원
+																					쿠폰 <fmt:formatDate value="${coupon.expireDate}"
+																						pattern="(~MM/dd)" />
+																				</span> <span class="btncoupon" id="applycoupon">적용</span>
 																			</div>
 																		</c:forEach>
-																			<div class="block">
-																				<span class="title">쿠폰 사용 안함</span>
-																				<span class="nocount" id="applycoupon">적용</span>
-																			</div>
+																		<div class="block">
+																			<span class="title">쿠폰 사용 안함</span> <span
+																				class="nocount" id="applycoupon">적용</span>
+																		</div>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -937,8 +938,8 @@
 										</dd>
 										<dt class="total"></dt>
 										<dd class="total">
-											<input type="hidden" name="RESERVATION_PRICE" id="RESERVATION_PRICE" value="">
-											<span id="pgmoney"></span>
+											<input type="hidden" name="RESERVATION_PRICE"
+												id="RESERVATION_PRICE" value=""> <span id="pgmoney"></span>
 										</dd>
 									</dl>
 								</div></li>
@@ -1244,8 +1245,8 @@
 									</dt>
 									<dd>
 										<ul>
-											<li>건물 뒤편에 ${roomsDto.room_name } 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
-												2대까지 주차 가능합니다.</li>
+											<li>건물 뒤편에 ${roomsDto.room_name } 전용 주차장이 마련되어 있습니다.
+												주중(월-금) 1대, 주말(토-일) 2대까지 주차 가능합니다.</li>
 										</ul>
 									</dd>
 								</dl>
@@ -1396,8 +1397,64 @@
 			} else {
 				// 최대인원 이하인 경우
 				// 결과를 hidden input에 설정
-
-				requestPay(); // 결제 요청 함수 호출
+				reservationPrice = $("#RESERVATION_PRICE").val();
+				if(reservationPrice === "0"){
+					//alert(reservationPrice);
+ 					if (confirm("결제하시겠습니까?")) {
+					var memberId = $("#MEMBER_ID").val();
+					var roomId = $("#ROOM_ID").val();
+					var reservationCheckin = $("#RESERVATION_CHECKIN").val();
+					var reservationCheckout = $("#RESERVATION_CHECKOUT").val();
+					var reservationCapacity = totalCount; // totalCount는 다른 곳에서 정의된 변수로 가정
+					var reservationRequire = $("#RESERVATION_REQUIRE").val();
+					var memberName=$("#name").val();
+					// 고유한 merchantUid 생성
+		            var merchantUid = memberName + new Date().getTime();
+					$.ajax({
+						type: "POST",
+						url: "/payment/complete", // 서버의 결제 정보 처리 URL
+						contentType: "application/json", // Content-Type 명시
+						data: JSON.stringify({
+							paymentDto : {
+								imp_uid: "", // 빈 값 설정
+		                        merchant_uid: merchantUid,
+		                        paid_amount: 0,
+		                        pg_provider: "",
+		                        pg_tid: "",
+		                        buyer_name: $("#name").val(),
+		                        member_useremail: $("#email").val()
+							},
+							reservationDto:{
+								memberId: memberId,
+								roomId: roomId,
+								reservationCheckin: reservationCheckin,
+								reservationCheckout: reservationCheckout,
+								reservationCapacity: reservationCapacity,
+								reservationRequire: reservationRequire,
+								reservationPrice: totalPrice,
+								merchantUid: merchantUid
+							},
+							//TODO: 쿠폰 id 확인 하기
+							useCouponReq: {
+								selected: isCouponSelected, //쿠폰 선택여부 전송 boolean
+								couponId: selectedCouponId // 선택된 쿠폰 ID 전송
+							}
+						}),
+						success: function(response) {
+							// 결제 완료 페이지로 이동
+							window.location.href = response.redirectUrl;
+						},
+						error: function(error) {
+							alert(error.responseJSON.message);
+							//결제 실패시 디테일 페이지로 이동
+							window.location.href = error.responseJSON.redirectUrl;
+						}
+					});
+				
+					}	
+				} else{
+					requestPay(); // 결제 요청 함수 호출
+				}
 			}
 		} else {
 			// 어느 하나라도 선택되지 않은 경우
@@ -1407,6 +1464,7 @@
 	//전역변수 생성
 	var selectedCouponId = null;
 	var isCouponSelected = false;
+	var reservationPrice;
 	// 실 결제금액
 	var pgMoney;
 	//할인 금액
@@ -1482,9 +1540,8 @@
 		var reservationCheckout = $("#RESERVATION_CHECKOUT").val();
 		var reservationCapacity = totalCount; // totalCount는 다른 곳에서 정의된 변수로 가정
 		var reservationRequire = $("#RESERVATION_REQUIRE").val();
-		var reservationPrice = $("#RESERVATION_PRICE").val();
 		var merchantUid = $("#merchant_uid").val();
-		totalPrice
+		
 		//IMP.request_pay(param, callback) // 결제창 호출
 		IMP.init("imp16144603");
 		IMP.request_pay({ // param
