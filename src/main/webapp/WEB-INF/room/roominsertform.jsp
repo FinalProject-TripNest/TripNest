@@ -273,6 +273,7 @@ vertical-align: middle;
 #r_detail{
 max-height: 250px;
 overflow: auto;
+font-family: "Noto Sans KR";
 }
 </style>
 <body>
@@ -770,34 +771,51 @@ overflow: auto;
 	        });
 	        $("#r_service").text(services.join(", "));
 	    });
-	    
-	    // 파일 입력(change) 이벤트 감지
-	    $('#image_photo').on('change', function(){
-	        var files = $(this)[0].files;
-	        var photoContainer = $('#r_photo');
-	        photoContainer.empty(); // 기존 이미지 모두 제거
-	        
-	        // FileReader 객체를 사용하여 선택된 이미지 파일들을 읽고 미리보기에 추가
-	        for (var i = 0; i < files.length; i++) {
-	            var file = files[i];
-	            var reader = new FileReader();
-	            
-	            reader.onload = (function(theFile) {
-	                return function(e) {
-	                    var imgElement = $('<img>');
-	                    imgElement.attr('src', e.target.result);
-	                    imgElement.attr('alt', theFile.name);
-	                    imgElement.addClass('preview-image');
-	                    photoContainer.append(imgElement); // 미리보기 이미지를 추가
-	                };
-	            })(file);
-	            
-	            // 파일 읽기 시작
-	            reader.readAsDataURL(file);
-	        }
-	    });
-		
 	})
+	
+	//사진 등록했을때 마지막 미리보기에 출력되게
+	$(function() {
+		
+		
+		// 이미지 미리보기를 감시할 MutationObserver 생성
+	    var observer = new MutationObserver(function(mutations) {
+	        mutations.forEach(function(mutation) {
+	            if (mutation.type === 'childList') {
+	                updateRPhoto();
+	            }
+	        });
+	    });
+
+	    // 감시할 대상 설정 (#imagePreviewContainer)
+	    var targetNode = document.getElementById('imagePreviewContainer');
+	    var config = { childList: true,subtree: true };
+
+	    // MutationObserver 시작
+	    observer.observe(targetNode, config);
+
+	    // 초기화 시 이미지 미리보기 로드
+	    updateRPhoto();
+
+	    // #r_photo 업데이트 함수 정의
+	    function updateRPhoto() {
+	        var photoContainer = $('#r_photo');
+	        var previewContainer = $('#imagePreviewContainer');
+
+	        // 기존에 #r_photo에 있던 사진 모두 제거
+	        photoContainer.empty();
+
+	        // #imagePreviewContainer 내의 각 이미지를 #r_photo에 복제하여 추가
+	        previewContainer.children('div.miribogidiv').each(function(index, element) {
+	        	 var clonedDiv = $(element).clone();
+	             photoContainer.append(clonedDiv);
+	        });
+	    }
+		
+
+
+
+});
+	
 	
 	    function updatePeopleText() {
         var r_min_capacity = $("#room_min_capacity").val();

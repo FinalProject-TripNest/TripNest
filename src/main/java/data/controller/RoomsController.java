@@ -233,7 +233,7 @@ public class RoomsController {
         List<String> services = Arrays.asList("와이파이", "TV", "주방", "세탁기", "에어컨", "전자렌지", 
 								                "수영장", "바베큐 그릴", "주차장", "반려동물 입장가능", 
 								                "셀프체크인", "건조기", "헤어드라이기", "비데", 
-								                "식기류", "빔프로젝트", "보드게임", "빅테이블");
+								                "식기류", "빔프로젝트", "보드게임", "빅테이블","전기포트","스피커","인덕션");
         model.addAttribute("services", services);
         
         List<ImagesDto> images = imgservice.imgList(room_id);

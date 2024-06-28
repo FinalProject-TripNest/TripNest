@@ -10,8 +10,38 @@
 </head>
 <title>TRIP NEST</title>
 <style>
-table  tr, td{
-	border: 1px solid red;
+#roomlist table td{
+	height: 30px;
+	    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    	vertical-align: middle;
+}
+
+#roomTable{
+	margin: 0 auto;
+}
+.roomlistdiv{
+padding-top: 5%;
+padding-bottom: 5%;
+}
+#roomlist .servicelist{
+    white-space: nowrap; /* 줄바꿈을 방지하여 한 줄에 표시 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+    text-overflow: ellipsis; /* 넘치는 부분을 ...으로 표시 */
+    max-width: 160px;
+}
+#roomlist .roomdel,.roomedit{
+width: 70px;
+background-color: white;
+border: 1px solid gray;
+cursor: pointer;
+height: 30px;
+margin: 5px;
+
+}
+#roomlist caption {
+	margin-bottom: 20px;
+	font-size: 20pt;
 }
 </style>
 <body>
@@ -20,16 +50,20 @@ table  tr, td{
 	<div id="wrap">
 		<div id="roomlist">
 			<div class="center">
-				<div>
+				<div class="roomlistdiv">
 				<input type="hidden" value="${memberId}" class="memid">
 					<table id="roomTable">
+					<caption align="top"><b>호스트님의 공간</b></caption>
 					<thead>
-						<tr>
-							<td>숙소번호</td>
-							<td>숙소이름</td>
-							<td>위치</td>
-							<td>상태</td>
-							<td>비고</td>
+						<tr align="center">
+							<td width="80px;">숙소번호</td>
+							<td width="200px;">숙소이름</td>
+							<td width="250px;">위치</td>
+							<td width="150px;">가격</td>
+							<td width="100px;">서비스</td>
+							<td width="100px;">상태</td>
+							<td width="160px;">비고</td>
+							<td><fmt:formatNumber value="" type="number"/> </td>
 						</tr>
 						</thead>
 						<tbody>
@@ -83,12 +117,16 @@ table  tr, td{
 	              var tbody = $('#roomTable tbody');
 	                tbody.empty();
 	                $.each(data, function(index, room){
-	                    var s = '<tr>' +
-	                        '<td>' + room.room_id + '</td>' +
-	                        '<td>' + room.room_name + '</td>' +
+	                	 var formattedPrice = new Intl.NumberFormat().format(room.room_price);
+	                	
+	                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '" title="누르면 해당 페이지로 이동합니다.">' +
+	                        '<td align="center">' + room.room_id + '</td>' +
+	                        '<td  align="center">' + room.room_name + '</td>' +
 	                        '<td>' + room.room_address + '</td>' +
-	                        '<td>' + room.room_status + '</td>' +
-	                        '<td>' +
+	                        '<td>'+formattedPrice+'</td>' +
+	                        '<td class="servicelist">' + room.room_service + '</td>' +
+	                        '<td align="center">' + room.room_status + '</td>' +
+	                        '<td align="center">' +
 	                            '<button type="button" class="roomdel" value="' + room.room_id + '">삭제</button>' +
 	                            '<button type="button" class="roomedit" value="' + room.room_id + '" onclick="location.href=\'updateform?room_id=' + room.room_id + '\'">수정</button>' +
 	                        '</td>' +
@@ -98,7 +136,15 @@ table  tr, td{
 			}
 		})
 	};
-	
+	// jQuery로 각 행에 클릭 이벤트 추가
+	$(document).on('click', '.clickable-row', function() {
+	    window.location = $(this).data('url');
+	});
+
+	// 버튼 클릭 시 이벤트 전파를 막아 행 클릭 이벤트가 발생하지 않도록 합니다.
+	$(document).on('click', '.roomdel, .roomedit', function(event) {
+	    event.stopPropagation();
+	});
 	</script>
 </body>
 </html>

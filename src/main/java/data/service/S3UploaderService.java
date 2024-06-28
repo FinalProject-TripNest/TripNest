@@ -100,4 +100,19 @@ public class S3UploaderService {
         deleteFile(oldFileName);
         return upload(newFile, dirName);
     }
+    public String uploadSingleFile(MultipartFile file,String dirName) throws IOException{
+    	  	
+    		String originalFileName = file.getOriginalFilename();
+    	    String uuid = UUID.randomUUID().toString();
+    	    String uniqueFileName = uuid + "_" + originalFileName.replaceAll("\\s", "_");
+
+    	    String fileName = dirName + "/" + uniqueFileName;
+    	    log.info("SingleFileName: " + fileName);
+
+    	    File uploadFile = convert(file);
+    	    String uploadImageUrl = putS3(uploadFile, fileName);
+    	    removeNewFile(uploadFile);
+
+    	    return uploadImageUrl;
+    }
 }

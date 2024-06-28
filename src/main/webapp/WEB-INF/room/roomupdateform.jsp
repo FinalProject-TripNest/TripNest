@@ -171,6 +171,7 @@
 						<div>
 							<span>사진</span>
 							<input type="file" id="image_photo" multiple="multiple" accept="image/*"  name="image_upload" onchange="previewImages(event)">
+							<span>(사진을 선택하지 않을시 기존의 사진이 유지됩니다)</span>
 						</div>
 						<div id="imagePreviewContainer" class="image-container">
 			        <c:forEach var="img" items="${images}">
