@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -119,31 +120,32 @@
 							<div class="title">Receipt</div>
 							<div class="content">
 								<div class="complete">예약이 완료되었습니다.</div>
-								<div class="hotelname">글림스</div>
+								<div class="hotelname">${roomsDto.room_name}</div>
 								<div class="location">
-									<span>구로구 구로동</span>
+									<span>${roomsDto.room_address}&nbsp;&nbsp;${roomsDto.room_address_detail}</span>
 								</div>
 								<a href="javascript:;" class="hotelimg"> <img alt=""
-									src="${root }/img/find/room_03.png">
+									src="${roomimage }">
 								</a>
 								<div class="text_box">
 									<div>
 										<p>
-											<span>예약번호</span> : 1234
+											<span>예약번호</span> : ${fn:substring(successDto.merchant_uid, 3, fn:length(successDto.merchant_uid))}
 										</p>
 										<p>
-											<span>예약자 성함</span> : 한동규
+											<span>예약자 성함</span> : ${successDto.buyer_name}
 										</p>
 										<p>
-											<span>체크인</span> : 2024-06-19 15:00 이후
+											<span>체크인</span> : ${successDto.RESERVATION_CHECKIN} 15:00 이후
 										</p>
 										<p>
-											<span>체크아웃</span> : 2024-06-19 11:00 이전
+											<span>체크아웃</span> : ${successDto.RESERVATION_CHECKOUT} 11:00 이전
 										</p>
 										<p>
-											<span>결제금액</span> : 10000
+											<span>결제금액</span> : <fmt:formatNumber value="${successDto.paid_amount}" type="currency"
+							currencySymbol="₩ " groupingUsed="true" />
 										</p>
-											<a href="#" class="mapconfirm" style="margin-top: 30px;">숙소 위치 확인</a>
+											<a href="${root }/find/list/detail?room_id=${roomsDto.room_id}#amenities" class="mapconfirm" style="margin-top: 30px;">숙소 위치 확인</a>
 									</div>		
 								</div>
 							</div>

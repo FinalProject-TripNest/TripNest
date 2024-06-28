@@ -22,5 +22,13 @@
 		select * from IMAGES
 		where room_id = #{room_id}
 	</select>
+	
+	<delete id="deleteImage" parameterType="String">
+		delete from IMAGES where room_id = #{room_id}
+	</delete>
+	
+	<update id="updateimage" parameterType="ImagesDto">
+		update IMAGES set image_photo=#{image_photo} where room_id=#{room_id}
+	</update>
 </mapper>
 

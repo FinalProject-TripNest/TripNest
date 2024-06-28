@@ -18,4 +18,6 @@ public interface MemberServiceInter {
     
     List<MemberDto> getRecentMember();
 
+	MemberDto getMemberByEmail(String email);
+
 }

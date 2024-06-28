@@ -70,4 +70,8 @@ public class MemberService implements MemberServiceInter {
 		// TODO Auto-generated method stub
 		return memberMapper.getRecentMember();
 	}
+	@Override
+	public MemberDto getMemberByEmail(String email) {
+		return memberMapper.findByEmail(email);
+	}
 }

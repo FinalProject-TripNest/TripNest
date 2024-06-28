@@ -19,4 +19,7 @@ public class ReservationDto {
 	private String RESERVATION_REQUIRE;
 	private int RESERVATION_PRICE;
 	private Timestamp RESERVATION_DATE;
+	private String MERCHANT_UID; // 상점 주문 번호 : 상점에서 관리하는 주문 번호 
+	//payment테이블의 주문번호 생성시 해당 컬럼에도 삽입되게함
+
 }

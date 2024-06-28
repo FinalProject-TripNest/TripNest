@@ -29,9 +29,13 @@ public class MemberController {
     @PostMapping("/send-verification")
     @ResponseBody
     public String sendVerification(@RequestParam String email) {
+    	// 이메일 중복 체크
+        if (memberService.checkEmailExists(email)) {
+            return "이미 사용 중인 이메일입니다.";
+        }
         // 이메일 인증 요청
         emailService.sendEmailVerification(email);
-        return "Verification email sent";
+        return "인증번호가 전송되었습니다.";
     }
 
     @PostMapping("/verify-code")
@@ -56,23 +60,21 @@ public class MemberController {
         memberDto.setMember_phone(member_phone);
         memberDto.setMember_birth_date(java.sql.Date.valueOf(member_birth_date));
 
-        // 이메일 중복 체크
-        if (memberService.checkEmailExists(member_useremail)) {
-            model.addAttribute("error", "이미 사용 중인 이메일입니다.");
-            return "/member/registerForm"; // 수정된 경로
-        }
-        
         if (emailService.verifyEmailToken(member_useremail, token)) {
-
-            memberService.registerMember(memberDto, token);
-            
-            // 이메일 인증 정보 삭제
-            emailService.deleteEmailVerification(member_useremail, token);
-
-            return "redirect:/member/registerSuccess"; // 성공 페이지로 리다이렉트
+            try {
+                memberService.registerMember(memberDto, token);
+                
+                // 이메일 인증 정보 삭제
+                emailService.deleteEmailVerification(member_useremail, token);
+                
+                return "redirect:/member/registerSuccess";
+            } catch (Exception e) {
+                model.addAttribute("error", "회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+                return "/member/registerForm";
+            }
         } else {
             model.addAttribute("error", "이메일 인증이 완료되지 않았습니다.");
-            return "/member/registerForm"; // 수정된 경로
+            return "/member/registerForm";
         }
     }
 
