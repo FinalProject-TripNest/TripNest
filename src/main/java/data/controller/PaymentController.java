@@ -116,7 +116,6 @@ public class PaymentController {
 	        String encodedMerchantUid = URLEncoder.encode(paymentDto.getMerchant_uid(), StandardCharsets.UTF_8);
 	        response.put("success", true);
 	        response.put("redirectUrl", "/find/reservation_success?merchant_uid=" + encodedMerchantUid);
-
 	        return ResponseEntity.ok(response);
 	    } catch (Exception e) {
 
