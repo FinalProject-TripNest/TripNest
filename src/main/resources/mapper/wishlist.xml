@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="data.mapper.WishlistMapperInter">
+	<select id="dataList" resultType="WishlistDto">
+		select * from journal order by desc
+	</select>
+	
+	<insert id="insertWishlist" parameterType="WishlistDto">
+		insert into WISHLIST (member_useremail,room_id,wishlist_date) values(#{member_useremail},#{room_id},now());
+	</insert>
+	
+	<select id="checkWishlist" resultType="int" parameterType="WishlistDto">
+		select count(*) from WISHLIST where member_useremail=#{member_useremail} and room_id=#{room_id}
+	</select>
+	
+	<delete id="delectWishlist" parameterType="WishlistDto">
+		delete from WISHLIST where member_useremail=#{member_useremail} and room_id=#{room_id}
+	</delete>
+</mapper>

@@ -860,7 +860,7 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 				alert("숙소사진을 선택해 주세요.");
 				// 슬라이드를 첫 번째 페이지로 이동
 				var swiper = document.querySelector('.mySwiper').swiper;
-				swiper.slideTo(0);
+				swiper.slideTo(2);
 				return false;
 			}
 
@@ -880,7 +880,9 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 			}
 			if (services == 0) {
 				alert("1개 이상의 편의시설을 선택해 주세요.");
+				var swiper = document.querySelector('.mySwiper').swiper;
 				// 슬라이드를 마지막 페이지로 이동
+				swiper.slideTo(3);
 				return false;
 			}
 			return true;
