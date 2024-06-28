@@ -11,7 +11,7 @@
 <title>TRIP NEST</title>
 <style>
 #roomlist table td{
-	height: 30px;
+	height: 40px;
 	    border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
     	vertical-align: middle;
@@ -20,8 +20,8 @@
 #roomTable{
 	margin: 0 auto;
 }
-.roomlistdiv{
-padding-top: 5%;
+#roomlist .roomlistdiv{
+padding-top:20px;
 padding-bottom: 5%;
 }
 #roomlist .servicelist{
@@ -32,13 +32,13 @@ padding-bottom: 5%;
 }
 #roomlist .roomdel,.roomedit{
 width: 70px;
-background-color: white;
-border: 1px solid gray;
+background-color: #F8F8F8;
+border: 1px solid #ccc;
 cursor: pointer;
 height: 30px;
 margin: 5px;
-
 }
+
 #roomlist caption {
 	margin-bottom: 20px;
 	font-size: 20pt;
@@ -53,9 +53,9 @@ margin: 5px;
 				<div class="roomlistdiv">
 				<input type="hidden" value="${memberId}" class="memid">
 					<table id="roomTable">
-					<caption align="top"><b>호스트님의 공간</b></caption>
+					<caption align="top"><b>호스트님의 공간</b><br><span style="font-size: 12pt;">(해당 숙소를 클릭하면 상세페이지로 이동합니다.)</span> </caption>
 					<thead>
-						<tr align="center">
+						<tr align="center" style="background-color:#F8F8F8; ">
 							<td width="80px;">숙소번호</td>
 							<td width="200px;">숙소이름</td>
 							<td width="250px;">위치</td>
@@ -119,11 +119,11 @@ margin: 5px;
 	                $.each(data, function(index, room){
 	                	 var formattedPrice = new Intl.NumberFormat().format(room.room_price);
 	                	
-	                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '" title="누르면 해당 페이지로 이동합니다.">' +
+	                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '">' +
 	                        '<td align="center">' + room.room_id + '</td>' +
 	                        '<td  align="center">' + room.room_name + '</td>' +
-	                        '<td>' + room.room_address + '</td>' +
-	                        '<td>'+formattedPrice+'</td>' +
+	                        '<td>' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
+	                        '<td align="center">'+formattedPrice+'</td>' +
 	                        '<td class="servicelist">' + room.room_service + '</td>' +
 	                        '<td align="center">' + room.room_status + '</td>' +
 	                        '<td align="center">' +

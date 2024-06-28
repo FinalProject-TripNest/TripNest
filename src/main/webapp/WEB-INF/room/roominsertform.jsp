@@ -65,6 +65,7 @@
 		width:500px;
 		height:300px;
 		border: 1px solid #ccc;
+		padding: 10px;
 	}
 
 #roominsertfrom .image-preview-container {
@@ -254,8 +255,8 @@
    border: 0px solid gray;
    height: 40px;
    border-bottom: 1px solid #ccc;
-
    }
+
 #roominsertfrom .miritable td{
 width: 70%;
 vertical-align: middle;
@@ -272,8 +273,12 @@ vertical-align: middle;
 }
 #r_detail{
 max-height: 250px;
-overflow: auto;
+overflow-x: hidden; /* 가로 스크롤 숨김 */
+overflow-y: auto; /* 세로 스크롤 표시 */
 font-family: "Noto Sans KR";
+width: 700px;
+padding: 10px;
+white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 }
 </style>
 <body>

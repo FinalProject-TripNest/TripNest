@@ -15,7 +15,7 @@
 <style>
 #roomupdateform .roomupdateformdiv input{
 	    border: 1px solid #ccc;
-	        height: 30px;
+	        height: 35px;
     padding-left: 10px;
 }
 #roomupdateform .roomupdateformdiv{
@@ -118,7 +118,7 @@
 					<form action="update" method="post" enctype="multipart/form-data" id="roomupform">
 					<input type="hidden" value="${rdto.room_id }" name="room_id">
 						<div>
-							<span class="editspan">호스트 이름/이메일</span>여기에 이름(${memberemail })
+							<span class="editspan">호스트 이름/이메일</span>${memberemail }
 						</div>
 						<div>
 							<span class="editspan">연락처</span>
@@ -149,7 +149,7 @@
 												name="room_address_detail" style="width: 300px;" required="required">
 												<input type="hidden" id="room_region" name="room_region">
 											</div>
-						</div><br>
+						</div>
 						<div class="textarea-container">
 							<div class="editspan">디테일 설명</div>
 							<textarea style="width: 500px; height: 250px; border: 1px solid #ccc; padding-left: 10px;" name="room_detail" required="required">
@@ -169,8 +169,9 @@
 						</c:forEach>
 						</div><br>
 						<div>
-							<span>사진</span>
-							<input type="file" id="image_photo" multiple="multiple" accept="image/*"  name="image_upload" onchange="previewImages(event)">
+							<span class="editspan">사진</span>
+							<input type="file" id="image_photo" multiple="multiple" accept="image/*"  name="image_upload" onchange="previewImages(event)"
+							style="padding-top: 5px;">
 							<span>(사진을 선택하지 않을시 기존의 사진이 유지됩니다)</span>
 						</div>
 						<div id="imagePreviewContainer" class="image-container">
