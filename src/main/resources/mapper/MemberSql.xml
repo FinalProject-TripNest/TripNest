@@ -18,4 +18,8 @@
         UPDATE MEMBERS SET member_name = #{member_name}, member_password = #{member_password}, member_phone = #{member_phone}, member_birth_date = #{member_birth_date}
         WHERE member_useremail = #{member_useremail}
     </update>
+    
+    <delete id="deleteMember" parameterType="int">
+    	DELETE FROM MEMBERS WHERE member_id = #{member_Id}
+	</delete>
 </mapper>

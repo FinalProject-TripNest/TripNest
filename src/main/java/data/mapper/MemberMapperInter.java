@@ -10,4 +10,5 @@ public interface MemberMapperInter {
     MemberDto findByEmail(@Param("email") String email);
     MemberDto findBySocialIdAndType(@Param("social_id") String social_id, @Param("social_type") String social_type);
     void updateMember(MemberDto memberDto);
+    void deleteMember(int member_Id);
 }

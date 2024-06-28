@@ -84,4 +84,20 @@ public class MyPageController {
         model.addAttribute("memberDto", memberDto);
         return "redirect:/mypage/main";
     }
+    
+    @PostMapping("/withdraw")
+    public String withdraw(HttpSession session) {
+        String userEmail = (String) session.getAttribute("myid");
+        if (userEmail != null) {
+            MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+            memberService.deleteMember(memberDto.getMember_id());
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
+    
+    @GetMapping("/message")
+    public String message() {
+        return "/mypage/message";
+    }
 }

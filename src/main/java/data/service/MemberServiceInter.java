@@ -8,4 +8,5 @@ public interface MemberServiceInter {
     boolean checkEmailExists(String email);
 	MemberDto getMemberByEmail(String email);
 	void updateMember(MemberDto memberDto);
+	void deleteMember(int member_Id);
 }
