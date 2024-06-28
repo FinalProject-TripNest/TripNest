@@ -49,7 +49,25 @@ public class S3UploaderService {
         removeNewFile(uploadFile);
         return uploadImageUrl;
     }
+    
+    // 파일 단일 업로드 메서드
+    public String uploadSingleFile(MultipartFile file,String dirName) throws IOException{
+        
+        String originalFileName = file.getOriginalFilename();
+         String uuid = UUID.randomUUID().toString();
+         String uniqueFileName = uuid + "_" + originalFileName.replaceAll("\\s", "_");
 
+         String fileName = dirName + "/" + uniqueFileName;
+         log.info("SingleFileName: " + fileName);
+
+         File uploadFile = convert(file);
+         String uploadImageUrl = putS3(uploadFile, fileName);
+         removeNewFile(uploadFile);
+
+         return uploadImageUrl;
+  }
+    
+    
     // MultipartFile을 File로 변환하는 메서드
     private File convert(MultipartFile file) throws IOException {
         String originalFileName = file.getOriginalFilename();

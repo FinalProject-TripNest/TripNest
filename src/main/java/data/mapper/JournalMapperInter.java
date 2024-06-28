@@ -12,4 +12,8 @@ public interface JournalMapperInter {
 	public List<JournalDto> dataList();
 
 	public JournalDto getOneData(String journal_id);
+
+	public void insertData(JournalDto dto);
+
+	public void deleteData(String journal_id);
 }

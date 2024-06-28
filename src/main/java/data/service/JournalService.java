@@ -26,4 +26,18 @@ public class JournalService implements JournalServiceInter {
 		return mapperInter.getOneData(journal_id);
 	}
 
+	@Override
+	public void insertData(JournalDto dto) {
+		mapperInter.insertData(dto);
+		
+	}
+
+	@Override
+	public void deleteData(String journal_id) {
+		mapperInter.deleteData(journal_id);
+		
+	}
+	
+	
+
 }

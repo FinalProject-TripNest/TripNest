@@ -1,29 +1,40 @@
 package data.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
 import data.dto.InqueryDto;
+import data.dto.JournalDto;
 import data.dto.MemberDto;
 import data.dto.ReviewDto;
 import data.dto.ReviewJoinDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
 import data.service.InqueryService;
+import data.service.JournalService;
 import data.service.MemberService;
 import data.service.ReviewService;
 import data.service.RoomsService;
+import data.service.S3UploaderService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
@@ -38,6 +49,10 @@ public class AdminController {
 	MemberService memservice;
 	@Autowired
 	ReviewService reviewservice;
+	@Autowired
+	JournalService journalservice;
+	@Autowired
+	S3UploaderService s3service;
 
 	/*
 	 * @GetMapping("/admin/adminmain") public String admin() { return
@@ -324,7 +339,7 @@ public class AdminController {
 
 	@GetMapping("/admin/reviewlist")
 	public ModelAndView reviewList() {
-		ModelAndView model = new ModelAndView(); // 괄호 추가하여 생성자 호출
+		ModelAndView model = new ModelAndView();
 		List<ReviewJoinDto> review = reviewservice.adminReview();
 		model.addObject("review", review);
 		model.setViewName("/admin/adminReview");
@@ -337,6 +352,48 @@ public class AdminController {
 	public String reviewDelete(@RequestParam("review_id") String review_id) {
 		reviewservice.dataDelete(review_id);
 		return "/admin/reviewDelete";
+	}
+
+	@GetMapping("/admin/journalList")
+	public ModelAndView journalList() {
+		ModelAndView model = new ModelAndView();
+		List<JournalDto> journal = journalservice.dataList();
+		model.addObject("journal", journal);
+		model.setViewName("/admin/adminJournal");
+		return model;
+	}
+
+	@PostMapping(value = "/admin/adminJournalUpdate", produces = "application/json")
+	public ResponseEntity<?> journalOneData(@RequestParam("journal_id") String journal_id) {
+		JournalDto journalUpdate = journalservice.getOneData(journal_id);
+		if (journalUpdate != null) {
+			return ResponseEntity.ok(journalUpdate);
+		} else {
+			return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body("Journal not found");
+		}
+	}
+
+	@ResponseBody
+	@PostMapping("/admin/JournalInsert")
+	public String journalInsert(@ModelAttribute JournalDto dto, @RequestParam("photo") MultipartFile photo) {
+		try {
+			String imageUrl = s3service.uploadSingleFile(photo, "journalphoto");
+			dto.setJournal_photo(imageUrl);
+			journalservice.insertData(dto);
+			return "{\"success\": true}";
+
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			// 예외 처리 로직 추가
+			return "{\"success\": false}";
+		}
+	}
+
+	@ResponseBody
+	@GetMapping("/admin/journalDelete")
+	public String journalDelete(@RequestParam("journal_id") String journal_id) {
+		journalservice.deleteData(journal_id);
+		return "/admin/adminJournal";
 	}
 
 }

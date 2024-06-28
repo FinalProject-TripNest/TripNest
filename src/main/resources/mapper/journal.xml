@@ -6,7 +6,19 @@
 		journal_id desc
 	</select>
 
-	<select id="getOneData" parameterType="String" resultType="JournalDto">
+	<select id="getOneData" parameterType="String"
+		resultType="JournalDto">
 		select * from journal where journal_id = #{journal_id}
 	</select>
+
+	<insert id="insertData" parameterType="JournalDto">
+		insert into journal
+		(journal_photo,journal_title,journal_content,journal_date) values
+		(#{journal_photo},#{journal_title},#{journal_content},now())
+	</insert>
+
+	<delete id="deleteData" parameterType="String">
+		delete from journal where journal_id =#{journal_id}
+	</delete>
+
 </mapper>

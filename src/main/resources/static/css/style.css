@@ -1,5 +1,9 @@
 @charset "EUC-KR";
 
+html.scroll {
+	overflow: hidden;
+}
+
 #wrap.active {
 	margin-top: 100px;
 }
@@ -1491,7 +1495,3 @@ header#header .menu ul.sub li {
 }
 
 /*//promotion_detail*/
-
-/*admin_review*/
-
-/*//admin_review*/
