@@ -17,6 +17,7 @@
 			<div class="bg">
 				<div class="title">${dto.promotion_title }</div>
 				<div class="event">${dto.promotion_content }</div>
+				<div hidden id="member-id">${sessionScope.member.member_id}</div>
 				<div class="date">
 					<fmt:formatDate value="${dto.promotion_date }" pattern="yyyy-MM-dd" />
 				</div>
