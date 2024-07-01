@@ -1,6 +1,8 @@
 package data.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -377,7 +379,7 @@ public class AdminController {
 	@PostMapping("/admin/JournalInsert")
 	public String journalInsert(@ModelAttribute JournalDto dto, @RequestParam("photo") MultipartFile photo) {
 		try {
-			String imageUrl = s3service.uploadSingleFile(photo, "journalphoto");
+			String imageUrl = s3service.uploadSingleFile(photo, "journal");
 			dto.setJournal_photo(imageUrl);
 			journalservice.insertData(dto);
 			return "{\"success\": true}";
@@ -392,8 +394,55 @@ public class AdminController {
 	@ResponseBody
 	@GetMapping("/admin/journalDelete")
 	public String journalDelete(@RequestParam("journal_id") String journal_id) {
-		journalservice.deleteData(journal_id);
-		return "/admin/adminJournal";
+		try {
+
+			// 2. S3에서 해당 journal_id에 해당하는 사진 파일 삭제
+			String photoName = journalservice.photoData(journal_id);
+			System.out.println(photoName);
+			// 1. 데이터베이스에서 해당 journal_id에 해당하는 데이터 삭제
+			journalservice.deleteData(journal_id);
+
+			String path = extractFilePath(photoName);
+
+			s3service.deleteFile(path);
+
+			// 성공적으로 처리되었음을 클라이언트에 응답
+			return "{\"success\": true}";
+		} catch (Exception e) {
+			// 예외 발생 시 에러 메시지와 함께 처리 실패 응답을 클라이언트에 반환
+			e.printStackTrace();
+			return "{\"success\": false, \"error\": \"" + e.getMessage() + "\"}";
+		}
+	}
+
+	// URL에서 S3 파일 경로를 추출하는 메서드
+	private String extractFilePath(String fileUrl) {
+		try {
+			String decodedFileName = URLDecoder.decode(fileUrl, "UTF-8");
+			// "roomphoto/"를 포함하여 반환
+			int index = decodedFileName.indexOf("journal/");
+			return decodedFileName.substring(index);
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("Error while decoding the file URL: " + e.getMessage());
+			return null;
+		}
+	}
+
+	@PostMapping("/admin/journalUpdate")
+	public String journalUpdate(@ModelAttribute JournalDto dto, @RequestParam("photo") MultipartFile photo) {
+
+		String oldFileName = journalservice.photoData(dto.getJournal_id());
+		try {
+			String imageUrl = s3service.updateFile(photo, oldFileName, "journal");
+			dto.setJournal_photo(imageUrl);
+			journalservice.updateData(dto);
+			return "{\"success\": true}";
+
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			// 예외 처리 로직 추가
+			return "{\"success\": false}";
+		}
 	}
 
 }

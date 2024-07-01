@@ -16,4 +16,8 @@ public interface JournalMapperInter {
 	public void insertData(JournalDto dto);
 
 	public void deleteData(String journal_id);
+
+	public String photoData(String journal_id);
+	
+	public void updateData(JournalDto dto);
 }

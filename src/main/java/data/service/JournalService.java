@@ -29,15 +29,24 @@ public class JournalService implements JournalServiceInter {
 	@Override
 	public void insertData(JournalDto dto) {
 		mapperInter.insertData(dto);
-		
+
 	}
 
 	@Override
 	public void deleteData(String journal_id) {
 		mapperInter.deleteData(journal_id);
-		
+
 	}
-	
-	
+
+	@Override
+	public String photoData(String journal_id) {
+		return mapperInter.photoData(journal_id);
+	}
+
+	@Override
+	public void updateData(JournalDto dto) {
+		mapperInter.updateData(dto);
+
+	}
 
 }

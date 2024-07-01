@@ -18,7 +18,22 @@
 	</insert>
 
 	<delete id="deleteData" parameterType="String">
-		delete from journal where journal_id =#{journal_id}
+		delete from journal where
+		journal_id =#{journal_id}
 	</delete>
+
+	<select id="photoData" parameterType="String"
+		resultType="String">
+		SELECT
+		journal_photo
+		FROM journal
+		WHERE journal_id =
+		#{journal_Id}
+	</select>
+
+	<update id="updateData" parameterType="JournalDto">
+		update journal set
+		journal_photo=#{journal_photo},journal_title=#{journal_title},journal_content=#{journal_content}
+	</update>
 
 </mapper>

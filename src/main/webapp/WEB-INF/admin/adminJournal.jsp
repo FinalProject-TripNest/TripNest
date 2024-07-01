@@ -247,7 +247,8 @@ img {
 						<c:forEach items="${journal}" var="list" varStatus="status">
 							<tr>
 								<td>${status.count }</td>
-								<td><img alt="" src="${list.journal_photo}"></td>
+								<td><img alt="" src="${list.journal_photo}"
+									class="data_photo"></td>
 								<td>${list.journal_title}</td>
 								<td>${list.journal_content}</td>
 								<td><fmt:formatDate value="${list.journal_date}"
@@ -353,14 +354,30 @@ img {
 								}
 							});
 				});
-		$(".pop_up .dimd").click(function() {
-			$(".pop_up").removeClass("active");
-			$("html").removeClass("scroll");
-		});
+		$(".pop_up .dimd")
+				.click(
+						function() {
+							$(
+									".insert_pop form>div input,.insert_pop form>div textarea")
+									.val("");
+							$(".pop_up").removeClass("active");
+							$("html").removeClass("scroll");
+						});
 
 		$(".update_pop form>div .update_btn").click(function() {
 
 			$(".update_pop form>div input.file").click();
+		});
+
+		$(".update_pop form>div input.file").change(function() {
+			var input = this;
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#update_photo').attr('src', e.target.result);
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
 		});
 
 		$(".insert_pop form>div .update_btn").click(function() {
@@ -377,7 +394,6 @@ img {
 			var journal_photo = $(".insert_pop form input.file")[0].files[0];
 			var journal_title = $(".insert_pop form input.title").val();
 			var journal_content = $(".insert_pop form textarea.content").val();
-			alert(journal_photo);
 
 			formData.append("photo", journal_photo);
 			formData.append("journal_title", journal_title);
@@ -391,7 +407,6 @@ img {
 				contentType : false,
 				processData : false,
 				success : function(data) {
-					alert("성공");
 					location.reload();
 				}
 			});
@@ -411,10 +426,11 @@ img {
 
 		$(".btn_box .delete").click(function() {
 			var journal_id = $(this).attr("name");
+
 			$.ajax({
-				type : "GET", // POST 방식으로 변경
+				type : "GET",
 				url : "/admin/journalDelete",
-				dataType : "html",
+				dataType : "json",
 				data : {
 					"journal_id" : journal_id
 				},
@@ -422,6 +438,31 @@ img {
 					location.reload();
 				}
 			});
+		});
+
+		$(".pop_up.update_pop form>div.btn input").click(function() {
+			var formData = new FormData();
+			var journal_photo = $(".update_pop form input.file")[0].files[0];
+			var journal_title = $(".update_pop form input.title").val();
+			var journal_content = $(".update_pop form textarea.content").val();
+			var journal_id = $("#journal_id").val();
+
+			formData.append("photo", journal_photo);
+			formData.append("journal_title", journal_title);
+			formData.append("journal_content", journal_content);
+			formData.append("journal_id", journal_id);
+			$.ajax({
+				type : "post",
+				dataType : "json",
+				contentType : false,
+				processData : false,
+				url : "/admin/journalUpdate",
+				data : formData,
+				success : function(res) {
+					location.reload();
+				}
+			});
+			return false;
 		});
 	</script>
 
