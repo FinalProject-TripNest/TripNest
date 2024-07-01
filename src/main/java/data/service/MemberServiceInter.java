@@ -20,4 +20,6 @@ public interface MemberServiceInter {
 
 	MemberDto getMemberByEmail(String email);
 
+	void updateMember(MemberDto memberDto);
+	void deleteMember(int member_Id);
 }

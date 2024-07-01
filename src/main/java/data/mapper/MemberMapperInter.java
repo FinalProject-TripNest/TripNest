@@ -23,4 +23,6 @@ public interface MemberMapperInter {
 	 
 	 List<MemberDto> getRecentMember();
 
+    void updateMember(MemberDto memberDto);
+    void deleteMember(int member_Id);
 }

@@ -32,13 +32,13 @@
         background-color: #000;
     }
 </style>
+<c:set var="root" value="<%=request.getContextPath()%>" />
 <body>
 <div class="cancel">
     <div class="no-cancel">
         <img alt="" src="../img/mypage/booking-waiting.png">
         <p>아직 예약 정보가 없습니다. 새로운 스테이를 찾아 떠나보세요.</p>
-        <a href="#" class="btn">FIND STAY</a>
+        <a href="${root }/find/list" class="btn">FIND NEST</a>
     </div>
 </div>
 </body>
-</html>

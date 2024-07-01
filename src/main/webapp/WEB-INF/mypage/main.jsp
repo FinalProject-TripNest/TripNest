@@ -80,8 +80,8 @@
         color: #333;
         font-size: 18px;
         padding: 10px;
-        display: block;
-    }
+        display: block;	    
+        }	    
     .tabs li a:hover,
     .tabs li.active a {
         color: #000;
@@ -138,12 +138,32 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     $(document).ready(function() {
-        $('#mypage_content').load('/mypage/reservation');
+        // 해시값을 기반으로 타겟 페이지를 로드하는 함수
+        function loadContent(target) {
+            if (!target) {
+                target = "reservation";
+            }
+            $('#mypage_content').load('/mypage/' + target);
+            $('.menu-item').removeClass('active');
+            $('a[data-target="' + target + '"]').addClass('active');
+        }
 
+        // 초기 해시값을 확인하고 적절한 컨텐츠를 로드
+        var initialTarget = window.location.hash.substr(1);
+        loadContent(initialTarget);
+
+        // 메뉴 항목 클릭 이벤트 핸들러
         $('.mypage_menu a').on('click', function(e) {
             e.preventDefault();
             var target = $(this).data('target');
-            $('#mypage_content').load('/mypage/' + target);
+            window.location.hash = target;
+            loadContent(target);
+        });
+
+        // 해시 변경 이벤트 핸들러 (브라우저 뒤로 가기/앞으로 가기)
+        $(window).on('hashchange', function() {
+            var target = window.location.hash.substr(1);
+            loadContent(target);
         });
     });
     </script>
