@@ -48,13 +48,7 @@ public class MyPageController {
 
         MemberDto memberDto = memberService.getMemberByEmail(userEmail);
         
-        System.out.println("MemberDto: " + memberDto);
-        System.out.println("Member ID: " + memberDto.getMember_id());
-        
         List<MyPageReservationDto> reservations = myPageServiceInter.getReservationsByMemberId(memberDto.getMember_id());
-        
-        System.out.println("Reservations: " + reservations);
-        
         model.addAttribute("reservations", reservations);
 
         return "/mypage/reservation";
@@ -69,13 +63,7 @@ public class MyPageController {
 
         MemberDto memberDto = memberService.getMemberByEmail(userEmail);
         
-        System.out.println("MemberDto: " + memberDto);
-        System.out.println("Member ID: " + memberDto.getMember_id());
-        
         List<MyPageReservationDto> cancellations = myPageServiceInter.getCancellationsByMemberId(memberDto.getMember_id());
-        
-        System.out.println("Cancellations: " + cancellations);
-        
         model.addAttribute("cancellations", cancellations);
 
         return "/mypage/cancel";
