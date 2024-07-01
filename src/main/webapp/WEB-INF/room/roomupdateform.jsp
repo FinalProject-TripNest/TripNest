@@ -117,6 +117,7 @@
 				<div class="roomupdateformdiv">
 					<form action="update" method="post" enctype="multipart/form-data" id="roomupform">
 					<input type="hidden" value="${rdto.room_id }" name="room_id">
+					<input type="hidden" value="${rdto.room_status}" name="room_status">
 						<div>
 							<span class="editspan">호스트 이름/이메일</span>${memberemail }
 						</div>
@@ -330,7 +331,34 @@
                 console.error('파일을 읽는 중 오류가 발생했습니다:', error);
             });
     }
-
+	    $(function() {
+	        $('#roomupdatebtn').click(function() {
+	            // 승인 상태 확인
+	            var room_status = "${rdto.room_status}";
+	            
+	            if (room_status === '승인') {
+	                // 승인된 숙소를 수정할 시에는 관리자의 승인을 다시 받아야 함을 경고창으로 알림
+	                var confirmed = confirm("승인된 숙소를 수정할 시에는 관리자의 승인을 다시 받아야 합니다.\n정말 수정하시겠습니까?");
+	                
+	                if (!confirmed) {
+	                    // 수정 취소
+	                    return false;
+	                }
+	            }else{
+	            	var confirmed = confirm("수정하시겠습니까?");
+	            	 if (!confirmed) {
+		                    // 수정 취소
+		                    return false;
+		                }
+	            }
+	            
+	            // 다른 처리 로직 추가 가능
+	            
+	            // 수정하기
+	            // 여기서는 일단 form을 제출하도록 설정
+	            $('#roomupform').submit();
+	        });
+	    });
 	</script>
 </body>
 </html>

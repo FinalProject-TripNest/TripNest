@@ -188,6 +188,7 @@ public class RoomsController {
 		String roomregion=roomaddr.split("\\s+")[0];
 		dto.setRoom_region(roomregion);
 		
+		System.out.println("room_status: " + dto.getRoom_status());
 		service.updateRoom(dto);
 		
 		

@@ -21,6 +21,8 @@ import data.service.ImageService;
 import data.service.InqueryService;
 import data.service.MemberService;
 import data.service.RoomsService;
+import jakarta.mail.Session;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
@@ -41,7 +43,7 @@ public class AdminController {
 	
 	//숙소리스트
 	@GetMapping("/admin/roomlist")
-	public ModelAndView list(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String room_id) {
+	public ModelAndView list(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String room_id,HttpSession sesstion) {
 
 		ModelAndView mview = new ModelAndView();
 
@@ -93,6 +95,9 @@ public class AdminController {
 		        	roomdto.setMememail("탈퇴한 사용자입니다.");
 		        }
 		   }
+		   
+		String myname=(String)sesstion.getAttribute("myname");
+		mview.addObject("myname", myname);
 
 		// 리퀘스에 저장
 		mview.addObject("totalCount", totalCount);

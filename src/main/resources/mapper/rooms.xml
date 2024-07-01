@@ -155,7 +155,16 @@
 	
 	<update id="updateRoom" parameterType="RoomsDto">
 		update ROOMS set room_name=#{room_name},room_price=#{room_price},room_min_capacity=#{room_min_capacity},room_max_capacity=#{room_max_capacity},room_address=#{room_address},
-		room_address_detail=#{room_address_detail},room_service=#{room_service},room_detail=#{room_detail},room_hp=#{room_hp},room_region=#{room_region} where room_id=#{room_id}
+		room_address_detail=#{room_address_detail},room_service=#{room_service},room_detail=#{room_detail},room_hp=#{room_hp},room_region=#{room_region},room_status = 
+		  <choose>
+            <when test="room_status == '승인'">
+                '미승인'
+            </when>
+            <otherwise>
+                room_status
+            </otherwise>
+        </choose>
+		where room_id=#{room_id}
 	</update>
 
 
