@@ -1,5 +1,7 @@
 package data.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import data.dto.MemberDto;
+import data.dto.MyPageReservationDto;
 import data.service.MemberServiceInter;
+import data.service.MyPageServiceInter;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -18,6 +22,9 @@ public class MyPageController {
 
     @Autowired
     private MemberServiceInter memberService;
+    
+    @Autowired
+    private MyPageServiceInter myPageServiceInter;
 
     @GetMapping("/main")
     public String myPage(HttpSession session, Model model) {
@@ -33,12 +40,44 @@ public class MyPageController {
     }
 
     @GetMapping("/reservation")
-    public String reservation() {
+    public String reservation(HttpSession session, Model model) {
+        String userEmail = (String) session.getAttribute("myid");
+        if (userEmail == null) {
+            return "redirect:/login/loginform";
+        }
+
+        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+        
+        System.out.println("MemberDto: " + memberDto);
+        System.out.println("Member ID: " + memberDto.getMember_id());
+        
+        List<MyPageReservationDto> reservations = myPageServiceInter.getReservationsByMemberId(memberDto.getMember_id());
+        
+        System.out.println("Reservations: " + reservations);
+        
+        model.addAttribute("reservations", reservations);
+
         return "/mypage/reservation";
     }
 
     @GetMapping("/cancel")
-    public String cancel() {
+    public String cancel(HttpSession session, Model model) {
+        String userEmail = (String) session.getAttribute("myid");
+        if (userEmail == null) {
+            return "redirect:/login/loginform";
+        }
+
+        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+        
+        System.out.println("MemberDto: " + memberDto);
+        System.out.println("Member ID: " + memberDto.getMember_id());
+        
+        List<MyPageReservationDto> cancellations = myPageServiceInter.getCancellationsByMemberId(memberDto.getMember_id());
+        
+        System.out.println("Cancellations: " + cancellations);
+        
+        model.addAttribute("cancellations", cancellations);
+
         return "/mypage/cancel";
     }
 
