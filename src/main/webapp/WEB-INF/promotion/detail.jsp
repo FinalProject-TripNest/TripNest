@@ -23,15 +23,16 @@
 			</div>
 			<div class="center">
 				<div class="main">
-					<div id="member-id">${sessionScope.member.member_id}</div>
-					<div class="img">
-						<img alt="" src="${dto.promotion_photo}">
-					</div>
+					<c:if test="${dto.promotion_photo != null}">
+						<div class="img">
+							<img alt="" src="${dto.promotion_photo}">
+						</div>
+					</c:if>
 					<div class="text">
 						<p>${dto.promotion_explanation}</p>
 					</div>
 
-					<%-- 해당 프로모션에 쿠폰 이벤트가 있는경우에만 쿠폰 발급 번틀을 보여줌 --%>
+					<%-- 해당 프로모션에 쿠폰 이벤트가 있는경우에만 쿠폰 발급 버튼을 보여줌 --%>
 					<c:if test="${couponGroupId != null}">
 						<div class="btn">
 							<div id="coupon-btn" onclick="newCoupon(${couponGroupId})">쿠폰 발급</div>
