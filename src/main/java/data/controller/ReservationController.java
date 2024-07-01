@@ -71,6 +71,9 @@ public class ReservationController {
 		
 		reservationService.insertReservation(dto);
 		
+		model.addObject("merchant_uid", merchant_uid);
+		
+		
 		// merchant_uid를 URL 인코딩하여 리다이렉트 URL에 포함
 	    String encodedMerchantUid = URLEncoder.encode(merchant_uid, StandardCharsets.UTF_8);
 	    model.setViewName("redirect:/find/reservation_success?merchant_uid=" + encodedMerchantUid);

@@ -38,6 +38,17 @@ public class ReservationService implements ReservationServiceInter {
 			throw new RuntimeException("숙소 예약을 실패하였습니다.",e);
 		}
 	}
+
+	@Override
+	public void cancelReservation(String MERCHANT_UID) {
+		// TODO Auto-generated method stub
+		try{
+			mapperInter.cancelReservation(MERCHANT_UID);
+		}catch (Exception e) {
+			log.error("[error] 숙소 예약 취소 처리 실패,", e);
+			throw new RuntimeException("숙소 예약 취소에 실패하였습니다.",e);
+		}
+	}
 	
 	
 }

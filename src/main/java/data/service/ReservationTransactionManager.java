@@ -16,6 +16,7 @@ public class ReservationTransactionManager {
     private final CouponService couponService;
     private final PaymentService paymentService;
     private final ReservationService reservationService;
+    private final RefundService refundService;
 
     @Transactional
     public void processBookingTransaction(UseCouponReq useCouponReq, PaymentDto paymentDto, ReservationDto reservationDto) {
@@ -32,6 +33,22 @@ public class ReservationTransactionManager {
             throw new RuntimeException(e.getMessage(),e);
         }
 
+    }
+    
+    @Transactional
+    public void cancelBookingTransaction(String merchant_uid) {
+        try{
+        	// 1. 결제 취소
+            paymentService.paymentRefund(merchant_uid);
+            // 2. 예약 취소
+            reservationService.cancelReservation(merchant_uid);
+            // 3. 쿠폰 잔여 횟수 복구
+//            if(useCouponReq.isSelected())
+//                couponService.useCoupon(useCouponReq);
+        }catch (Exception e) {
+            log.error("[error] cancelBookingTransaction - fail to cancel reservation", e);
+            throw new RuntimeException(e.getMessage(),e);
+        }
     }
 
 }

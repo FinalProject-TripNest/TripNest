@@ -38,8 +38,14 @@ public class PaymentService implements PaymentServiceInter {
 		return mapperInter.getImgByRoomId(room_id);
 	}
 
-	
-	
-	
-	
+	@Override
+	public void paymentRefund(String merchant_uid) {
+		// TODO Auto-generated method stub
+		try{
+			mapperInter.paymentRefund(merchant_uid);
+		}catch (Exception e) {
+			log.error("[error] 결제 취소 실패,", e);
+			throw new RuntimeException("결제 금액 환불에 실패하였습니다.",e);
+		}
+	}
 }

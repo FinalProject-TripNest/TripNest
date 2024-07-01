@@ -129,7 +129,35 @@ public class PaymentController {
 	        return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(response);
 	    }
 	}
+	
+	//환불로직
+	 @PostMapping("/payment/cancel")
+	    @ResponseBody
+	    public ResponseEntity<Map<String, Object>> cancelBooking(@RequestBody Map<String, Object> requestData, HttpSession session) {
+	        Map<String, Object> response = new HashMap<>();
 
+	        String merchant_uid = (String) requestData.get("merchant_uid");
+
+	        try {
+	            // 세션에서 member_id를 가져옴
+	            Integer memberId = (Integer) session.getAttribute("member_id");
+
+	            String token = refundService.getToken(apiKey, secretKey);
+				refundService.refundRequest1(token, merchant_uid, "전액환불");
+	            
+	            
+	            // 예약 및 결제 취소 트랜잭션 실행
+	            reservationTransactionManager.cancelBookingTransaction(merchant_uid);
+
+	            response.put("success", true);
+	            response.put("message", "예약 및 결제가 취소되었습니다.");
+	            return ResponseEntity.ok(response);
+	        } catch (Exception e) {
+	            response.put("success", false);
+	            response.put("message", "예약 및 결제 취소 중 오류가 발생했습니다.\n" + e.getMessage());
+	            return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body(response);
+	        }
+	    }
 
 
 
