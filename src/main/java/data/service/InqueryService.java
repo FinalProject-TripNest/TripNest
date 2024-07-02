@@ -60,6 +60,18 @@ public class InqueryService implements InqueryServiceInter {
 		return mapper.getNullInquery();
 	}
 
+	@Override
+	public List<InqueryDto> getMyInqueryDatas(int member_id) {
+		// TODO Auto-generated method stub
+		return mapper.getMyInqueryDatas(member_id);
+	}
+
+	@Override
+	public void deleteInquery(String inquery_id) {
+		// TODO Auto-generated method stub
+		mapper.deleteInquery(inquery_id);
+	}
+
 
 
 

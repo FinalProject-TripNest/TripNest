@@ -31,5 +31,8 @@ public class RoomsDto {
 
 	private List<String> imgList;
 	private String mememail;
+	
+	private String room_latitude;//위도
+	private String room_longitude;//경도
 }
 
