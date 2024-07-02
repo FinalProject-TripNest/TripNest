@@ -6,16 +6,58 @@
     .cancel {
         text-align: center;
     }
-    .cancel img {
-        width: 400px;
-        height: auto;
+    .cancel-list {
+        text-align: left;
     }
-    .cancel p {
-        margin: 20px 0;
+    .cancel-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 50px;
+    }
+    .cancel-image-container {
+        position: relative;
+        margin-right: 20px;
+    }
+    .cancel-item img {
+        width: 250px;
+        height: auto;
+        border-radius: 8px;
+    }
+    .cancel-status {
+        position: absolute;
+        top: -35px;
+        display: inline-block;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        background-color: #d1d1d1;
+        color: #4a4a4a;
+    }
+    .cancel-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .cancel-item h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+    .cancel-item p {
+        margin: 5px 0;
+    }
+    .cancel-price {
+        margin-left: auto;
+        font-size: 16px;
+        font-weight: bold;
     }
     .no-cancel {
         margin: 0 0 100px;
         border-bottom: 1px solid #ddd;
+    }
+    .no-cancel img {
+        width: 400px;
+        height: auto;
     }
     .btn {
         display: inline-block;
@@ -30,39 +72,29 @@
     .btn:hover {
         background-color: #000;
     }
-    .cancellation-list {
-        text-align: left;
-        margin: 20px;
-    }
-    .cancellation-item {
-        border-bottom: 1px solid #ddd;
-        padding: 20px 0;
-    }
-    .cancellation-item img {
-        width: 200px;
-        height: auto;
-    }
-    .cancellation-item h3 {
-        margin: 0;
-        font-size: 18px;
-    }
-    .cancellation-item p {
-        margin: 5px 0;
-    }
 </style>
 <c:set var="root" value="<%=request.getContextPath()%>" />
 <body>
 <div class="cancel">
     <c:choose>
         <c:when test="${not empty cancellations}">
-            <div class="cancellation-list">
+            <div class="cancel-list">
                 <c:forEach var="cancellation" items="${cancellations}">
-                    <div class="cancellation-item">
-                        <img src="${cancellation.image_photo}" alt="${cancellation.room_name}" />
-                        <h3>${cancellation.room_name}</h3>
-                        <p>${cancellation.reservation_status}</p>
-                        <p>${cancellation.reservation_date}</p>
-                        <p>₩<fmt:formatNumber value="${cancellation.reservation_price}" /></p>
+                    <div class="cancel-item">
+                        <div class="cancel-image-container">
+                        	<p class="cancel-status">
+	                            ${cancellation.reservation_status}
+	                        </p>
+                            <img src="${cancellation.image_photo}" alt="${cancellation.room_name}" />
+                        </div>
+                        <div class="cancel-info">
+                            <h3>${cancellation.room_name}</h3>
+                            <p>결제일 : <fmt:formatDate value="${cancellation.reservation_date}" pattern="yyyy-MM-dd HH:mm" /></p>
+                            <p>결제취소 : </p>
+                        </div>
+                        <div class="cancel-price">
+                            ₩ <fmt:formatNumber value="${cancellation.paid_amount}" type="currency" currencySymbol="" />
+                        </div>
                     </div>
                 </c:forEach>
             </div>

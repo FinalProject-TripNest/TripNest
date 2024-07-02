@@ -61,7 +61,7 @@ public class MyPageController {
             return "redirect:/login/loginform";
         }
 
-        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+        MemberDto memberDto = memberService.getMemberByEmail(userEmail);	
         
         List<MyPageReservationDto> cancellations = myPageServiceInter.getCancellationsByMemberId(memberDto.getMember_id());
         model.addAttribute("cancellations", cancellations);
