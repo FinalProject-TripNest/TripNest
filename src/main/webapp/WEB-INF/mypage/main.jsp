@@ -109,7 +109,7 @@
                     </div>
                     <br>
                     <div class="journey-info" role="link" tabindex="0">
-                        <p>2024년 6월부터 0번의 여행을 했어요.</p>
+                        <p>${currentDate}에는 ${reservationCount}번의 여행을 했어요.</p>
                     </div>
                 </div>
                 <div class="separator"></div>

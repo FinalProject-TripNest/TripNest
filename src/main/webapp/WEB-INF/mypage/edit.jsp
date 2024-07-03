@@ -159,7 +159,7 @@
                                     <li class="naver"></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li>일반 회원</li>
+                                    <li>일반회원</li>
                                 </c:otherwise>
                             </c:choose>
                         </ul>

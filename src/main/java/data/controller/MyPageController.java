@@ -1,5 +1,7 @@
 package data.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,15 @@ public class MyPageController {
 
         MemberDto memberDto = memberService.getMemberByEmail(userEmail);
         model.addAttribute("memberDto", memberDto);
+        
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년");
+        String formattedDate = currentDate.format(formatter);
+
+        int reservationCount = myPageServiceInter.getReservationsByMemberId(memberDto.getMember_id()).size();
+        
+        model.addAttribute("currentDate", formattedDate);
+        model.addAttribute("reservationCount", reservationCount);
 
         return "/mypage/main";
     }
