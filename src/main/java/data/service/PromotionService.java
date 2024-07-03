@@ -29,13 +29,13 @@ public class PromotionService implements PromotionServiceInter {
 	@Override
 	public void insertData(PromotionDto dto) {
 		mapperInter.insertData(dto);
-		
+
 	}
 
 	@Override
 	public void deleteData(String journal_id) {
 		mapperInter.deleteData(journal_id);
-		
+
 	}
 
 	@Override
@@ -46,7 +46,11 @@ public class PromotionService implements PromotionServiceInter {
 	@Override
 	public void updateData(PromotionDto dto) {
 		mapperInter.updateData(dto);
-		
+	}
+
+	public String getCouponGroupId(String promotion_id) {
+		return mapperInter.getCouponGroupId(promotion_id);
+
 	}
 
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="data.mapper.WishlistMapperInter">
+	
+	<insert id="insertWishlist" parameterType="WishlistDto">
+		insert into WISHLIST (member_useremail,room_id,wishlist_date) values(#{member_useremail},#{room_id},now());
+	</insert>
+	
+	<select id="checkWishlist" resultType="int" parameterType="WishlistDto">
+		select count(*) from WISHLIST where member_useremail=#{member_useremail} and room_id=#{room_id}
+	</select>
+	
+	<delete id="delectWishlist" parameterType="WishlistDto">
+		delete from WISHLIST where member_useremail=#{member_useremail} and room_id=#{room_id}
+	</delete>
+	
+	<select id="myWishList" parameterType="WishlistDto" resultType="WishlistDetailDto">
+		select i.image_photo,r.room_name,r.room_region,r.room_min_capacity,r.room_max_capacity,r.room_price,w.wishlist_date,w.room_id from
+		WISHLIST w
+			join ROOMS r on w.room_id = r.room_id
+			left join(
+			SELECT room_id, MIN(image_photo) AS image_photo
+            FROM IMAGES
+            GROUP BY room_id
+			)as i on r.room_id = i.room_id
+		where 
+			w.member_useremail = #{member_useremail}
+			ORDER BY 
+        DATE(w.wishlist_date) DESC, r.room_id;
+	</select>
+</mapper>

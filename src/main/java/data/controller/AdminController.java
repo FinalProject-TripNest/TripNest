@@ -38,6 +38,7 @@ import data.service.ReviewService;
 import data.service.RoomsService;
 import data.service.S3UploaderService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.mail.Session;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -67,7 +68,8 @@ public class AdminController {
 
 	// 숙소리스트
 	@GetMapping("/admin/roomlist")
-	public ModelAndView list(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String room_id) {
+	public ModelAndView list(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String room_id,
+			HttpSession sesstion) {
 
 		ModelAndView mview = new ModelAndView();
 
@@ -117,6 +119,9 @@ public class AdminController {
 				roomdto.setMememail("탈퇴한 사용자입니다.");
 			}
 		}
+
+		String myname = (String) sesstion.getAttribute("myname");
+		mview.addObject("myname", myname);
 
 		// 리퀘스에 저장
 		mview.addObject("totalCount", totalCount);
@@ -471,12 +476,10 @@ public class AdminController {
 		model.setViewName("/admin/adminPromotion");
 		return model;
 	}
-	
-	
-	
+
 	@PostMapping(value = "/admin/adminPromotionUpdate", produces = "application/json")
 	public ResponseEntity<?> promotionOneData(@RequestParam("promotion_id") String promotion_id) {
-	PromotionDto promotionUpdate = promotionservice.getOneData(promotion_id);
+		PromotionDto promotionUpdate = promotionservice.getOneData(promotion_id);
 		if (promotionUpdate != null) {
 			return ResponseEntity.ok(promotionUpdate);
 		} else {

@@ -31,5 +31,10 @@ public interface RoomsMapperInter {
 	
 	public int getCountNoRoom();
 	public List<RoomsDto> getRecentRoom();
+
+	public void deleteRoom(String room_id);
+	public List<RoomsDto> getRoomDataByMyid(int member_id);
+	public void updateRoom(RoomsDto dto);
+
 }
 

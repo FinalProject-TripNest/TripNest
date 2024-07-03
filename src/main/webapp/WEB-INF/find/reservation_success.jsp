@@ -20,7 +20,7 @@
 }
 
 #reservation_success .center {
-	padding-bottom: 120px;
+	padding-bottom: 150px;
 }
 
 #reservation_success  div.title {
@@ -91,7 +91,7 @@
 }
 
 #reservation_success  a.mapconfirm {
-    width: 240px;
+    width: 100px;
     height: 40px;
     margin: 0;
     background-color: #000;
@@ -120,12 +120,12 @@
 							<div class="title">Receipt</div>
 							<div class="content">
 								<div class="complete">예약이 완료되었습니다.</div>
-								<div class="hotelname">글림스</div>
+								<div class="hotelname">${roomsDto.room_name}</div>
 								<div class="location">
-									<span>구로구 구로동</span>
+									<span>${roomsDto.room_address}&nbsp;&nbsp;${roomsDto.room_address_detail}</span>
 								</div>
 								<a href="javascript:;" class="hotelimg"> <img alt=""
-									src="${root }/img/find/room_03.png">
+									src="${roomimage }">
 								</a>
 								<div class="text_box">
 									<div>
@@ -145,14 +145,18 @@
 											<span>결제금액</span> : <fmt:formatNumber value="${successDto.paid_amount}" type="currency"
 							currencySymbol="₩ " groupingUsed="true" />
 										</p>
-											<a href="#" class="mapconfirm" style="margin-top: 30px;">숙소 위치 확인</a>
+										<div style="display: flex; justify-content: center;">
+											<a href="${root }/find/list/detail?room_id=${roomsDto.room_id}#amenities" class="mapconfirm" style="margin-top: 30px;">위치 확인</a>
+											<a href="javascript:;" id="cancel" class="mapconfirm" style="margin-top: 30px; margin-left: 20px;">예약 취소</a>
+											<input type="hidden" id="merchant_uid" value="${param.merchant_uid}">
+										</div>
+									</div>		
 									</div>		
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<!--//각 페이지 작업 코드  -->
 			</div>
 		</div>
@@ -164,7 +168,30 @@
 	<%@ include file="../include/footer.jsp"%>
 	<script>
 		//각 페이지 자바스크립트
-
+		 $(document).ready(function() {
+		 	   $("#cancel").click(function() {
+		 		   var merchant_uid = $("#merchant_uid").val();
+		 		   //alert(merchant_uid);
+		 		   if (confirm("정말로 취소하시겠습니까?")) {
+		 		  $.ajax({
+						type: "POST",
+						url: "/payment/cancel", // 서버의 결제 정보 처리 URL
+						contentType: "application/json", // Content-Type 명시
+						data: JSON.stringify({
+							merchant_uid: merchant_uid // merchant_uid 전송
+						}),
+						success: function(response) {
+							// 취소 완료시
+							alert("취소가 완료되었습니다.");
+							window.location.href = "${root}/index"; // 취소 완료 시 이동할 페이지
+						},
+						error: function(error) {
+							alert(error.responseJSON.message);
+						}
+					});
+		 		   }
+		 	   });
+    });
 		//각 페이지 자바스크립트
 	</script>
 </body>

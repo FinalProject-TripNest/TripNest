@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.InqueryDto;
 import data.dto.MemberDto;
+import data.dto.RoomsDto;
 import data.service.InqueryService;
 import data.service.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -46,8 +49,20 @@ public class InqueryController {
 	public String inquerysuccess() {
 		return "/inquery/inquerysuccess";
 	}
-	
 
-	
+	@GetMapping("/mypage/inquerydetails")
+	@ResponseBody
+	public InqueryDto inquerylist(String inquery_id) {
+		return service.inqueryAdminAnswerList(inquery_id);
+	}
+
+	@GetMapping("/mypage/deleteinquery")
+	@ResponseBody
+	public String deleteinquery(String inquery_id) {
+		
+		service.deleteInquery(inquery_id);
+		
+		return "/mypage/deleteinquery";
+	}
 
 }
