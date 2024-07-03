@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <title>TRIP NEST</title>
 <style>
@@ -56,7 +55,7 @@
   padding: 18px 0;
   margin: 0 auto;
 }
- .custom-model-main {
+ .custom-model-mainiq {
   text-align: center;
   overflow: hidden;
   position: fixed;
@@ -152,7 +151,7 @@
 }
 
 @media screen and (min-width:800px){
-	.custom-model-main:before {
+	.custom-model-mainiq:before {
 	  content: "";
 	  display: inline-block;
 	  height: auto;
@@ -221,7 +220,7 @@ background-color: white;
 		</div>
 
 			
-				<div class="custom-model-main" id="myinquerymodal">
+				<div class="custom-model-mainiq" id="myinquerymodal">
 					<div class="custom-model-inner">
 						<div class="close-btn">×</div>
 						<div class="custom-model-wrap">
@@ -272,7 +271,7 @@ background-color: white;
 		list();
 
 		 $(document).on('click', '.Click-here', function(){
-			$(".custom-model-main").addClass('model-open');
+			$(".custom-model-mainiq").addClass('model-open');
 			 $("body").addClass('modal-open');
 			 
 			 var inquery_id=$(this).data("inquery-id");
@@ -319,7 +318,7 @@ background-color: white;
 		
 		$(".close-btn, .bg-overlay").click(function(){
 			$("body").removeClass('modal-open');
-		  $(".custom-model-main").removeClass('model-open');
+		  $(".custom-model-mainiq").removeClass('model-open');
 		});
 		
 	});

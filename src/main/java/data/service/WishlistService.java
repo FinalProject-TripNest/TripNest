@@ -1,8 +1,11 @@
 package data.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import data.dto.WishlistDetailDto;
 import data.dto.WishlistDto;
 import data.mapper.WishlistMapperInter;
 
@@ -28,6 +31,12 @@ public class WishlistService implements WishlistServiceInter {
 	public void delectWishlist(WishlistDto dto) {
 		// TODO Auto-generated method stub
 		wishmapper.delectWishlist(dto);
+	}
+
+	@Override
+	public List<WishlistDetailDto> myWishList(String member_useremail) {
+		// TODO Auto-generated method stub
+		return wishmapper.myWishList(member_useremail);
 	}
 
 }

@@ -1,6 +1,10 @@
 package data.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +15,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import data.dto.WishlistDetailDto;
 import data.dto.WishlistDto;
+import data.service.MemberService;
+import data.service.RoomsService;
 import data.service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class WishlistController {
 
 	@Autowired
 	WishlistService service;
+	@Autowired
+	RoomsService roomservice;
+	@Autowired
+	MemberService memservice;
 	
 	@PostMapping("/wishlist/wishinsert")
 	public String wishinsert(@ModelAttribute WishlistDto dto) {
@@ -51,4 +63,43 @@ public class WishlistController {
 		service.delectWishlist(dto);
 		return "find/list";
 	}
+	
+	/*@GetMapping("/wishlist/mywishlist")
+	@ResponseBody
+	public List<WishlistDetailDto> mywishlist(HttpSession session,Model model){
+		String myemail=(String)session.getAttribute("myid");
+		
+		List<WishlistDetailDto> list=service.myWishList(myemail);
+		
+		for(WishlistDetailDto dto:list) {
+			String room_region=roomservice.getDataRoom(dto.getRoom_id()).getRoom_region();
+			dto.setRoom_region(room_region);
+		}
+		
+		return list;
+	}*/
+	
+	@GetMapping("/wishlist/mywishlist")
+	@ResponseBody
+	public Map<String, List<WishlistDetailDto>> mywishlist(HttpSession session, Model model) {
+	    String myemail = (String) session.getAttribute("myid");
+
+	    List<WishlistDetailDto> list = service.myWishList(myemail);
+	    
+	    // 날짜별로 위시리스트를 그룹화하기 위한 Map 생성
+	    Map<String, List<WishlistDetailDto>> wishlistByDate = new LinkedHashMap();
+
+	    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	    // 날짜별로 위시리스트를 그룹화
+	    for (WishlistDetailDto dto : list) {
+	        String wishlistDate = sdf.format(dto.getWishlist_date()); // 날짜 가져오기
+	        if (!wishlistByDate.containsKey(wishlistDate)) {
+	            wishlistByDate.put(wishlistDate, new ArrayList<>());
+	        }
+	        wishlistByDate.get(wishlistDate).add(dto);
+	    }
+
+	    return wishlistByDate;
+
+	}	
 }
