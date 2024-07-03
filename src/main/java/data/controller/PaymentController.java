@@ -164,8 +164,6 @@ public class PaymentController {
 
 	            // 포맷에 맞게 변환
 	            String formattedPaidDate = paidDate.format(formatter);
-
-	            System.out.println("Formatted Current Time: " + formattedPaidDate);
 	            
 	            paymentService.RefundChangeTime(formattedPaidDate, merchant_uid);
 
