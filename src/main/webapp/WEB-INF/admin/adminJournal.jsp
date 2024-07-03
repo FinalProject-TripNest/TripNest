@@ -394,7 +394,7 @@ img {
 			var journal_photo = $(".insert_pop form input.file")[0].files[0];
 			var journal_title = $(".insert_pop form input.title").val();
 			var journal_content = $(".insert_pop form textarea.content").val();
-
+			/* alert(journal_photo); */
 			formData.append("photo", journal_photo);
 			formData.append("journal_title", journal_title);
 			formData.append("journal_content", journal_content);
@@ -434,7 +434,7 @@ img {
 				data : {
 					"journal_id" : journal_id
 				},
-				success : function(response) {
+				success : function(res) {
 					location.reload();
 				}
 			});
@@ -447,10 +447,11 @@ img {
 			var journal_content = $(".update_pop form textarea.content").val();
 			var journal_id = $("#journal_id").val();
 
-			formData.append("photo", journal_photo);
+			formData.append("newFile", journal_photo);
 			formData.append("journal_title", journal_title);
 			formData.append("journal_content", journal_content);
 			formData.append("journal_id", journal_id);
+
 			$.ajax({
 				type : "post",
 				dataType : "json",
@@ -459,9 +460,11 @@ img {
 				url : "/admin/journalUpdate",
 				data : formData,
 				success : function(res) {
+					/* alert(res); */
 					location.reload();
 				}
 			});
+
 			return false;
 		});
 	</script>

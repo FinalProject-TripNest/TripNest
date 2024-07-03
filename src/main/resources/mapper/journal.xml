@@ -34,6 +34,7 @@
 	<update id="updateData" parameterType="JournalDto">
 		update journal set
 		journal_photo=#{journal_photo},journal_title=#{journal_title},journal_content=#{journal_content}
+		where journal_id=#{journal_id}
 	</update>
 
 </mapper>

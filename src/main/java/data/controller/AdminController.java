@@ -398,7 +398,7 @@ public class AdminController {
 
 			// 2. S3에서 해당 journal_id에 해당하는 사진 파일 삭제
 			String photoName = journalservice.photoData(journal_id);
-			System.out.println(photoName);
+			/* System.out.println(photoName); */
 			// 1. 데이터베이스에서 해당 journal_id에 해당하는 데이터 삭제
 			journalservice.deleteData(journal_id);
 
@@ -428,21 +428,35 @@ public class AdminController {
 		}
 	}
 
+	@ResponseBody
 	@PostMapping("/admin/journalUpdate")
-	public String journalUpdate(@ModelAttribute JournalDto dto, @RequestParam("photo") MultipartFile photo) {
-
+	public String journalUpdate(@ModelAttribute JournalDto dto,
+			@RequestParam(value = "newFile", required = false) MultipartFile newFile) {
 		String oldFileName = journalservice.photoData(dto.getJournal_id());
-		try {
-			String imageUrl = s3service.updateFile(photo, oldFileName, "journal");
-			dto.setJournal_photo(imageUrl);
+		System.out.println(newFile == null);
+		if (newFile != null) {
+			try {
+				// newFile의 원본 파일 이름 가져오기
+				String originalFilename = newFile.getOriginalFilename();
+				String path = extractFilePath(oldFileName);
+				System.out.println("path: " + path);
+				System.out.println("Uploaded File: " + originalFilename);
+				// originalFilename을 updateFile 메서드의 첫 번째 인자로 전달
+				String imageUrl = s3service.updateFile(newFile, path, "journal");
+				dto.setJournal_photo(imageUrl);
+				journalservice.updateData(dto);
+				return "{\"success\": true}";
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				// 예외 처리 로직 추가
+				return "{\"success\": false}";
+			}
+		} else {
+			dto.setJournal_photo(oldFileName);
 			journalservice.updateData(dto);
 			return "{\"success\": true}";
-
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			// 예외 처리 로직 추가
-			return "{\"success\": false}";
 		}
+
 	}
 
 }
