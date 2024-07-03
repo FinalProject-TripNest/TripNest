@@ -79,22 +79,24 @@
     <c:if test="${not empty reservations}">
         <div class="reservation-list">
             <c:forEach var="reservation" items="${reservations}">
-                <div class="reservation-item">
-                    <div class="image-container">
-                        <p class="reservation-status">
-                            ${reservation.reservation_status}
-                        </p>
-                        <img src="${reservation.image_photo}" alt="${reservation.room_name}" />
-                    </div>
-                    <div class="reservation-info">
-                        <h3>${reservation.room_name}</h3>
-                        <p>${reservation.reservation_checkin} ~ ${reservation.reservation_checkout}</p>
-                        <p>${reservation.reservation_capacity} 명</p>
-                    </div>
-                    <div class="reservation-price">
-                        ₩ <fmt:formatNumber value="${reservation.paid_amount}" type="currency" currencySymbol="" />
-                    </div>
-                </div>
+	            <a href="${root}/find/reservation_success?merchant_uid=${reservation.merchant_uid}">
+	                <div class="reservation-item">
+	                    <div class="image-container">
+	                        <p class="reservation-status">
+	                            ${reservation.reservation_status}
+	                        </p>
+	                        <img src="${reservation.image_photo}" alt="${reservation.room_name}" />
+	                    </div>
+	                    <div class="reservation-info">
+	                        <h3>${reservation.room_name}</h3>
+	                        <p>${reservation.reservation_checkin} ~ ${reservation.reservation_checkout}</p>
+	                        <p>${reservation.reservation_capacity} 명</p>
+	                    </div>
+	                    <div class="reservation-price">
+	                        ₩ <fmt:formatNumber value="${reservation.paid_amount}" type="currency" currencySymbol="" />
+	                    </div>
+	                </div>
+	            </a>
             </c:forEach>
         </div>
     </c:if>

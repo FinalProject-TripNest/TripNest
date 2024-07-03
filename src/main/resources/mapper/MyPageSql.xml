@@ -15,7 +15,8 @@
             r.MERCHANT_UID as merchant_uid,
             ro.room_name as room_name, 
             img.image_photo as image_photo, 
-            p.paid_amount as paid_amount
+            p.paid_amount as paid_amount,
+            p.paid_date as paid_date
         FROM 
             RESERVATIONS r
         JOIN 
@@ -44,7 +45,8 @@
             r.MERCHANT_UID as merchant_uid,
             ro.room_name as room_name, 
             img.image_photo as image_photo, 
-            p.paid_amount as paid_amount
+            p.paid_amount as paid_amount,
+            p.paid_date as paid_date
         FROM 
             RESERVATIONS r
         JOIN 

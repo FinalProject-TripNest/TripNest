@@ -53,7 +53,7 @@ public class MyPageController {
 
         return "/mypage/reservation";
     }
-
+    
     @GetMapping("/cancel")
     public String cancel(HttpSession session, Model model) {
         String userEmail = (String) session.getAttribute("myid");

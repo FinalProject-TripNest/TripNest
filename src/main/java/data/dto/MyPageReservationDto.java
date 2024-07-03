@@ -22,4 +22,5 @@ public class MyPageReservationDto {
     private String room_name;
     private String image_photo;
     private int paid_amount;
+    private Timestamp paid_date;
 }
