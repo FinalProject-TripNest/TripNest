@@ -1,29 +1,44 @@
 package data.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
 import data.dto.InqueryDto;
+import data.dto.JournalDto;
 import data.dto.MemberDto;
+import data.dto.PromotionDto;
 import data.dto.ReviewDto;
 import data.dto.ReviewJoinDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
 import data.service.InqueryService;
+import data.service.JournalService;
 import data.service.MemberService;
+import data.service.PromotionService;
 import data.service.ReviewService;
 import data.service.RoomsService;
+import data.service.S3UploaderService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
@@ -38,6 +53,12 @@ public class AdminController {
 	MemberService memservice;
 	@Autowired
 	ReviewService reviewservice;
+	@Autowired
+	JournalService journalservice;
+	@Autowired
+	S3UploaderService s3service;
+	@Autowired
+	PromotionService promotionservice;
 
 	/*
 	 * @GetMapping("/admin/adminmain") public String admin() { return
@@ -324,7 +345,7 @@ public class AdminController {
 
 	@GetMapping("/admin/reviewlist")
 	public ModelAndView reviewList() {
-		ModelAndView model = new ModelAndView(); // 괄호 추가하여 생성자 호출
+		ModelAndView model = new ModelAndView();
 		List<ReviewJoinDto> review = reviewservice.adminReview();
 		model.addObject("review", review);
 		model.setViewName("/admin/adminReview");
@@ -337,6 +358,214 @@ public class AdminController {
 	public String reviewDelete(@RequestParam("review_id") String review_id) {
 		reviewservice.dataDelete(review_id);
 		return "/admin/reviewDelete";
+	}
+
+	@GetMapping("/admin/journalList")
+	public ModelAndView journalList() {
+		ModelAndView model = new ModelAndView();
+		List<JournalDto> journal = journalservice.dataList();
+		model.addObject("journal", journal);
+		model.setViewName("/admin/adminJournal");
+		return model;
+	}
+
+	@PostMapping(value = "/admin/adminJournalUpdate", produces = "application/json")
+	public ResponseEntity<?> journalOneData(@RequestParam("journal_id") String journal_id) {
+		JournalDto journalUpdate = journalservice.getOneData(journal_id);
+		if (journalUpdate != null) {
+			return ResponseEntity.ok(journalUpdate);
+		} else {
+			return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body("Journal not found");
+		}
+	}
+
+	@ResponseBody
+	@PostMapping("/admin/JournalInsert")
+	public String journalInsert(@ModelAttribute JournalDto dto, @RequestParam("photo") MultipartFile photo) {
+		try {
+			String imageUrl = s3service.uploadSingleFile(photo, "journal");
+			dto.setJournal_photo(imageUrl);
+			journalservice.insertData(dto);
+			return "{\"success\": true}";
+
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			// 예외 처리 로직 추가
+			return "{\"success\": false}";
+		}
+	}
+
+	@ResponseBody
+	@GetMapping("/admin/journalDelete")
+	public String journalDelete(@RequestParam("journal_id") String journal_id) {
+		try {
+
+			// 2. S3에서 해당 journal_id에 해당하는 사진 파일 삭제
+			String photoName = journalservice.photoData(journal_id);
+			/* System.out.println(photoName); */
+			// 1. 데이터베이스에서 해당 journal_id에 해당하는 데이터 삭제
+			journalservice.deleteData(journal_id);
+
+			String path = extractFilePath(photoName);
+
+			s3service.deleteFile(path);
+
+			// 성공적으로 처리되었음을 클라이언트에 응답
+			return "{\"success\": true}";
+		} catch (Exception e) {
+			// 예외 발생 시 에러 메시지와 함께 처리 실패 응답을 클라이언트에 반환
+			e.printStackTrace();
+			return "{\"success\": false, \"error\": \"" + e.getMessage() + "\"}";
+		}
+	}
+
+	// URL에서 S3 파일 경로를 추출하는 메서드
+	private String extractFilePath(String fileUrl) {
+		try {
+			String decodedFileName = URLDecoder.decode(fileUrl, "UTF-8");
+			// "roomphoto/"를 포함하여 반환
+			int index = decodedFileName.indexOf("journal/");
+			return decodedFileName.substring(index);
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("Error while decoding the file URL: " + e.getMessage());
+			return null;
+		}
+	}
+
+	@ResponseBody
+	@PostMapping("/admin/journalUpdate")
+	public String journalUpdate(@ModelAttribute JournalDto dto,
+			@RequestParam(value = "newFile", required = false) MultipartFile newFile) {
+		String oldFileName = journalservice.photoData(dto.getJournal_id());
+		System.out.println(newFile == null);
+		if (newFile != null) {
+			try {
+				// newFile의 원본 파일 이름 가져오기
+				String originalFilename = newFile.getOriginalFilename();
+				String path = extractFilePath(oldFileName);
+				System.out.println("path: " + path);
+				System.out.println("Uploaded File: " + originalFilename);
+				// originalFilename을 updateFile 메서드의 첫 번째 인자로 전달
+				String imageUrl = s3service.updateFile(newFile, path, "journal");
+				dto.setJournal_photo(imageUrl);
+				journalservice.updateData(dto);
+				return "{\"success\": true}";
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				// 예외 처리 로직 추가
+				return "{\"success\": false}";
+			}
+		} else {
+			dto.setJournal_photo(oldFileName);
+			journalservice.updateData(dto);
+			return "{\"success\": true}";
+		}
+
+	}
+
+	@GetMapping("/admin/promotionList")
+	public ModelAndView promotionList() {
+		ModelAndView model = new ModelAndView();
+		List<PromotionDto> promotion = promotionservice.dataList();
+		model.addObject("promotion", promotion);
+		model.setViewName("/admin/adminPromotion");
+		return model;
+	}
+	
+	
+	
+	@PostMapping(value = "/admin/adminPromotionUpdate", produces = "application/json")
+	public ResponseEntity<?> promotionOneData(@RequestParam("promotion_id") String promotion_id) {
+	PromotionDto promotionUpdate = promotionservice.getOneData(promotion_id);
+		if (promotionUpdate != null) {
+			return ResponseEntity.ok(promotionUpdate);
+		} else {
+			return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body("promotion not found");
+		}
+	}
+
+	@ResponseBody
+	@PostMapping("/admin/promotionInsert")
+	public String promotionInsert(@ModelAttribute PromotionDto dto, @RequestParam("photo") MultipartFile photo) {
+		try {
+			String imageUrl = s3service.uploadSingleFile(photo, "promotion");
+			dto.setPromotion_photo(imageUrl);
+			promotionservice.insertData(dto);
+			return "{\"success\": true}";
+
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			// 예외 처리 로직 추가
+			return "{\"success\": false}";
+		}
+	}
+
+	@ResponseBody
+	@GetMapping("/admin/promotionDelete")
+	public String promotionDelete(@RequestParam("promotion_id") String promotion_id) {
+		try {
+
+			// 2. S3에서 해당 journal_id에 해당하는 사진 파일 삭제
+			String photoName = promotionservice.photoData(promotion_id);
+			/* System.out.println(photoName); */
+			// 1. 데이터베이스에서 해당 journal_id에 해당하는 데이터 삭제
+			promotionservice.deleteData(promotion_id);
+
+			String path = promtionextractFilePath(photoName);
+
+			s3service.deleteFile(path);
+
+			// 성공적으로 처리되었음을 클라이언트에 응답
+			return "{\"success\": true}";
+		} catch (Exception e) {
+			// 예외 발생 시 에러 메시지와 함께 처리 실패 응답을 클라이언트에 반환
+			e.printStackTrace();
+			return "{\"success\": false, \"error\": \"" + e.getMessage() + "\"}";
+		}
+	}
+
+	// URL에서 S3 파일 경로를 추출하는 메서드
+	private String promtionextractFilePath(String fileUrl) {
+		try {
+			String decodedFileName = URLDecoder.decode(fileUrl, "UTF-8");
+			// "roomphoto/"를 포함하여 반환
+			int index = decodedFileName.indexOf("promotion/");
+			return decodedFileName.substring(index);
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("Error while decoding the file URL: " + e.getMessage());
+			return null;
+		}
+	}
+
+	@ResponseBody
+	@PostMapping("/admin/promotionUpdate")
+	public String promotionUpdate(@ModelAttribute PromotionDto dto,
+			@RequestParam(value = "newFile", required = false) MultipartFile newFile) {
+		String oldFileName = promotionservice.photoData(dto.getPromotion_id());
+		System.out.println(newFile == null);
+		if (newFile != null) {
+			try {
+				// newFile의 원본 파일 이름 가져오기
+				String originalFilename = newFile.getOriginalFilename();
+				String path = promtionextractFilePath(oldFileName);
+				System.out.println("path: " + path);
+				System.out.println("Uploaded File: " + originalFilename);
+				// originalFilename을 updateFile 메서드의 첫 번째 인자로 전달
+				String imageUrl = s3service.updateFile(newFile, path, "promotion");
+				dto.setPromotion_photo(imageUrl);
+				promotionservice.updateData(dto);
+				return "{\"success\": true}";
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				// 예외 처리 로직 추가
+				return "{\"success\": false}";
+			}
+		} else {
+			dto.setPromotion_photo(oldFileName);
+			promotionservice.updateData(dto);
+			return "{\"success\": true}";
+		}
+
 	}
 
 }
