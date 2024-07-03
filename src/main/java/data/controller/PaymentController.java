@@ -3,6 +3,7 @@ package data.controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ import data.dto.RoomsDto;
 import data.service.PaymentService;
 import data.service.RoomsService;
 import jakarta.servlet.http.HttpSession;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @Slf4j
@@ -137,17 +139,35 @@ public class PaymentController {
 	        Map<String, Object> response = new HashMap<>();
 
 	        String merchant_uid = (String) requestData.get("merchant_uid");
+	        int amount = (Integer) requestData.get("amount");
 
 	        try {
 	            // 세션에서 member_id를 가져옴
 	            Integer memberId = (Integer) session.getAttribute("member_id");
 
-	            String token = refundService.getToken(apiKey, secretKey);
-				refundService.refundRequest1(token, merchant_uid, "전액환불");
+	            String token = refundService.getToken(apiKey, secretKey);			
+	            
+	            //amount가 0보다 큰 경우에만 전체&부분환불 요청을 실행
+	            if (amount > 0) {
+	                refundService.refundPartialRequest(token, merchant_uid, "결제 금액 환불", amount);
+	            }
 	            
 	            
 	            // 예약 및 결제 취소 트랜잭션 실행
 	            reservationTransactionManager.cancelBookingTransaction(merchant_uid);
+	            
+	           // 현재 시간을 가져옴
+	            LocalDateTime paidDate = LocalDateTime.now();
+
+	            // 포맷 지정
+	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+	            // 포맷에 맞게 변환
+	            String formattedPaidDate = paidDate.format(formatter);
+
+	            System.out.println("Formatted Current Time: " + formattedPaidDate);
+	            
+	            paymentService.RefundChangeTime(formattedPaidDate, merchant_uid);
 
 	            response.put("success", true);
 	            response.put("message", "예약 및 결제가 취소되었습니다.");

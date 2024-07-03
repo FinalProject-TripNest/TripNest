@@ -32,7 +32,7 @@
 							<a href="../../login/loginform" class="payment_btn">결제하기</a>
 						</c:when>
 						<c:otherwise>
-							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=2024-06-29&checkout=2024-06-30" class="payment_btn">
+							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=2024-07-09&checkout=2024-07-10" class="payment_btn">
 							결제하기</a>
 						</c:otherwise>
 					</c:choose>

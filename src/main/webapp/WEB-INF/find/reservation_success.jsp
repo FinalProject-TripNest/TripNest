@@ -171,14 +171,69 @@
 		 $(document).ready(function() {
 		 	   $("#cancel").click(function() {
 		 		   var merchant_uid = $("#merchant_uid").val();
-		 		   //alert(merchant_uid);
-		 		   if (confirm("정말로 취소하시겠습니까?")) {
+		 		   var paidAmountStr = "${successDto.paid_amount}";
+		 		   var paidAmount = parseInt(paidAmountStr, 10);
+		 		  
+		 		    var currentDate = new Date();
+		            var formattedDate = currentDate.toISOString().split('T')[0];
+		            
+		            // 예약 체크인 날짜
+		            var checkinDateStr = "${successDto.RESERVATION_CHECKIN}"; // 예약 체크인 날짜 문자열
+		            var checkinDateParts = checkinDateStr.split('-'); // 년, 월, 일 분리
+		            var checkinDate = new Date(checkinDateParts[0], checkinDateParts[1] - 1, checkinDateParts[2]); // 월은 0부터 시작하므로 -1
+
+		            // 날짜 차이 계산 (일 단위)
+		            var timeDiff = checkinDate.getTime() - currentDate.getTime();
+		            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+		       	  // 환불 비율 계산
+		            var refundPercent = 0;
+		            if (daysDiff >= 10) {
+		                refundPercent = 100;
+		            } else if (daysDiff === 9) {
+		                refundPercent = 90;
+		            } else if (daysDiff === 8) {
+		                refundPercent = 80;
+		            } else if (daysDiff === 7) {
+		                refundPercent = 70;
+		            } else if (daysDiff === 6) {
+		                refundPercent = 60;
+		            } else if (daysDiff === 5) {
+		                refundPercent = 50;
+		            } else if (daysDiff === 4) {
+		                refundPercent = 40;
+		            } else {
+		                // 3일 전부터는 예약 취소 불가
+		                alert("체크인 3일 전부터는 예약 취소가 불가합니다.");
+		                return; // 함수 종료
+		            }
+		            // 환불 금액 계산
+		            var refundAmount = (paidAmount * refundPercent) / 100;
+		           // 만약 환불 금액이 음수면 0으로 설정
+		            if (refundAmount < 0) {
+		                refundAmount = 0;
+		            }
+		           
+		            // 환불 금액이 0인 경우와 아닌 경우에 따라 다른 메시지 설정
+		            var confirmMessage;
+		            if (refundAmount === 0) {
+		                confirmMessage = "취소 할 경우 이벤트 쿠폰은 복구되지 않습니다.\n";
+		            } else {
+		                confirmMessage = "현재 날짜: " + formattedDate + "\n";
+		                confirmMessage += "체크인 날짜: " + checkinDateStr + "\n";
+		                confirmMessage += "체크인 " + daysDiff + "일 전: " + refundPercent + "% 공제\n";
+		                confirmMessage += "환불 금액: " + refundAmount + "원\n";
+		            }
+		            confirmMessage += "정말로 취소하시겠습니까?";
+
+		 		   if (confirm(confirmMessage)) {
 		 		  $.ajax({
 						type: "POST",
 						url: "/payment/cancel", // 서버의 결제 정보 처리 URL
 						contentType: "application/json", // Content-Type 명시
 						data: JSON.stringify({
-							merchant_uid: merchant_uid // merchant_uid 전송
+							merchant_uid: merchant_uid, // merchant_uid 전송
+							amount: refundAmount
 						}),
 						success: function(response) {
 							// 취소 완료시

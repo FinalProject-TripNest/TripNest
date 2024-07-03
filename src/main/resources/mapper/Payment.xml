@@ -30,4 +30,9 @@
 	<update id="paymentRefund" parameterType="String">
 		update PAYMENT set pay_status='취소' where merchant_uid=#{merchant_uid};
 	</update>
+	<update id="RefundChangeTime" parameterType="String">
+		update PAYMENT
+        set paid_date = #{paid_date}
+        where merchant_uid = #{merchant_uid}
+	</update>
 </mapper>
