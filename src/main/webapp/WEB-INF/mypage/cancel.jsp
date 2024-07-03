@@ -89,8 +89,8 @@
                         </div>
                         <div class="cancel-info">
                             <h3>${cancellation.room_name}</h3>
-                            <p>결제일 : <fmt:formatDate value="${cancellation.reservation_date}" pattern="yyyy-MM-dd HH:mm" /></p>
-                            <p>결제취소 : </p>
+                            <p>${cancellation.reservation_checkin} ~ ${cancellation.reservation_checkout}</p>
+                            <p>결제취소일 : <fmt:formatDate value="${cancellation.reservation_date}" pattern="yyyy-MM-dd HH:mm" /></p>
                         </div>
                         <div class="cancel-price">
                             ₩ <fmt:formatNumber value="${cancellation.paid_amount}" type="currency" currencySymbol="" />

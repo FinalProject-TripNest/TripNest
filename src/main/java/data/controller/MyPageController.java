@@ -123,8 +123,4 @@ public class MyPageController {
         return "redirect:/";
     }
     
-    @GetMapping("/message")
-    public String message() {
-        return "/mypage/message";
-    }
 }
