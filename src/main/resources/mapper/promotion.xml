@@ -37,4 +37,9 @@
 		promotion_photo=#{promotion_photo},promotion_title=#{promotion_title},promotion_content=#{promotion_content}
 		where promotion_id=#{promotion_id}
 	</update>
+
+	<select id="getCouponGroupId" resultType="String" parameterType="String">
+		select coupon_group_id from COUPON_GROUP where promotion_id = #{promotion_id}
+	</select>
+
 </mapper>

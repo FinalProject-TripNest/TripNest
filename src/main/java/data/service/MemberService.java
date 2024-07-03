@@ -40,6 +40,7 @@ public class MemberService implements MemberServiceInter {
     public boolean checkEmailExists(String email) {
         return memberMapper.findByEmail(email) != null;
     }
+
     
 	@Override
 	public MemberDto findMemberEmail(int member_id) {
@@ -69,5 +70,11 @@ public class MemberService implements MemberServiceInter {
 	public List<MemberDto> getRecentMember() {
 		// TODO Auto-generated method stub
 		return memberMapper.getRecentMember();
+
+	}
+	@Override
+	public MemberDto getMemberByEmail(String email) {
+		return memberMapper.findByEmail(email);
+
 	}
 }

@@ -112,7 +112,12 @@ public class RoomsService implements RoomsServiceInter {
 		// 상위 6개 방 정보 가져오기
 		for(String room_id : viewRank) {
 			RoomsDto room = roommapper.getSimpleRoomsDataByRoomId(room_id);
-			topRooms.add(room);
+			if (room != null) {
+				topRooms.add(room);
+			} else {
+				// room이 null일 경우 처리할 로직
+				System.out.println("Room data is null for room_id: " + room_id);
+			}
 		}
 
 		//도, 시 정보 추가

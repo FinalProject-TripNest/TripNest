@@ -23,24 +23,68 @@
 			</div>
 			<div class="center">
 				<div class="main">
+					<div id="member-id">${sessionScope.member.member_id}</div>
 					<div class="img">
 						<img alt="" src="${dto.promotion_photo}">
 					</div>
 					<div class="text">
 						<p>${dto.promotion_explanation}</p>
 					</div>
-					<div class="btn">
-						<div>쿠폰 발급</div>
-					</div>
+
+					<%-- 해당 프로모션에 쿠폰 이벤트가 있는경우에만 쿠폰 발급 번틀을 보여줌 --%>
+					<c:if test="${couponGroupId != null}">
+						<div class="btn">
+							<div id="coupon-btn" onclick="newCoupon(${couponGroupId})">쿠폰 발급</div>
+						</div>
+					</c:if>
+
 				</div>
 
 			</div>
 		</div>
 	</div>
 
+<script>
+
+    async function newCoupon(couponGroupId){
+		const memberId = document.getElementById("member-id").innerText.trim();
+		console.log("memberId : "+memberId);
+
+        // 로그인 확인
+        if(memberId === ""){
+            alert("로그인이 필요합니다.");
+			window.location.href = "/login/loginform";
+            return;
+        }
+
+        try{
+			console.log("http://localhost:8080/api/coupons/"+couponGroupId+"/issue");
+            const response = await fetch("http://localhost:8080/api/coupons/"+couponGroupId+"/issue",{
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "memberId": memberId,
+                }),
+            });
+            if(response.ok){
+                alert("쿠폰이 발급되었습니다.");
+            }else if(response.status === 400){
+				const responseData = await response.json();
+                alert(responseData.message);
+            }else {
+				alert("오류가 발생했습니다.");
+			}
+        }catch(error){
+            throw new Error(error);
+        }
+    }
+
+</script>
 
 
 
-	<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

@@ -47,7 +47,7 @@ public class FindController {
 		System.out.println("roomDtoList.size() = " + roomDtoList.size());
 
 		return model;
-	}
+	} 
 
 	@GetMapping("/find/list/detail")
 	public ModelAndView detail(@RequestParam("room_id") String room_id) {

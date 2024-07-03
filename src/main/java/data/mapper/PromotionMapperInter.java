@@ -21,4 +21,7 @@ public interface PromotionMapperInter {
 	public String photoData(String journal_id);
 	
 	public void updateData(PromotionDto dto);
+
+	public String getCouponGroupId(String promotion_id);
+
 }

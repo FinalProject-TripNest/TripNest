@@ -48,5 +48,9 @@ public class PromotionService implements PromotionServiceInter {
 		mapperInter.updateData(dto);
 		
 	}
+	public String getCouponGroupId(String promotion_id) {
+		return mapperInter.getCouponGroupId(promotion_id);
+
+	}
 
 }

@@ -32,8 +32,8 @@
 							<a href="../../login/loginform" class="payment_btn">결제하기</a>
 						</c:when>
 						<c:otherwise>
-							<a href="../../find/reservation?room_id=${detailDto.room_id}"
-								class="payment_btn">결제하기</a>
+							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=2024-07-09&checkout=2024-07-10" class="payment_btn">
+							결제하기</a>
 						</c:otherwise>
 					</c:choose>
 
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="amenities">
+				<div class="amenities" id="amenities">
 					<div class="title">AMENITIES</div>
 					<div class="text">
 						<p>${detailDto.room_service}</p>
@@ -295,7 +295,7 @@
 									</dt>
 									<dd>
 										<ul>
-											<li>체크인 시간은 오후 4시, 체크아웃 시간은 오전 11시입니다.</li>
+											<li>체크인 시간은 오후 3시, 체크아웃 시간은 오전 11시입니다.</li>
 											<li>예약하신 당일 오전에, 체크인 안내 문자를 보내드립니다.</li>
 											<li>최대인원을 초과하는 인원은 입실이 불가합니다.</li>
 											<li>예약인원 외 방문객의 출입을 엄격히 제한합니다.</li>
@@ -351,7 +351,7 @@
 									</dt>
 									<dd>
 										<ul>
-											<li>건물 뒤편에 글림스 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
+											<li>건물 뒤편에 ${detailDto.room_name } 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
 												2대까지 주차 가능합니다.</li>
 										</ul>
 									</dd>

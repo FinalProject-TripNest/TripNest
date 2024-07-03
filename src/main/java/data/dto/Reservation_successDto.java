@@ -7,7 +7,8 @@ import lombok.Data;
 @Data
 @Alias("Reservation_successDto")
 public class Reservation_successDto {
-
+	
+	//payment 테이블과 reservation 테이블 조인 => 예약완료화면에 출력
     private String member_id;
     private String buyer_name;
     private int paid_amount;
