@@ -34,7 +34,7 @@
 color: rgba(255, 255, 255, 0.7);
     border-radius: 100px;
     position: absolute;
-			bottom: 40px; /* 이미지 내부에서 아이콘의 상단 위치 */
+			bottom: 57px; /* 이미지 내부에서 아이콘의 상단 위치 */
 			right: 30px; /* 이미지 내부에서 아이콘의 오른쪽 위치 */
 			font-size: 18px; /* 아이콘 크기 */
 			cursor: pointer;
@@ -49,11 +49,16 @@ padding: 20px;
 }
 .mylikestayprice{
 float: right;
+font-size: 15px;
 }
 #likestay b {
 	font-size: 24px;
 	margin-bottom: 20px;
 	text-align: left;
+}
+#likestay .mylikecapacity{
+font-size: 0.8em;
+color: gray;
 }
 </style>
 <body>
@@ -111,7 +116,9 @@ function list(){
                      s += "<img src='" + res.image_photo + "' class='mylikestayphoto'>";
                      s += "<i class='bi bi-heart-fill'room_id='"+res.room_id+"'></i>";
                      s += "<br><span>" + res.room_name + "</span>/<span>" + res.room_region + "</span>";
-                     s += "<span class='mylikestayprice'>" + res.room_price + "</span>";
+                     s += "<span class='mylikestayprice'>" + formatPrice(res.room_price) + "</span>";
+                     s+="<br><span class='mylikecapacity'>기준"+res.room_min_capacity+"명(최대"+res.room_max_capacity+"명)</span>"
+                     
                      s += "</a></div>";
                  });
              });
@@ -120,6 +127,11 @@ function list(){
 		}
 		
 	});
+}
+
+function formatPrice(price) {
+	// 가격에 천 단위마다 쉼표를 추가하고 앞에 \를 붙입니다.
+	return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 function icon(){
     $(".bi-heart-fill").each(function() {

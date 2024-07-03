@@ -321,6 +321,7 @@ background-color: white;
 		  $(".custom-model-mainiq").removeClass('model-open');
 		});
 		
+		
 	});
 	function list(){
 	    $.ajax({

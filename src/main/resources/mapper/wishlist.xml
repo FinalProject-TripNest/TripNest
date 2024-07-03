@@ -14,18 +14,39 @@
 		delete from WISHLIST where member_useremail=#{member_useremail} and room_id=#{room_id}
 	</delete>
 	
+	<!-- ROOMS,IMAGES,WISHLIST JOIN 이미지 테이블중에서 같은 room_id중에서 가장작은 image_id를 대표이미지로 하게끔 -->
 	<select id="myWishList" parameterType="WishlistDto" resultType="WishlistDetailDto">
-		select i.image_photo,r.room_name,r.room_region,r.room_min_capacity,r.room_max_capacity,r.room_price,w.wishlist_date,w.room_id from
-		WISHLIST w
-			join ROOMS r on w.room_id = r.room_id
-			left join(
-			SELECT room_id, MIN(image_photo) AS image_photo
-            FROM IMAGES
-            GROUP BY room_id
-			)as i on r.room_id = i.room_id
-		where 
-			w.member_useremail = #{member_useremail}
-			ORDER BY 
-        DATE(w.wishlist_date) DESC, r.room_id;
+		SELECT
+    r.room_id,
+    r.room_name,
+    r.room_region,
+    r.room_min_capacity,
+    r.room_max_capacity,
+    r.room_price,
+    w.wishlist_date,
+    i.image_photo
+FROM
+    WISHLIST w
+    JOIN ROOMS r ON w.room_id = r.room_id
+    LEFT JOIN (
+        SELECT 
+            room_id, 
+            image_photo
+        FROM 
+            IMAGES i1
+        WHERE 
+            image_id IN (
+                SELECT 
+                    MIN(image_id) 
+                FROM 
+                    IMAGES i2
+                GROUP BY 
+                    room_id
+            )
+    ) i ON r.room_id = i.room_id
+WHERE 
+    w.member_useremail = #{member_useremail}
+ORDER BY 
+    DATE(w.wishlist_date) DESC;
 	</select>
 </mapper>
