@@ -11,4 +11,30 @@
 
 		select * from promotion where promotion_id = #{promotion_id}
 	</select>
+	
+		<insert id="insertData" parameterType="PromotionDto">
+		insert into promotion
+		(promotion_photo,promotion_title,promotion_content,promotion_date) values
+		(#{promotion_photo},#{promotion_title},#{promotion_content},now())
+	</insert>
+
+	<delete id="deleteData" parameterType="String">
+		delete from promotion where
+		promotion_id =#{promotion_id}
+	</delete>
+
+	<select id="photoData" parameterType="String"
+		resultType="String">
+		SELECT
+		promotion_photo
+		FROM promotion
+		WHERE promotion_id =
+		#{promotion_Id}
+	</select>
+
+	<update id="updateData" parameterType="PromotionDto">
+		update promotion set
+		promotion_photo=#{promotion_photo},promotion_title=#{promotion_title},promotion_content=#{promotion_content}
+		where promotion_id=#{promotion_id}
+	</update>
 </mapper>
