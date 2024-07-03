@@ -7,7 +7,7 @@
 		values(null, #{member_id},#{member_useremail},#{buyer_name},#{imp_uid},#{merchant_uid},#{paid_amount},#{pg_provider},#{pg_tid}, now())
 	</insert>
 	
-	 <select id="getSuccessOneData" resultType="Reservation_successDto" parameterType="string">
+	 <select id="getSuccessOneData" resultType="Reservation_successDto" parameterType="String">
         SELECT 
             p.member_id,
             p.buyer_name,
@@ -27,4 +27,7 @@
     	<select id="getImgByRoomId" resultType="String" parameterType="String">
 		select image_photo from IMAGES where room_id = #{room_id}
 	</select>
+	<update id="paymentRefund" parameterType="String">
+		update PAYMENT set pay_status='취소' where merchant_uid=#{merchant_uid};
+	</update>
 </mapper>
