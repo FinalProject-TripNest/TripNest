@@ -1494,4 +1494,9 @@ header#header .menu ul.sub li {
 	font-size: 18px;
 }
 
+#promotion_detail .main #member-id {
+	opacity: 0;
+	height: 0;
+}
+
 /*//promotion_detail*/
