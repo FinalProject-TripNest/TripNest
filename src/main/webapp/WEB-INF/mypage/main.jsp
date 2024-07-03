@@ -121,6 +121,8 @@
                             <li><a href="#" data-target="coupon" class="menu-item">보유 쿠폰</a></li>
                             <li><a href="#" data-target="likestay" class="menu-item">관심 스테이</a></li>
                             <li><a href="#" data-target="edit" class="menu-item">회원 정보 수정</a></li>
+                            <li><a href="#" data-target="message" class="menu-item">메시지</a></li>
+                            <li><a href="#" data-target="myinquery" class="menu-item">1:1 문의</a></li>
                         </ul>
                     </div>
                     <div class="mypage_content" id="mypage_content">

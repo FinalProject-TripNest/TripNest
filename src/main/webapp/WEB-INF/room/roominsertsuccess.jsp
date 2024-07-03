@@ -11,31 +11,31 @@
 </head>
 <title>TRIP NEST</title>
 <style>
-.rinsertsuccess{
+#roominsertsuccess .rinsertsuccess{
 	width: 70%;
 	margin: 0 auto;
 	padding: 10%;
 }
-.rinsertsuccessspan{
+#roominsertsuccess .rinsertsuccessspan{
 	font-size: 2em;
 
 }
-.rinsertbtn1,.rinsertbtn2{
+#roominsertsuccess .rinsertbtn1,#roominsertsuccess .rinsertbtn2{
 	margin: 10%;
 	width: 100px;
 	height: 50px;
 	border: 1px solid gray;
 	cursor: pointer;
 }
-.rinsertbtn2{
+#roominsertsuccess .rinsertbtn2{
 	background-color: #05141F;
 	color: white;
 }
-.rinsertbtn1{
+#roominsertsuccess .rinsertbtn1{
 	background-color: white;
 }
 
-i.bi-house-door{
+#roominsertsuccess i.bi-house-door{
 	font-size: 2.5em;
 }
 </style>
