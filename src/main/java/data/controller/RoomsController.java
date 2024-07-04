@@ -237,7 +237,7 @@ public class RoomsController {
 	public String getOneData(String room_id, Model model,HttpSession session) {
 		RoomsDto rdto=service.getOneData(room_id);
 		model.addAttribute("rdto", rdto);
-		
+		model.addAttribute("apikey", apikey);
         // 서비스 목록 예시 데이터
         List<String> services = Arrays.asList("와이파이", "TV", "주방", "세탁기", "에어컨", "전자렌지", 
 								                "수영장", "바베큐 그릴", "주차장", "반려동물 입장가능", 

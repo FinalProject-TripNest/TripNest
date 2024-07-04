@@ -358,6 +358,8 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 												<input type="text" class="addrinput" id="sample6_extraAddress" placeholder="참고항목">
 												<input type="hidden" id="room_address_detail" name="room_address_detail">
 												<input type="hidden" id="room_region" name="room_region">
+												<input type="hidden" name="room_latitude" id="room_latitude">
+												<input type="hidden" name="room_longitude" id="room_longitude">
 											</div>
 										</td>
 									</tr>
@@ -942,6 +944,9 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 					map: map,
 					position: coords
 				});
+				
+				$("#room_latitude").val(result[0].y);
+				$("#room_longitude").val(result[0].x);
 			}
 		});
 	}

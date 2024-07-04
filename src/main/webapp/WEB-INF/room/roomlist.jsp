@@ -43,6 +43,12 @@ margin: 5px;
 	margin-bottom: 20px;
 	font-size: 20pt;
 }
+#roomlist .address{
+white-space: nowrap; /* 줄바꿈을 방지하여 한 줄에 표시 */
+overflow: hidden; /* 넘치는 부분 숨김 */
+text-overflow: ellipsis; /* 넘치는 부분을 ...으로 표시 */
+max-width: 250px;
+}
 </style>
 <body>
 
@@ -122,7 +128,7 @@ margin: 5px;
 	                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '">' +
 	                        '<td align="center">' + room.room_id + '</td>' +
 	                        '<td  align="center">' + room.room_name + '</td>' +
-	                        '<td>' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
+	                        '<td class="address">' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
 	                        '<td align="center">'+formattedPrice+'</td>' +
 	                        '<td class="servicelist">' + room.room_service + '</td>' +
 	                        '<td align="center">' + room.room_status + '</td>' +
