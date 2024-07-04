@@ -30,6 +30,8 @@ public class RoomsDto {
 
 	private String city;
 	private String district;
+	private double room_latitude;
+	private double room_longitude;
 	private List<String> imgList;
 
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.SearchMapperInter">
+  <select id="findHotelsNearby" resultType="RoomsDto">
+        SELECT * 
+        FROM ROOMS
+        WHERE 1=1
+        <if test="minLatitude != null and maxLatitude != null and minLongitude != null and maxLongitude != null">
+          AND room_latitude BETWEEN #{minLatitude} AND #{maxLatitude}
+          AND room_longitude BETWEEN #{minLongitude} AND #{maxLongitude}
+        </if>
+        <if test="checkin != null and checkout != null">
+          AND NOT EXISTS (
+              SELECT 1 
+              FROM RESERVATIONS 
+              WHERE RESERVATIONS.room_id = ROOMS.room_id
+                AND (
+                    (#{checkin} BETWEEN RESERVATIONS.RESERVATION_CHECKIN AND RESERVATIONS.RESERVATION_CHECKOUT)
+                    OR
+                    (#{checkout} BETWEEN RESERVATIONS.RESERVATION_CHECKIN AND RESERVATIONS.RESERVATION_CHECKOUT)
+                    OR
+                    (RESERVATIONS.RESERVATION_CHECKIN BETWEEN #{checkin} AND #{checkout})
+                    OR
+                    (RESERVATIONS.RESERVATION_CHECKOUT BETWEEN #{checkin} AND #{checkout})
+                )
+          )
+        </if>
+        <if test="personnel != null">
+          AND #{personnel} BETWEEN ROOMS.room_min_capacity AND ROOMS.room_max_capacity
+        </if>
+    </select>
+</mapper>

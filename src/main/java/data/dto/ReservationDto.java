@@ -1,15 +1,24 @@
 package data.dto;
 
 import java.sql.Timestamp;
-
 import org.apache.ibatis.type.Alias;
-
 import lombok.Data;
 
 @Data
 @Alias("ReservationDto")
 public class ReservationDto {
 	
+
+	private int reservation_id;
+	private int member_id;
+	private int room_id;
+	private String reservation_checkin;
+	private String reservation_checkout;
+	private String reservation_status;
+	private int reservation_price;
+	
+	
+
 //	private int RESERVATION_ID;
 //	private int MEMBER_ID;
 //	private int ROOM_ID;
@@ -31,5 +40,6 @@ public class ReservationDto {
 	   private int reservationPrice;
 	   private Timestamp reservationDate;
 	   private String merchantUid;
+
 
 }
