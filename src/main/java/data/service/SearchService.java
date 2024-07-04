@@ -15,7 +15,7 @@ public class SearchService implements SearchServiceInter {
 	 @Autowired
 	    private SearchMapperInter hotelMapper;
 
-	    public List<RoomsDto> findHotelsNearby(double latitude, double longitude, double errorRange, Date checkin, Date checkout, Integer personnel) {
+	    public List<RoomsDto> findHotelsNearby(double latitude, double longitude, double errorRange, String checkin, String checkout, Integer personnel) {
 	        double minLatitude = latitude - errorRange;
 	        double maxLatitude = latitude + errorRange;
 	        double minLongitude = longitude - errorRange;

@@ -15,8 +15,8 @@ public interface SearchMapperInter {
             @Param("maxLatitude") double maxLatitude,
             @Param("minLongitude") double minLongitude,
             @Param("maxLongitude") double maxLongitude,
-            @Param("checkin") Date checkin,
-            @Param("checkout") Date checkout,
+            @Param("checkin") String checkin,
+            @Param("checkout") String checkout,
             @Param("personnel") Integer personnel);
 	
 }

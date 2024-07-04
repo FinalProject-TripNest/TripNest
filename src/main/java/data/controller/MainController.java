@@ -65,6 +65,10 @@ public class MainController {
 		// 포맷팅된 날짜 출력
 		String defaultCheckin = sdf.format(Checkin);
 		String defaultCheckout = sdf.format(Checkout);
+		
+		Integer personnelCount = 2;
+		
+		String defaultDate = defaultCheckin + " ~ " + defaultCheckout;
 
 		model.addObject("journalDto", journalDto);
 		model.addObject("promotionDto", promotionDto);
@@ -75,6 +79,8 @@ public class MainController {
 		model.addObject("defaultAddress", defaultAddress);
 		model.addObject("defaultCheckin", defaultCheckin);
 		model.addObject("defaultCheckout", defaultCheckout);
+		model.addObject("defaultDate", defaultDate );
+		model.addObject("personnelCount", personnelCount);
 		model.setViewName("/main/index");
 		return model;
 	}

@@ -7,5 +7,5 @@ import data.dto.RoomsDto;
 
 public interface SearchServiceInter {
 
-	public List<RoomsDto> findHotelsNearby(double latitude, double longitude, double errorRange, Date checkin, Date checkout, Integer personnel);
+	public List<RoomsDto> findHotelsNearby(double latitude, double longitude, double errorRange, String checkin, String checkout, Integer personnel);
 }
