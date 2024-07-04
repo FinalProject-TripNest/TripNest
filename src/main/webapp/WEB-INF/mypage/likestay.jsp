@@ -60,15 +60,25 @@ font-size: 15px;
 font-size: 0.8em;
 color: gray;
 }
+#noMylikestay{
+font-size: 20px;
+margin: 0 auto;
+padding-top: 10%;
+text-align: center;
+font-weight: bold;
+}
 </style>
 <body>
 
 
 	<div id="likestay" class="reservation-info">
 		<b>관심스테이</b>
-		<div id="mylikestaydiv">
+			<div id="noMylikestay">
 			
-		</div>
+			</div>
+			<div id="mylikestaydiv">
+			
+			</div>
 	</div>
 
 
@@ -102,31 +112,54 @@ color: gray;
 	});
 	
 function list(){
+	
+	
 	$.ajax({
+		url:"/wishlist/countmywish",
 		type:"get",
-		url:"/wishlist/mywishlist",
 		dataType:"json",
-		success:function(data){
-			var s="";
-			 $.each(data, function(date, items) {
-                 s += "<span class='mylikestaydate'>" + date + "</span>"; // 날짜 출력
-                 $.each(items, function(i, res) {
-                     s += "<div class='mylikestaydiv'>";
-                     s += "<a href='/find/list/detail?room_id=" + res.room_id + "'>";
-                     s += "<img src='" + res.image_photo + "' class='mylikestayphoto'>";
-                     s += "<i class='bi bi-heart-fill'room_id='"+res.room_id+"'></i>";
-                     s += "<br><span>" + res.room_name + "</span>/<span>" + res.room_region + "</span>";
-                     s += "<span class='mylikestayprice'>" + formatPrice(res.room_price) + "</span>";
-                     s+="<br><span class='mylikecapacity'>기준"+res.room_min_capacity+"명(최대"+res.room_max_capacity+"명)</span>"
-                     
-                     s += "</a></div>";
-                 });
-             });
-			$("#mylikestaydiv").html(s);
-			 icon();
+		success:function(res){
+			if(res.countwish==0){
+				var s="";
+				s+="<div>등록된 위시리스트가 없습니다.</div><br>";
+				s+="<div>나만의 공간을 등록해보세요."
+				$("#noMylikestay").html(s);
+			}else{
+				
+				
+				
+				$.ajax({
+					type:"get",
+					url:"/wishlist/mywishlist",
+					dataType:"json",
+					success:function(data){
+						var s="";
+						 $.each(data, function(date, items) {
+			                 s += "<span class='mylikestaydate'>" + date + "</span>"; // 날짜 출력
+			                 $.each(items, function(i, res) {
+			                     s += "<div class='mylikestaydiv'>";
+			                     s += "<a href='/find/list/detail?room_id=" + res.room_id + "'>";
+			                     s += "<img src='" + res.image_photo + "' class='mylikestayphoto'>";
+			                     s += "<i class='bi bi-heart-fill'room_id='"+res.room_id+"'></i>";
+			                     s += "<br><span>" + res.room_name + "</span>/<span>" + res.room_region + "</span>";
+			                     s += "<span class='mylikestayprice'>" + formatPrice(res.room_price) + "</span>";
+			                     s+="<br><span class='mylikecapacity'>기준"+res.room_min_capacity+"명(최대"+res.room_max_capacity+"명)</span>"
+			                     
+			                     s += "</a></div>";
+			                 });
+			             });
+						$("#mylikestaydiv").html(s);
+						 icon();
+					}
+					
+				});
+				
+			}
 		}
-		
-	});
+	})
+	
+	
+
 }
 
 function formatPrice(price) {

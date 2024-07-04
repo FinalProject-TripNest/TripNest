@@ -11,4 +11,5 @@ public interface WishlistServiceInter {
 	public int checkWishlist(WishlistDto dto);
 	public void delectWishlist(WishlistDto dto);
 	public List<WishlistDetailDto> myWishList(String member_useremail);
+	public int countMywishlist(String member_useremail);
 }

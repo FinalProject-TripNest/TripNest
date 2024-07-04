@@ -39,4 +39,10 @@ public class WishlistService implements WishlistServiceInter {
 		return wishmapper.myWishList(member_useremail);
 	}
 
+	@Override
+	public int countMywishlist(String member_useremail) {
+		// TODO Auto-generated method stub
+		return wishmapper.countMywishlist(member_useremail);
+	}
+
 }

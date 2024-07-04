@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.InqueryDto;
 import data.dto.MemberDto;
 import data.service.InqueryService;
 import data.service.MemberServiceInter;
+import data.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -25,6 +27,8 @@ public class MyPageController {
     private MemberServiceInter memberService;
     @Autowired
     InqueryService inqueryService;
+    @Autowired
+    WishlistService wishService;
 
     @GetMapping("/main")
     public String myPage(HttpSession session, Model model) {
@@ -124,4 +128,6 @@ public class MyPageController {
 
         return inqueryList;
     }
+    
+
 }

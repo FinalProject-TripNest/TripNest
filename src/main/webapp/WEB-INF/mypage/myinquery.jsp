@@ -190,6 +190,10 @@
 cursor: pointer;
 background-color: white;
 }
+#myinquery .noinquerytd{
+height: 50px;
+font-weight: bold;
+}
 </style>
 <body>
 
@@ -324,35 +328,60 @@ background-color: white;
 		
 	});
 	function list(){
-	    $.ajax({
-	        type: "get",
-	        url: "/mypage/myinquerylist",
-	        dataType: "json",
-	        success: function(data){
-	            var tbody = $(".myinquery tbody");
-	            tbody.empty(); // 기존 테이블 내용 비우기
-	            
-	            // 데이터를 반복하여 테이블에 추가
-	            $.each(data, function(i, iq){
-	                var status = (iq.inquery_answer != null) ? "답변완료" : "답변대기";
-	                
-	                var s = "<tr>";
-	                s += "<td align='center'>" + iq.inquery_id + "</td>";
-	                s += "<td align='center'>" + iq.inquery_category + "</td>";
-	                s += "<td class='iq_title'><a class='Click-here' data-inquery-id='" + iq.inquery_id + "'>" + iq.inquery_title + "</a></td>";
-	                s += "<td align='center'>" + new Date(iq.inquery_date).toLocaleDateString() + "</td>";
-	                if(iq.inquery_answer != null){
-	                	s+="<td align='center' style='color:#2196F3'>답변완료</td>";
-	                }else{
-	                	s+="<td align='center'>답변대기</td>";
-	                }
-	                s += "<td align='center'><button type='button' class='myinquerydelbtn' data-inquery-id='" + iq.inquery_id + "'>삭제</button></td>";
-	                s += "</tr>";
-	                
-	                tbody.append(s);
-	            });
-	        }
-	    });
+		
+		
+		$.ajax({
+			type:"get",
+			url:"/mypage/myinquerycount",
+			dataType:"json",
+			success:function(res){
+				var tbody = $(".myinquery tbody");
+				if(res.inquerycount==0){
+					var s="";
+					s+="<tr>";
+					s+="<td colspan='6' align='center' class='noinquerytd' >등록한 문의글이 없습니다</td>";
+					s+="</tr>";
+					tbody.html(s);
+				}else{
+					
+					
+					
+				    $.ajax({
+				        type: "get",
+				        url: "/mypage/myinquerylist",
+				        dataType: "json",
+				        success: function(data){
+				            var tbody = $(".myinquery tbody");
+				            tbody.empty(); // 기존 테이블 내용 비우기
+				            
+				            // 데이터를 반복하여 테이블에 추가
+				            $.each(data, function(i, iq){
+				                var status = (iq.inquery_answer != null) ? "답변완료" : "답변대기";
+				                
+				                var s = "<tr>";
+				                s += "<td align='center'>" + iq.inquery_id + "</td>";
+				                s += "<td align='center'>" + iq.inquery_category + "</td>";
+				                s += "<td class='iq_title'><a class='Click-here' data-inquery-id='" + iq.inquery_id + "'>" + iq.inquery_title + "</a></td>";
+				                s += "<td align='center'>" + new Date(iq.inquery_date).toLocaleDateString() + "</td>";
+				                if(iq.inquery_answer != null){
+				                	s+="<td align='center' style='color:#2196F3'>답변완료</td>";
+				                }else{
+				                	s+="<td align='center'>답변대기</td>";
+				                }
+				                s += "<td align='center'><button type='button' class='myinquerydelbtn' data-inquery-id='" + iq.inquery_id + "'>삭제</button></td>";
+				                s += "</tr>";
+				                
+				                tbody.append(s);
+				            });
+				        }
+				    });
+					
+				}
+			}
+		})
+		
+		
+
 	}
 	</script>
 </body>

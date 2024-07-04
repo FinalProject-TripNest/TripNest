@@ -1,6 +1,8 @@
 package data.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +65,17 @@ public class InqueryController {
 		service.deleteInquery(inquery_id);
 		
 		return "/mypage/deleteinquery";
+	}
+	
+	@GetMapping("/mypage/myinquerycount")
+	@ResponseBody
+	public Map<String, Object> myinquerycount(HttpSession session){
+		Map<String, Object> map=new HashMap<>();
+		int memid=(int)session.getAttribute("member_id");
+		int inquerycount=service.myInqueryCount(memid);
+		map.put("inquerycount", inquerycount);
+		System.out.println("inquerycount count: " + inquerycount);
+		return map;
 	}
 
 }

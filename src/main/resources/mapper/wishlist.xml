@@ -49,4 +49,8 @@ WHERE
 ORDER BY 
     DATE(w.wishlist_date) DESC;
 	</select>
+	
+	<select id="countMywishlist" parameterType="String" resultType="int">
+		select count(*) from WISHLIST where member_useremail=#{member_useremail}
+	</select>
 </mapper>

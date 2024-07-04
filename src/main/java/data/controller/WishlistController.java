@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.WishlistDetailDto;
 import data.dto.WishlistDto;
@@ -38,12 +39,6 @@ public class WishlistController {
 		return "find/list";
 	}
 	
-	@GetMapping("/wishlist/wishcount")
-	public String wishcount(WishlistDto dto, Model model) {
-		int count=service.checkWishlist(dto);
-		model.addAttribute("count", count);
-		return "find/list";
-	}
 	@GetMapping("/wishlist/count")
 	@ResponseBody
 	public Map<String, Integer> count(WishlistDto dto) {
@@ -64,20 +59,6 @@ public class WishlistController {
 		return "find/list";
 	}
 	
-	/*@GetMapping("/wishlist/mywishlist")
-	@ResponseBody
-	public List<WishlistDetailDto> mywishlist(HttpSession session,Model model){
-		String myemail=(String)session.getAttribute("myid");
-		
-		List<WishlistDetailDto> list=service.myWishList(myemail);
-		
-		for(WishlistDetailDto dto:list) {
-			String room_region=roomservice.getDataRoom(dto.getRoom_id()).getRoom_region();
-			dto.setRoom_region(room_region);
-		}
-		
-		return list;
-	}*/
 	
 	@GetMapping("/wishlist/mywishlist")
 	@ResponseBody
@@ -102,4 +83,19 @@ public class WishlistController {
 	    return wishlistByDate;
 
 	}	
+	@GetMapping("/wishlist/countmywish")
+	@ResponseBody
+	public Map<String,Object> countmywish(HttpSession session) {
+		
+		String member_useremail=(String)session.getAttribute("myid");
+		int countwish=service.countMywishlist(member_useremail);
+		Map<String, Object> map=new HashMap<>();
+		map.put("countwish", countwish);
+		System.out.println("Wishlist count: " + countwish);
+		
+		return map;
+
+	}
+
+
 }
