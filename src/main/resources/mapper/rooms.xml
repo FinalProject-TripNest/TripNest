@@ -150,7 +150,7 @@
 	</delete>
 	
 	<select id="getRoomDataByMyid" parameterType="int" resultType="RoomsDto">
-		select * from ROOMS where member_id=#{member_id}
+		select * from ROOMS where member_id=#{member_id} order by room_id desc
 	</select>
 	
 	<update id="updateRoom" parameterType="RoomsDto">

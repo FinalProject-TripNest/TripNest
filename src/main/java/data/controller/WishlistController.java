@@ -91,7 +91,7 @@ public class WishlistController {
 		int countwish=service.countMywishlist(member_useremail);
 		Map<String, Object> map=new HashMap<>();
 		map.put("countwish", countwish);
-		System.out.println("Wishlist count: " + countwish);
+		//System.out.println("Wishlist count: " + countwish);
 		
 		return map;
 

@@ -127,7 +127,7 @@
 						</div>
 						<div>
 							<span class="editspan">숙소이름</span> 
-							<input type="text" value=" ${rdto.room_name}" name="room_name" required="required">
+							<input type="text" value="${rdto.room_name}" name="room_name" required="required">
 						</div>
 						<div>
 							<span class="editspan">가격</span>

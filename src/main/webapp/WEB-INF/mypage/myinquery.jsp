@@ -165,6 +165,7 @@
 }
 .myinquerypre,.myinqueryanswerpre,.myinqueryspan{
 	padding: 20px;
+	white-space: pre-wrap;
 }
 #myinquerymodal .Qicondiv,#myinquerymodal .Aicondiv{
 	border-radius: 100px;

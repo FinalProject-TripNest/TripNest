@@ -74,7 +74,7 @@ public class InqueryController {
 		int memid=(int)session.getAttribute("member_id");
 		int inquerycount=service.myInqueryCount(memid);
 		map.put("inquerycount", inquerycount);
-		System.out.println("inquerycount count: " + inquerycount);
+		//System.out.println("inquerycount count: " + inquerycount);
 		return map;
 	}
 
