@@ -1545,7 +1545,7 @@
 		//IMP.request_pay(param, callback) // 결제창 호출
 		IMP.init("imp16144603");
 		IMP.request_pay({ // param
-			pg : "html5_inicis",
+			pg : "nice",
 			pay_method : "card",
 			merchant_uid : $("#name").val() + new Date().getTime(),
 			name : $(".name").text(),
