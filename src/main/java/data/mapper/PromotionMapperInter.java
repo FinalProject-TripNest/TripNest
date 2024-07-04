@@ -11,4 +11,7 @@ import data.dto.PromotionDto;
 public interface PromotionMapperInter {
 
 	public List<PromotionDto> dataList();
+	
+	public PromotionDto getOneData(String Promotion_id);
+	public String getCouponGroupId(String promotion_id);
 }

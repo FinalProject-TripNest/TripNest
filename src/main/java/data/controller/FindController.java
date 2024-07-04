@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import data.service.redis.RedisService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,19 +38,23 @@ public class FindController {
 	@Autowired
 	ReservationService reservationService;
 
+	@Autowired
+	RedisService redisService;
+
 	@Value("${kakao-api-key}")
 	private String apikey;
 
 	@GetMapping("/find/list")
 	public ModelAndView journalPage() {
 		ModelAndView model = new ModelAndView();
-		List<RoomsDto> roomsDto = roomsService.dataList();
-		List<ImagesDto> imageDto = imageService.dataList();
-		model.addObject("roomsDto", roomsDto);
-		model.addObject("imageDto", imageDto);
-		model.setViewName("/find/list");
+
+		List<RoomsDto> roomDtoList = roomsService.getAllRoomsData();
+		model.addObject("roomDtoList", roomDtoList);
+		model.setViewName("find/list");
+		System.out.println("roomDtoList.size() = " + roomDtoList.size());
+
 		return model;
-	}
+	} 
 
 	@GetMapping("/find/list/detail")
 	public ModelAndView detail(@RequestParam("room_id") String room_id,
@@ -100,9 +106,18 @@ public class FindController {
 		detailModel.addObject("longitude", longitude);
 		detailModel.addObject("address", address);
 		detailModel.addObject("personnelCount", personnelCount);
+
+
+		RoomsDto detailDto = roomsService.getRoomsDataByRoomId(room_id);
+		detailDto.setRoomImgList(roomsService.getImgsByRoomId(room_id));
+		detailModel.addObject("detailDto", detailDto);
+
 		detailModel.setViewName("find/detail");
 
 		detailModel.addObject("apikey",apikey);
+
+		// detail 페이지 접속시 조회수 1증가
+		redisService.addToSortedSet("viewRank", room_id);
 
 		return detailModel;
 	}

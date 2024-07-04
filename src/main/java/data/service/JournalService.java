@@ -20,4 +20,10 @@ public class JournalService implements JournalServiceInter {
 		return mapperInter.dataList();
 	}
 
+	@Override
+	public JournalDto getOneData(String journal_id) {
+		// TODO Auto-generated method stub
+		return mapperInter.getOneData(journal_id);
+	}
+
 }

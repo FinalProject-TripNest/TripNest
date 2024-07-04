@@ -70,6 +70,4 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO7HTv_-lT3XqT_R-FwjiUdjiGJT6NRsI&libraries=places"></script>
-<script src="${root }/js/parallax_scroll.js" type="module"></script>
-<script src="${root }/js/ukiyo.js"></script>
 <script src="${root }/js/index.js"></script>

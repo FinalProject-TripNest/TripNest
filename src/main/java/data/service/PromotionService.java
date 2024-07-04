@@ -20,4 +20,14 @@ public class PromotionService implements PromotionServiceInter {
 		return mapperInter.dataList();
 	}
 
+	@Override
+	public PromotionDto getOneData(String Promotion_id) {
+		// TODO Auto-generated method stub
+		return mapperInter.getOneData(Promotion_id);
+	}
+
+	public String getCouponGroupId(String promotion_id) {
+		return mapperInter.getCouponGroupId(promotion_id);
+	}
+
 }

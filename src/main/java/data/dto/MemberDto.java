@@ -15,4 +15,6 @@ public class MemberDto {
     private Date member_registration_date;
     private Date member_birth_date;
     private String member_role;
+    private String member_social_id;
+    private String member_social_type;
 }

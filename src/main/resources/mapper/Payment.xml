@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="data.mapper.PaymentMapperInter">
+	<insert id="insertPayment" parameterType="PaymentDto">
+		insert into
+		PAYMENT(idx,member_id,member_useremail,buyer_name,imp_uid,merchant_uid,paid_amount,pg_provider,pg_tid,paid_date)
+		values(null, #{member_id},#{member_useremail},#{buyer_name},#{imp_uid},#{merchant_uid},#{paid_amount},#{pg_provider},#{pg_tid}, now())
+	</insert>
+	
+	 <select id="getSuccessOneData" resultType="Reservation_successDto" parameterType="String">
+        SELECT 
+            p.member_id,
+            p.buyer_name,
+            p.paid_amount,
+            p.merchant_uid,
+            r.RESERVATION_CHECKIN,
+            r.RESERVATION_CHECKOUT,
+            r.RESERVATION_CAPACITY,
+            r.ROOM_ID
+        FROM 
+            PAYMENT p
+        JOIN 
+            RESERVATIONS r ON p.merchant_uid = r.MERCHANT_UID
+        WHERE 
+            p.merchant_uid = #{merchantUid}
+    </select>
+    	<select id="getImgByRoomId" resultType="String" parameterType="String">
+		select image_photo from IMAGES where room_id = #{room_id}
+	</select>
+	<update id="paymentRefund" parameterType="String">
+		update PAYMENT set pay_status='취소' where merchant_uid=#{merchant_uid};
+	</update>
+	<update id="RefundChangeTime" parameterType="String">
+		update PAYMENT
+        set paid_date = #{paid_date}
+        where merchant_uid = #{merchant_uid}
+	</update>
+</mapper>

@@ -37,4 +37,9 @@ public class MemberService implements MemberServiceInter {
     public boolean checkEmailExists(String email) {
         return memberMapper.findByEmail(email) != null;
     }
+
+	@Override
+	public MemberDto getMemberByEmail(String email) {
+		return memberMapper.findByEmail(email);
+	}
 }

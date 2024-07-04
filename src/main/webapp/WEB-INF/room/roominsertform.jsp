@@ -10,16 +10,17 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}&libraries=services"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 <title>TRIP NEST</title>
 <style>
-	html,
+#roominsertfrom	html,
 	body {
 		position: relative;
 	}
 
-	body {
+#roominsertfrom	body {
 		background: #fff;
 		font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 		font-size: 14px;
@@ -28,12 +29,12 @@
 		padding: 0;
 	}
 
-	.swiper {
+#roominsertfrom .swiper {
 		width: 100%;
 		height: 100%;
 	}
 
-	.swiper-slide {
+#roominsertfrom .swiper-slide {
 
 		font-size: 18px;
 		background: #fff;
@@ -44,79 +45,82 @@
 
 
 
-	.number-input {
+#roominsertfrom	.number-input {
 		display: flex;
 		align-items: center;
 	}
-	.number-input input {
+#roominsertfrom .number-input input {
 		width: 50px;
 		text-align: center;
 	}
 
-	input{
+ #roominsertfrom input{
 		border: 1px solid #ccc; /* 테두리 설정 */
 		border-radius: 4px; /* 모서리 둥글게 */
 		padding: 5px;
 		width: 500px;
 		height: 40px;
 	}
-	textarea {
+#roominsertfrom textarea {
 		width:500px;
 		height:300px;
 		border: 1px solid #ccc;
 	}
 
-	.image-preview-container {
+#roominsertfrom .image-preview-container {
 		display: flex;
 		flex-wrap: wrap;
-		margin-top: 10px;
 		margin: 0 auto;
 		text-align: center;
 	}
 
-	.image-preview {
+#roominsertfrom .image-preview {
 		width: 200px;
 		height: 200px;
-		margin-right: 10px;
-		margin-bottom: 10px;
+		margin-right:2px;
 		border: 1px solid #ccc;
 		object-fit: cover;
 	}
-	table tr,th,td {
-		border: 0px solid black;
-	}
 
-	.form-table,.service-table {
+#roominsertfrom .form-table,.service-table {
 		width: 100%;
 		table-layout: fixed; /* 테이블 고정 레이아웃 설정 */
 	}
-	.form-table th {
+#roominsertfrom	.form-table th {
 		width: 30%; /* th의 너비를 30%로 설정 */
 		padding: 10px;
 		vertical-align: middle;
 	}
 
-	.form-table td {
+#roominsertfrom	.form-table td {
 		width: 70%;
 		padding: 10px;
 		vertical-align: middle;
 	}
 
-	.form-table .full-width {
+#roominsertfrom .form-table .full-width {
 		width: 100%;
 	}
-	.tablediv{
+#roominsertfrom .tablediv{
 		margin: 0 auto;
 		width: 80%;
 		margin-bottom: 5%;
-		margin-top: 8%;
+		margin-top: 3%;
 	}
-	caption {
+	
+	
+#roominsertfrom .roomphotodiv{
+		margin: 0 auto;
+		width: 80%;
+		margin-bottom: 5%;
+		margin-top: 3%;
+}
+#roominsertfrom caption {
 		font-size: 20pt;
 		font-weight: bold;
 		margin-bottom: 5%;
 	}
-	button.addrbtn{
+#roominsertfrom button.addrbtn{
 		cursor: pointer;
 		width: 300px;
 		height: 40px;
@@ -124,88 +128,152 @@
 		margin-top: 5%;
 		margin-bottom: 5%;
 	}
-	#map{
+#roominsertfrom .roomMap{
 		width:96%;
 		height:450px;
 		margin-top: 5%;
 	}
-	.image-preview-container {
+#roominsertfrom .image-preview-container {
 		text-align: center;
 	}
 
-	.image-preview-container img {
+#roominsertfrom .image-preview-container img {
 		display: block;
 		margin: 0 auto; /* 좌우 마진을 auto로 설정하여 가운데 정렬합니다. */
 	}
-	input.service{
+#roominsertfrom input.service{
 		width: 50px;
 	}
 
-	.checkboxdiv{
+#roominsertfrom .checkboxdiv{
 		border: 1px solid #ccc;
-		width:250px;
-		height: 80px;
+		width:200px;
+		height: 60px;
 		vertical-align: middle;
-		border-radius: 20px;
+		border-radius: 10px;
 		margin: 10px;
 	}
 
-	.servicediv input[type="checkbox"] {
+	#roominsertfrom .servicediv input[type="checkbox"] {
 		transform: scale(0.8); /* 체크박스 크기를 줄입니다 */
 		margin-right: 5px; /* 체크박스와 텍스트 사이의 간격을 조정합니다 */
+		vertical-align: middle; /* 체크박스 세로 정렬 */
+		margin-right: 2px; /* 체크박스 오른쪽 여백 설정 */
+		accent-color: black;
 
 	}
 
-	.service-table {
+	#roominsertfrom .service-table {
 		width: 100%;
 		border-collapse: collapse; /* 테이블 셀 경계 병합 */
 	}
 
-	.service-table td {
+	#roominsertfrom .service-table td {
 		text-align: center; /* 셀 내용 가운데 정렬 */
 		vertical-align: top; /* 셀 내용 상단 정렬 */
 		width: 33.33%; /* 셀 폭을 세 등분으로 설정 */
 		padding: 10px; /* 셀 여백 설정 */
 	}
 
-	.checkboxdiv {
+	#roominsertfrom .checkboxdiv {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 
-	.servicediv input[type="checkbox"] {
-		vertical-align: middle; /* 체크박스 세로 정렬 */
-		margin-right: 2px; /* 체크박스 오른쪽 여백 설정 */
-		accent-color: black;
-	}
-
-	.servicediv{
+	#roominsertfrom .servicediv{
 		display: flex;
 		align-items: center;
 	}
 
-	#insertbtn{
+	#roominsertbtn{
 		width: 250px;
 		height: 50px;
 		background-color: white;
 		font-size: 20pt;
 		background-color: #05141F;
 		color: white;
-		border-radius: 20px;
+		border-radius: 10px;
 		margin-top: 5%;
 		cursor: pointer;
 	}
-	.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+	#roominsertfrom .swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
 		background-color: black;
 	}
-	.swiper-button-next:after, .swiper-button-prev:after{
+	#roominsertfrom .swiper-button-next:after, .swiper-button-prev:after{
 		color: black;
 	}
-	input.addrinput{
+	#roominsertfrom input.addrinput{
 		margin-bottom: 20px;
 	}
 
+    #image_upload_icon{
+    	font-size: 3em;
+    }
+   #roominsertfrom .miribogibtn{
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    position: absolute;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    top: 10px;
+    right: 10px;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    }
+  #roominsertfrom .miribogiimg{
+     margin-top: 10px;
+     padding:5px;
+     height: 400px;
+     width: 100%;
+     max-width: 100%;
+     display: block;
+    }
+  #roominsertfrom .miribogidiv{
+    	width:33.3%;
+    	position: relative;
+    	display: inline-block;
+    }
+   #roominsertfrom .preview-image{
+     margin-top: 10px;
+     padding:5px;
+     height: 350px;
+     width: 300px;
+     max-width: 100%;
+    }
+  #roominsertfrom .miritable{
+   	width: 100%;
+   }
+   #roominsertfrom .miritable td,.miritable th {
+   border: 0px solid gray;
+   height: 40px;
+   border-bottom: 1px solid #ccc;
+
+   }
+#roominsertfrom .miritable td{
+width: 70%;
+vertical-align: middle;
+}
+#roominsertfrom .miritable th{
+width: 30%;
+vertical-align: middle;
+}
+#roominsertfrom .miridiv{
+		margin: 0 auto;
+		width: 80%;
+		margin-bottom: 5%;
+		margin-top: 3%;
+}
+#r_detail{
+max-height: 250px;
+overflow: auto;
+}
 </style>
 <body>
 
@@ -214,7 +282,6 @@
 	<div id="roominsertfrom">
 		<div class="center">
 			<form action="insert" method="post" enctype="multipart/form-data" id="roomform">
-				<input type="hidden" name="room_address" id="room_address">
 				<div class="swiper mySwiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
@@ -226,21 +293,15 @@
 											<span>숙소이름</span>
 										</th>
 										<td>
-											<input type="text" required="required" name="room_name" id="room_name">
+											<input type="text" required="required" name="room_name" id="room_name" placeholder="공간에 이름을 지어주세요">
 										</td>
 									</tr>
-									<tr>
+										<tr>
 										<th>
-											<span>숙소사진</span>
+											<span>연락처</span>
 										</th>
-										<td class="full-width">
-											<input type="file" id="image_photo" multiple="multiple" required="required" accept="image/*"
-												   name="image_upload">
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<div class="image-preview-container" id="imagePreviewContainer" align="center"></div>
+										<td>
+											<input type="text" required="required" name="room_hp" id="room_hp" placeholder="연락 가능한 번호 입력해 주세요">
 										</td>
 									</tr>
 									<tr>
@@ -248,7 +309,7 @@
 											<span>숙소가격</span>
 										</th>
 										<td>
-											<input type="text" required="required" placeholder="1박 기준" name="room_price" id="room_price">
+											<input type="text" required="required" placeholder="1박당 기본 요금을 설정하세요" name="room_price" id="room_price">
 										</td>
 									</tr>
 									<tr>
@@ -270,7 +331,7 @@
 										</th>
 										<td>
 											<div>
-												<textarea name="room_detail" id="room_detail"></textarea>
+												<textarea name="room_detail" id="room_detail" placeholder="숙소에 대한 소개를 적어주세요"></textarea>
 											</div>
 										</td>
 									</tr>
@@ -286,23 +347,31 @@
 											<div>
 												<input type="text" class="addrinput" id="sample6_postcode" placeholder="우편번호">
 												<input type="button" class="addrinput" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-												<input type="text" class="addrinput" id="sample6_address" placeholder="주소" required="required"><br>
+												<input type="text" class="addrinput" id="room_address" placeholder="주소" required="required" name="room_address"><br>
 												<input type="text" class="addrinput" id="sample6_detailAddress" placeholder="상세주소" required="required">
 												<input type="text" class="addrinput" id="sample6_extraAddress" placeholder="참고항목">
+												<input type="hidden" id="room_address_detail" name="room_address_detail">
+												<input type="hidden" id="room_region" name="room_region">
 											</div>
 										</td>
 									</tr>
 								</table>
-								<!-- <div align="center">
-									<button type="button" onclick="searchAddress()" class="addrbtn">주소로 지도 표시하기</button>
-								</div> -->
-								<div id="map"></div>
+								<div id="map" class="roomMap"></div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="roomphotodiv">
+								<div align="center" style="font-size: 20pt;font-weight: bold;margin-bottom: 5%;"><b>숙소사진을 등록해주세요</b></div>
+								<input type="file" id="image_photo" multiple="multiple" accept="image/*" name="image_upload" onchange="previewImages(event)" style="display: none;">
+								<div align="center"><i class="bi bi-camera" id="image_upload_icon"></i></div>
+								<div align="center" id="phototext">사진기를 눌러 사진을 등록해주세요.</div>
+								<div class="image-preview-container" id="imagePreviewContainer" align="center"></div>
 							</div>
 						</div>
 						<div class="swiper-slide">
 							<div class="tablediv">
 								<table class="service-table">
-									<caption align="top"><b>편의시설 선택하기</b></caption>
+									<caption align="top"><b>편의시설 선택하기</b><br><span style="font-size: 12pt;">(1개이상 선택해주세요)</span> </caption>
 									<tr align="center">
 										<td>
 											<div class="servicediv">
@@ -403,10 +472,91 @@
 											</div>
 										</td>
 									</tr>
-
+									<tr align="center">
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="빔프로젝트" class="service" name="room_service[]">
+												<div class="checkboxdiv">빔프로젝트</div>
+											</div>
+										</td>
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="보드게임" class="service" name="room_service[]">
+												<div class="checkboxdiv">보드게임</div>
+											</div>
+										</td>
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="빅테이블" class="service" name="room_service[]">
+												<div class="checkboxdiv">빅테이블</div>
+											</div>
+										</td>
+									</tr>
+									<tr align="center">
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="전기포트" class="service" name="room_service[]">
+												<div class="checkboxdiv">전기포트</div>
+											</div>
+										</td>
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="스피커" class="service" name="room_service[]">
+												<div class="checkboxdiv">스피커</div>
+											</div>
+										</td>
+										<td>
+											<div class="servicediv">
+												<input type="checkbox" value="인덕션" class="service" name="room_service[]">
+												<div class="checkboxdiv">인덕션</div>
+											</div>
+										</td>
+									</tr>
 								</table>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="miridiv" align="center">
+								<table class="miritable">
+								<caption><b>입력한 숙소 정보</b><br><span style="font-size: 12pt;">(다시 확인해주세요)</span></caption>
+									<tr>
+										<th >숙소이름</th>
+										<td><span id="r_name"></span></td>
+									</tr>
+									<tr>
+										<th>연락처</th>
+										<td><span id="r_hp"></span></td>
+									</tr>
+									<tr>
+										<th>가격</th>
+										<td><span id="r_price"></span></td>
+									</tr>
+									<tr>
+										<th>인원수</th>
+										<td><span id="r_people"></span></td>
+									</tr>
+									<tr>
+										<th>상세정보</th>
+										<td><pre id="r_detail"></pre></td>
+									</tr>
+									<tr>
+										<th>주소</th>
+										<td><span id="r_address"></span></td>
+									</tr>
+									<tr>
+										<th>편의시설</th>
+										<td><span id="r_service"></span></td>
+									</tr>
+								</table>
+								<br><br>
+								<div>
+									<span><b>등록한 사진</b></span>
+									<div id="r_photo">
+									
+									</div>
+								</div>
 								<div align="center">
-									<button type="submit" id="insertbtn">등록하기</button>
+									<button type="submit" id="roominsertbtn">등록하기</button>
 								</div>
 							</div>
 						</div>
@@ -435,7 +585,74 @@
 			prevEl: ".swiper-button-prev",
 		},
 	});
+	
+	$(document).ready(function(){
+		   $('#image_upload_icon').on('click', function() {
+		        $('#image_photo').click();
+		    });
+	})
+	// 이미지 업로드시 미리보기 생성 및 동기화
+	function previewImages(event) {
+	    const imagePreviewList = document.getElementById('imagePreviewContainer');
 
+	    // eYzyqx 클래스를 가진 li 요소들을 선택하여 초기화합니다.
+	    const itemsToRemove = imagePreviewList.querySelectorAll('div.miribogidiv');
+	    itemsToRemove.forEach(item => {
+	        item.remove(); // 요소를 제거하거나 다른 초기화 작업을 수행할 수 있습니다.
+	    });
+
+	    const files = event.target.files;
+
+	    // 파일을 읽고 결과를 반환하는 Promise를 생성합니다.
+	    const readFile = (file) => {
+	        return new Promise((resolve, reject) => {
+	            const reader = new FileReader();
+	            reader.onload = () => resolve(reader.result);
+	            reader.onerror = reject;
+	            reader.readAsDataURL(file);
+	        });
+	    };
+
+	    // 모든 파일을 읽고 나서 처리합니다.
+	    Promise.all(Array.from(files).map(readFile))
+	        .then(fileImgs => {
+	            fileImgs.forEach((fileImg, index) => {
+	                const div = document.createElement('div');
+	                div.classList.add('miribogidiv');
+
+	                const img = document.createElement('img');
+	                img.classList.add('miribogiimg');
+	                img.src = fileImg;
+
+	                const btn = document.createElement('button');
+	                btn.textContent = 'X';
+	                btn.classList.add('miribogibtn');
+	                btn.addEventListener('click', function() {
+	                    // event.target.files에서 해당 파일을 제거합니다.
+	                    const newFiles = Array.from(event.target.files).filter((f, i) => i !== index);
+
+	                    // 변경된 파일 목록으로 새 FileList 객체를 생성합니다.
+	                    const newFileList = new DataTransfer();
+	                    newFiles.forEach(f => newFileList.items.add(f));
+
+	                    // input 요소의 files 속성을 업데이트합니다.
+	                    event.target.files = newFileList.files;
+
+	                    // 변경된 event.target.files로 미리보기를 다시 생성합니다.
+	                    previewImages(event);
+	                });
+
+	                div.appendChild(img);
+	                div.appendChild(btn);
+
+	                imagePreviewList.appendChild(div);
+	            });
+
+	        })
+	        .catch(error => {
+	            console.error('파일을 읽는 중 오류가 발생했습니다:', error);
+	        });
+	};
 	//도로명주소 검색
 	function sample6_execDaumPostcode() {
 		new daum.Postcode({
@@ -478,7 +695,7 @@
 
 				// 우편번호와 주소 정보를 해당 필드에 넣는다.
 				document.getElementById('sample6_postcode').value = data.zonecode;
-				document.getElementById("sample6_address").value = addr;
+				document.getElementById("room_address").value = addr;
 				// 커서를 상세주소 필드로 이동한다.
 				document.getElementById("sample6_detailAddress").focus();
 			}
@@ -488,51 +705,120 @@
 	//도로명 주소로 검색한 주소를 input hidden안에 내용들어가게
 	$(document).ready(function() {
 		// 주소 입력 필드의 값이 변경될 때마다 room_address에 설정
-		$('#sample6_address, #sample6_detailAddress, #sample6_extraAddress').on('input', function() {
-			var address = $('#sample6_address').val();
+		$('#sample6_detailAddress, #sample6_extraAddress').on('input', function() {
 			var detailAddress = $('#sample6_detailAddress').val();
 			var extraAddress = $('#sample6_extraAddress').val();
 
-			var fullAddress = address + ' ' + detailAddress + ' ' + extraAddress;
-
-			$('#room_address').val(fullAddress);
+			var fullAddress = detailAddress + ' ' + extraAddress;
+			 console.log("fullAddress:", fullAddress);
+			$('#room_address_detail').val(fullAddress);
 		});
+		
 	});
+	$(document).ready(function(){
+		$('#room_name').on('input', function(){
+			var r_name=$("#room_name").val();
+			
+			$("#r_name").text(r_name);
+		});
+	    // 연락처 입력 변화 감지
+	    $('#room_hp').on('input', function(){
+	        var r_hp = $("#room_hp").val();
+	        $("#r_hp").text(r_hp);
+	    });
 
-	//사진 미리보기
-	document.getElementById('image_photo').addEventListener('change', function() {
-		const previewContainer = document.getElementById('imagePreviewContainer');
-		previewContainer.innerHTML = ''; // 기존 미리보기 초기화
+	    // 가격 입력 변화 감지
+	    $('#room_price').on('input', function(){
+	        var r_price = $("#room_price").val();
+	        $("#r_price").text(r_price);
+	    });
 
-		const files = this.files;
-		for (let i = 0; i < files.length; i++) {
-			const file = files[i];
+	    // 인원수 입력 변화 감지
+	    /*$('#room_min_capacity, #room_max_capacity').on('input', function(){
+	        var r_min_capacity = $("#room_min_capacity").val();
+	        var r_max_capacity = $("#room_max_capacity").val();
+	        $("#r_people").text("기준 " + r_min_capacity + " / 최대 " + r_max_capacity);
+	    });*/
 
-			if (file.type.startsWith('image/')) {
-				const reader = new FileReader();
-				reader.onload = function(event) {
-					const img = document.createElement('img');
-					img.src = event.target.result;
-					img.classList.add('image-preview');
-					previewContainer.appendChild(img);
-				}
-				reader.readAsDataURL(file);
-			}
-		}
-	});
+	    // 상세정보 입력 변화 감지
+	    $('#room_detail').on('input', function(){
+	        var r_detail = $("#room_detail").val();
+	        $("#r_detail").text(r_detail);
+	    });
+	    updatePeopleText();
+
+	    // 주소 입력 변화 감지 (우편번호, 주소, 상세주소, 참고항목)
+	    $('#sample6_postcode, #room_address, #sample6_detailAddress, #sample6_extraAddress').on('input', function(){
+	        var r_address = $("#room_address").val();
+	        var r_detail_address = $("#sample6_detailAddress").val();
+	        var r_extra_address = $("#sample6_extraAddress").val();
+	        
+	        if(r_extra_address==null){
+	        	var full_address = r_address + " " + r_detail_address
+	        }else{
+	        	var full_address = r_address + " " + r_detail_address + " " + r_extra_address;
+	        }
+	        
+	        $("#r_address").text(full_address);
+	    });
+
+	    // 편의시설 체크박스 변화 감지
+	    $('.service').on('change', function(){
+	        var services = [];
+	        $('.service:checked').each(function(){
+	            services.push($(this).val());
+	        });
+	        $("#r_service").text(services.join(", "));
+	    });
+	    
+	    // 파일 입력(change) 이벤트 감지
+	    $('#image_photo').on('change', function(){
+	        var files = $(this)[0].files;
+	        var photoContainer = $('#r_photo');
+	        photoContainer.empty(); // 기존 이미지 모두 제거
+	        
+	        // FileReader 객체를 사용하여 선택된 이미지 파일들을 읽고 미리보기에 추가
+	        for (var i = 0; i < files.length; i++) {
+	            var file = files[i];
+	            var reader = new FileReader();
+	            
+	            reader.onload = (function(theFile) {
+	                return function(e) {
+	                    var imgElement = $('<img>');
+	                    imgElement.attr('src', e.target.result);
+	                    imgElement.attr('alt', theFile.name);
+	                    imgElement.addClass('preview-image');
+	                    photoContainer.append(imgElement); // 미리보기 이미지를 추가
+	                };
+	            })(file);
+	            
+	            // 파일 읽기 시작
+	            reader.readAsDataURL(file);
+	        }
+	    });
+		
+	})
+	
+	    function updatePeopleText() {
+        var r_min_capacity = $("#room_min_capacity").val();
+        var r_max_capacity = $("#room_max_capacity").val();
+        $("#r_people").text("기준 " + r_min_capacity + " / 최대 " + r_max_capacity);
+    }
 
 	//폼을 제출할때 빠진 정보가 없게끔. 비어있는 슬라이드로 이동함.
-	$(document).ready(function(){
+	$(document).ready(function() {
 
-		$("#insertbtn").click(function(){
-			var room_name=$("#room_name").val();
+		$("#roominsertbtn").click(function() {
+			var room_name = $("#room_name").val();
 			var images = $("#image_photo")[0].files.length;
 			var room_price = $("#room_price").val();
 			var room_detail = $("#room_detail").val();
-			var room_address=$("#room_address").val();
+			var room_address = $("#room_address").val();
 			var services = $("input[name='room_service[]']:checked").length;
 
-			if(!room_name){
+			console.log(room_address);
+
+			if (!room_name) {
 
 				alert("숙소이름을 입력해 주세요.");
 				// 슬라이드를 첫 번째 페이지로 이동
@@ -578,18 +864,15 @@
 
 		})
 	});
-
-
-
-
+	
 
 </script>
 <script type="text/javascript">
 
 	//지도의 주소가 바뀔때마다 지도에 표시되는 위치 변경
 	$(document).ready(function() {
-		$('#sample6_detailAddress,#sample6_address').on('keyup', function() {
-			var address = $('#sample6_address').val().trim(); // 주소 입력 필드 값 가져오기
+		$('#sample6_detailAddress,#room_address').on('keyup', function() {
+			var address = $('#room_address').val().trim(); // 주소 입력 필드 값 가져오기
 
 			// 주소가 입력되어 있는 경우에만 지도 업데이트
 			if (address) {
@@ -615,7 +898,7 @@
 
 	// 주소로 좌표를 검색하는 함수
 	function searchAddress() {
-		var address = document.getElementById('sample6_address').value;
+		var address = document.getElementById('room_address').value;
 		//var detailAddress = document.getElementById('sample6_detailAddress').value;
 
 		// 주소와 상세주소를 합쳐서 주소로 사용합니다
@@ -637,7 +920,6 @@
 			}
 		});
 	}
-
 
 
 </script>

@@ -42,4 +42,16 @@ public class ImageService implements ImageServiceInter {
 		return imgmapper.hotelNearbyImages(roomIds);
 	}
 
+	@Override
+	public void deleteImage(String room_id) {
+		// TODO Auto-generated method stub
+		imgmapper.deleteImage(room_id);
+	}
+
+	@Override
+	public void updateimage(ImagesDto dto) {
+		// TODO Auto-generated method stub
+		imgmapper.updateimage(dto);
+	}
+
 }

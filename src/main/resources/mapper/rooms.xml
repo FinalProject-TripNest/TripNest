@@ -4,8 +4,8 @@
 	<insert id="insertRoom" parameterType="RoomsDto"
 		keyProperty="room_id">
 		insert into
-		ROOMS(room_id,room_name,room_price,room_min_capacity,room_max_capacity,room_address,room_service,room_detail)
-		values(null,#{room_name},#{room_price},#{room_min_capacity},#{room_max_capacity},#{room_address},#{room_service},#{room_detail})
+		ROOMS(room_id,room_name,room_price,room_min_capacity,room_max_capacity,room_address,room_service,room_detail,room_hp,room_address_detail,member_id,room_region)
+		values(null,#{room_name},#{room_price},#{room_min_capacity},#{room_max_capacity},#{room_address},#{room_service},#{room_detail},#{room_hp},#{room_address_detail},#{member_id},#{room_region})
 	</insert>
 
 	<select id="getLastInsertedRoomId" resultType="int">
@@ -22,6 +22,112 @@
 		parameterType="String">
 		select * from ROOMS where room_id = #{room_id}
 	</select>
+
+	<select id="searchRooms" parameterType="string"
+		resultType="RoomsDto">
+		SELECT *
+		FROM ROOMS
+		WHERE room_name LIKE CONCAT('%', #{search}, '%')
+		OR room_address LIKE CONCAT('%', #{search}, '%')
+		ORDER BY room_id DESC
+	</select>
+	
+	<select id="getRoomsDataByRoomId" resultType="RoomsDto" parameterType="String">
+		select * from ROOMS where room_id = #{room_id}
+	</select>
+
+	<select id="getImgsByRoomId" resultType="String" parameterType="String">
+		select image_photo from IMAGES where room_id = #{room_id}
+	</select>
+
+	<select id="getAllRoomsData" resultType="RoomsDto">
+		SELECT
+			ROOMS.room_id,
+			ROOMS.room_name,
+			ROOMS.room_price,
+			ROOMS.room_rating,
+			ROOMS.room_min_capacity,
+			ROOMS.room_max_capacity,
+			ROOMS.room_address,
+			ROOMS.room_address_detail,
+			ROOMS.room_region,
+			ROOMS.room_service,
+			ROOMS.room_detail,
+			ROOMS.room_status,
+			ROOMS.room_hp,
+			IMAGES.image_photo
+		FROM
+			ROOMS
+				LEFT JOIN (
+				SELECT
+					room_id,
+					MIN(image_id) AS min_image_id
+				FROM
+					IMAGES
+				GROUP BY
+					room_id
+			) AS min_images ON ROOMS.room_id = min_images.room_id
+				LEFT JOIN IMAGES ON min_images.min_image_id = IMAGES.image_id
+		ORDER BY
+			ROOMS.room_id ASC;
+	</select>
+
+	<select id="getLackRoomId" parameterType="map" resultType="String">
+		SELECT room_id
+		FROM ROOMS
+		WHERE room_id NOT IN
+		<foreach item="id" index="index" collection="excludedIds" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+		order by room_id desc limit #{num};
+	</select>
+
+	<select id="getSimpleRoomsDataByRoomId" parameterType="String" resultType="RoomsDto">
+		SELECT
+			ROOMS.room_id,
+			ROOMS.room_name,
+			ROOMS.room_price,
+			ROOMS.room_rating,
+			ROOMS.room_min_capacity,
+			ROOMS.room_max_capacity,
+			ROOMS.room_address,
+			ROOMS.room_address_detail,
+			ROOMS.room_region,
+			ROOMS.room_service,
+			ROOMS.room_detail,
+			ROOMS.room_status,
+			ROOMS.room_hp,
+			IMAGES.image_photo
+		FROM
+			ROOMS
+				LEFT JOIN (
+				SELECT
+					room_id,
+					MIN(image_id) AS min_image_id
+				FROM
+					IMAGES
+				GROUP BY
+					room_id
+			) AS min_images ON ROOMS.room_id = min_images.room_id
+				LEFT JOIN IMAGES ON min_images.min_image_id = IMAGES.image_id
+		WHERE
+			ROOMS.room_id = #{room_id}
+		ORDER BY
+			ROOMS.room_id ASC;
+	</select>
+
+	<delete id="deleteRoom" parameterType="String">
+		delete from ROOMS where room_id=#{room_id}
+	</delete>
+	
+	<select id="getRoomDataByMyid" parameterType="int" resultType="RoomsDto">
+		select * from ROOMS where member_id=#{member_id}
+	</select>
+	
+	<update id="updateRoom" parameterType="RoomsDto">
+		update ROOMS set room_name=#{room_name},room_price=#{room_price},room_min_capacity=#{room_min_capacity},room_max_capacity=#{room_max_capacity},room_address=#{room_address},
+		room_address_detail=#{room_address_detail},room_service=#{room_service},room_detail=#{room_detail},room_hp=#{room_hp},room_region=#{room_region} where room_id=#{room_id}
+	</update>
 
 
 </mapper>
