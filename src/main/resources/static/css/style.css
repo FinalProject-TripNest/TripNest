@@ -1500,3 +1500,285 @@ header#header .menu ul.sub li {
 }
 
 /*//promotion_detail*/
+
+/*mypage*/
+#myPage .mypage_wrap {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+#myPage .center {
+	padding-bottom: 120px;
+}
+
+#myPage .mypage_info {
+	text-align: center;
+	margin: 250px 0 20px;
+}
+
+#myPage .mypage_info .title {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+#myPage .mypage_info .title span {
+	font-weight: 700;
+}
+
+#myPage .mypage_info .journey-info {
+	font-size: 16px;
+	color: #999;
+}
+
+#myPage .separator {
+	width: 100%;
+	height: 3px;
+	background-color: #000;
+	margin: 80px 0;
+}
+
+#myPage .content_wrapper {
+	display: flex;
+	align-items: flex-start;
+}
+
+#myPage .mypage_menu {
+	width: 200px;
+	margin-right: 40px;
+}
+
+#myPage .mypage_menu ul {
+	list-style: none;
+	padding: 0;
+}
+
+#myPage .mypage_menu li {
+	margin-bottom: 20px;
+}
+
+#myPage .mypage_menu a, #mypage_menu button {
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding: 10px;
+	text-decoration: none;
+	color: #333;
+	font-size: 16px;
+	border: 1px solid transparent;
+	background: none;
+	cursor: pointer;
+}
+
+#myPage .mypage_menu a.active, #myPage .mypage_menu a:hover, #myPage .mypage_menu button.active,
+	#myPage .mypage_menu button:hover {
+	color: #000;
+	font-weight: bold;
+}
+
+#myPage .mypage_content {
+	flex: 1;
+}
+
+#myPage .tabs {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+#myPage .tabs li {
+	margin: 0 20px;
+}
+
+#myPage .tabs li a {
+	text-decoration: none;
+	color: #333;
+	font-size: 18px;
+	padding: 10px;
+	display: block;
+}
+
+#myPage .tabs li a:hover, #myPage .tabs li.active a {
+	color: #000;
+	border-bottom: 2px solid #000;
+}
+
+#myPage .btn {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #333;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 4px;
+}
+
+#myPage .btn:hover {
+	background-color: #000;
+}
+
+#myPage .menu-item.active {
+	font-weight: 700;
+}
+/*//mypage*/
+
+/*mypage reservation*/
+#myPage .reservation {
+	text-align: center;
+}
+
+#myPage .reservation-list {
+	text-align: left;
+	margin-top: 50px;
+}
+
+#myPage .reservation-list>a {
+	margin-top: 100px;
+	display: block;
+}
+
+#myPage .reservation-list>a:first-child {
+	margin-top: 0;
+}
+
+#myPage .reservation-item {
+	display: flex;
+	align-items: flex-start;
+}
+
+#myPage .image-container {
+	position: relative;
+	margin-right: 20px;
+}
+
+#myPage .reservation-item img {
+	width: 250px;
+	height: auto;
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+#myPage .reservation-status {
+	position: absolute;
+	top: -50px;
+	display: inline-block;
+	font-weight: bold;
+	padding: 6px 12px;
+	border-radius: 12px;
+	font-size: 12px;
+	background-color: #d1d1d1;
+	color: #4a4a4a;
+}
+
+#myPage .reservation-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+#myPage .reservation-item h3 {
+	margin: 0;
+	font-size: 18px;
+}
+
+#myPage .reservation-item p {
+	margin-top: 10px;
+}
+
+#myPage .reservation-price {
+	margin-left: auto;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#myPage .no-reservation {
+	margin: 0 0 100px;
+	border-bottom: 1px solid #ddd;
+}
+
+#myPage .no-reservation img {
+	width: 400px;
+	height: auto;
+}
+/*//mypage reservation*/
+
+/*mypage cancel*/
+#myPage .cancel {
+	text-align: center;
+}
+
+#myPage .cancel-list {
+	text-align: left;
+	margin-top: 50px;
+}
+
+#myPage .cancel-list>div {
+	margin-top: 100px;
+	display: flex;
+}
+
+#myPage .cancel-list>div:first-child {
+	margin-top: 0;
+}
+
+#myPage .cancel-item {
+	display: flex;
+	align-items: flex-start;
+}
+
+#myPage .cancel-image-container {
+	position: relative;
+	margin-right: 20px;
+}
+
+#myPage .cancel-item img {
+	width: 250px;
+	height: auto;
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+#myPage .cancel-status {
+	position: absolute;
+	top: -50px;
+	display: inline-block;
+	font-weight: bold;
+	padding: 6px 12px;
+	border-radius: 12px;
+	font-size: 12px;
+	background-color: #d1d1d1;
+	color: #4a4a4a;
+}
+
+#myPage .cancel-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+#myPage .cancel-item h3 {
+	margin: 0;
+	font-size: 18px;
+}
+
+#myPage .cancel-item p {
+	margin-top: 10px;
+}
+
+#myPage .cancel-price {
+	margin-left: auto;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#myPage .no-cancel {
+	margin: 0 0 100px;
+	border-bottom: 1px solid #ddd;
+}
+
+#myPage .no-cancel img {
+	width: 400px;
+	height: auto;
+}
+/*//mypage cancel*/

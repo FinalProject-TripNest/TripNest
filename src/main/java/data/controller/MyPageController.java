@@ -25,141 +25,138 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/mypage")
 public class MyPageController {
 
-    @Autowired
-    private MemberServiceInter memberService;
-    
-    @Autowired
-    private MyPageServiceInter myPageServiceInter;
+	@Autowired
+	private MemberServiceInter memberService;
 
-    @Autowired
-    InqueryService inqueryService;
+	@Autowired
+	private MyPageServiceInter myPageServiceInter;
 
-    @GetMapping("/main")
-    public String myPage(HttpSession session, Model model) {
-        String userEmail = (String) session.getAttribute("myid");
-        if (userEmail == null) {
-            return "redirect:/login/loginform";
-        }
+	@Autowired
+	InqueryService inqueryService;
 
-        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
-        model.addAttribute("memberDto", memberDto);
-        
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년");
-        String formattedDate = currentDate.format(formatter);
+	@GetMapping("/main")
+	public String myPage(HttpSession session, Model model) {
+		String userEmail = (String) session.getAttribute("myid");
+		if (userEmail == null) {
+			return "redirect:/login/loginform";
+		}
 
-        int reservationCount = myPageServiceInter.getReservationsByMemberId(memberDto.getMember_id()).size();
-        
-        model.addAttribute("currentDate", formattedDate);
-        model.addAttribute("reservationCount", reservationCount);
+		MemberDto memberDto = memberService.getMemberByEmail(userEmail);
 
-        return "/mypage/main";
-    }
+		List<MyPageReservationDto> reservations = myPageServiceInter
+				.getReservationsByMemberId(memberDto.getMember_id());
+		model.addAttribute("reservations", reservations);
+		model.addAttribute("memberDto", memberDto);
 
-    @GetMapping("/reservation")
-    public String reservation(HttpSession session, Model model) {
-        String userEmail = (String) session.getAttribute("myid");
-        if (userEmail == null) {
-            return "redirect:/login/loginform";
-        }
+		LocalDate currentDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년");
+		String formattedDate = currentDate.format(formatter);
 
-        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
-        
-        List<MyPageReservationDto> reservations = myPageServiceInter.getReservationsByMemberId(memberDto.getMember_id());
-        model.addAttribute("reservations", reservations);
+		int reservationCount = myPageServiceInter.getReservationsByMemberId(memberDto.getMember_id()).size();
 
-        return "/mypage/reservation";
-    }
-    
-    @GetMapping("/cancel")
-    public String cancel(HttpSession session, Model model) {
-        String userEmail = (String) session.getAttribute("myid");
-        if (userEmail == null) {
-            return "redirect:/login/loginform";
-        }
+		model.addAttribute("currentDate", formattedDate);
+		model.addAttribute("reservationCount", reservationCount);
 
-        MemberDto memberDto = memberService.getMemberByEmail(userEmail);	
-        
-        List<MyPageReservationDto> cancellations = myPageServiceInter.getCancellationsByMemberId(memberDto.getMember_id());
-        model.addAttribute("cancellations", cancellations);
+		return "/mypage/main";
+	}
 
-        return "/mypage/cancel";
-    }
+	@GetMapping("/cancel")
+	public String cancel(HttpSession session, Model model) {
+		String userEmail = (String) session.getAttribute("myid");
 
-    @GetMapping("/coupon")
-    public String coupon() {
-        return "/mypage/coupon";
-    }
+		if (userEmail == null) {
+			return "redirect:/login/loginform";
+		}
 
-    @GetMapping("/likestay")
-    public String likestay() {
-        return "/mypage/likestay";
-    }
+		MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+		LocalDate currentDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년");
+		String formattedDate = currentDate.format(formatter);
+		int reservationCount = myPageServiceInter.getReservationsByMemberId(memberDto.getMember_id()).size();
 
-    @GetMapping("/edit")
-    public String edit(HttpSession session, Model model) {
-        String userEmail = (String) session.getAttribute("myid");
-        if (userEmail == null) {
-            return "redirect:/login/loginform";
-        }
+		List<MyPageReservationDto> cancellations = myPageServiceInter
+				.getCancellationsByMemberId(memberDto.getMember_id());
+		model.addAttribute("cancellations", cancellations);
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("currentDate", formattedDate);
+		model.addAttribute("reservationCount", reservationCount);
 
-        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
-        model.addAttribute("memberDto", memberDto);
+		return "/mypage/cancel";
+	}
 
-        return "/mypage/edit";
-    }
-    
-    @PostMapping("/updateProfile")
-    public String updateProfile(HttpSession session, @RequestParam String name, 
-                                @RequestParam String phone, @RequestParam String birthday, 
-                                Model model) {
-        String userEmail = (String) session.getAttribute("myid");
-        if (userEmail == null) {
-            return "redirect:/login/loginform";
-        }
+	@GetMapping("/coupon")
+	public String coupon() {
+		return "/mypage/coupon";
+	}
 
-        MemberDto memberDto = memberService.getMemberByEmail(userEmail);
-        memberDto.setMember_name(name);
-        memberDto.setMember_phone(phone);
-        memberDto.setMember_birth_date(java.sql.Date.valueOf(birthday));
+	@GetMapping("/likestay")
+	public String likestay() {
+		return "/mypage/likestay";
+	}
 
-        memberService.updateMember(memberDto);
+	@GetMapping("/edit")
+	public String edit(HttpSession session, Model model) {
+		String userEmail = (String) session.getAttribute("myid");
+		if (userEmail == null) {
+			return "redirect:/login/loginform";
+		}
 
-        model.addAttribute("memberDto", memberDto);
-        return "redirect:/mypage/main";
-    }
-    
-    @PostMapping("/withdraw")
-    public String withdraw(HttpSession session) {
-        String userEmail = (String) session.getAttribute("myid");
-        if (userEmail != null) {
-            MemberDto memberDto = memberService.getMemberByEmail(userEmail);
-            memberService.deleteMember(memberDto.getMember_id());
-            session.invalidate();
-        }
-        return "redirect:/";
-    }
-    
-    @GetMapping("/message")
-    public String message() {
-        return "/mypage/message";
-    }
-    
-    @GetMapping("/myinquery")
-    public String myinquery() {
-        return "/mypage/myinquery";
-    }
-    
-    @GetMapping("/myinquerylist")
-    @ResponseBody
-    public List<InqueryDto> myinquerylist(HttpSession session ,Model model) {
+		MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+		model.addAttribute("memberDto", memberDto);
 
-        String memberEmail = (String) session.getAttribute("myid");
+		return "/mypage/edit";
+	}
 
-        MemberDto memberDto = memberService.getMemberByEmail(memberEmail);
+	@PostMapping("/updateProfile")
+	public String updateProfile(HttpSession session, @RequestParam String name, @RequestParam String phone,
+			@RequestParam String birthday, Model model) {
+		String userEmail = (String) session.getAttribute("myid");
+		if (userEmail == null) {
+			return "redirect:/login/loginform";
+		}
 
-        List<InqueryDto> inqueryList = inqueryService.getMyInqueryDatas(memberDto.getMember_id());
+		MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+		memberDto.setMember_name(name);
+		memberDto.setMember_phone(phone);
+		memberDto.setMember_birth_date(java.sql.Date.valueOf(birthday));
 
-        return inqueryList;
-    }
+		memberService.updateMember(memberDto);
+
+		model.addAttribute("memberDto", memberDto);
+		return "redirect:/mypage/main";
+	}
+
+	@PostMapping("/withdraw")
+	public String withdraw(HttpSession session) {
+		String userEmail = (String) session.getAttribute("myid");
+		if (userEmail != null) {
+			MemberDto memberDto = memberService.getMemberByEmail(userEmail);
+			memberService.deleteMember(memberDto.getMember_id());
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
+
+	@GetMapping("/message")
+	public String message() {
+		return "/mypage/message";
+	}
+
+	@GetMapping("/myinquery")
+	public String myinquery() {
+		return "/mypage/myinquery";
+	}
+
+	@GetMapping("/myinquerylist")
+	@ResponseBody
+	public List<InqueryDto> myinquerylist(HttpSession session, Model model) {
+
+		String memberEmail = (String) session.getAttribute("myid");
+
+		MemberDto memberDto = memberService.getMemberByEmail(memberEmail);
+
+		List<InqueryDto> inqueryList = inqueryService.getMyInqueryDatas(memberDto.getMember_id());
+
+		return inqueryList;
+	}
 }
