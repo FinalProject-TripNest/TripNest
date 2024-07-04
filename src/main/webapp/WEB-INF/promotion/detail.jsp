@@ -53,7 +53,7 @@
         // 로그인 확인
         if(memberId === ""){
             alert("로그인이 필요합니다.");
-            location.href = "/login/loginform";
+			window.location.href = "/login/loginform";
             return;
         }
 
@@ -70,12 +70,14 @@
             });
             if(response.ok){
                 alert("쿠폰이 발급되었습니다.");
-            }else{
-				console.log(response);
-                alert("쿠폰 발급에 실패했습니다.");
-            }
+            }else if(response.status === 400){
+				const responseData = await response.json();
+                alert(responseData.message);
+            }else {
+				alert("오류가 발생했습니다.");
+			}
         }catch(error){
-            throw new Error("쿠폰 발급 api 요청 실패");
+            throw new Error(error);
         }
     }
 
