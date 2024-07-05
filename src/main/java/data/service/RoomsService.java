@@ -135,6 +135,7 @@ public class RoomsService implements RoomsServiceInter {
 	}
 
 
+
 	public RoomsDto getOneData(String room_id) {
 		// TODO Auto-generated method stub
 		return roommapper.getOneData(room_id);

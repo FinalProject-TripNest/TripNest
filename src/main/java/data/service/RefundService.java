@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
@@ -92,74 +93,60 @@ public class RefundService {
         return accessToken;
     }
     
-    public void refundPartialRequest(String access_token, String merchant_uid, String reason, String cancel_request_amount) throws IOException {
-        URL url = new URL("https://api.iamport.kr/payments/cancel");
+    public void refundPartialRequest(String access_token, String merchant_uid, String reason, int amount) throws IOException {
+        // API 호출을 위한 URL 설정
+    	URL url = new URL("https://api.iamport.kr/payments/cancel");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        
+        try {
+            // HTTP 연결 설정
+            conn = (HttpsURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", access_token);
+            conn.setDoOutput(true);
 
-        // 요청 방식을 POST로 설정
-        conn.setRequestMethod("POST");
+            // JSON 객체 생성 및 데이터 추가
+            JsonObject json = new JsonObject();
+            json.addProperty("merchant_uid", merchant_uid);
+            json.addProperty("reason", reason);
+            json.addProperty("amount", amount);
 
-        // 요청의 Content-Type, Accept, Authorization 헤더 설정
-        conn.setRequestProperty("Content-type", "application/json");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("Authorization", access_token);
+            // 출력 스트림으로 API 요청 전송
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()))) {
+                bw.write(json.toString());
+                bw.flush();
+            }
 
-        // 해당 연결을 출력 스트림(요청)으로 사용
-        conn.setDoOutput(true);
-
-        // JSON 객체에 해당 API가 필요로하는 데이터 추가.
-        JsonObject json = new JsonObject();
-        json.addProperty("merchant_uid", merchant_uid);
-        json.addProperty("reason", reason);
-        json.addProperty("cancel_request_amount", cancel_request_amount);
-
-        // 출력 스트림으로 해당 conn에 요청
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-        bw.write(json.toString());
-        bw.flush();
-        bw.close();
-
-        // 입력 스트림으로 conn 요청에 대한 응답 반환
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        br.close();
-        conn.disconnect();
-
-        log.info("결제 부분 취소 완료 : 주문 번호 {}", merchant_uid);
+            // API 응답 처리
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // 정상 응답 처리
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                    String inputLine;
+                    StringBuilder response = new StringBuilder();
+                    while ((inputLine = br.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    // 응답 결과 로깅
+                    log.info("API 응답: {}", response.toString());
+                }
+                log.info("결제 취소 완료 : 주문 번호 {}", merchant_uid);
+            } else {
+                // 응답 코드가 HTTP_OK가 아닌 경우 오류 처리
+                log.error("API 요청 실패 - 응답 코드: {}", responseCode);
+                throw new IOException("API 요청 실패 - 응답 코드: " + responseCode);
+            }
+        } catch (IOException e) {
+            log.error("환불 요청 실패", e);
+            throw e; // 예외 전파
+        } finally {
+            // 연결 자원 해제
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
     }
-    
-    public void refundRequest1(String access_token, String merchant_uid, String reason) throws IOException {
-        URL url = new URL("https://api.iamport.kr/payments/cancel");
-        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-
-        // 요청 방식을 POST로 설정
-        conn.setRequestMethod("POST");
-
-        // 요청의 Content-Type, Accept, Authorization 헤더 설정
-        conn.setRequestProperty("Content-type", "application/json");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("Authorization", access_token);
-
-        // 해당 연결을 출력 스트림(요청)으로 사용
-        conn.setDoOutput(true);
-
-        // JSON 객체에 해당 API가 필요로하는 데이터 추가.
-        JsonObject json = new JsonObject();
-        json.addProperty("merchant_uid", merchant_uid);
-        json.addProperty("reason", reason);
-
-        // 출력 스트림으로 해당 conn에 요청
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-        bw.write(json.toString());
-        bw.flush();
-        bw.close();
-
-        // 입력 스트림으로 conn 요청에 대한 응답 반환
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        br.close();
-        conn.disconnect();
-
-        log.info("결제 취소 완료 : 주문 번호 {}", merchant_uid);
-    }
-
 
 }

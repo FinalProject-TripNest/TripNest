@@ -42,38 +42,40 @@ margin: 5px;
 #roomlist caption {
 	margin-bottom: 20px;
 	font-size: 20pt;
+
 }
 </style>
 <body>
 
 
-	<div id="wrap">
-		<div id="roomlist">
-			<div class="center">
-				<div class="roomlistdiv">
-				<input type="hidden" value="${memberId}" class="memid">
-					<table id="roomTable">
-					<caption align="top"><b>호스트님의 공간</b><br><span style="font-size: 12pt;">(해당 숙소를 클릭하면 상세페이지로 이동합니다.)</span> </caption>
-					<thead>
-						<tr align="center" style="background-color:#F8F8F8; ">
-							<td width="80px;">숙소번호</td>
-							<td width="200px;">숙소이름</td>
-							<td width="250px;">위치</td>
-							<td width="150px;">가격</td>
-							<td width="100px;">서비스</td>
-							<td width="100px;">상태</td>
-							<td width="160px;">비고</td>
-							<td><fmt:formatNumber value="" type="number"/> </td>
-						</tr>
-						</thead>
-						<tbody>
-						<!-- 여기에 list 옵니다 -->
-					</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="wrap">
+    <div id="roomlist">
+        <div class="center">
+            <div class="roomlistdiv">
+                <input type="hidden" value="${memberId}" class="memid">
+                <table id="roomTable">
+                    <caption align="top"><b>호스트님의 공간</b><br><span style="font-size: 12pt;">(해당 숙소를 클릭하면 상세페이지로 이동합니다.)</span></caption>
+                    <thead>
+                        <tr align="center" style="background-color:#F8F8F8;">
+                            <td width="80px;">숙소번호</td>
+                            <td width="200px;">숙소이름</td>
+                            <td width="250px;">위치</td>
+                            <td width="150px;">가격</td>
+                            <td width="100px;">서비스</td>
+                            <td width="100px;">상태</td>
+                            <td width="160px;">비고</td>
+                            <td><fmt:formatNumber value="" type="number"/></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 여기에 list 옵니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
