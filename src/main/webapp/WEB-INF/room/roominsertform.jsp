@@ -65,6 +65,7 @@
 		width:500px;
 		height:300px;
 		border: 1px solid #ccc;
+		padding: 10px;
 	}
 
 #roominsertfrom .image-preview-container {
@@ -256,6 +257,8 @@
    border-bottom: 1px solid #ccc;
 
    }
+
+
 #roominsertfrom .miritable td{
 width: 70%;
 vertical-align: middle;
@@ -272,7 +275,14 @@ vertical-align: middle;
 }
 #r_detail{
 max-height: 250px;
-overflow: auto;
+
+overflow-x: hidden; /* 가로 스크롤 숨김 */
+overflow-y: auto; /* 세로 스크롤 표시 */
+font-family: "Noto Sans KR";
+width: 700px;
+padding: 10px;
+white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
+
 }
 </style>
 <body>
@@ -352,6 +362,8 @@ overflow: auto;
 												<input type="text" class="addrinput" id="sample6_extraAddress" placeholder="참고항목">
 												<input type="hidden" id="room_address_detail" name="room_address_detail">
 												<input type="hidden" id="room_region" name="room_region">
+												<input type="hidden" name="room_latitude" id="room_latitude">
+												<input type="hidden" name="room_longitude" id="room_longitude">
 											</div>
 										</td>
 									</tr>
@@ -770,6 +782,7 @@ overflow: auto;
 	        });
 	        $("#r_service").text(services.join(", "));
 	    });
+
 	    
 	    // 파일 입력(change) 이벤트 감지
 	    $('#image_photo').on('change', function(){
@@ -797,7 +810,53 @@ overflow: auto;
 	        }
 	    });
 		
-	})
+	});
+
+	
+	//사진 등록했을때 마지막 미리보기에 출력되게
+	$(function() {
+		
+		
+		// 이미지 미리보기를 감시할 MutationObserver 생성
+	    var observer = new MutationObserver(function(mutations) {
+	        mutations.forEach(function(mutation) {
+	            if (mutation.type === 'childList') {
+	                updateRPhoto();
+	            }
+	        });
+	    });
+
+	    // 감시할 대상 설정 (#imagePreviewContainer)
+	    var targetNode = document.getElementById('imagePreviewContainer');
+	    var config = { childList: true,subtree: true };
+
+	    // MutationObserver 시작
+	    observer.observe(targetNode, config);
+
+	    // 초기화 시 이미지 미리보기 로드
+	    updateRPhoto();
+
+	    // #r_photo 업데이트 함수 정의
+	    function updateRPhoto() {
+	        var photoContainer = $('#r_photo');
+	        var previewContainer = $('#imagePreviewContainer');
+
+	        // 기존에 #r_photo에 있던 사진 모두 제거
+	        photoContainer.empty();
+
+	        // #imagePreviewContainer 내의 각 이미지를 #r_photo에 복제하여 추가
+	        previewContainer.children('div.miribogidiv').each(function(index, element) {
+	        	 var clonedDiv = $(element).clone();
+	             photoContainer.append(clonedDiv);
+	        });
+	    }
+		
+
+
+
+});
+	
+
 	
 	    function updatePeopleText() {
         var r_min_capacity = $("#room_min_capacity").val();
@@ -837,7 +896,7 @@ overflow: auto;
 				alert("숙소사진을 선택해 주세요.");
 				// 슬라이드를 첫 번째 페이지로 이동
 				var swiper = document.querySelector('.mySwiper').swiper;
-				swiper.slideTo(0);
+				swiper.slideTo(2);
 				return false;
 			}
 
@@ -857,7 +916,9 @@ overflow: auto;
 			}
 			if (services == 0) {
 				alert("1개 이상의 편의시설을 선택해 주세요.");
+				var swiper = document.querySelector('.mySwiper').swiper;
 				// 슬라이드를 마지막 페이지로 이동
+				swiper.slideTo(3);
 				return false;
 			}
 			return true;
@@ -917,6 +978,8 @@ overflow: auto;
 					map: map,
 					position: coords
 				});
+				$("#room_latitude").val(result[0].y);
+				$("#room_longitude").val(result[0].x);
 			}
 		});
 	}

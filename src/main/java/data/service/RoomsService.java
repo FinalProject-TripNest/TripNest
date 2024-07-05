@@ -1,8 +1,8 @@
 package data.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,6 +34,39 @@ public class RoomsService implements RoomsServiceInter {
 	}
 
 	@Override
+	public List<RoomsDto> getAllRooms(int start, int perpage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> map=new HashMap<>();
+		map.put("start", start);
+		map.put("perpage", perpage);
+		return roommapper.getAllRooms(map);
+	}
+
+	@Override
+	public int getTotalRooms() {
+		// TODO Auto-generated method stub
+		return roommapper.getTotalRooms();
+	}
+
+	@Override
+	public RoomsDto getDataRoom(String room_id) {
+		// TODO Auto-generated method stub
+		return roommapper.getDataRoom(room_id);
+	}
+
+	@Override
+	public void updateRoomAcc(String room_id) {
+		// TODO Auto-generated method stub
+		roommapper.updateRoomAcc(room_id);
+	}
+
+	@Override
+	public void updateRoomHold(String room_id) {
+		// TODO Auto-generated method stub
+		roommapper.updateRoomHold(room_id);
+	}
+
+
 	public List<RoomsDto> dataList() {
 		List<RoomsDto> roomsList = roommapper.dataList();
 		for (RoomsDto room : roomsList) {
@@ -90,6 +123,19 @@ public class RoomsService implements RoomsServiceInter {
 	}
 
 	@Override
+	public int getCountNoRoom() {
+		// TODO Auto-generated method stub
+		return roommapper.getCountNoRoom();
+	}
+
+	@Override
+	public List<RoomsDto> getRecentRoom() {
+		// TODO Auto-generated method stub
+		return roommapper.getRecentRoom();
+	}
+
+
+
 	public RoomsDto getOneData(String room_id) {
 		// TODO Auto-generated method stub
 		return roommapper.getOneData(room_id);

@@ -15,7 +15,7 @@
 <style>
 #roomupdateform .roomupdateformdiv input{
 	    border: 1px solid #ccc;
-	        height: 30px;
+	        height: 35px;
     padding-left: 10px;
 }
 #roomupdateform .roomupdateformdiv{
@@ -117,8 +117,9 @@
 				<div class="roomupdateformdiv">
 					<form action="update" method="post" enctype="multipart/form-data" id="roomupform">
 					<input type="hidden" value="${rdto.room_id }" name="room_id">
+					<input type="hidden" value="${rdto.room_status}" name="room_status">
 						<div>
-							<span class="editspan">호스트 이름/이메일</span>여기에 이름(${memberemail })
+							<span class="editspan">호스트 이름/이메일</span>${memberemail }
 						</div>
 						<div>
 							<span class="editspan">연락처</span>
@@ -149,7 +150,7 @@
 												name="room_address_detail" style="width: 300px;" required="required">
 												<input type="hidden" id="room_region" name="room_region">
 											</div>
-						</div><br>
+						</div>
 						<div class="textarea-container">
 							<div class="editspan">디테일 설명</div>
 							<textarea style="width: 500px; height: 250px; border: 1px solid #ccc; padding-left: 10px;" name="room_detail" required="required">
@@ -169,8 +170,10 @@
 						</c:forEach>
 						</div><br>
 						<div>
-							<span>사진</span>
-							<input type="file" id="image_photo" multiple="multiple" accept="image/*"  name="image_upload" onchange="previewImages(event)">
+							<span class="editspan">사진</span>
+							<input type="file" id="image_photo" multiple="multiple" accept="image/*"  name="image_upload" onchange="previewImages(event)"
+							style="padding-top: 5px;">
+							<span>(사진을 선택하지 않을시 기존의 사진이 유지됩니다)</span>
 						</div>
 						<div id="imagePreviewContainer" class="image-container">
 			        <c:forEach var="img" items="${images}">
@@ -328,6 +331,35 @@
                 console.error('파일을 읽는 중 오류가 발생했습니다:', error);
             });
     }
+
+	    $(function() {
+	        $('#roomupdatebtn').click(function() {
+	            // 승인 상태 확인
+	            var room_status = "${rdto.room_status}";
+	            
+	            if (room_status === '승인') {
+	                // 승인된 숙소를 수정할 시에는 관리자의 승인을 다시 받아야 함을 경고창으로 알림
+	                var confirmed = confirm("승인된 숙소를 수정할 시에는 관리자의 승인을 다시 받아야 합니다.\n정말 수정하시겠습니까?");
+	                
+	                if (!confirmed) {
+	                    // 수정 취소
+	                    return false;
+	                }
+	            }else{
+	            	var confirmed = confirm("수정하시겠습니까?");
+	            	 if (!confirmed) {
+		                    // 수정 취소
+		                    return false;
+		                }
+	            }
+	            
+	            // 다른 처리 로직 추가 가능
+	            
+	            // 수정하기
+	            // 여기서는 일단 form을 제출하도록 설정
+	            $('#roomupform').submit();
+	        });
+	    });
 
 	</script>
 </body>
