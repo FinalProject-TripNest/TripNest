@@ -90,7 +90,10 @@ public class MyPageController {
 	}
 
 	@GetMapping("/likestay")
-	public String likestay() {
+	public String likestay(HttpSession session, Model model) {
+		String myname = (String) session.getAttribute("myname");
+		model.addAttribute("myname", myname);
+
 		return "/mypage/likestay";
 	}
 
@@ -123,7 +126,7 @@ public class MyPageController {
 		memberService.updateMember(memberDto);
 
 		model.addAttribute("memberDto", memberDto);
-		return "redirect:/mypage/main";
+		return "redirect:/mypage/edit";
 	}
 
 	@PostMapping("/withdraw")
@@ -143,7 +146,9 @@ public class MyPageController {
 	}
 
 	@GetMapping("/myinquery")
-	public String myinquery() {
+	public String myinquery(HttpSession session, Model model) {
+		String myname = (String) session.getAttribute("myname");
+		model.addAttribute("myname", myname);
 		return "/mypage/myinquery";
 	}
 
@@ -159,4 +164,5 @@ public class MyPageController {
 
 		return inqueryList;
 	}
+
 }

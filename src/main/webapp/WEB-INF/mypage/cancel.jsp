@@ -3,31 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
 <c:set var="root" value="<%=request.getContextPath()%>" />
 <title>TRIP NEST</title>
 <style>
-a.menu-item.cancel {
+a.menu-item.cancel{
 	font-weight: 700;
 }
 </style>
 <body>
 	<div id="wrap">
 		<div id="myPage">
-			<div class="center">
+			<div class="center" id="myCancel">
 				<div class="mypage_info">
 					<div class="title">
 						<p>
 							<span>${memberDto.member_name}</span>님반가워요!
 						</p>
-					</div>
-					<br>
-					<div class="journey-info" role="link" tabindex="0">
-						<p>${currentDate}에는${reservationCount}번의여행을했어요.</p>
 					</div>
 				</div>
 				<div class="separator"></div>
@@ -81,3 +72,4 @@ a.menu-item.cancel {
 	</div>
 	<%@ include file="../include/footer.jsp"%>
 </body>
+</html>

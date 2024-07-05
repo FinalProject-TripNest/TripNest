@@ -55,6 +55,7 @@
                         <c:otherwise>
                             <li><a href="${root}/login/logout">LOGOUT</a></li>
                             <li><a href="${root}/mypage/main">MY PAGE</a></li>
+                            <li><a href="${root}/room/roominsert">HOST</a></li>
                         </c:otherwise>
                     </c:choose>
 				</ul>

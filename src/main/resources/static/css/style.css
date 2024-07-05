@@ -1612,6 +1612,8 @@ header#header .menu ul.sub li {
 	color: #fff;
 	text-decoration: none;
 	border-radius: 4px;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 #myPage .btn:hover {
@@ -1623,43 +1625,43 @@ header#header .menu ul.sub li {
 }
 /*//mypage*/
 
-/*mypage reservation*/
-#myPage .reservation {
+/*mypage myReservation*/
+#myReservation .reservation {
 	text-align: center;
 }
 
-#myPage .reservation-list {
+#myReservation .reservation-list {
 	text-align: left;
 	margin-top: 50px;
 }
 
-#myPage .reservation-list>a {
+#myReservation .reservation-list>a {
 	margin-top: 100px;
 	display: block;
 }
 
-#myPage .reservation-list>a:first-child {
+#myReservation .reservation-list>a:first-child {
 	margin-top: 0;
 }
 
-#myPage .reservation-item {
+#myReservation .reservation-item {
 	display: flex;
 	align-items: flex-start;
 }
 
-#myPage .image-container {
+#myReservation .image-container {
 	position: relative;
 	margin-right: 20px;
 }
 
-#myPage .reservation-item img {
+#myReservation .reservation-item img {
 	width: 250px;
 	height: auto;
 	border-radius: 8px;
 	object-fit: cover;
 }
 
-#myPage .reservation-status {
+#myReservation .reservation-status {
 	position: absolute;
 	top: -50px;
 	display: inline-block;
@@ -1671,75 +1673,75 @@ header#header .menu ul.sub li {
 	color: #4a4a4a;
 }
 
-#myPage .reservation-info {
+#myReservation .reservation-info {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 }
 
-#myPage .reservation-item h3 {
+#myReservation .reservation-item h3 {
 	margin: 0;
 	font-size: 18px;
 }
 
-#myPage .reservation-item p {
+#myReservation .reservation-item p {
 	margin-top: 10px;
 }
 
-#myPage .reservation-price {
+#myReservation .reservation-price {
 	margin-left: auto;
 	font-size: 16px;
 	font-weight: bold;
 }
 
-#myPage .no-reservation {
+#myReservation .no-reservation {
 	margin: 0 0 100px;
 	border-bottom: 1px solid #ddd;
 }
 
-#myPage .no-reservation img {
+#myReservation .no-reservation img {
 	width: 400px;
 	height: auto;
 }
 /*//mypage reservation*/
 
 /*mypage cancel*/
-#myPage .cancel {
+#myCancel .cancel {
 	text-align: center;
 }
 
-#myPage .cancel-list {
+#myCancel .cancel-list {
 	text-align: left;
 	margin-top: 50px;
 }
 
-#myPage .cancel-list>div {
+#myCancel .cancel-list>div {
 	margin-top: 100px;
 	display: flex;
 }
 
-#myPage .cancel-list>div:first-child {
+#myCancel .cancel-list>div:first-child {
 	margin-top: 0;
 }
 
-#myPage .cancel-item {
+#myCancel .cancel-item {
 	display: flex;
 	align-items: flex-start;
 }
 
-#myPage .cancel-image-container {
+#myCancel .cancel-image-container {
 	position: relative;
 	margin-right: 20px;
 }
 
-#myPage .cancel-item img {
+#myCancel .cancel-item img {
 	width: 250px;
 	height: auto;
 	border-radius: 8px;
 	object-fit: cover;
 }
 
-#myPage .cancel-status {
+#myCancel .cancel-status {
 	position: absolute;
 	top: -50px;
 	display: inline-block;
@@ -1751,34 +1753,401 @@ header#header .menu ul.sub li {
 	color: #4a4a4a;
 }
 
-#myPage .cancel-info {
+#myCancel .cancel-info {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 }
 
-#myPage .cancel-item h3 {
+#myCancel .cancel-item h3 {
 	margin: 0;
 	font-size: 18px;
 }
 
-#myPage .cancel-item p {
+#myCancel .cancel-item p {
 	margin-top: 10px;
 }
 
-#myPage .cancel-price {
+#myCancel .cancel-price {
 	margin-left: auto;
 	font-size: 16px;
 	font-weight: bold;
 }
 
-#myPage .no-cancel {
+#myCancel .no-cancel {
 	margin: 0 0 100px;
 	border-bottom: 1px solid #ddd;
 }
 
-#myPage .no-cancel img {
+#myCancel .no-cancel img {
 	width: 400px;
 	height: auto;
 }
 /*//mypage cancel*/
+
+/*mypage likeStay*/
+#myLikeStay .mylikestayphoto {
+	width: 100%;
+	object-fit: cover;
+	height: 270px;
+	border-radius: 10px;
+	height: 270px;
+}
+
+#myLikeStay #mylikestaydiv {
+	display: flex;
+	flex-wrap: wrap; /* 줄 바꿈 설정 */
+}
+
+#myLikeStay .mylikestaydate {
+	width: 100%;
+	margin-top: 20px;
+	font-weight: bold;
+	font-size: 18px;
+	padding-bottom: 20px;
+}
+
+#myLikeStay .bi-heart-fill {
+	color: rgba(255, 255, 255, 0.7);
+	border-radius: 100px;
+	position: absolute;
+	bottom: 46px; /* 이미지 내부에서 아이콘의 상단 위치 */
+	right: 10px; /* 이미지 내부에서 아이콘의 오른쪽 위치 */
+	font-size: 18px; /* 아이콘 크기 */
+	cursor: pointer;
+}
+
+#myLikeStay span.text {
+	margin-top: 20px;
+	display: inline-block;
+	font-size: 20px;
+}
+
+#myLikeStay .red {
+	color: rgba(255, 0, 0, 0.6);
+}
+
+#myLikeStay .mylikestayprice {
+	float: right;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+#myLikeStay b {
+	font-size: 24px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+#myLikeStay .mylikestaydiv {
+	width: calc(( 100% - 40px)/3);
+	margin-right: 20px;
+	margin-bottom: 60px;
+}
+
+#myLikeStay .mylikestaydiv:nth-of-type(3n) {
+	margin-right: 0;
+}
+
+/*//mypage likeStay*/
+
+/*mypage edit*/
+#myEdit .edit {
+	border-radius: 4px;
+	background-color: #fff;
+}
+
+#myEdit .edit h2 {
+	font-size: 24px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+#myEdit .content {
+	display: flex;
+	justify-content: center;
+}
+
+#myEdit .main-content {
+	width: 100%;
+	position: relative;
+}
+
+#myEdit .form-group {
+	margin-bottom: 40px;
+}
+
+#myEdit .form-group label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+#myEdit .form-group input[type="text"], #myEdit .form-group input[type="email"],
+	#myEdit 	.form-group input[type="date"], #myEdit .form-group select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+#myEdit .form-group .btn {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #333;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+#myEdit .form-group .btn:hover {
+	background-color: #000;
+}
+
+#myEdit .submit-btn {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 100px;
+}
+
+#myEdit .submit-btn .btn {
+	width: 40%;
+}
+
+#myEdit .withdraw-btn {
+	cursor: pointer;
+	position: absolute;
+	background: none;
+	bottom: 100px;
+	border-bottom: 1px solid #333;
+	margin-bottom: 5px;
+}
+
+#myEdit .social-login ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+}
+
+#myEdit .social-login li {
+	margin-right: 10px;
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#myEdit .social-login .kakao {
+	background-image: url('../img/mypage/sns_kakao.svg');
+}
+
+#myEdit .social-login .naver {
+	background-image: url('../img/mypage/sns_naver.svg');
+}
+/* 탈퇴 팝업 스타일 */
+#myEdit .withdraw-popup {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+#myEdit .withdraw-popup-content {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 4px;
+	text-align: center;
+	width: 600px;
+}
+
+#myEdit .withdraw-popup-content p {
+	margin-bottom: 20px;
+}
+
+#myEdit .withdraw-popup-buttons {
+	display: flex;
+	justify-content: space-between;
+}
+
+#myEdit .withdraw-popup-buttons button {
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+	width: 48%;
+}
+
+#myEdit .withdraw-popup-buttons .withdraw-confirm {
+	color: #fff;
+}
+
+#myEdit .withdraw-popup-buttons .withdraw-confirm:hover {
+	background-color: #000;
+}
+
+#myEdit .withdraw-popup-buttons .withdraw-cancel {
+	color: #fff;
+}
+
+#myEdit .withdraw-popup-buttons .withdraw-cancel:hover {
+	background-color: #000;
+}
+/*//mypage edit*/
+
+/*mypage myinquery*/
+#myInquery  b {
+	font-size: 24px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+#myinquery .myinquery tr, #myinquery .myinquery td {
+	border: 1px solid #ccc;
+	height: 35px;
+	vertical-align: middle;
+}
+
+#myinquery .myinquery {
+	width: 100%;
+	margin: 0 auto;
+	margin-bottom: 8%;
+}
+
+#myinquery .iq_title {
+	width: 400px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-left: 10px;
+	display: inline-block;
+	border: 0px;
+	padding-top: 8px;
+}
+
+#myinquery .writeinquerybtn {
+	width: 100px;
+	height: 30px;
+	background-color: #333;
+	color: white;
+	cursor: pointer;
+	float: right;
+	margin-bottom: 10px;
+}
+
+#myinquery .Click-here {
+	cursor: pointer;
+	width: 180px;
+	text-align: center;
+	font-size: 16px;
+	padding: 18px 0;
+	margin: 0 auto;
+}
+
+/*//mypage myinquery*/
+
+/*mypage myinqueryForm*/
+#myInqueryForm .inquerytable tr, #myInqueryForm .inquerytable th,
+	#myInqueryForm .inquerytable td {
+	border: 0px solid gray;
+	padding: 10px;
+	vertical-align: middle;
+}
+
+#myInqueryForm .inquerytable th {
+	width: 30%;
+}
+
+#myInqueryForm .inquerytable td {
+	width: 70%;
+}
+
+#myInqueryForm .content {
+	width: 600px;
+	height: 300px;
+	padding-top: 20px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	padding-left: 20px;
+}
+
+#myInqueryForm input.title {
+	border: 1px solid #ccc; /* 테두리 설정 */
+	border-radius: 4px; /* 모서리 둥글게 */
+	width: 600px;
+	height: 40px;
+	padding-left: 20px;
+}
+
+#myInqueryForm caption {
+	font-size: 20pt;
+	font-weight: bold;
+	margin-bottom: 5%;
+}
+
+#myInqueryForm div.canceldiv {
+	float: left;
+}
+
+#myInqueryForm div.submitdiv {
+	float: right;
+}
+
+#myInqueryForm #cancelbtn {
+	width: 150px;
+	height: 50px;
+	border: 0px solid gray;
+	background-color: #E9E9E9;
+	cursor: pointer;
+}
+
+#myInqueryForm #submitbtn {
+	width: 150px;
+	height: 50px;
+	background-color: #05141F;
+	color: white;
+	cursor: pointer;
+}
+/*//mypage myinqueryForm*/
+
+/*mypage inquerysuccess*/
+#inquerysuccess .inquerydiv {
+	width: 60%;
+	margin: 0 auto;
+	padding: 10%;
+}
+
+#inquerysuccess .inqueryspan {
+	font-size: 2em;
+}
+
+#inquerysuccess .inquerybtn1, #inquerysuccess .inquerybtn2 {
+	margin: 10%;
+	width: 100px;
+	height: 50px;
+	border: 1px solid gray;
+	cursor: pointer;
+}
+
+#inquerysuccess .inquerybtn2 {
+	background-color: #05141F;
+	color: white;
+}
+
+#inquerysuccess .inquerybtn1 {
+	background-color: white;
+}
+
+#inquerysuccess i.bi-envelope-paper {
+	font-size: 2.5em;
+}
+/*//mypage inquerysuccess*/
