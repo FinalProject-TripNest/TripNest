@@ -13,4 +13,6 @@ public interface InqueryServiceInter {
 	public InqueryDto inqueryAdminAnswerList(String inquery_id);
 	public int getCountAnswer();
 	public List<InqueryDto> getNullInquery();
+	public List<InqueryDto> getMyInqueryDatas(int member_id);
+	public void deleteInquery(String inquery_id);
 }

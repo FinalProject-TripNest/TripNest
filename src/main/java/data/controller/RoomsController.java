@@ -6,6 +6,8 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
 
+
+import org.eclipse.angus.mail.auth.MD4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ import data.service.RoomsService;
 import data.service.S3UploaderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 
 
 
@@ -51,6 +54,7 @@ public class RoomsController {
 		model.setViewName("/room/roominsertform");
 		return model;
 	}
+
 
 	@PostMapping("/room/insert")
 	public String insert(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -108,7 +112,6 @@ public class RoomsController {
 
 	}
 	
-
 	@GetMapping("/room/delete")
 	public String deleteroom(String room_id,HttpSession session) {
 		
@@ -127,6 +130,7 @@ public class RoomsController {
 		return "/room/roomlist";
 	}
 	
+
 
 	// URL에서 S3 파일 경로를 추출하는 메서드
 	private String extractFilePath(String fileUrl) {
@@ -188,7 +192,7 @@ public class RoomsController {
 		String roomregion=roomaddr.split("\\s+")[0];
 		dto.setRoom_region(roomregion);
 		
-		System.out.println("room_status: " + dto.getRoom_status());
+
 		service.updateRoom(dto);
 		
 		
@@ -241,8 +245,8 @@ public class RoomsController {
         // 서비스 목록 예시 데이터
         List<String> services = Arrays.asList("와이파이", "TV", "주방", "세탁기", "에어컨", "전자렌지", 
 								                "수영장", "바베큐 그릴", "주차장", "반려동물 입장가능", 
-								                "셀프체크인", "건조기", "헤어드라이기", "비데", 
-								                "식기류", "빔프로젝트", "보드게임", "빅테이블","전기포트","스피커","인덕션");
+								                "셀프체크인", "건조기", "헤어드라이기", "비데", "식기류", "빔프로젝트", "보드게임", "빅테이블","전기포트","스피커","인덕션");
+
         model.addAttribute("services", services);
         
         List<ImagesDto> images = imgservice.imgList(room_id);

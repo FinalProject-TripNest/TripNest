@@ -15,7 +15,4 @@ public class JournalDto {
 	private String journal_content;
 	private Timestamp journal_date;
 	private String journal_photo;
-	
-	
-	
 }

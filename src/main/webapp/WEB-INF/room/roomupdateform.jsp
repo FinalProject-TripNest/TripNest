@@ -340,6 +340,7 @@ height: 350px;
                 console.error('파일을 읽는 중 오류가 발생했습니다:', error);
             });
     }
+
 	    $(function() {
 	        $('#roomupdatebtn').click(function() {
 	            // 승인 상태 확인
@@ -368,10 +369,7 @@ height: 350px;
 	            $('#roomupform').submit();
 	        });
 	    });
-	    
-	    
-	
-	    
+
 	</script>
 <script>
 $(document).ready(function() {

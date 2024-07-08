@@ -9,4 +9,5 @@ public interface ReservationServiceInter {
 	public RoomsDto getOneData(int room_id);
 	public MemberDto getOneData_member(String member_useremail);
 	public void insertReservation(ReservationDto reservationDto);
+	public void cancelReservation(String MERCHANT_UID);
 }
