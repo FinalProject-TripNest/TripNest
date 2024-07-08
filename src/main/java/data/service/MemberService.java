@@ -18,6 +18,9 @@ public class MemberService implements MemberServiceInter {
 
 	@Autowired
 	private EmailMapperInter emailMapper;
+	
+	@Autowired
+    private EmailServiceInter emailService;
 
 	@Override
 	@Transactional
@@ -39,6 +42,12 @@ public class MemberService implements MemberServiceInter {
     @Override
     public boolean checkEmailExists(String email) {
         return memberMapper.findByEmail(email) != null;
+    }
+    
+    @Override
+    public String findMemberEmailByNameAndPhone(String member_name, String member_phone) {
+        MemberDto member = memberMapper.findMemberByNameAndPhone(member_name, member_phone);
+        return member != null ? member.getMember_useremail() : null;
     }
     
 	@Override
@@ -84,4 +93,47 @@ public class MemberService implements MemberServiceInter {
     public void deleteMember(int member_Id) {
         memberMapper.deleteMember(member_Id);
     }
+	
+	@Override
+	@Transactional
+	public boolean resetPassword(String token, String newPassword) {
+	    System.out.println("Starting resetPassword for token: " + token);
+
+	    // 토큰을 사용하여 이메일 인증 정보를 조회
+	    EmailDto emailDto = emailMapper.findByEmailToken(token);
+	    if (emailDto == null) {
+	        System.out.println("Invalid token: " + token);
+	        return false;
+	    }
+
+	    // 이메일 토큰을 검증
+	    boolean isVerified = emailService.verifyEmailToken(emailDto.getMember_useremail(), token);
+	    if (!isVerified) {
+	        System.out.println("Email not verified for token: " + token);
+	        return false;
+	    }
+
+	    // 이메일 인증이 완료되었으면 로그 출력
+	    System.out.println("Email verified for token: " + token);
+	    MemberDto member = memberMapper.findByEmail(emailDto.getMember_useremail());
+	    if (member == null) {
+	        System.out.println("No member found for email: " + emailDto.getMember_useremail());
+	        return false;
+	    }
+
+	    // 회원 정보가 존재하면 로그 출력
+	    System.out.println("Member found: " + member.getMember_useremail());
+	    memberMapper.updatePassword(member.getMember_useremail(), newPassword);
+
+	    // 이메일 인증 정보를 삭제
+	    emailMapper.deleteEmailVerification(emailDto.getMember_useremail(), token);
+	    System.out.println("Password reset successfully for email: " + emailDto.getMember_useremail());
+	    return true;
+	}
+	
+	@Override
+    public MemberDto findMemberByToken(String token) {
+        return memberMapper.findMemberByToken(token);
+    }
+
 }

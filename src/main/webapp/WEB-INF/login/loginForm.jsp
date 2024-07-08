@@ -64,8 +64,20 @@
         border-radius: 8px;
     }
     .forgot-password {
-        text-align: center;
-        margin-top: 40px;
+    	margin-left: 148px;
+        margin-top: 20px;
+    }
+    .forgot-password a {
+    	font-size: 12px;
+    }
+    .divider {
+        content: "";
+        width: 1px;
+        height: 18px;
+        background: #888;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 10px;
     }
 </style>
 <body>
@@ -96,8 +108,9 @@
                         </button>
                     </div>
                     <div class="form-group forgot-password">
-                        <a href="${pageContext.request.contextPath}/findId">아이디 찾기</a>	
-                        <a href="${pageContext.request.contextPath}/findPass">비밀번호 찾기</a>	
+                        <a href="${pageContext.request.contextPath}/member/findId">아이디 찾기</a>
+                        <span class="divider"></span>
+                        <a href="${pageContext.request.contextPath}/member/findPass">비밀번호 찾기</a>	
                     </div>
                     <div class="form-group">
                         <c:if test="${not empty error}">

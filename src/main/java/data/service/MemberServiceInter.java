@@ -8,7 +8,7 @@ public interface MemberServiceInter {
     void registerMember(MemberDto dto, String token);
     MemberDto findByEmail(String email);
     boolean checkEmailExists(String email);
-
+    String findMemberEmailByNameAndPhone(String member_name, String member_phone);
     
     MemberDto findMemberEmail(int member_id);
     int getTotalMember();
@@ -22,4 +22,7 @@ public interface MemberServiceInter {
 
 	void updateMember(MemberDto memberDto);
 	void deleteMember(int member_Id);
+	
+	boolean resetPassword(String token, String newPassword);
+	MemberDto findMemberByToken(String token);
 }
