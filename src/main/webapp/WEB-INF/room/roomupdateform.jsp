@@ -153,8 +153,8 @@ height: 350px;
 												<input type="text" class="addrinput" id="sample6_detailAddress" placeholder="상세주소" required="required" value="${rdto.room_address_detail}"
 												name="room_address_detail" style="width: 300px;" required="required">
 												<input type="hidden" id="room_region" name="room_region">
-												<input type="text" name="room_latitude" id="room_latitude" value="${rdto.room_latitude}">
-												<input type="text" name="room_longitude" id="room_longitude" value="${rdto.room_longitude}">
+												<input type="hidden" name="room_latitude" id="room_latitude" value="${rdto.room_latitude}">
+												<input type="hidden" name="room_longitude" id="room_longitude" value="${rdto.room_longitude}">
 										</div>
 						</div>
 						<div id="map" class="roomupdatemap"></div>	
