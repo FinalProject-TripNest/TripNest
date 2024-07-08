@@ -978,6 +978,7 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 					map: map,
 					position: coords
 				});
+
 				$("#room_latitude").val(result[0].y);
 				$("#room_longitude").val(result[0].x);
 			}
