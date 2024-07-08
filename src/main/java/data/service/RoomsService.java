@@ -135,6 +135,7 @@ public class RoomsService implements RoomsServiceInter {
 	}
 
 
+
 	public RoomsDto getOneData(String room_id) {
 		// TODO Auto-generated method stub
 		return roommapper.getOneData(room_id);
@@ -157,6 +158,15 @@ public class RoomsService implements RoomsServiceInter {
 	public void updateRoom(RoomsDto dto) {
 		// TODO Auto-generated method stub
 		roommapper.updateRoom(dto);
+	}
+
+	@Override
+	public List<RoomsDto> getRoomDataBymemid(int start, int perpage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> map=new HashMap<>();
+		map.put("start", start);
+		map.put("perpage", perpage);
+		return roommapper.getRoomDataBymemid(map);
 	}
 
 

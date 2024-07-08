@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.angus.mail.auth.MD4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
+import data.dto.InqueryDto;
+import data.dto.MemberDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
 import data.service.MemberService;
@@ -26,6 +31,7 @@ import data.service.RoomsService;
 import data.service.S3UploaderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 
 
 
@@ -51,6 +57,7 @@ public class RoomsController {
 		model.setViewName("/room/roominsertform");
 		return model;
 	}
+
 
 	@PostMapping("/room/insert")
 	public String insert(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -108,7 +115,6 @@ public class RoomsController {
 
 	}
 	
-
 	@GetMapping("/room/delete")
 	public String deleteroom(String room_id,HttpSession session) {
 		
@@ -128,6 +134,7 @@ public class RoomsController {
 	}
 	
 
+
 	// URL에서 S3 파일 경로를 추출하는 메서드
 	private String extractFilePath(String fileUrl) {
 	    try {
@@ -143,7 +150,7 @@ public class RoomsController {
 	
 
 	
-	@GetMapping("/room/roomlist")
+	/*@GetMapping("/room/roomlist")
 	public ModelAndView roomlist(HttpSession session) {
 		ModelAndView mview=new ModelAndView();
 		
@@ -159,20 +166,9 @@ public class RoomsController {
 		
 		return mview;
 		
-	}
+	}*/
 	
-	@GetMapping("/room/myroomlist")
-	@ResponseBody
-	public List<RoomsDto> roomlistid(HttpSession session){
-		
-		 // 세션에서 member_id 가져오기
-        String memberEmail = (String) session.getAttribute("myid");
-        Integer memberId = mservice.findByEmail(memberEmail).getMember_id();
-		
-		List<RoomsDto> list=service.getRoomDataByMyid(memberId);
-		
-		return list;
-	}
+
 
 	@PostMapping("/room/update")
 	public String update(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -188,7 +184,7 @@ public class RoomsController {
 		String roomregion=roomaddr.split("\\s+")[0];
 		dto.setRoom_region(roomregion);
 		
-		System.out.println("room_status: " + dto.getRoom_status());
+
 		service.updateRoom(dto);
 		
 		
@@ -237,12 +233,12 @@ public class RoomsController {
 	public String getOneData(String room_id, Model model,HttpSession session) {
 		RoomsDto rdto=service.getOneData(room_id);
 		model.addAttribute("rdto", rdto);
-		
+		model.addAttribute("apikey", apikey);
         // 서비스 목록 예시 데이터
         List<String> services = Arrays.asList("와이파이", "TV", "주방", "세탁기", "에어컨", "전자렌지", 
 								                "수영장", "바베큐 그릴", "주차장", "반려동물 입장가능", 
-								                "셀프체크인", "건조기", "헤어드라이기", "비데", 
-								                "식기류", "빔프로젝트", "보드게임", "빅테이블","전기포트","스피커","인덕션");
+								                "셀프체크인", "건조기", "헤어드라이기", "비데", "식기류", "빔프로젝트", "보드게임", "빅테이블","전기포트","스피커","인덕션");
+
         model.addAttribute("services", services);
         
         List<ImagesDto> images = imgservice.imgList(room_id);
@@ -253,7 +249,6 @@ public class RoomsController {
 		return "/room/roomupdateform";
 		
 	}
-	
 	
 	
 }

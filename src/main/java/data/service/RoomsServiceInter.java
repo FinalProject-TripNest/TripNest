@@ -1,5 +1,6 @@
 package data.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import data.dto.RoomsDto;
@@ -25,9 +26,12 @@ public interface RoomsServiceInter {
 	
 	public List<RoomsDto> getRoomDataByMyid(int member_id);
 
+
 	public int getCountNoRoom();
 	public List<RoomsDto> getRecentRoom();
 
 	public void updateRoom(RoomsDto dto);
+	public List<RoomsDto> getRoomDataBymemid(int start,int perpage);
 }
+
 

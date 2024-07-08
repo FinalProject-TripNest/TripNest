@@ -32,7 +32,7 @@
 							<a href="../../login/loginform" class="payment_btn">결제하기</a>
 						</c:when>
 						<c:otherwise>
-							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=2024-06-25&checkout=2024-06-27" class="payment_btn">
+							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=2024-07-09&checkout=2024-07-10" class="payment_btn">
 							결제하기</a>
 						</c:otherwise>
 					</c:choose>
@@ -141,6 +141,66 @@
 									});
 				</script>
 
+				<div class="review">
+					<div class="title" data-aos="fade-up">
+						<a class="title2">Review</a>
+					</div>
+					<div class="list">
+						<c:forEach items="${ReviewJoinDto}" var="list">
+							<div class="block">
+								<div class="name">${list.member_name}</div>
+								<div class="text">${list.review_content}</div>
+								<div class="bottom" data-star-count="${list.review_rating}">
+									<script>
+										// 페이지 로드 후 실행
+										document
+												.addEventListener(
+														'DOMContentLoaded',
+														function() {
+															var reviewBlocks = document
+																	.querySelectorAll('.review .block');
+
+															reviewBlocks
+																	.forEach(function(
+																			block) {
+																		var bottomElement = block
+																				.querySelector('.bottom');
+																		if (!bottomElement.classList
+																				.contains('star-added')) { // 별점이 추가되지 않은 경우에만 실행
+																			var starCount = parseInt(bottomElement
+																					.getAttribute('data-star-count'));
+																			var starContainer = document
+																					.createElement('div');
+																			starContainer.innerHTML = displayStars(starCount);
+																			starContainer.classList
+																					.add('star-container');
+																			bottomElement
+																					.appendChild(starContainer);
+																			bottomElement.classList
+																					.add('star-added'); // 클래스 추가 표시
+																		}
+																	});
+														});
+
+										// 별점을 표시하는 함수
+										function displayStars(starCount) {
+											var starHtml = '';
+											for (var i = 0; i < starCount; i++) {
+												starHtml += '<img alt="" src="../../img/find/star.png" class="star">';
+											}
+											return starHtml;
+										}
+									</script>
+
+									<span><fmt:formatDate value="${list.review_date}"
+											pattern="yyyy-MM-dd" /></span>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+
+
 
 				<!--//각 페이지 작업 코드  -->
 			</div>
@@ -235,7 +295,7 @@
 									</dt>
 									<dd>
 										<ul>
-											<li>체크인 시간은 오후 4시, 체크아웃 시간은 오전 11시입니다.</li>
+											<li>체크인 시간은 오후 3시, 체크아웃 시간은 오전 11시입니다.</li>
 											<li>예약하신 당일 오전에, 체크인 안내 문자를 보내드립니다.</li>
 											<li>최대인원을 초과하는 인원은 입실이 불가합니다.</li>
 											<li>예약인원 외 방문객의 출입을 엄격히 제한합니다.</li>
@@ -291,7 +351,7 @@
 									</dt>
 									<dd>
 										<ul>
-											<li>건물 뒤편에 글림스 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
+											<li>건물 뒤편에 ${detailDto.room_name } 전용 주차장이 마련되어 있습니다. 주중(월-금) 1대, 주말(토-일)
 												2대까지 주차 가능합니다.</li>
 										</ul>
 									</dd>

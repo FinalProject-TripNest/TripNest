@@ -1,74 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <title>TRIP NEST</title>
-<style>
-    .reservation {
-        text-align: center;
-    }
-    .tabs {
-        justify-content: flex-start;
-        list-style: none;
-    }
-    .tabs ul {
-        display: flex;
-        padding: 0;
-        margin: 0;
-    }
-    .tabs li {
-        margin: 0 10px;
-    }
-    .tabs li a {
-        text-decoration: none;
-        color: #333;
-        font-size: 18px;
-        padding: 10px;
-        display: block;
-    }
-    .tabs li a:hover,
-    .tabs li.active a {
-        color: #000;
-        border-bottom: 1px solid #000;
-    }
-    .reservation img {
-        width: 400px;
-        height: auto;
-    }
-    .reservation p {
-        margin: 20px 0;
-    }
-    .no-reservation {
-    	margin: 0 0 100px;
-    	border-bottom: 1px solid #ddd;
-    }
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #333;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 4px;
-        margin-top: 20px;
-        margin-bottom: 40px;
-    }
-    .btn:hover {
-        background-color: #000;
-    }
-</style>
 <c:set var="root" value="<%=request.getContextPath()%>" />
 <body>
 <div class="reservation">
-    <div class="tabs">
-        <ul>
-            <li><a href="#" class="active">다가올 예약</a></li>
-            <li><a href="#">이용 완료</a></li>
-        </ul>
-    </div>
-    <div class="no-reservation">
-        <img alt="" src="../img/mypage/booking-waiting.png">
-        <p>아직 예약 정보가 없습니다. 새로운 스테이를 찾아 떠나보세요.</p>
-        <a href="${root }/find/list" class="btn">FIND NEST</a>
-    </div>
+    <c:if test="${not empty reservations}">
+        <div class="reservation-list">
+            <c:forEach var="reservation" items="${reservations}">
+	            <a href="${root}/find/reservation_success?merchant_uid=${reservation.merchant_uid}">
+	                <div class="reservation-item">
+	                    <div class="image-container">
+	                        <p class="reservation-status">
+	                            ${reservation.reservation_status}
+	                        </p>
+	                        <img src="${reservation.image_photo}" alt="${reservation.room_name}" />
+	                    </div>
+	                    <div class="reservation-info">
+	                        <h3>${reservation.room_name}</h3>
+	                        <p>${reservation.reservation_checkin} ~ ${reservation.reservation_checkout}</p>
+	                        <p>${reservation.reservation_capacity} 명</p>
+	                    </div>
+	                    <div class="reservation-price">
+	                        ₩ <fmt:formatNumber value="${reservation.paid_amount}" type="currency" currencySymbol="" />
+	                    </div>
+	                </div>
+	            </a>
+            </c:forEach>
+        </div>
+    </c:if>
+    <c:if test="${empty reservations}">
+        <div class="no-reservation">
+            <img alt="" src="${root}/img/mypage/booking-waiting.png">
+            <p>아직 예약 정보가 없습니다. 새로운 스테이를 찾아 떠나보세요.</p>
+            <a href="${root}/find/list" class="btn">FIND NEST</a>
+        </div>
+    </c:if>
 </div>
 </body>

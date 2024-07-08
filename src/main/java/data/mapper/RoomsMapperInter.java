@@ -29,12 +29,15 @@ public interface RoomsMapperInter {
 	public List<String> getLackRoomId(Map params);
 	public RoomsDto getSimpleRoomsDataByRoomId(String room_id);
 	
+
 	public int getCountNoRoom();
 	public List<RoomsDto> getRecentRoom();
-
 	public void deleteRoom(String room_id);
 	public List<RoomsDto> getRoomDataByMyid(int member_id);
 	public void updateRoom(RoomsDto dto);
 
+	public List<RoomsDto> getRoomDataBymemid(HashMap<String, Integer> map);
+
 }
+
 

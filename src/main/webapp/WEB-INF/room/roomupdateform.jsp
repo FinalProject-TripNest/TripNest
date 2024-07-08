@@ -8,8 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}&libraries=services"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}&libraries=services"></script>
 </head>
 <title>TRIP NEST</title>
 <style>
@@ -107,6 +107,10 @@
 		cursor: pointer;
 		margin-bottom: 5%;
     }
+#roomupdateform .roomupdatemap{
+width: 700px;
+height: 350px;
+}
 </style>
 <body>
 
@@ -127,7 +131,7 @@
 						</div>
 						<div>
 							<span class="editspan">숙소이름</span> 
-							<input type="text" value="${rdto.room_name}" name="room_name" required="required">
+							<input type="text" value="${rdto.room_name}" name="room_name" required="required" class="room_name">
 						</div>
 						<div>
 							<span class="editspan">가격</span>
@@ -141,7 +145,7 @@
 						</div>
 						<div class="address-container">
 							<span class="editspan">주소</span>
-											<div class="address-inputs">
+										<div class="address-inputs">
 												<input type="text" class="addrinput" id="sample6_postcode" placeholder="우편번호" style="width: 150px;">
 												<input type="button" class="addrinput" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 147px;"><br>
 												<input type="text" class="addrinput" id="room_address" placeholder="주소" required="required" name="room_address" value="${rdto.room_address}"
@@ -149,11 +153,14 @@
 												<input type="text" class="addrinput" id="sample6_detailAddress" placeholder="상세주소" required="required" value="${rdto.room_address_detail}"
 												name="room_address_detail" style="width: 300px;" required="required">
 												<input type="hidden" id="room_region" name="room_region">
-											</div>
+												<input type="hidden" name="room_latitude" id="room_latitude" value="${rdto.room_latitude}">
+												<input type="hidden" name="room_longitude" id="room_longitude" value="${rdto.room_longitude}">
+										</div>
 						</div>
+						<div id="map" class="roomupdatemap"></div>	
 						<div class="textarea-container">
 							<div class="editspan">디테일 설명</div>
-							<textarea style="width: 500px; height: 250px; border: 1px solid #ccc; padding-left: 10px;" name="room_detail" required="required">
+							<textarea style="width: 602px; height: 250px; border: 1px solid #ccc; padding-left: 10px;" name="room_detail" required="required">
 								${rdto.room_detail }
 							</textarea>
 						</div><br>
@@ -267,6 +274,8 @@
 			}
 		}).open();
 	};
+	
+
 
 	// 이미지 업로드시 미리보기 생성 및 동기화
 	    function previewImages(event) {
@@ -331,6 +340,7 @@
                 console.error('파일을 읽는 중 오류가 발생했습니다:', error);
             });
     }
+
 	    $(function() {
 	        $('#roomupdatebtn').click(function() {
 	            // 승인 상태 확인
@@ -359,6 +369,62 @@
 	            $('#roomupform').submit();
 	        });
 	    });
+
 	</script>
+<script>
+$(document).ready(function() {
+	$(".roomupdatemap").hide();
+	$('#sample6_detailAddress,#room_address').on('keyup', function() {
+		var address = $('#room_address').val().trim(); // 주소 입력 필드 값 가져오기
+
+		// 주소가 입력되어 있는 경우에만 지도 업데이트
+		if (address) {
+			searchAddress(address); // 주소 검색 함수 호출
+		}
+	});
+});
+
+var room_latitude=$("#room_latitude").val();
+var room_longitude=$("#room_longitude").val();
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(room_latitude, room_longitude), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+function searchAddress() {
+
+var room_address=$("#room_address").val();
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+//주소로 좌표를 검색합니다
+geocoder.addressSearch(room_address, function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    $("#room_latitude").val(result[0].y);
+			$("#room_longitude").val(result[0].x);
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});  
+}
+</script>
 </body>
 </html>
