@@ -25,9 +25,11 @@ public interface RoomsServiceInter {
 	
 	public List<RoomsDto> getRoomDataByMyid(int member_id);
 
+
 	public int getCountNoRoom();
 	public List<RoomsDto> getRecentRoom();
 
 	public void updateRoom(RoomsDto dto);
 }
+
 

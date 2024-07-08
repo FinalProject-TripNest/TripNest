@@ -11,11 +11,11 @@
 </head>
 <title>TRIP NEST</title>
 <style>
-#adminMember {
+#admin_review {
 	padding-bottom: 120px;
 }
 
-#adminMember .center {
+#admin_review .center {
 	width: 100%;
 	overflow-x: auto;
 }
@@ -62,30 +62,30 @@ td button:hover {
 
 
 	<div id="wrap">
-		<div id="adminMember">
+		<div id="admin_review">
 			<div class="center">
 				<table>
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>이름</th>
+							<th>숙소 이름</th>
 							<th>이메일</th>
-							<th>휴대전화</th>
-							<th>회원 등급</th>
-							<th>가입 날짜</th>
-							<th>회원 관리</th>
+							<th>내용</th>
+							<th>평점</th>
+							<th>작성 날짜</th>
+							<th>리뷰 관리</th>
 						</tr>
-						<c:forEach items="${dto}" var="list" varStatus="status">
+						<c:forEach items="${review}" var="list" varStatus="status">
 							<tr>
 								<td>${status.count }</td>
-								<td>${list.member_name }</td>
+								<td>${list.room_name}</td>
 								<td>${list.member_useremail}</td>
-								<td>${list.member_phone}</td>
-								<td>${list.member_role }</td>
-								<td><fmt:formatDate
-										value="${list.member_registration_date }" pattern="yyyy-MM-dd" /></td>
+								<td>${list.review_content}</td>
+								<td>${list.review_rating}</td>
+								<td><fmt:formatDate value="${list.review_date}"
+										pattern="yyyy-MM-dd" /></td>
 								<td><button type="button" class="btn"
-										name="${list.member_id }">회원 내보내기</button></td>
+										name="${list.review_id }">삭제</button></td>
 							</tr>
 						</c:forEach>
 					</thead>
@@ -103,14 +103,14 @@ td button:hover {
 	<%@ include file="../include/footer.jsp"%>
 	<script>
 		$("button.btn").click(function() {
-			var member_id = $(this).attr("name");
+			var review_id = $(this).attr("name");
 
 			$.ajax({
 				type : "GET", // POST 방식으로 변경
-				url : "/admin/memberDelete",
+				url : "/admin/reviewDelete",
 				dataType : "html",
 				data : {
-					"member_id" : member_id
+					"review_id" : review_id
 				},
 				success : function(response) {
 					location.reload();

@@ -75,7 +75,7 @@ header#header .select {
 							end="5">
 							<a class="block"
 								href="/promotion/detail?promotion_id=${promotion.promotion_id}">
-								<img alt="" src="../img/promotion/${promotion.promotion_photo}">
+								<img alt="" src="${promotion.promotion_photo}">
 								<div class="text_box">
 									<span class="title">${promotion.promotion_title}</span> <span
 										class="text">${promotion.promotion_content}</span>

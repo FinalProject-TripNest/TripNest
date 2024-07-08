@@ -141,6 +141,66 @@
 									});
 				</script>
 
+				<div class="review">
+					<div class="title" data-aos="fade-up">
+						<a class="title2">Review</a>
+					</div>
+					<div class="list">
+						<c:forEach items="${ReviewJoinDto}" var="list">
+							<div class="block">
+								<div class="name">${list.member_name}</div>
+								<div class="text">${list.review_content}</div>
+								<div class="bottom" data-star-count="${list.review_rating}">
+									<script>
+										// 페이지 로드 후 실행
+										document
+												.addEventListener(
+														'DOMContentLoaded',
+														function() {
+															var reviewBlocks = document
+																	.querySelectorAll('.review .block');
+
+															reviewBlocks
+																	.forEach(function(
+																			block) {
+																		var bottomElement = block
+																				.querySelector('.bottom');
+																		if (!bottomElement.classList
+																				.contains('star-added')) { // 별점이 추가되지 않은 경우에만 실행
+																			var starCount = parseInt(bottomElement
+																					.getAttribute('data-star-count'));
+																			var starContainer = document
+																					.createElement('div');
+																			starContainer.innerHTML = displayStars(starCount);
+																			starContainer.classList
+																					.add('star-container');
+																			bottomElement
+																					.appendChild(starContainer);
+																			bottomElement.classList
+																					.add('star-added'); // 클래스 추가 표시
+																		}
+																	});
+														});
+
+										// 별점을 표시하는 함수
+										function displayStars(starCount) {
+											var starHtml = '';
+											for (var i = 0; i < starCount; i++) {
+												starHtml += '<img alt="" src="../../img/find/star.png" class="star">';
+											}
+											return starHtml;
+										}
+									</script>
+
+									<span><fmt:formatDate value="${list.review_date}"
+											pattern="yyyy-MM-dd" /></span>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+
+
 
 				<!--//각 페이지 작업 코드  -->
 			</div>

@@ -42,38 +42,46 @@ margin: 5px;
 #roomlist caption {
 	margin-bottom: 20px;
 	font-size: 20pt;
+
+}
+#roomlist .address{
+white-space: nowrap; /* 줄바꿈을 방지하여 한 줄에 표시 */
+overflow: hidden; /* 넘치는 부분 숨김 */
+text-overflow: ellipsis; /* 넘치는 부분을 ...으로 표시 */
+max-width: 250px;
 }
 </style>
 <body>
 
 
-	<div id="wrap">
-		<div id="roomlist">
-			<div class="center">
-				<div class="roomlistdiv">
-				<input type="hidden" value="${memberId}" class="memid">
-					<table id="roomTable">
-					<caption align="top"><b>호스트님의 공간</b><br><span style="font-size: 12pt;">(해당 숙소를 클릭하면 상세페이지로 이동합니다.)</span> </caption>
-					<thead>
-						<tr align="center" style="background-color:#F8F8F8; ">
-							<td width="80px;">숙소번호</td>
-							<td width="200px;">숙소이름</td>
-							<td width="250px;">위치</td>
-							<td width="150px;">가격</td>
-							<td width="100px;">서비스</td>
-							<td width="100px;">상태</td>
-							<td width="160px;">비고</td>
-							<td><fmt:formatNumber value="" type="number"/> </td>
-						</tr>
-						</thead>
-						<tbody>
-						<!-- 여기에 list 옵니다 -->
-					</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="wrap">
+    <div id="roomlist">
+        <div class="center">
+            <div class="roomlistdiv">
+                <input type="hidden" value="${memberId}" class="memid">
+                <table id="roomTable">
+                    <caption align="top"><b>호스트님의 공간</b><br><span style="font-size: 12pt;">(해당 숙소를 클릭하면 상세페이지로 이동합니다.)</span></caption>
+                    <thead>
+                        <tr align="center" style="background-color:#F8F8F8;">
+                            <td width="80px;">숙소번호</td>
+                            <td width="200px;">숙소이름</td>
+                            <td width="250px;">위치</td>
+                            <td width="150px;">가격</td>
+                            <td width="100px;">서비스</td>
+                            <td width="100px;">상태</td>
+                            <td width="160px;">비고</td>
+                            <td><fmt:formatNumber value="" type="number"/></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 여기에 list 옵니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -122,7 +130,7 @@ margin: 5px;
 	                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '">' +
 	                        '<td align="center">' + room.room_id + '</td>' +
 	                        '<td  align="center">' + room.room_name + '</td>' +
-	                        '<td>' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
+	                        '<td class="address">' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
 	                        '<td align="center">'+formattedPrice+'</td>' +
 	                        '<td class="servicelist">' + room.room_service + '</td>' +
 	                        '<td align="center">' + room.room_status + '</td>' +

@@ -255,7 +255,9 @@
    border: 0px solid gray;
    height: 40px;
    border-bottom: 1px solid #ccc;
+
    }
+
 
 #roominsertfrom .miritable td{
 width: 70%;
@@ -273,12 +275,14 @@ vertical-align: middle;
 }
 #r_detail{
 max-height: 250px;
+
 overflow-x: hidden; /* 가로 스크롤 숨김 */
 overflow-y: auto; /* 세로 스크롤 표시 */
 font-family: "Noto Sans KR";
 width: 700px;
 padding: 10px;
 white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
+
 }
 </style>
 <body>
@@ -778,7 +782,36 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 	        });
 	        $("#r_service").text(services.join(", "));
 	    });
-	})
+
+	    
+	    // 파일 입력(change) 이벤트 감지
+	    $('#image_photo').on('change', function(){
+	        var files = $(this)[0].files;
+	        var photoContainer = $('#r_photo');
+	        photoContainer.empty(); // 기존 이미지 모두 제거
+	        
+	        // FileReader 객체를 사용하여 선택된 이미지 파일들을 읽고 미리보기에 추가
+	        for (var i = 0; i < files.length; i++) {
+	            var file = files[i];
+	            var reader = new FileReader();
+	            
+	            reader.onload = (function(theFile) {
+	                return function(e) {
+	                    var imgElement = $('<img>');
+	                    imgElement.attr('src', e.target.result);
+	                    imgElement.attr('alt', theFile.name);
+	                    imgElement.addClass('preview-image');
+	                    photoContainer.append(imgElement); // 미리보기 이미지를 추가
+	                };
+	            })(file);
+	            
+	            // 파일 읽기 시작
+	            reader.readAsDataURL(file);
+	        }
+	    });
+		
+	});
+
 	
 	//사진 등록했을때 마지막 미리보기에 출력되게
 	$(function() {
@@ -823,6 +856,7 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 
 });
 	
+
 	
 	    function updatePeopleText() {
         var r_min_capacity = $("#room_min_capacity").val();
@@ -944,6 +978,7 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 					map: map,
 					position: coords
 				});
+
 				$("#room_latitude").val(result[0].y);
 				$("#room_longitude").val(result[0].x);
 			}

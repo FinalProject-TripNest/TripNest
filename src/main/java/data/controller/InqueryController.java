@@ -24,27 +24,29 @@ public class InqueryController {
 
 	@Autowired
 	InqueryService service;
-	
+
 	@Autowired
 	MemberService mservice;
-	
+
 	@GetMapping("/inquery/inqueryform")
-	public String inqueryform() {
+	public String inqueryform(HttpSession session, Model model) {
+		String myname = (String) session.getAttribute("myname");
+		model.addAttribute("myname", myname);
 		return "/inquery/inqueryform";
 	}
-	
+
 	@PostMapping("/inquery/insert")
-	public String insert(@ModelAttribute InqueryDto dto,HttpSession session) {
-		
-		String memberemail=(String)session.getAttribute("myid");
-		int memid=mservice.findByEmail(memberemail).getMember_id();
+	public String insert(@ModelAttribute InqueryDto dto, HttpSession session) {
+
+		String memberemail = (String) session.getAttribute("myid");
+		int memid = mservice.findByEmail(memberemail).getMember_id();
 		dto.setMember_id(memid);
 		service.insertInquery(dto);
-		
+
 		return "/inquery/inquerysuccess";
 	}
-	
-	//이거 내가 보기편하게 만든거. 나중에 삭제할것
+
+	// 이거 내가 보기편하게 만든거. 나중에 삭제할것
 	@GetMapping("/inquery/inquerysuccess")
 	public String inquerysuccess() {
 		return "/inquery/inquerysuccess";
@@ -59,9 +61,9 @@ public class InqueryController {
 	@GetMapping("/mypage/deleteinquery")
 	@ResponseBody
 	public String deleteinquery(String inquery_id) {
-		
+
 		service.deleteInquery(inquery_id);
-		
+
 		return "/mypage/deleteinquery";
 	}
 

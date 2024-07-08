@@ -21,7 +21,7 @@ public interface MemberServiceInter {
     // 회원 정보 업데이트
     void updateMember(MemberDto memberDto); // 회원 정보 업데이트
     boolean resetPassword(String token, String newPassword); // 비밀번호 재설정
-
+  
     // 회원 삭제
     void deleteMember(int member_Id); // 회원 ID로 회원 삭제
     void dataDelete(int member_id); // 회원 ID로 회원 삭제

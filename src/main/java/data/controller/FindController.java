@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
+import data.dto.ReviewDto;
+import data.dto.ReviewJoinDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
+import data.service.ReviewService;
 import data.service.RoomsService;
 
 @Controller
@@ -27,6 +30,9 @@ public class FindController {
 
 	@Autowired
 	RedisService redisService;
+
+	@Autowired
+	ReviewService reviewService;
 
 	@Value("${kakao-api-key}")
 	private String apikey;
@@ -48,11 +54,13 @@ public class FindController {
 		ModelAndView detailModel = new ModelAndView();
 
 		RoomsDto detailDto = roomsService.getRoomsDataByRoomId(room_id);
-		detailDto.setRoomImgList (roomsService.getImgsByRoomId(room_id));
+		detailDto.setRoomImgList(roomsService.getImgsByRoomId(room_id));
 		detailModel.addObject("detailDto", detailDto);
 		detailModel.setViewName("find/detail");
+		List<ReviewJoinDto> ReviewJoinDto = reviewService.dataList(room_id);
+		detailModel.addObject("ReviewJoinDto", ReviewJoinDto);
 
-		detailModel.addObject("apikey",apikey);
+		detailModel.addObject("apikey", apikey);
 
 		// detail 페이지 접속시 조회수 1증가
 		redisService.addToSortedSet("viewRank", room_id);
