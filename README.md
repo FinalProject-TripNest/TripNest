@@ -112,7 +112,7 @@
 
 ### ▪️ 박범수
 
-### ▪️ 손범수
+### ▪️ 손범수<br>
 <span><b>예약 및 결제 기능 ➡ 결제 API</b></span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/cef6594e-122b-4f87-9605-25aaca8c4527"></video></div><br>
 <span><b>예약 및 결제 기능 ➡ 결제 금액보다 쿠폰 금액이 큰 경우 결제</b></span>
@@ -123,6 +123,8 @@
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/a6f1ec98-3c53-4e79-947c-0246480546fd"></video></div><br>
 <span><b>예약 상태 업데이트 ➡ 스케줄러를 사용하여 일정 시간이 지나면 DB 값 변경 </b></span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/30b157fa-302f-447c-86cc-653295c86544"></video></div><br>
+
+
 ### ▪️ 이준형
 <span><b>회원가입 ➡ 이메일 인증을 통해 회원가입</b></span>
 <div align="center">
