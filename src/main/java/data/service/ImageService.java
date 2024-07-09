@@ -21,6 +21,19 @@ public class ImageService implements ImageServiceInter {
 	}
 
 	@Override
+
+	public List<ImagesDto> getAllRoomPhoto() {
+		// TODO Auto-generated method stub
+		return imgmapper.getAllRoomPhoto();
+	}
+
+	@Override
+	public List<ImagesDto> getDataRoomImg(String room_id) {
+		// TODO Auto-generated method stub
+		return imgmapper.getDataRoomImg(room_id);
+	}
+
+
 	public List<ImagesDto> dataList() {
 		// TODO Auto-generated method stub
 		return imgmapper.dataList();

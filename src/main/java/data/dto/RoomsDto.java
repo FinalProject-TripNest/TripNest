@@ -6,7 +6,6 @@ import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 @Alias("RoomsDto")
@@ -25,11 +24,15 @@ public class RoomsDto {
 	private String room_detail;
 	private String room_status;
 	private String room_hp;
-	private String image_photo;
-	private List<String> roomImgList;
-
 	private String city;
 	private String district;
-	private List<String> imgList;
+	private List<String> roomImgList;
+	private String image_photo;
 
+	private List<String> imgList;
+	private String mememail;
+	
+	private String room_latitude;//위도
+	private String room_longitude;//경도
 }
+

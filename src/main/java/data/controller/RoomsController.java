@@ -1,9 +1,11 @@
 package data.controller;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
+
 
 import org.eclipse.angus.mail.auth.MD4;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
 import data.dto.RoomsDto;
@@ -25,7 +28,8 @@ import data.service.RoomsService;
 import data.service.S3UploaderService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.servlet.ModelAndView;
+
+
 
 
 @Controller
@@ -50,7 +54,7 @@ public class RoomsController {
 		model.setViewName("/room/roominsertform");
 		return model;
 	}
-	
+
 
 	@PostMapping("/room/insert")
 	public String insert(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -69,20 +73,26 @@ public class RoomsController {
 		//member_id 구해오기
 		String memberemail=(String)session.getAttribute("myid");
 		int memid=mservice.findByEmail(memberemail).getMember_id();
+		System.out.println("memberemail:"+memberemail);
+		
 		dto.setMember_id(memid);
 		
 		service.insertRoom(dto);
+		
+		 // 방 정보 삽입 후, room 의 마지막에 등록된 romm_id값을 가져와서 images테이블에 넣어줌.
+        int room_id = service.getLastInsertedRoomId(); 
+       
+		//SimpleDateFormat sdf=new SimpleDateFormat("yyyMMdd");
+		for(MultipartFile multi:image_upload) {
 
-		// 방 정보 삽입 후, room 의 마지막에 등록된 romm_id값을 가져와서 images테이블에 넣어줌.
-		int room_id = service.getLastInsertedRoomId();
 
-		for (MultipartFile multi : image_upload) {
-			
 			try {
 
 				///roomphohto 는 s3에 등록할 파일명?같은거 path
 				String imageUrl = s3service.upload(multi, "roomphoto");
+
                 //images 테이블에 image_id당 하나의 이미지만 들어가게끔
+
 				ImagesDto imgdto=new ImagesDto();
 				imgdto.setRoom_id(String.valueOf(room_id));
 				imgdto.setImage_photo(imageUrl);
@@ -98,6 +108,7 @@ public class RoomsController {
 		}
 
 		return "/room/roominsertsuccess";
+
 
 	}
 	
@@ -119,6 +130,7 @@ public class RoomsController {
 		return "/room/roomlist";
 	}
 	
+
 
 	// URL에서 S3 파일 경로를 추출하는 메서드
 	private String extractFilePath(String fileUrl) {
@@ -180,6 +192,7 @@ public class RoomsController {
 		String roomregion=roomaddr.split("\\s+")[0];
 		dto.setRoom_region(roomregion);
 		
+
 		service.updateRoom(dto);
 		
 		
@@ -232,8 +245,8 @@ public class RoomsController {
         // 서비스 목록 예시 데이터
         List<String> services = Arrays.asList("와이파이", "TV", "주방", "세탁기", "에어컨", "전자렌지", 
 								                "수영장", "바베큐 그릴", "주차장", "반려동물 입장가능", 
-								                "셀프체크인", "건조기", "헤어드라이기", "비데", 
-								                "식기류", "빔프로젝트", "보드게임", "빅테이블");
+								                "셀프체크인", "건조기", "헤어드라이기", "비데", "식기류", "빔프로젝트", "보드게임", "빅테이블","전기포트","스피커","인덕션");
+
         model.addAttribute("services", services);
         
         List<ImagesDto> images = imgservice.imgList(room_id);
