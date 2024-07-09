@@ -38,6 +38,7 @@
 	                }
 	            });
 
+
 				$(".data_btn").on("click", function() {
         			$(".detail_date").focus();
     			});
