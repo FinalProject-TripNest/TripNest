@@ -37,8 +37,11 @@
    <img src ="https://img.shields.io/badge/Github-181717.svg?&style=for-the-badge&logo=Github&logoColor=white"/>
 </div>
 
-## 팀소개 및 담당기능
+## 팀원을 소개합니다
 <table>
+  <tr>
+    <td align=center>이름</td>
+    <td align=center>담당기능</td>
   <tr>
     <td>김민규</td>
     <td>
