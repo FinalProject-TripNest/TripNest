@@ -113,4 +113,11 @@
 
 ### 이준형
 
-### 차유지
+<div><h4>회원가입</h4>
+  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/5eeb201e-7f66-4ea0-a785-d63c6d0544fc"/>
+</div>
+<div><h4>회원가입</h4>
+  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/5eeb201e-7f66-4ea0-a785-d63c6d0544fc"/>
+</div>
+
+### 최유지
