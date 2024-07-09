@@ -115,10 +115,10 @@
 ### 손범수
 
 ### 이준형
-<div align="center"><h4>회원가입 ➡ 이메일 인증을 통해 회원가입</h4>
+<div align="center"><span><b>회원가입 ➡ 이메일 인증을 통해 회원가입</b></span>
   <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/6c878cc2-b183-4a5a-814b-7b13330b6a1f">
 </div>
-<div align="center"><h4>로그인 ➡ 일반 로그인</h4>
+<div align="center"><b>로그인 ➡ 일반 로그인</b>
   <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/8c69050a-e40c-45e7-aaa1-89957b7dfced">
 </div>
 <div align="center"><h4>로그인 ➡ 소셜 로그인(카카오,네이버)</h4>
