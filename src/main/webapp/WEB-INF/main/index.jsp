@@ -110,6 +110,7 @@ header#header .select {
 					</div>
 					<div class="list">
 						<c:forEach items="${roomDtoList}" var="room">
+
 							<a class="block"
 							   href="find/list/detail?room_id=${room.room_id}">
 								<c:choose>
@@ -117,12 +118,16 @@ header#header .select {
 										<img alt="" src="${room.image_photo}">
 									</c:when>
 									<c:otherwise>
-										<img alt="" src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/roomphoto/noimage.jpg">
+										<img alt=""
+											src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/roomphoto/noimage.jpg"
+											style="border: 1px solid #ddd;">
 									</c:otherwise>
 								</c:choose>
 								<div class="text_box">
-									<span class="title">${room.room_name}</span>
-									<span class="text">${room.city} / ${room.district} / <fmt:formatNumber value="${room.room_price}" type="currency" />~</span>
+									<span class="title">${room.room_name}</span> <span class="text">${room.city}
+										/ ${room.district} / <fmt:formatNumber
+											value="${room.room_price}" type="currency" />~
+									</span>
 								</div>
 							</a>
 						</c:forEach>
@@ -140,8 +145,9 @@ header#header .select {
 					<div class="list">
 						<c:forEach items="${promotionDto}" var="promotion" begin="0"
 							end="5">
-							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/promotion/${promotion.promotion_photo}">
+							<a class="block"
+								href="/promotion/detail?promotion_id=${promotion.promotion_id}">
+								<img alt="" src="${promotion.promotion_photo}">
 								<div class="text_box">
 									<span class="title">${promotion.promotion_title}</span> <span
 										class="text">${promotion.promotion_content}</span>
@@ -169,7 +175,7 @@ header#header .select {
 					</div>
 					<div class="list">
 						<c:forEach items="${journalDto}" var="journal" begin="0" end="5">
-							<a class="block" href="javascript:;"> <img alt=""
+							<a class="block" href="/journal/detail?journal_id=${journal.journal_id}"> <img alt=""
 								src="${journal.journal_photo}">
 								<div class="text_box">
 									<span class="title">${journal.journal_title}</span> <span
@@ -186,5 +192,32 @@ header#header .select {
 
 
 	<%@ include file="../include/footer.jsp"%>
+	<script>
+		$(document)
+				.click(
+						function(event) {
+							if (!$(event.target)
+									.closest(
+											"#index .search form .input input, #index .search form .gray").length) {
+								$("#index .search form .input input")
+										.removeClass("active");
+								$("#index .search form .gray").removeClass(
+										"active");
+							}
+						});
+
+		$("#index .search form .input input").click(function() {
+			$(".pop_up.search").addClass("active");
+		});
+		$("#index .search form .date").click(function() {
+			$(".pop_up.date").addClass("active");
+		});
+		$("#index .search form .personnel").click(function() {
+			$(".pop_up.personnel").addClass("active");
+		});
+		$(".dimd").click(function() {
+			$(".pop_up").removeClass("active");
+		});
+	</script>
 </body>
 </html>

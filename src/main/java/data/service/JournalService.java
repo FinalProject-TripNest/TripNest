@@ -20,4 +20,33 @@ public class JournalService implements JournalServiceInter {
 		return mapperInter.dataList();
 	}
 
+	@Override
+	public JournalDto getOneData(String journal_id) {
+		// TODO Auto-generated method stub
+		return mapperInter.getOneData(journal_id);
+	}
+
+	@Override
+	public void insertData(JournalDto dto) {
+		mapperInter.insertData(dto);
+
+	}
+
+	@Override
+	public void deleteData(String journal_id) {
+		mapperInter.deleteData(journal_id);
+
+	}
+
+	@Override
+	public String photoData(String journal_id) {
+		return mapperInter.photoData(journal_id);
+	}
+
+	@Override
+	public void updateData(JournalDto dto) {
+		mapperInter.updateData(dto);
+
+	}
+
 }

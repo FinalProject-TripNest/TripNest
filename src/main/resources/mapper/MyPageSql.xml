@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.MyPageMapperInter">
+	<select id="getReservationsByMemberId" resultType="data.dto.MyPageReservationDto">
+        SELECT 
+            r.RESERVATION_ID as reservation_id, 
+            r.MEMBER_ID as member_id, 
+            r.ROOM_ID as room_id, 
+            r.RESERVATION_CHECKIN as reservation_checkin, 
+            r.RESERVATION_CHECKOUT as reservation_checkout, 
+            r.RESERVATION_CAPACITY as reservation_capacity, 
+            r.RESERVATION_STATUS as reservation_status, 
+            r.RESERVATION_PRICE as reservation_price,
+            r.RESERVATION_DATE as reservation_date,
+            r.MERCHANT_UID as merchant_uid,
+            ro.room_name as room_name, 
+            img.image_photo as image_photo, 
+            p.paid_amount as paid_amount,
+            p.paid_date as paid_date
+        FROM 
+            RESERVATIONS r
+        JOIN 
+            ROOMS ro ON r.ROOM_ID = ro.room_id
+        JOIN 
+            MEMBERS m ON r.MEMBER_ID = m.member_id
+        JOIN 
+            PAYMENT p ON r.MERCHANT_UID = p.merchant_uid
+        LEFT JOIN 
+            (SELECT room_id, MIN(image_photo) AS image_photo FROM IMAGES GROUP BY room_id) img ON r.ROOM_ID = img.room_id
+        WHERE 
+            r.MEMBER_ID = #{member_id} AND (r.RESERVATION_STATUS = '예약완료' OR r.RESERVATION_STATUS = '이용완료')
+    </select>    
+
+    <select id="getCancellationsByMemberId" resultType="data.dto.MyPageReservationDto">
+        SELECT 
+            r.RESERVATION_ID as reservation_id, 
+            r.MEMBER_ID as member_id, 
+            r.ROOM_ID as room_id, 
+            r.RESERVATION_CHECKIN as reservation_checkin, 
+            r.RESERVATION_CHECKOUT as reservation_checkout, 
+            r.RESERVATION_CAPACITY as reservation_capacity, 
+            r.RESERVATION_STATUS as reservation_status, 
+            r.RESERVATION_PRICE as reservation_price,
+            r.RESERVATION_DATE as reservation_date,
+            r.MERCHANT_UID as merchant_uid,
+            ro.room_name as room_name, 
+            img.image_photo as image_photo, 
+            p.paid_amount as paid_amount,
+            p.paid_date as paid_date
+        FROM 
+            RESERVATIONS r
+        JOIN 
+            ROOMS ro ON r.ROOM_ID = ro.room_id
+        JOIN 
+            MEMBERS m ON r.MEMBER_ID = m.member_id
+        JOIN 
+            PAYMENT p ON r.MERCHANT_UID = p.merchant_uid
+        LEFT JOIN 
+            (SELECT room_id, MIN(image_photo) AS image_photo FROM IMAGES GROUP BY room_id) img ON r.ROOM_ID = img.room_id
+        WHERE 
+            r.MEMBER_ID = #{member_id} AND r.RESERVATION_STATUS = '예약취소'
+    </select>
+</mapper>
