@@ -25,6 +25,7 @@
   <img src ="https://img.shields.io/badge/JSP-007396.svg?&style=for-the-badge&logo=JSP&logoColor=white"/>
    <img src ="https://img.shields.io/badge/Apache%20Tomcat-F8DC75.svg?&style=for-the-badge&logo=Apache%20Tomcat&logoColor=white"/>
   <img src ="https://img.shields.io/badge/springboot-6DB33F.svg?&style=for-the-badge&logo=springboot&logoColor=white"/>
+    <img src ="https://img.shields.io/badge/MyBatis-001327.svg?&style=for-the-badge&logo=MyBatis&logoColor=white"/>
 </div>
 
 <div><h4>:open_file_folder:DB</h4>
