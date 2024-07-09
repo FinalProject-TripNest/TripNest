@@ -71,7 +71,7 @@
   transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
   display: inline-block;
   vertical-align: middle;
-  width: 700px;
+  width: 900px;
   margin: 30px auto;
   max-width: 97%;
 }
@@ -194,7 +194,7 @@
 								<tr>
 									<td align="center">${no }</td>
 									<c:set var="no" value="${no-1 }"/>
-									<td align="center" style="font-size: 0.9em;">${myname}(${rlist.mememail})</td>
+									<td align="center" style="font-size: 0.9em;">${rlist.mememail}</td>
 									<td>
 										<div class="Click-here" id="Click-here">${ rlist.room_name}</div>
 										<input type="hidden" value="${rlist.room_id }" name="room_id" class="r_id">
@@ -303,7 +303,7 @@
     <div class="bg-overlay"></div>
 </div>
 <!-- 페이징 -->
-<div style="margin: 0 auto; width: 80%; text-align: center; padding-top: 5%;">
+<div style="margin: 0 auto; width: 80%; text-align: center;padding-top: 30px;padding-bottom: 30px;">
 	<ul  class="pagination justify-content-center">
 		
 		<!-- 이전 -->

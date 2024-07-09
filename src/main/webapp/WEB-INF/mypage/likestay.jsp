@@ -30,6 +30,7 @@ a.menu-item.likestay {
 					<div class="mypage_content" id="mypage_content">
 						<div id="likestay" class="reservation-info">
 							<div id="mylikestaydiv"></div>
+							<div id="noMylikestay"></div>
 						</div>
 					</div>
 				</div>
@@ -71,45 +72,68 @@ a.menu-item.likestay {
 		});
 
 		function list() {
-			$
-					.ajax({
-						type : "get",
-						url : "/wishlist/mywishlist",
-						dataType : "json",
-						success : function(data) {
-							var s = "";
-							$
-									.each(
-											data,
-											function(date, items) {
-												s += "<span class='mylikestaydate'>"
-														+ date + "</span>"; // 날짜 출력
-												$
-														.each(
-																items,
-																function(i, res) {
-																	s += "<div class='mylikestaydiv'>";
-																	s += "<a href='/find/list/detail?room_id="
-																			+ res.room_id
-																			+ "'>";
-																	s += "<img src='" + res.image_photo + "' class='mylikestayphoto'>";
-																	s += "<i class='bi bi-heart-fill'room_id='"+res.room_id+"'></i>";
-																	s += "<br><span class='text'>"
-																			+ res.room_name
-																			+ "</span>/<span class='text'>"
-																			+ res.room_region
-																			+ "</span>";
-																	s += "<span class='mylikestayprice'>"
-																			+ res.room_price
-																			+ "</span>";
-																	s += "</a></div>";
-																});
-											});
-							$("#mylikestaydiv").html(s);
-							icon();
-						}
+			
+			
+			$.ajax({
+				url:"/wishlist/countmywish",
+				type:"get",
+				dataType:"json",
+				success:function(res){
+					if(res.countwish==0){
+						var s="";
+						s+="<div>등록된 위시리스트가 없습니다.</div><br>";
+						s+="<div>나만의 공간을 등록해보세요.</div>"
+						$("#noMylikestay").html(s);
+					}else{
+						
+						$.ajax({
+									type : "get",
+									url : "/wishlist/mywishlist",
+									dataType : "json",
+									success : function(data) {
+										var s = "";
+										$
+												.each(
+														data,
+														function(date, items) {
+															s += "<span class='mylikestaydate'>"
+																	+ date + "</span>"; // 날짜 출력
+															$
+																	.each(
+																			items,
+																			function(i, res) {
+																				s += "<div class='mylikestayicon'>";
+																				s += "<a href='/find/list/detail?room_id="
+																						+ res.room_id
+																						+ "'>";
+																				s += "<img src='" + res.image_photo + "' class='mylikestayphoto'>";
+																				s += "<i class='bi bi-heart-fill'room_id='"+res.room_id+"'></i>";
+																				s += "<br><span class='text'>"
+																						+ res.room_name
+																						+ "</span>/<span class='text'>"
+																						+ res.room_region
+																						+ "</span>";
+																				s += "<span class='mylikestayprice'>"
+																						+ formatPrice(res.room_price)
+																						+ "</span>";
+																				s += "</a></div>";
+																			});
+														});
+										$("#mylikestaydiv").html(s);
+										icon();
+									}
 
-					});
+								});
+					}
+					
+					}
+				});
+			
+
+		}
+		function formatPrice(price) {
+			// 가격에 천 단위마다 쉼표를 추가하고 앞에 \를 붙입니다.
+			return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 		function icon() {
 			$(".bi-heart-fill").each(function() {

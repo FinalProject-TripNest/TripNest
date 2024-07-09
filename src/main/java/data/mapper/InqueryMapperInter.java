@@ -19,4 +19,5 @@ public interface InqueryMapperInter {
 	public List<InqueryDto> getNullInquery();
 	public List<InqueryDto> getMyInqueryDatas(int member_id);
 	public void deleteInquery(String inquery_id);
+	public int myInqueryCount(int member_id);
 }

@@ -20,10 +20,10 @@
 #roomTable{
 	margin: 0 auto;
 }
-#roomlist .roomlistdiv{
+/*#roomlist .roomlistdiv{
 padding-top:20px;
 padding-bottom: 5%;
-}
+}*/
 #roomlist .servicelist{
     white-space: nowrap; /* 줄바꿈을 방지하여 한 줄에 표시 */
     overflow: hidden; /* 넘치는 부분 숨김 */
@@ -55,12 +55,23 @@ max-width: 250px;
 
 
 <div id="wrap">
-    <div id="roomlist">
-        <div class="center">
+    <div id="myPage">
+        <div class="center" id="roomlist">
+        <div class="mypage_info">
+					<div class="title">
+						<p>
+							<span>${myname}</span>님반가워요!
+						</p>
+					</div>
+				</div>
+				<div class="separator"></div>
+				<div class="content_wrapper">
+				<%@ include file="../include/mypqge_menu.jsp"%>
             <div class="roomlistdiv">
+            
                 <input type="hidden" value="${memberId}" class="memid">
                 <table id="roomTable">
-                    <caption align="top"><b>호스트님의 공간</b><br><span style="font-size: 12pt;">(해당 숙소를 클릭하면 상세페이지로 이동합니다.)</span></caption>
+                    <caption align="top"><span style="font-size: 12pt; float: right;">해당 숙소를 클릭하면 상세페이지로 이동합니다.</span></caption>
                     <thead>
                         <tr align="center" style="background-color:#F8F8F8;">
                             <td width="80px;">숙소번호</td>
@@ -75,13 +86,16 @@ max-width: 250px;
                     </thead>
                     <tbody>
                         <!-- 여기에 list 옵니다 -->
+                        <!--<c:if test="${roomcount==0 }">
+                        	<b>등록한 숙소가 없습니다.</b>
+                        </c:if>-->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 
 
 
@@ -119,28 +133,33 @@ max-width: 250px;
 	function list(){
 		$.ajax({
 			type:"get",
-			url:"/mypage/myroomlist",
+			url:"/mypage/roomlist",
 			dataType:"json",
 			success:function(data){
 	              var tbody = $('#roomTable tbody');
 	                tbody.empty();
-	                $.each(data, function(index, room){
-	                	 var formattedPrice = new Intl.NumberFormat().format(room.room_price);
-	                	
-	                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '">' +
-	                        '<td align="center">' + room.room_id + '</td>' +
-	                        '<td  align="center">' + room.room_name + '</td>' +
-	                        '<td class="address">' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
-	                        '<td align="center">'+formattedPrice+'</td>' +
-	                        '<td class="servicelist">' + room.room_service + '</td>' +
-	                        '<td align="center">' + room.room_status + '</td>' +
-	                        '<td align="center">' +
-	                            '<button type="button" class="roomdel" value="' + room.room_id + '">삭제</button>' +
-	                            '<button type="button" class="roomedit" value="' + room.room_id + '" onclick="location.href=\'updateform?room_id=' + room.room_id + '\'">수정</button>' +
-	                        '</td>' +
-	                    '</tr>';
-	                    tbody.append(s);
-	                });
+	                if(data.length==0){
+	                	 tbody.append('<tr><td colspan="7" align="center">등록한 숙소가 없습니다.</td></tr>');
+	                }else{
+	                	 $.each(data, function(index, room){
+		                	 var formattedPrice = new Intl.NumberFormat().format(room.room_price);
+		                	
+		                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '">' +
+		                        '<td align="center">' + room.room_id + '</td>' +
+		                        '<td  align="center">' + room.room_name + '</td>' +
+		                        '<td class="address">' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
+		                        '<td align="center">'+formattedPrice+'</td>' +
+		                        '<td class="servicelist">' + room.room_service + '</td>' +
+		                        '<td align="center">' + room.room_status + '</td>' +
+		                        '<td align="center">' +
+		                            '<button type="button" class="roomdel" value="' + room.room_id + '">삭제</button>' +
+		                            '<button type="button" class="roomedit" value="' + room.room_id + '" onclick="location.href=\'/room/updateform?room_id=' + room.room_id + '\'">수정</button>' +
+		                        '</td>' +
+		                    '</tr>';
+		                    tbody.append(s);
+		                });
+	                }
+	               
 			}
 		})
 	};

@@ -26,6 +26,7 @@ import data.dto.InqueryDto;
 import data.dto.JournalDto;
 import data.dto.MemberDto;
 import data.dto.PromotionDto;
+import data.dto.ReservationDto;
 import data.dto.ReviewDto;
 import data.dto.ReviewJoinDto;
 import data.dto.RoomsDto;
@@ -34,6 +35,7 @@ import data.service.InqueryService;
 import data.service.JournalService;
 import data.service.MemberService;
 import data.service.PromotionService;
+import data.service.ReservationService;
 import data.service.ReviewService;
 import data.service.RoomsService;
 import data.service.S3UploaderService;
@@ -60,6 +62,8 @@ public class AdminController {
 	S3UploaderService s3service;
 	@Autowired
 	PromotionService promotionservice;
+	@Autowired
+	ReservationService reservationservice;
 
 	/*
 	 * @GetMapping("/admin/adminmain") public String admin() { return
@@ -299,7 +303,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/adminmain")
-	public ModelAndView getcount() {
+	public ModelAndView getcount(HttpSession session) {
 		ModelAndView mview = new ModelAndView();
 
 		int noiqcount = iqservice.getCountAnswer();
@@ -342,6 +346,9 @@ public class AdminController {
 
 		int roomscount = rservice.getTotalRooms();
 		mview.addObject("roomscount", roomscount);
+		
+		List<ReservationDto> paylist=reservationservice.recentReservationList();
+		mview.addObject("paylist", paylist);
 
 		mview.setViewName("/admin/adminpage");
 		// System.out.println("Inquiry Count: " + noiqcount);

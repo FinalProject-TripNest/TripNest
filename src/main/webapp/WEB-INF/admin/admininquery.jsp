@@ -121,9 +121,9 @@ textarea.inquery_answer{
 	display: flex;
 	margin-left: 50px;
 }
-button.adminanswerbtn,.admineditbtn{
+button.adminanswerbtn,button.admineditbtn{
 	height: 60px;
-	width: 100px;
+	width: 70px;
   margin-left: 5%;
   background-color: white;
   border: 1px solid #ccc;
@@ -136,7 +136,7 @@ button.adminanswerbtn,.admineditbtn{
 	 padding-top: 5%;
 	 padding-bottom: 5%;
 }
-.answer-areafirst,.answer-areasecond {
+#admininquery .areafirst,#admininquery .areasecond {
     display: flex;
     align-items: center; /* 세로 중앙 정렬 */
     justify-content: space-between; /* 요소들 사이의 간격을 자동으로 조절 */
@@ -200,12 +200,12 @@ button.adminanswerbtn,.admineditbtn{
 						<div class="inquery_reanswer" align="center">
 							<div class="answerdiv"><div class="Aicondiv">A</div> 문의답변</div><br>
 							
-							<div class="answer-areafirst">
+							<div class="answer-areafirst-${a.inquery_id} areafirst">
 								<!--<c:if test="${a.inquery_answer==null }"></c:if>-->					
 									<textarea name="inquery_answer_${a.inquery_id}" placeholder="답변등록" class="inquery_answer"></textarea>
 										<button type="button" class="adminanswerbtn">등록</button>
 							</div>
-							<div class="answer-areasecond">
+							<div class="answer-areasecond-${a.inquery_id} areasecond">
 								<!--<c:if test="${a.inquery_answer!=null }"></c:if>-->
 									<div class="bbbbb_${a.inquery_id } contentbb"><pre>${a.inquery_answer }</pre></div>
 									<button type="button" class="admineditbtn" data-inquery-id="${a.inquery_id}" value="edit">수정</button>
@@ -271,8 +271,10 @@ button.adminanswerbtn,.admineditbtn{
 		    	
 		    	//답변달기를 눌렀을때 이벤트
 		    	   $(".reanswerbtn").click(function(){
+		    		   
 				    	 var inquery_id = $(this).data("inquery-id");
 		              //alert(inquery_id);
+		              
 		              
 		              $.ajax({
 		            	  url:"/admin/iqlist",
@@ -281,16 +283,16 @@ button.adminanswerbtn,.admineditbtn{
 		            	  dataType:"json",
 		            	  success:function(res){
 		            		  
-		            	            if (res != null) {
+		            	          
 		                                var inquery_answer = res.inquery_answer;
 		                                if (inquery_answer == null) {
-		                                    $("div.answer-areasecond").hide();
-		                                    $("div.answer-areafirst").show();
+		                                    $("div.answer-areasecond-"+res.inquery_id).hide();
+		                                    $("div.answer-areafirst-"+res.inquery_id).show();
 		                                } else {
-		                                    $("div.answer-areafirst").hide();
-		                                    $("div.answer-areasecond").show();
+		                                    $("div.answer-areafirst-"+res.inquery_id).hide();
+		                                    $("div.answer-areasecond-"+res.inquery_id).show();
 		                                }
-		                            }       
+		                            
 		            	            
 		            	     
 		            	  }
@@ -313,8 +315,8 @@ button.adminanswerbtn,.admineditbtn{
 		    		var inquery_id = $(this).data("inquery-id");
 		    		//alert(inquery_id);
 		    		
-		    		$("div.answer-areasecond").hide();
-	          $("div.answer-areafirst").show();
+		    		$(".areasecond").hide();
+	          $(".areafirst").show();
 		    		
 		    			$.ajax({
 		    			url:"/admin/iqlist",

@@ -38,4 +38,8 @@
 	<delete id="deleteInquery" parameterType="String">
 		delete from INQUERY where inquery_id=#{inquery_id}
 	</delete>
+	
+	<select id="myInqueryCount" parameterType="int" resultType="int">
+		select count(*) from INQUERY where member_id=#{member_id}
+	</select>
 </mapper>

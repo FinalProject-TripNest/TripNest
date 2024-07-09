@@ -57,7 +57,7 @@ public class MainController {
       List<JournalDto> journalDto = journalService.dataList();
       List<PromotionDto> promotionDto = promotionService.dataList();
       List<RoomsDto> roomDtoList = roomsService.getTopRoomsId();
-
+      
       model.addObject("journalDto", journalDto);
       model.addObject("promotionDto", promotionDto);
       model.addObject("roomDtoList", roomDtoList);

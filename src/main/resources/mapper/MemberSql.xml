@@ -23,6 +23,10 @@
         SELECT * FROM MEMBERS WHERE member_social_id = #{social_id} AND member_social_type = #{social_type}
     </select>
     
+    <select id="findMemberByNameAndPhone" parameterType="map" resultType="data.dto.MemberDto">
+        SELECT member_useremail FROM MEMBERS WHERE member_name = #{member_name} AND member_phone = #{member_phone}
+    </select>
+    
     <!-- 회원 아이디가 필요해서... 차유지 작성함 -->
     <select id="findMemberEmail" parameterType="int" resultType="MemberDto">
     	select member_useremail from MEMBERS where member_id=#{member_id}
@@ -54,4 +58,18 @@
     <delete id="deleteMember" parameterType="int">
     	DELETE FROM MEMBERS WHERE member_id = #{member_Id}
 	</delete>
+	
+	<select id="findMemberByEmail" parameterType="String" resultType="data.dto.MemberDto">
+        SELECT * FROM MEMBERS WHERE member_useremail = #{email}
+    </select>
+
+    <update id="updatePassword" parameterType="map">
+        UPDATE MEMBERS SET member_password = #{password} WHERE member_useremail = #{email}
+    </update>
+    
+    <select id="findMemberByToken" parameterType="String" resultType="data.dto.MemberDto">
+        SELECT m.* FROM MEMBERS m 
+        JOIN EMAIL e ON m.member_useremail = e.member_useremail 
+        WHERE e.email_token = #{token}
+    </select>
 </mapper>

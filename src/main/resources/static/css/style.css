@@ -1791,14 +1791,17 @@ header#header .menu ul.sub li {
 	object-fit: cover;
 	height: 270px;
 	border-radius: 10px;
-	height: 270px;
 }
 
 #myLikeStay #mylikestaydiv {
 	display: flex;
 	flex-wrap: wrap; /* 줄 바꿈 설정 */
 }
-
+#myLikeStay .mylikestayicon{
+	position: relative;
+	display: inline-block;
+	padding: 10px;
+}
 #myLikeStay .mylikestaydate {
 	width: 100%;
 	margin-top: 20px;
@@ -1811,8 +1814,8 @@ header#header .menu ul.sub li {
 	color: rgba(255, 255, 255, 0.7);
 	border-radius: 100px;
 	position: absolute;
-	bottom: 46px; /* 이미지 내부에서 아이콘의 상단 위치 */
-	right: 10px; /* 이미지 내부에서 아이콘의 오른쪽 위치 */
+	bottom: 56px; /* 이미지 내부에서 아이콘의 상단 위치 */
+	right: 18px; /* 이미지 내부에서 아이콘의 오른쪽 위치 */
 	font-size: 18px; /* 아이콘 크기 */
 	cursor: pointer;
 }
@@ -2029,9 +2032,7 @@ header#header .menu ul.sub li {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	padding-left: 10px;
-	display: inline-block;
-	border: 0px;
-	padding-top: 8px;
+
 }
 
 #myinquery .writeinquerybtn {
