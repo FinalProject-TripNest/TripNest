@@ -38,12 +38,14 @@
   <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white">
   <img src="https://img.shields.io/badge/JSP-007396?style=flat&logo=Java&logoColor=white">
   <img src="https://img.shields.io/badge/Apache%20Tomcat-F8DC75?style=flat&logo=Apache%20Tomcat&logoColor=white">
-  <img src="https://img.shields.io/badge/Apache%20Tomcat-F8DC75?style=flat&logo=Apache%20Tomcat&logoColor=white">
+  <img src ="https://img.shields.io/badge/springboot-6DB33F.svg?&style=for-the-badge&logo=springboot&logoColor=white"/>
 </div>
 
 <div><h4>:open_file_folder:DB</h4>
   <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white">
-  <img src="https://img.shields.io/badge/AWS-232F3E?style=flat&logo=AWS&logoColor=white">
+  <img alt="amazonwebservices" src ="https://img.shields.io/badge/AWS-232F3E.svg?&style=for-the-badge&logo=amazonwebservices&logoColor=white"/>
+  <img alt="amazons3" src ="https://img.shields.io/badge/AWS s3-569A31.svg?&style=for-the-badge&logo=amazons3&logoColor=white"/>
+  <img alt="amazonec2" src ="https://img.shields.io/badge/AWS EC2-FF9900.svg?&style=for-the-badge&logo=amazonec2&logoColor=white"/>
 </div>
 
 <div><h4>:love_letter:communication</h4>
