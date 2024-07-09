@@ -15,12 +15,15 @@
 		where room_id = #{room_id}
 	</select>
 	<select id="hotelNearbyImages" resultType="ImagesDto" parameterType="java.util.List">
-        select *
+    select *
+    from (
+        select *, row_number() over (partition by room_id order by image_id) as rn
         from IMAGES
-        where room_id IN
-        <foreach item="roomId" index="index" collection="list" 
-                 open="(" separator="," close=")">
+        where room_id in
+        <foreach item="roomId" index="index" collection="list" open="(" separator="," close=")">
             #{roomId}
         </foreach>
-    </select>
+    ) sub
+    where rn = 1
+	</select>
 </mapper>

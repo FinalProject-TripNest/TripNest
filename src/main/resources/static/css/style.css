@@ -39,7 +39,7 @@ header#header {
    font-family: 'Lato' !important;
    position: fixed;
    width: 100%;
-   z-index: 9999;
+   z-index: 999;
 }
 
 header#header .top_event {
@@ -162,6 +162,123 @@ header#header .menu ul.sub li a {
 
 header#header .menu ul.sub li {
    font-weight: 500;
+}
+
+/* 모달 스타일 */
+header#header .modal_location {
+    display: none; /* 기본적으로 보이지 않도록 설정 */
+    position: fixed;
+    z-index: 1000; /* 다른 콘텐츠보다 위에 위치 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* 검은색 배경 */
+}
+
+header#header .modal_date {
+    display: none; /* 기본적으로 보이지 않도록 설정 */
+    position: fixed;
+    z-index: 1000; /* 다른 콘텐츠보다 위에 위치 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* 검은색 배경 */
+}
+
+/* 모달 콘텐츠 */
+header#header .modal-content_location {
+    background-color: #fefefe;
+    margin: 15% auto; /* 상단에서 15% 내려서 가운데 정렬 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* 너비 80% */
+    max-width: 500px; /* 최대 너비 500px */
+    border-radius: 10px; /* 모서리 둥글게 */
+    position: relative;
+    z-index: 1001; /* 드롭다운보다 위에 위치 */
+}
+
+header#header .modal-content_location #header_address {
+    width: 65%;
+    height: 50px;
+    background-color: #ebebeb;
+    padding: 0 20px 0 50px;
+    border-radius: 8px;
+    font-weight: 700;
+    background-image: url("../img/main/search.png");
+    background-size: cover;
+    background-position: 20px center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    margin-right: 15px;
+}
+
+header#header .modal-content_location button {
+    width: 120px; 
+    height: 50px;
+    background: #2E65C9;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* 모달 콘텐츠 */
+header#header .modal-content_date {
+    background-color: #fefefe;
+    margin: 15% auto; /* 상단에서 15% 내려서 가운데 정렬 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* 너비 80% */
+    max-width: 500px; /* 최대 너비 500px */
+    border-radius: 10px; /* 모서리 둥글게 */
+    position: relative;
+    z-index: 1001; /* 드롭다운보다 위에 위치 */
+}
+
+header#header .modal-content_date #header_checkdate {
+    width: 65%;
+    height: 50px;
+    background-color: #ebebeb;
+    padding: 0 20px 0 50px;
+    border-radius: 8px;
+    font-weight: 700;
+    background-image: url("../img/main/search.png");
+    background-size: cover;
+    background-position: 20px center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    margin-right: 15px;
+}
+
+header#header .modal-content_date button {
+    width: 120px; 
+    height: 50px;
+    background: #2E65C9;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+/* 닫기 버튼 */
+header#header .close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* 절대 위치 */
+    top: 5px; /* 모달 콘텐츠의 위쪽에서 10px 아래 */
+    right: 10px; /* 모달 콘텐츠의 오른쪽에서 20px 왼쪽 */
+}
+
+header#header .close:hover,
+header#header .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /*//header*/
@@ -612,7 +729,6 @@ header#header .menu ul.sub li {
 #index .event a p.text {
    margin-top: 20px;
 }
-
 
 
 .pop_up {

@@ -5,12 +5,54 @@
 <%@ include file="../include/header.jsp"%>
 <title>TRIP NEST</title>
 <style>
-header #header .select {
+header#header .select {
 	display: none;
 }
 
 .flatpickr-calendar {
-	width: 460px; /* 원하는 너비로 설정 */
+   /* 부모 요소의 너비에 맞추기 */
+    min-width: 0 !important; /* 최소 너비 제한 해제 */
+    max-width: none !important; /* 최대 너비 제한 해제 */
+    height: 330px;
+}
+
+.flatpickr-innerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 내부 요소를 중앙 정렬 */
+}
+
+.flatpickr-months {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center;
+    width: 100%; /* 부모 요소의 너비에 맞추기 */
+}
+
+.flatpickr-month {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    width: auto;
+}
+
+.flatpickr-weekdays {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center;
+    width: 100%; /* 부모 요소의 너비에 맞추기 */
+}
+
+.flatpickr-days {
+    display: grid;
+    justify-content: center; /* 중앙 정렬 */
+    width: 100%; /* 부모 요소의 너비에 맞추기 */
+}
+
+.flatpickr-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* 높이를 고정 크기로 설정 */
 }
 </style>
 <body onload="initAutocomplete()">
@@ -18,44 +60,40 @@ header #header .select {
 		<div id="index">
 			<div class="top_banner">
 				<div class="search">
-					<form method="get" action="find/search" id="searchForm">
-						<div id="address_parent">
-							<input id="address" type="text" placeholder="여행 갈 곳을 검색해보세요"
-								name="address" value="${defaultAddress }">
-						</div>
+                    <form method="get" action="find/search" id="searchForm">
+                        <div id="main_address">
+                            <input id="main_address_input" type="text" placeholder="여행 갈 곳을 검색해보세요" name="address" value="${address}">
+                        </div>
 
-						<div id="date">
-							<input id="checkin" class="datepicker" name="checkin"
-								placeholder="체크인 날짜를 선택하세요" value="${defaultCheckin}"> <input
-								id="checkout" class="datepicker" name="checkout"
-								placeholder="체크아웃 날짜를 선택하세요" value="${defaultCheckout}">
-						</div>
+                        <div id="main_date">
+                            <input id="main_checkdate" class="datepicker" placeholder="날짜를 선택하세요" value="${defaultDate}">
+                        </div>
 
-						<div id="personnel">
-							<input name="personnel" value="인원 수" id="personnelinput">
-							<input type="hidden" name="personnelCount" id="personnelCount">
+                        <div id="main_personnel">
+                            <span id="main_personnelinput">2명</span>
+                        </div>
 
-						</div>
+                        <input type="hidden" id="main_personnelcount" name="personnelCount"  value="2">
+                        <input type="hidden" id="main_checkin" name="checkin" value="${checkin}">
+                        <input type="hidden" id="main_checkout" name="checkout" value="${checkout}">
+                        <input type="hidden" id="main_latitude" name="latitude" value="${Latitude}">
+                        <input type="hidden" id="main_longitude" name="longitude" value="${Longitude}">
 
-						<input type="hidden" id="latitude" name="latitude"
-							value="${defaultLatitude }"> <input type="hidden"
-							id="longitude" name="longitude" value="${defaultLongitude }">
-
-						<input type="submit" class="btn" value="검색">
-					</form>
-				</div>
+                        <input type="submit" class="btn" value="검색">
+                    </form>
+                </div>
+            
 
 				<!-- 인원 모달창 -->
-				<div class="modal-background"></div>
-				<div class="modal-content">
-					<div class="counter">
+				<div class="main_modal-content">
+					<div class="main_counter">
 						<label>총 인원</label>
-						<button class="decrement">-</button>
-						<span id="totalCount">0</span>
-						<button class="increment">+</button>
+						<button class="main_decrement">-</button>
+						<span id="main_totalCount">1</span>
+						<button class="main_increment">+</button>
 					</div>
-					<div class="button-container">
-						<button id="savePersonnel">저장</button>
+					<div class="main_button-container">
+						<button id="main_savePersonnel">저장</button>
 					</div>
 				</div>
 
@@ -71,25 +109,22 @@ header #header .select {
 						<a href="find/list" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<c:forEach items="${roomsDto}" var="room" begin="0" end="5">
-							<c:set var="firstImage" value="true" />
-							<c:forEach items="${imageDto}" var="image">
-								<c:if test="${room.room_id eq image.room_id}">
-									<c:if test="${firstImage}">
-										<a class="block"
-											href="find/list/detail?room_id=${room.room_id }"> <img
-											alt="" src="${image.image_photo}">
-											<div class="text_box">
-												<span class="title">${room.room_name}</span> <span
-													class="text">${room.city} / ${room.district} / <fmt:formatNumber
-														value="${room.room_price}" type="currency" />~
-												</span>
-											</div>
-										</a>
-										<c:set var="firstImage" value="false" />
-									</c:if>
-								</c:if>
-							</c:forEach>
+						<c:forEach items="${roomDtoList}" var="room">
+							<a class="block"
+							   href="find/list/detail?room_id=${room.room_id}">
+								<c:choose>
+									<c:when test="${room.image_photo != null}">
+										<img alt="" src="${room.image_photo}">
+									</c:when>
+									<c:otherwise>
+										<img alt="" src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/roomphoto/noimage.jpg">
+									</c:otherwise>
+								</c:choose>
+								<div class="text_box">
+									<span class="title">${room.room_name}</span>
+									<span class="text">${room.city} / ${room.district} / <fmt:formatNumber value="${room.room_price}" type="currency" />~</span>
+								</div>
+							</a>
 						</c:forEach>
 					</div>
 				</div>
@@ -135,7 +170,7 @@ header #header .select {
 					<div class="list">
 						<c:forEach items="${journalDto}" var="journal" begin="0" end="5">
 							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/journal/${journal.journal_photo}">
+								src="${journal.journal_photo}">
 								<div class="text_box">
 									<span class="title">${journal.journal_title}</span> <span
 										class="text">${journal.journal_content}</span>
@@ -151,149 +186,5 @@ header #header .select {
 
 
 	<%@ include file="../include/footer.jsp"%>
-	<script>
-		// flat pickr에서 날짜 선택하면 input에 넣어주는 함수
-
-		$(document)
-				.ready(
-						function() {
-
-							// Flatpickr 한국어 로컬라이제이션 설정
-							flatpickr.localize(flatpickr.l10ns.ko);
-
-							const dateRangePicker = flatpickr(
-									"#checkin",
-									{
-										mode : "range",
-										dateFormat : "Y-m-d",
-										locale : "ko",
-										onChange : function(selectedDates,
-												dateStr, instance) {
-											if (selectedDates.length === 2) {
-												const checkinDate = selectedDates[0]
-														.toLocaleDateString(
-																'ko-KR',
-																{
-																	year : 'numeric',
-																	month : '2-digit',
-																	day : '2-digit'
-																}).split('. ')
-														.join('-').slice(0, -1);
-												const checkoutDate = selectedDates[1]
-														.toLocaleDateString(
-																'ko-KR',
-																{
-																	year : 'numeric',
-																	month : '2-digit',
-																	day : '2-digit'
-																}).split('. ')
-														.join('-').slice(0, -1);
-												document
-														.getElementById('checkin').value = checkinDate;
-												document
-														.getElementById('checkout').value = checkoutDate;
-											}
-										}
-									});
-
-							// 체크인 또는 체크아웃 입력 필드를 클릭하면 캘린더가 열리도록 설정
-
-							document.getElementById('checkin')
-									.addEventListener('focus', function() {
-										dateRangePicker.open();
-									});
-
-							document.getElementById('checkout')
-									.addEventListener('focus', function() {
-										dateRangePicker.open();
-									});
-
-							// 인원 input 창에 인원 선택해주는 modal 창 함수
-							const $counter = $('.counter');
-							const $decrementBtn = $counter.find('.decrement');
-							const $incrementBtn = $counter.find('.increment');
-							const $countDisplay = $counter.find('span');
-							let count = parseInt($countDisplay.text());
-
-							$decrementBtn.on('click', function() {
-								if (count > 0) {
-									count--;
-									$countDisplay.text(count);
-								}
-							});
-
-							$incrementBtn.on('click', function() {
-								count++;
-								$countDisplay.text(count);
-							});
-
-							const $saveBtn = $('#savePersonnel');
-							$saveBtn.on('click', function() {
-								const inputCount = count + '명';
-								$('#personnelinput').val(inputCount);
-								$('#personnelCount').val(count); // 숫자 값만 숨겨진 필드에 저장
-								$('.modal-content').hide();
-								$('.modal-background').hide();
-							});
-
-							$('#personnelinput').on('click', function(event) {
-						        event.stopPropagation();
-						        const $personnel = $('#personnel');
-						        const offset = $personnel.offset();
-						        const height = $personnel.outerHeight();
-						        $('.modal-content').css({
-						            top: offset.top + height + 'px',
-						            left: offset.left + 'px'
-						        }).show();
-						        $('.modal-background').show();
-						    });
-
-							$(document)
-									.on(
-											'click',
-											function(event) {
-												if (!$(event.target)
-														.closest(
-																'#personnelinput, .modal-content').length) {
-													$('.modal-content').hide();
-													$('.modal-background')
-															.hide();
-												}
-											});
-
-							$('.modal-background').on('click', function() {
-								$('.modal-content').hide();
-								$(this).hide();
-							});
-
-						});
-
-		// 구글지도 검색추천 함수
-		function initAutocomplete() {
-			var input = document.getElementById('address');
-			var autocomplete = new google.maps.places.Autocomplete(input);
-
-			autocomplete.addListener('place_changed', function() {
-				var place = autocomplete.getPlace();
-
-				console.log(place);
-
-				// 경도, 위도 전달 함수
-				if (place.geometry) {
-					var latitude = place.geometry.location.lat();
-					var longitude = place.geometry.location.lng();
-
-					document.getElementById('latitude').value = latitude;
-					document.getElementById('longitude').value = longitude;
-
-					console.log('Latitude:', latitude);
-					console.log('Longitude:', longitude);
-				} else {
-					console.log("google maps api에 없는 장소입니다");
-				}
-			});
-		}
-	</script>
-
 </body>
 </html>

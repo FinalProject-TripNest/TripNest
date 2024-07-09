@@ -24,8 +24,8 @@
 						<span>${detailDto.room_name }</span>
 					</div>
 					<div class="data_btn">
-						<span>날짜를 선택해주세요.</span> <img alt=""
-							src="../../img/main/right_arrow.png">
+						<input class="detail_date" value="${defaultDate }"> 
+						<img alt="" src="../../img/main/right_arrow.png">
 					</div>
 					<c:choose>
 						<c:when test="${sessionScope.loginok == null}">
@@ -33,8 +33,7 @@
 						</c:when>
 						<c:otherwise>
 						<!-- 박범수 checkin, checkout 넘겨주기 -->
-							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=2024-06-25&checkout=2024-06-27" class="payment_btn">
-                     결제하기</a>
+							<a href="../../find/reservation?room_id=${detailDto.room_id}&checkin=${checkin }&checkout=${checkout}" class="payment_btn">결제하기</a>
 						</c:otherwise>
 					</c:choose>
 

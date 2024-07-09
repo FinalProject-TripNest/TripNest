@@ -29,4 +29,10 @@
           AND #{personnel} BETWEEN ROOMS.room_min_capacity AND ROOMS.room_max_capacity
         </if>
     </select>
+     <!-- Room ID에 해당하는 예약 목록 조회 -->
+    <select id="getReservationsByRoomId" resultType="ReservationDto">
+        SELECT * 
+        FROM RESERVATIONS 
+        WHERE ROOM_ID = #{room_id}
+    </select>
 </mapper>

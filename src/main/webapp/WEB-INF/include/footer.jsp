@@ -73,3 +73,6 @@
 <script src="${root }/js/parallax_scroll.js" type="module"></script>
 <script src="${root }/js/ukiyo.js"></script>
 <script src="${root }/js/index.js"></script>
+<script src="${root }/js/detail.js"></script>
+<script src="${root }/js/header.js"></script>
+
