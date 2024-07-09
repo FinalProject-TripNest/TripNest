@@ -71,13 +71,9 @@ table td{
                <table style="width: 300px;">
                   <tr style="background-color: #EEEEEE;">
                      <td>총 회원수</td>
-                     <td>user</td>
-                     <td>business</td>
                   </tr>
                   <tr style="background-color: #F8F8F8;">
                      <td>${memcount }명</td>
-                     <td>명</td>
-                     <td>명</td>
                   </tr>
                </table>
             </div>
@@ -159,7 +155,7 @@ table td{
                            <td>${rdto.room_name}</td>
                            <td>${rdto.room_address}</td>
                            <td>
-                              <c:if test="${rdto.room_status=='no' }">
+                              <c:if test="${rdto.room_status=='미승인' }">
                                  미승인
                               </c:if>
                               <c:if test="${rdto.room_status=='보류' }">
@@ -213,11 +209,19 @@ table td{
                   <table class="maintable">
                      <tr style="background-color: #F8F8F8;">
                         <td>결제번호</td>
-                        <td>게스트명</td>
-                        <td>연락처</td>
                         <td>결제금액</td>
                         <td>결제일</td>
+                        <td>예약상태</td>
                      </tr>
+                     <c:forEach var="pay" items="${paylist}">
+                     	<tr>
+                     		<td>${pay.MERCHANT_UID}</td>
+                     		<td>
+                     			<fmt:formatNumber value="${pay.RESERVATION_PRICE}"/></td>
+                     		<td>${pay.RESERVATION_DATE}</td>
+                     		<td>${pay.RESERVATION_STATUS}</td>
+                     	</tr>
+                     </c:forEach>
                   </table>
                </div>
             </div>

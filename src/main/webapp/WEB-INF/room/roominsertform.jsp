@@ -746,11 +746,11 @@ white-space: pre-wrap; /* 공백 유지 및 줄바꿈 처리 */
 	    });
 
 	    // 인원수 입력 변화 감지
-	    /*$('#room_min_capacity, #room_max_capacity').on('input', function(){
+	    $('#room_min_capacity, #room_max_capacity').on('input', function(){
 	        var r_min_capacity = $("#room_min_capacity").val();
 	        var r_max_capacity = $("#room_max_capacity").val();
 	        $("#r_people").text("기준 " + r_min_capacity + " / 최대 " + r_max_capacity);
-	    });*/
+	    });
 
 	    // 상세정보 입력 변화 감지
 	    $('#room_detail').on('input', function(){

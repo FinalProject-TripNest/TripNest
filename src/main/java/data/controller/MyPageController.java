@@ -2,7 +2,9 @@ package data.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,27 +14,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.InqueryDto;
 import data.dto.MemberDto;
 import data.dto.MyPageReservationDto;
+import data.dto.RoomsDto;
 import data.service.InqueryService;
 import data.service.MemberServiceInter;
+import data.service.WishlistService;
 import data.service.MyPageServiceInter;
+import data.service.RoomsService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
 
-	@Autowired
-	private MemberServiceInter memberService;
-
+    @Autowired
+    private MemberServiceInter memberService;
+    @Autowired
+    InqueryService inqueryService;
+    @Autowired
+    WishlistService wishService;
 	@Autowired
 	private MyPageServiceInter myPageServiceInter;
-
 	@Autowired
-	InqueryService inqueryService;
+	RoomsService roomService;
+
+
 
 	@GetMapping("/main")
 	public String myPage(HttpSession session, Model model) {
@@ -163,6 +173,23 @@ public class MyPageController {
 		List<InqueryDto> inqueryList = inqueryService.getMyInqueryDatas(memberDto.getMember_id());
 
 		return inqueryList;
+	}
+	@GetMapping("/myroomlist")
+	public String roomlist() {
+		return "/mypage/myroomlist";
+	}
+
+	@GetMapping("/roomlist")
+	@ResponseBody
+	public List<RoomsDto> roomlistid(HttpSession session){
+		
+		 // 세션에서 member_id 가져오기
+        String memberEmail = (String) session.getAttribute("myid");
+        Integer memberId = memberService.findByEmail(memberEmail).getMember_id();
+		
+		List<RoomsDto> list=roomService.getRoomDataByMyid(memberId);
+		
+		return list;
 	}
 
 }

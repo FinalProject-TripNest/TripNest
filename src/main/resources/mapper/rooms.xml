@@ -137,7 +137,7 @@
 	
 	<!-- 미승인된 room의 갯수를 파악하기 위해서)차유지-->
 	<select id="getCountNoRoom" resultType="int">
-		select count(*) from ROOMS where room_status='no' or room_status='보류'
+		select count(*) from ROOMS where room_status='미승인' or room_status='보류'
 	</select>
 	
 	<!-- 최신 추가된 방 5개의 정보list 출력하려고) 유지 -->
@@ -150,7 +150,7 @@
 	</delete>
 	
 	<select id="getRoomDataByMyid" parameterType="int" resultType="RoomsDto">
-		select * from ROOMS where member_id=#{member_id} order by room_id desc
+		select * from ROOMS where member_id=#{member_id} order by room_id desc 
 	</select>
 	
 	<update id="updateRoom" parameterType="RoomsDto">
@@ -167,6 +167,4 @@
         </choose>
 		where room_id=#{room_id}
 	</update>
-
-
 </mapper>

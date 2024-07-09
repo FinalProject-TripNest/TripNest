@@ -1,6 +1,9 @@
 package data.service;
 
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +51,12 @@ public class ReservationService implements ReservationServiceInter {
 			log.error("[error] 숙소 예약 취소 처리 실패,", e);
 			throw new RuntimeException("숙소 예약 취소에 실패하였습니다.",e);
 		}
+	}
+
+	@Override
+	public List<ReservationDto> recentReservationList() {
+		// TODO Auto-generated method stub
+		return mapperInter.recentReservationList();
 	}
 	
 	

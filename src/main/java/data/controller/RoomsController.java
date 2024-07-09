@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.eclipse.angus.mail.auth.MD4;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
+import data.dto.InqueryDto;
+import data.dto.MemberDto;
 import data.dto.RoomsDto;
 import data.service.ImageService;
 import data.service.MemberService;
@@ -147,7 +150,7 @@ public class RoomsController {
 	
 
 	
-	@GetMapping("/room/roomlist")
+	/*@GetMapping("/room/roomlist")
 	public ModelAndView roomlist(HttpSession session) {
 		ModelAndView mview=new ModelAndView();
 		
@@ -163,20 +166,9 @@ public class RoomsController {
 		
 		return mview;
 		
-	}
+	}*/
 	
-	@GetMapping("/room/myroomlist")
-	@ResponseBody
-	public List<RoomsDto> roomlistid(HttpSession session){
-		
-		 // 세션에서 member_id 가져오기
-        String memberEmail = (String) session.getAttribute("myid");
-        Integer memberId = mservice.findByEmail(memberEmail).getMember_id();
-		
-		List<RoomsDto> list=service.getRoomDataByMyid(memberId);
-		
-		return list;
-	}
+
 
 	@PostMapping("/room/update")
 	public String update(@ModelAttribute RoomsDto dto, List<MultipartFile> image_upload, HttpSession session,
@@ -257,7 +249,6 @@ public class RoomsController {
 		return "/room/roomupdateform";
 		
 	}
-	
 	
 	
 }

@@ -72,6 +72,12 @@ public class InqueryService implements InqueryServiceInter {
 		mapper.deleteInquery(inquery_id);
 	}
 
+	@Override
+	public int myInqueryCount(int member_id) {
+		// TODO Auto-generated method stub
+		return mapper.myInqueryCount(member_id);
+	}
+
 
 
 

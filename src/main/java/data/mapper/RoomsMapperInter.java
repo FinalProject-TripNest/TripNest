@@ -36,7 +36,6 @@ public interface RoomsMapperInter {
 	public List<RoomsDto> getRoomDataByMyid(int member_id);
 	public void updateRoom(RoomsDto dto);
 
-
 }
 
 

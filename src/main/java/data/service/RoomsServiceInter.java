@@ -1,5 +1,6 @@
 package data.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import data.dto.RoomsDto;
