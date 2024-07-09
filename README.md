@@ -50,9 +50,10 @@
   <tr>
     <td>김민규</td>
     <td>
-      <span>-</span><br>
-      <span>-</span><br>
-      <span>-</span>
+      <span>- 메인 : 숙소/기사/이벤트 목록 출력</span><br>
+      <span>- 숙소 목록/상세 : 숙소 목록 및 상세 정보 출력</span><br>
+      <span>- 이벤트/기사 : 이벤트/기사 목록 및 상세 정보 출력</span><br>
+      <span>- 관리자 : 회원,리뷰,이벤트,기사 목록,추가,수정,삭제 기능 구현</span>
     </td>
   </tr>
   <tr>
