@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
 import data.dto.RoomsDto;
+import data.mapper.RoomsMapperInter;
 import data.service.ImageService;
 import data.service.RoomsService;
 import data.service.SearchService;
@@ -73,9 +74,16 @@ public class SearchController {
         String defaultDate = Checkin + " ~ " + Checkout;
 
         // HotelService를 통해 오차 범위 내의 호텔을 가져옴
-        List<RoomsDto> hotels = searchService.findHotelsNearby(latitude, longitude, errorRange, Checkin, Checkout, personnelCount);
+        List<RoomsDto> roomsDto = searchService.findHotelsNearby(latitude, longitude, errorRange, Checkin, Checkout, personnelCount);
+        for (RoomsDto room : roomsDto) {
+			String[] addressParts = room.getRoom_address().split(" ");
+			if (addressParts.length >= 2) {
+				room.setCity(addressParts[0]);
+				room.setDistrict(addressParts[1]);
+			}
+		}
         
-        List<String> roomIds = hotels.stream().map(RoomsDto::getRoom_id).collect(Collectors.toList());
+        List<String> roomIds = roomsDto.stream().map(RoomsDto::getRoom_id).collect(Collectors.toList());
         
         List<ImagesDto> imagesDto = new ArrayList<>(); // 초기화
         
@@ -85,10 +93,11 @@ public class SearchController {
 		
 		/* System.out.print(hotels); */
         System.out.print(imagesDto);
+        System.out.print(roomsDto);
         
         
         ModelAndView model = new ModelAndView();
-        model.addObject("hotels", hotels);
+        model.addObject("roomsDto", roomsDto);
 		model.addObject("imagesDto", imagesDto);
         model.addObject("latitude", latitude);
         model.addObject("longitude", longitude);

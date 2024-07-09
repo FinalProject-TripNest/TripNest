@@ -74,11 +74,11 @@ public class MainController {
 		model.addObject("promotionDto", promotionDto);
 		model.addObject("roomsDto", roomsDto);
 		model.addObject("imageDto", imageDto);
-		model.addObject("defaultLatitude", defaultLatitude);
-		model.addObject("defaultLongitude", defaultLongitude);
-		model.addObject("defaultAddress", defaultAddress);
-		model.addObject("defaultCheckin", defaultCheckin);
-		model.addObject("defaultCheckout", defaultCheckout);
+		model.addObject("latitude", defaultLatitude);
+		model.addObject("longitude", defaultLongitude);
+		model.addObject("address", defaultAddress);
+		model.addObject("checkin", defaultCheckin);
+		model.addObject("checkout", defaultCheckout);
 		model.addObject("defaultDate", defaultDate );
 		model.addObject("personnelCount", personnelCount);
 		model.setViewName("/main/index");

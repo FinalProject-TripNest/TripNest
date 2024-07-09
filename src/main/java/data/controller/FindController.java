@@ -19,10 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import data.dto.ImagesDto;
 import data.dto.ReservationDto;
 import data.dto.RoomsDto;
-import data.mapper.ReservationMapperInter;
 import data.service.ImageService;
-import data.service.ReservationService;
 import data.service.RoomsService;
+import data.service.SearchService;
 
 @Controller
 public class FindController {
@@ -34,7 +33,7 @@ public class FindController {
 	ImageService imageService;
 	
 	@Autowired
-	ReservationService reservationService;
+	SearchService searchService;
 
 	@Value("${kakao-api-key}")
 	private String apikey;
@@ -61,7 +60,7 @@ public class FindController {
 		ModelAndView detailModel = new ModelAndView();
 		RoomsDto detailDto = roomsService.getOneData(room_id);
 		List<ImagesDto> imageDto = imageService.imgList(room_id); // 이미지 서비스에서 String으로 전달
-		List<ReservationDto> reservationDto = reservationService.getReservationsByRoomId(room_id);
+		List<ReservationDto> reservationDto = searchService.getReservationsByRoomId(room_id);
 		
         // 기본값 설정 (오늘과 내일 날짜)
         Calendar calendar = Calendar.getInstance();

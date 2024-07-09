@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import data.dto.ReservationDto;
 import data.dto.RoomsDto;
 
 @Mapper
@@ -18,5 +19,7 @@ public interface SearchMapperInter {
             @Param("checkin") String checkin,
             @Param("checkout") String checkout,
             @Param("personnel") Integer personnel);
+	
+	public List<ReservationDto> getReservationsByRoomId(@Param("room_id") String room_id);
 	
 }
