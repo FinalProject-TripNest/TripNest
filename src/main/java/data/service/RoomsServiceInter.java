@@ -31,7 +31,6 @@ public interface RoomsServiceInter {
 	public List<RoomsDto> getRecentRoom();
 
 	public void updateRoom(RoomsDto dto);
-	public List<RoomsDto> getRoomDataBymemid(int start,int perpage);
 }
 
 

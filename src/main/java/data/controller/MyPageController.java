@@ -191,6 +191,5 @@ public class MyPageController {
 		
 		return list;
 	}
-	
 
 }

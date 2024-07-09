@@ -86,6 +86,9 @@ max-width: 250px;
                     </thead>
                     <tbody>
                         <!-- 여기에 list 옵니다 -->
+                        <!--<c:if test="${roomcount==0 }">
+                        	<b>등록한 숙소가 없습니다.</b>
+                        </c:if>-->
                     </tbody>
                 </table>
             </div>
@@ -135,23 +138,28 @@ max-width: 250px;
 			success:function(data){
 	              var tbody = $('#roomTable tbody');
 	                tbody.empty();
-	                $.each(data, function(index, room){
-	                	 var formattedPrice = new Intl.NumberFormat().format(room.room_price);
-	                	
-	                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '">' +
-	                        '<td align="center">' + room.room_id + '</td>' +
-	                        '<td  align="center">' + room.room_name + '</td>' +
-	                        '<td class="address">' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
-	                        '<td align="center">'+formattedPrice+'</td>' +
-	                        '<td class="servicelist">' + room.room_service + '</td>' +
-	                        '<td align="center">' + room.room_status + '</td>' +
-	                        '<td align="center">' +
-	                            '<button type="button" class="roomdel" value="' + room.room_id + '">삭제</button>' +
-	                            '<button type="button" class="roomedit" value="' + room.room_id + '" onclick="location.href=\'/room/updateform?room_id=' + room.room_id + '\'">수정</button>' +
-	                        '</td>' +
-	                    '</tr>';
-	                    tbody.append(s);
-	                });
+	                if(data.length==0){
+	                	 tbody.append('<tr><td colspan="7" align="center">등록한 숙소가 없습니다.</td></tr>');
+	                }else{
+	                	 $.each(data, function(index, room){
+		                	 var formattedPrice = new Intl.NumberFormat().format(room.room_price);
+		                	
+		                    var s = '<tr class="clickable-row" data-url="/find/list/detail?room_id=' + room.room_id + '">' +
+		                        '<td align="center">' + room.room_id + '</td>' +
+		                        '<td  align="center">' + room.room_name + '</td>' +
+		                        '<td class="address">' + room.room_address +'&nbsp;'+room.room_address_detail +'</td>' +
+		                        '<td align="center">'+formattedPrice+'</td>' +
+		                        '<td class="servicelist">' + room.room_service + '</td>' +
+		                        '<td align="center">' + room.room_status + '</td>' +
+		                        '<td align="center">' +
+		                            '<button type="button" class="roomdel" value="' + room.room_id + '">삭제</button>' +
+		                            '<button type="button" class="roomedit" value="' + room.room_id + '" onclick="location.href=\'/room/updateform?room_id=' + room.room_id + '\'">수정</button>' +
+		                        '</td>' +
+		                    '</tr>';
+		                    tbody.append(s);
+		                });
+	                }
+	               
 			}
 		})
 	};

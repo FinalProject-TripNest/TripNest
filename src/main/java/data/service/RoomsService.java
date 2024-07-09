@@ -160,14 +160,5 @@ public class RoomsService implements RoomsServiceInter {
 		roommapper.updateRoom(dto);
 	}
 
-	@Override
-	public List<RoomsDto> getRoomDataBymemid(int start, int perpage) {
-		// TODO Auto-generated method stub
-		HashMap<String, Integer> map=new HashMap<>();
-		map.put("start", start);
-		map.put("perpage", perpage);
-		return roommapper.getRoomDataBymemid(map);
-	}
-
 
 }
