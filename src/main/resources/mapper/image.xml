@@ -5,6 +5,14 @@
 		insert into
 		IMAGES(room_id,image_photo) values(#{room_id},#{image_photo})
 	</insert>
+	
+	<select id="getAllRoomPhoto" resultType="ImagesDto" >
+		select * from IMAGES
+	</select>
+	
+	<select id="getDataRoomImg" parameterType="String" resultType="ImagesDto">
+		select * from IMAGES where room_id=#{room_id}
+	</select>
 
 	<select id="dataList" resultType="ImagesDto">
 		select * from IMAGES order by image_id desc
@@ -14,6 +22,7 @@
 		select * from IMAGES
 		where room_id = #{room_id}
 	</select>
+
 	<select id="hotelNearbyImages" resultType="ImagesDto" parameterType="java.util.List">
         select *
         from IMAGES
@@ -22,5 +31,15 @@
                  open="(" separator="," close=")">
             #{roomId}
         </foreach>
-    </select>
+  </select>
+  
+	<delete id="deleteImage" parameterType="String">
+		delete from IMAGES where room_id = #{room_id}
+	</delete>
+	
+	<update id="updateimage" parameterType="ImagesDto">
+		update IMAGES set image_photo=#{image_photo} where room_id=#{room_id}
+	</update>
+
 </mapper>
+

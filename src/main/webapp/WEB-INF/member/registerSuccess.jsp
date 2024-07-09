@@ -5,17 +5,28 @@
 <%@ include file="../include/header.jsp"%>
 <title>TRIP NEST</title>
 <style>
-body {
-	font-family: 'Noto Sans KR', sans-serif;
-	text-align: center;
-	margin-top: 50px;
-}
-h1 {
-	color: #4CAF50;
+	body {
+		font-family: 'Noto Sans KR', sans-serif;
+		text-align: center;
+		margin-top: 50px;
 	}
-p {
-	font-size: 1.2em;
-}
+	h1 {
+		color: #4CAF50;
+		}
+	p {
+		font-size: 1.2em;
+	}
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 <body>
 	<div id="wrap">
@@ -25,7 +36,7 @@ p {
 				<h1>회원가입 성공</h1>
 			    <p>TRIP NEST에 회원가입이 성공적으로 완료되었습니다.</p>
 			    <p>로그인 페이지로 이동하여 로그인을 진행하세요.</p>
-			    <a href="${pageContext.request.contextPath}/login">로그인 페이지로 이동</a>
+			    <a href="${pageContext.request.contextPath}/login/loginform" class="btn">로그인 페이지로 이동</a>
 				<!--//각 페이지 작업 코드  -->
 			</div>
 		</div>

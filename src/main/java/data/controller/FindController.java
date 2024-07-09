@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import data.service.redis.RedisService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,8 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.ImagesDto;
 import data.dto.ReservationDto;
+import data.dto.ReviewDto;
+import data.dto.ReviewJoinDto;
+
 import data.dto.RoomsDto;
 import data.service.ImageService;
+import data.service.ReviewService;
 import data.service.RoomsService;
 import data.service.SearchService;
 
@@ -35,19 +41,26 @@ public class FindController {
 	@Autowired
 	SearchService searchService;
 
+	@Autowired
+	RedisService redisService;
+
+	@Autowired
+	ReviewService reviewService;
+
 	@Value("${kakao-api-key}")
 	private String apikey;
 
 	@GetMapping("/find/list")
 	public ModelAndView journalPage() {
 		ModelAndView model = new ModelAndView();
-		List<RoomsDto> roomsDto = roomsService.dataList();
-		List<ImagesDto> imageDto = imageService.dataList();
-		model.addObject("roomsDto", roomsDto);
-		model.addObject("imageDto", imageDto);
-		model.setViewName("/find/list");
+
+		List<RoomsDto> roomDtoList = roomsService.getAllRoomsData();
+		model.addObject("roomDtoList", roomDtoList);
+		model.setViewName("find/list");
+		System.out.println("roomDtoList.size() = " + roomDtoList.size());
+
 		return model;
-	}
+	} 
 
 	@GetMapping("/find/list/detail")
 	public ModelAndView detail(@RequestParam("room_id") String room_id,
@@ -58,6 +71,7 @@ public class FindController {
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<Date> checkin,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<Date> checkout ) {
 		ModelAndView detailModel = new ModelAndView();
+
 		RoomsDto detailDto = roomsService.getOneData(room_id);
 		List<ImagesDto> imageDto = imageService.imgList(room_id); // 이미지 서비스에서 String으로 전달
 		List<ReservationDto> reservationDto = searchService.getReservationsByRoomId(room_id);
@@ -99,9 +113,20 @@ public class FindController {
 		detailModel.addObject("longitude", longitude);
 		detailModel.addObject("address", address);
 		detailModel.addObject("personnelCount", personnelCount);
-		detailModel.setViewName("find/detail");
 
-		detailModel.addObject("apikey",apikey);
+
+		RoomsDto searchDto = roomsService.getRoomsDataByRoomId(room_id);
+		searchDto.setRoomImgList(roomsService.getImgsByRoomId(room_id));
+		detailModel.addObject("detailDto", searchDto);
+
+		detailModel.setViewName("find/detail");
+		List<ReviewJoinDto> ReviewJoinDto = reviewService.dataList(room_id);
+		detailModel.addObject("ReviewJoinDto", ReviewJoinDto);
+
+		detailModel.addObject("apikey", apikey);
+
+		// detail 페이지 접속시 조회수 1증가
+		redisService.addToSortedSet("viewRank", room_id);
 
 		return detailModel;
 	}

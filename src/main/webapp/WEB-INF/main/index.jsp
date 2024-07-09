@@ -71,25 +71,25 @@ header #header .select {
 						<a href="find/list" class="link">전체 보기</a>
 					</div>
 					<div class="list">
-						<c:forEach items="${roomsDto}" var="room" begin="0" end="5">
-							<c:set var="firstImage" value="true" />
-							<c:forEach items="${imageDto}" var="image">
-								<c:if test="${room.room_id eq image.room_id}">
-									<c:if test="${firstImage}">
-										<a class="block"
-											href="find/list/detail?room_id=${room.room_id }"> <img
-											alt="" src="${image.image_photo}">
-											<div class="text_box">
-												<span class="title">${room.room_name}</span> <span
-													class="text">${room.city} / ${room.district} / <fmt:formatNumber
-														value="${room.room_price}" type="currency" />~
-												</span>
-											</div>
-										</a>
-										<c:set var="firstImage" value="false" />
-									</c:if>
-								</c:if>
-							</c:forEach>
+						<c:forEach items="${roomDtoList}" var="room">
+							<a class="block" href="find/list/detail?room_id=${room.room_id}">
+								<c:choose>
+									<c:when test="${room.image_photo != null}">
+										<img alt="" src="${room.image_photo}">
+									</c:when>
+									<c:otherwise>
+										<img alt=""
+											src="https://finaltripnest0613.s3.ap-northeast-2.amazonaws.com/roomphoto/noimage.jpg"
+											style="border: 1px solid #ddd;">
+									</c:otherwise>
+								</c:choose>
+								<div class="text_box">
+									<span class="title">${room.room_name}</span> <span class="text">${room.city}
+										/ ${room.district} / <fmt:formatNumber
+											value="${room.room_price}" type="currency" />~
+									</span>
+								</div>
+							</a>
 						</c:forEach>
 					</div>
 				</div>
@@ -105,8 +105,9 @@ header #header .select {
 					<div class="list">
 						<c:forEach items="${promotionDto}" var="promotion" begin="0"
 							end="5">
-							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/promotion/${promotion.promotion_photo}">
+							<a class="block"
+								href="/promotion/detail?promotion_id=${promotion.promotion_id}">
+								<img alt="" src="${promotion.promotion_photo}">
 								<div class="text_box">
 									<span class="title">${promotion.promotion_title}</span> <span
 										class="text">${promotion.promotion_content}</span>
@@ -134,8 +135,8 @@ header #header .select {
 					</div>
 					<div class="list">
 						<c:forEach items="${journalDto}" var="journal" begin="0" end="5">
-							<a class="block" href="javascript:;"> <img alt=""
-								src="../img/journal/${journal.journal_photo}">
+							<a class="block" href="/journal/detail?journal_id=${journal.journal_id}"> <img alt=""
+								src="${journal.journal_photo}">
 								<div class="text_box">
 									<span class="title">${journal.journal_title}</span> <span
 										class="text">${journal.journal_content}</span>
@@ -293,6 +294,20 @@ header #header .select {
 				}
 			});
 		}
+
+		$("#index .search form .input input").click(function() {
+			$(".pop_up.search").addClass("active");
+		});
+		$("#index .search form .date").click(function() {
+			$(".pop_up.date").addClass("active");
+		});
+		$("#index .search form .personnel").click(function() {
+			$(".pop_up.personnel").addClass("active");
+		});
+		$(".dimd").click(function() {
+			$(".pop_up").removeClass("active");
+		});
+
 	</script>
 
 </body>

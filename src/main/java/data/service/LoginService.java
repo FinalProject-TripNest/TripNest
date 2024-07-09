@@ -18,9 +18,21 @@ public class LoginService implements LoginServiceInter {
     @Transactional
     public MemberDto authenticate(LoginDto loginDto) {
         MemberDto member = memberMapper.findByEmail(loginDto.getEmail());
-        if (member != null && member.getMember_password().equals(loginDto.getPassword())) {
+        if (member != null && member.getMember_password() != null && loginDto.getPassword().equals(member.getMember_password())) {
             return member;
         }
         return null;
+    }
+
+    @Override
+    @Transactional
+    public MemberDto authenticateSocialUser(String socialId, String socialType) {
+        return memberMapper.findBySocialIdAndType(socialId, socialType);
+    }
+
+    @Override
+    @Transactional
+    public void registerMember(MemberDto memberDto) {
+        memberMapper.insertMember(memberDto);
     }
 }
