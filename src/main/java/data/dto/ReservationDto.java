@@ -10,6 +10,7 @@ import lombok.Data;
 @Alias("ReservationDto")
 public class ReservationDto {
 
+
 	private int reservationId;
 	   private int memberId;
 	   private int roomId;
