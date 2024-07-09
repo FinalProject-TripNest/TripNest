@@ -52,12 +52,17 @@ public class ReservationService implements ReservationServiceInter {
 			throw new RuntimeException("숙소 예약 취소에 실패하였습니다.",e);
 		}
 	}
+  
+  @Override
+	public void updateReservationStatus() {
+		// TODO Auto-generated method stub
+		mapperInter.updateReservationStatus();
+	}
 
-	@Override
+  @Override
 	public List<ReservationDto> recentReservationList() {
 		// TODO Auto-generated method stub
 		return mapperInter.recentReservationList();
 	}
-	
-	
+  
 }
