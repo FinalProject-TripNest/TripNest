@@ -18,5 +18,5 @@ spring:
 mybatis:
   type-aliases-package: data.*
   mapper-locations:
-  - /mapper/**/*.xml
-  
+
+ 

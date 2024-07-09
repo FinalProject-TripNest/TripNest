@@ -16,9 +16,15 @@
 <link rel="stylesheet"
 	href="https://unpkg.com/swiper@latest/swiper-bundle.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+<!-- Flatpickr CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" href="${root }/css/reset.css">
 <link rel="stylesheet" href="${root }/css/style.css">
+<link rel="stylesheet" href="${root }/css/searchbar.css">
+<link rel="stylesheet" href="${root }/css/personnelmodal.css">
 </head>
+    
 <c:set var="root" value="<%=request.getContextPath()%>" />
 <header id="header">
 	<a href="javascript:;" class="top_event">

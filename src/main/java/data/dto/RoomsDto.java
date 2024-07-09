@@ -26,13 +26,15 @@ public class RoomsDto {
 	private String room_hp;
 	private String city;
 	private String district;
+
+	private double room_latitude;
+	private double room_longitude;
+
 	private List<String> roomImgList;
 	private String image_photo;
 
 	private List<String> imgList;
 	private String mememail;
-	
-	private String room_latitude;//위도
-	private String room_longitude;//경도
+
 }
 
