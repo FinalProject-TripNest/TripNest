@@ -5,26 +5,11 @@
 </div>
 <img src="https://capsule-render.vercel.app/api?type=waving&color=FAF58C&height=150&section=footer" />
 
-## 팀소개 및 담당기능
- ### 김민규
--
--
-### 문인규
--
--
-### 박범수
--
--
-### 손범수
--
--
-### 이준형
--
--
-### 차유지
--
--
 ## 개발환경
+ #### 프로젝트 기간 : 24.06.17 ~ 24.07.09
+
+ #### 개발인원 : 6명
+
 
 <div><h4>:art:프론트엔드</h4>
   <img src ="https://img.shields.io/badge/Bootstrap-7952B3.svg?&style=for-the-badge&logo=Bootstrap&logoColor=white"/>
@@ -51,5 +36,59 @@
 <div><h4>:love_letter:communication</h4>
    <img src ="https://img.shields.io/badge/Github-181717.svg?&style=for-the-badge&logo=Github&logoColor=white"/>
 </div>
+
+## 팀소개 및 담당기능
+<table>
+  <tr>
+    <td>김민규</td>
+    <td>
+      <span>-</span><br>
+      <span>-</span><br>
+      <span>-</span>
+    </td>
+  </tr>
+  <tr>
+    <td>문인규</td>
+    <td>
+      <span>-</span><br>
+      <span>-</span><br>
+      <span>-</span>
+    </td>
+  </tr>
+  <tr>
+    <td>박범수</td>
+    <td>
+      <span>-</span><br>
+      <span>-</span><br>
+      <span>-</span>
+    </td>
+  </tr>
+  <tr>
+    <td>손범수</td>
+    <td>
+      <span>-</span><br>
+      <span>-</span><br>
+      <span>-</span>
+    </td>
+  </tr>
+  <tr>
+    <td>이준형</td>
+    <td>
+      <span>-</span><br>
+      <span>-</span><br>
+      <span>-</span>
+    </td>
+  </tr>
+  <tr>
+    <td>차유지</td>
+    <td>
+      <span>- 숙소등록 및 수정, 삭제/ MYPAGE에서 숙소 리스트 출력</span><br>
+      <span>- 위시리스트 등록 및 삭제, 위시리스트 목록 출력</span><br>
+      <span>- 관리자 메인페이지 제작</span>
+    </td>
+  </tr>
+</table>
+
+
 
 ## 기능설명
