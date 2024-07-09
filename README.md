@@ -6,12 +6,12 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=FAF58C&height=150&section=footer" />
 
 ## 💻 개발환경
- #### 프로젝트 기간 : 24.06.17 ~ 24.07.09
+ #### 📆 프로젝트 기간 : 24.06.17 ~ 24.07.09
 
- #### 개발인원 : 6명
+ #### 🧑‍🤝‍🧑 개발인원 : 6명
 
 
-<div><h4>프론트엔드</h4>
+<div><h4> ◾프론트엔드</h4>
 
   <img src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/>
   <img src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/>
@@ -20,7 +20,7 @@
   <img src ="https://img.shields.io/badge/Bootstrap-7952B3.svg?&style=for-the-badge&logo=Bootstrap&logoColor=white"/>
 </div>
 
-<div><h4>백엔드</h4>
+<div><h4> ◾백엔드</h4>
    <img src ="https://img.shields.io/badge/Java-007396.svg?&style=for-the-badge&logo=Java&logoColor=white"/>
   <img src ="https://img.shields.io/badge/JSP-007396.svg?&style=for-the-badge&logo=JSP&logoColor=white"/>
    <img src ="https://img.shields.io/badge/Apache%20Tomcat-F8DC75.svg?&style=for-the-badge&logo=Apache%20Tomcat&logoColor=white"/>
@@ -28,14 +28,14 @@
     <img src ="https://img.shields.io/badge/MyBatis-001327.svg?&style=for-the-badge&logo=MyBatis&logoColor=white"/>
 </div>
 
-<div><h4>DB</h4>
+<div><h4> ◾DB</h4>
   <img src ="https://img.shields.io/badge/MySQL-4479A1.svg?&style=for-the-badge&logo=MySQL&logoColor=white"/>
   <img alt="amazonwebservices" src ="https://img.shields.io/badge/AWS-232F3E.svg?&style=for-the-badge&logo=amazonwebservices&logoColor=white"/>
   <img alt="amazons3" src ="https://img.shields.io/badge/AWS s3-569A31.svg?&style=for-the-badge&logo=amazons3&logoColor=white"/>
   <img alt="amazonec2" src ="https://img.shields.io/badge/AWS EC2-FF9900.svg?&style=for-the-badge&logo=amazonec2&logoColor=white"/>
 </div>
 
-<div><h4>communication</h4>
+<div><h4> ◾communication</h4>
    <img src ="https://img.shields.io/badge/Github-181717.svg?&style=for-the-badge&logo=Github&logoColor=white"/>
 </div>
 
@@ -75,9 +75,10 @@
   <tr>
     <td>손범수</td>
     <td>
-      <span>-</span><br>
-      <span>-</span><br>
-      <span>-</span>
+      <span>- 예약 및 결제 기능 구현</span><br>
+      <span>- 결제 API</span><br>
+      <span>- 예약 취소 및 결제 금액 환불 기능 구현</span><br>
+      <span>- 예약 상태 업데이트 스케줄러 구현</span>
     </td>
   </tr>
   <tr>
