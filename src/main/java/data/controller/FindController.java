@@ -116,7 +116,7 @@ public class FindController {
 
 
 		RoomsDto searchDto = roomsService.getRoomsDataByRoomId(room_id);
-    searchDto.setRoomImgList(roomsService.getImgsByRoomId(room_id));
+        searchDto.setRoomImgList(roomsService.getImgsByRoomId(room_id));
 		detailModel.addObject("detailDto", searchDto);
 
 		detailModel.setViewName("find/detail");

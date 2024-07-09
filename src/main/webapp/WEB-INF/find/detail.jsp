@@ -22,6 +22,7 @@
 				<div class="head">
 					<div class="title">
 						<span>${detailDto.room_name }</span>
+						<input type="hidden" value="${detailDto.room_id}" id="roomId">
 					</div>
 					<div class="data_btn">
 						<input class="detail_date" value="${defaultDate }"> 

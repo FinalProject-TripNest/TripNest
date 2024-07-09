@@ -32,10 +32,13 @@ public class ReservationController {
 	CouponService couponService;
 
 	@GetMapping("/find/reservation")
-	public ModelAndView booking(@RequestParam int room_id, @RequestParam String checkin, @RequestParam String checkout, HttpSession session) {
+	public ModelAndView booking(@RequestParam String room_id, @RequestParam String checkin, @RequestParam String checkout, HttpSession session) {
 		ModelAndView model = new ModelAndView();
-
-		RoomsDto roomsDto = reservationService.getOneData(room_id);
+		
+		// String room_id를 int로 변환
+	    int roomIdInt = Integer.parseInt(room_id);
+	    
+		RoomsDto roomsDto = reservationService.getOneData(roomIdInt);
 
 		// 세션에서 myid를 가져옴
 		String myid = (String) session.getAttribute("myid");

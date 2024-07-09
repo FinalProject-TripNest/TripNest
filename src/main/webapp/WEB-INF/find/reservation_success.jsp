@@ -221,7 +221,7 @@
 		            } else {
 		                confirmMessage = "현재 날짜: " + formattedDate + "\n";
 		                confirmMessage += "체크인 날짜: " + checkinDateStr + "\n";
-		                confirmMessage += "체크인 " + daysDiff + "일 전: " + refundPercent + "% 공제\n";
+		                confirmMessage += "체크인 " + daysDiff + "일 전: 총 결제금액의 " + refundPercent + "% 환불\n";
 		                confirmMessage += "환불 금액: " + refundAmount + "원\n";
 		            }
 		            confirmMessage += "정말로 취소하시겠습니까?";
