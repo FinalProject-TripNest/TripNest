@@ -115,23 +115,28 @@
 ### ▪️ 손범수
 
 ### ▪️ 이준형
-<div align="center"><span><b>회원가입 ➡ 이메일 인증을 통해 회원가입</b></span>
-  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/6c878cc2-b183-4a5a-814b-7b13330b6a1f">
+<span><b>회원가입 ➡ 이메일 인증을 통해 회원가입</b></span>
+<div align="center">
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/2d17ae45-2e45-46ee-aa69-26149a65fbb4" type="video/mp4"></video>
 </div>
-<div align="center"><b>로그인 ➡ 일반 로그인</b><br>
-  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/8c69050a-e40c-45e7-aaa1-89957b7dfced">
+<span><b>로그인 ➡ 일반 로그인</b></span>
+<div align="center">
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/6b50fcc8-78d3-4096-9fad-f0cd3493631f"></video>
 </div>
-<div align="center"><b>로그인 ➡ 소셜 로그인(카카오,네이버)</b><br>
-  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/2b40ff54-4a61-441d-89d0-4a4aa85847ea">
-  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/551af9c6-3bdf-4abd-a023-10895a1a9d7d">
+<span><b>로그인 ➡ 소셜 로그인(카카오,네이버)</b></span>
+<div align="center">
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/cdf741f7-bce8-4b9a-b415-d34064166525"></video>
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a6105075-04a1-4f58-b26a-3c0b9b1070f4"></video>
 </div>
-<div align="center"><b>아이디/비밀번호 찾기 ➡ 이메일을 통해 비밀번호 재설정 메일 발송</b><br>
-  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/906e0471-f5cc-4e22-a334-9c069d7847e0">
-  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/21441d38-7468-4d07-9534-9f08f0bcb6b7">
+<span><b>아이디/비밀번호 찾기 ➡ 이메일을 통해 비밀번호 재설정 메일 발송</b></span>
+<div align="center">
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/0050f6ed-d2de-4493-b7db-fd7fc589f65a"></video>
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/0eb86df6-684d-4330-a259-15bfd2f48eed"></video>
 </div>
-<div align="center"><b>마이페이지 ➡ 예약/취소 내역 확인, 회원 정보 수정 및 탈퇴</b><br>
-  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a8b3adf0-c804-4c35-bdd5-28f842f5397a">
-  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a9b53336-6d97-4de6-844c-2c6576c5d488">
+<span><b>마이페이지 ➡ 예약/취소 내역 확인, 회원 정보 수정 및 탈퇴</b></span>
+<div align="center">
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/d8e896ae-8f03-4772-9d31-6c42fba57f99"></video>
+  <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/d058dc81-a54d-4e65-bd3c-7f4a68f604c5"></video>
 </div>
 
 ### ▪️ 차유지
