@@ -8,7 +8,7 @@
 ## 💻 개발환경
  #### 📆 프로젝트 기간 : 24.06.17 ~ 24.07.09
 
- #### 🧑‍🤝‍🧑 개발인원 : 6명
+ #### 🧑‍🤝‍🧑개발인원 : 6명
 
 
 <div><h4> ◾프론트엔드</h4>
@@ -39,10 +39,10 @@
    <img src ="https://img.shields.io/badge/Github-181717.svg?&style=for-the-badge&logo=Github&logoColor=white"/>
 </div>
 
-## ERD
+## 💬ERD
 <img src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/de43fbbc-fb31-4fcc-8d15-26685078484d"><br>
 
-## 팀원을 소개합니다
+## 🧚팀원을 소개합니다
 <table>
   <tr>
     <td align=center>이름</td>
@@ -104,17 +104,17 @@
 
 
 
-## 기능설명
+## 📑기능설명
 
-### 김민규
+### ▪️ 김민규
 
-### 문인규
+### ▪️ 문인규
 
-### 박범수
+### ▪️ 박범수
 
-### 손범수
+### ▪️ 손범수
 
-### 이준형
+### ▪️ 이준형
 <div align="center"><span><b>회원가입 ➡ 이메일 인증을 통해 회원가입</b></span>
   <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/6c878cc2-b183-4a5a-814b-7b13330b6a1f">
 </div>
@@ -134,7 +134,7 @@
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a9b53336-6d97-4de6-844c-2c6576c5d488">
 </div>
 
-### 차유지
+### ▪️ 차유지
 <span><b>호스트 숙소 등록</b></span><br>
 <span>숙소를 등록할때 이미지들은 aws의 s3에 저장됨 </span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/f5694226-8da1-4c1b-a0ab-17c02bb171b1" type="video/mp4"></video></div><br>
