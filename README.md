@@ -135,7 +135,7 @@
 </div>
 
 ### 차유지
-<h4>호스트 숙소 등록</h4>
+<span><b>호스트 숙소 등록</b></span><br>
 <span>숙소를 등록할때 이미지들은 aws의 s3에 저장됨 </span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/f5694226-8da1-4c1b-a0ab-17c02bb171b1" type="video/mp4"></video></div><br>
 <h4>등록한 숙소 수정 및 삭제</h4>
