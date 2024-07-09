@@ -67,9 +67,9 @@
   <tr>
     <td>박범수</td>
     <td>
-      <span>-</span><br>
-      <span>-</span><br>
-      <span>-</span>
+      <span>-메인페이지 호텔 검색 바 (지역, 예약날짜, 인원 수) -> 호텔 검색 결과리스트 출력</span><br>
+      <span>-호텔 검색 결과 google maps에서 호텔 위치 마커로 출력</span><br>
+      <span>-header 호텔 검색 기능 (지역, 예약날짜)</span>
     </td>
   </tr>
   <tr>
