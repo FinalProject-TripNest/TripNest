@@ -77,7 +77,7 @@
     <td>
       <span>- 예약 및 결제 기능 구현</span><br>
       <span>- 결제 API</span><br>
-      <span>- 예약 취소 및 결제 금액 환불 기능 구현</span><br>
+      <span>- 예약 취소 및 결제 금액 전체 환불, 부분 환불 기능 구현</span><br>
       <span>- 예약 상태 업데이트 스케줄러 구현</span>
     </td>
   </tr>
