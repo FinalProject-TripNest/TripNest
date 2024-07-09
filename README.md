@@ -131,4 +131,14 @@
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a9b53336-6d97-4de6-844c-2c6576c5d488">
 </div>
 
-### 최유지
+### 차유지
+<h4>호스트 숙소 등록</h4>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/f5694226-8da1-4c1b-a0ab-17c02bb171b1" type="video/mp4"></video></div><br>
+<h4>등록한 숙소 수정 및 삭제</h4>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/107a0979-44de-4b43-809c-03558244ca9e" type="video/mp4"></video></div><br>
+<h4>1:1문의 등록 / 문의에 대한 관리자의 답변 등록과 수정</h4>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/5c5c19e5-1dde-4d3e-abff-8e793ba3f94e" type="video/mp4"></video></div><br>
+<h4>위시리스트 추가/ 날짜별로 추가한 위시리스트 목록 출력</h4>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/8145244b-b27a-4f1b-a56e-bd749990ec66" type="video/mp4"></video></div><br>
+<h4>admin메인페이지/ 등록된 숙소 관리</h4>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/a5c39ff3-852c-4e9b-b153-6e5e3a0727bb" type="video/mp4"></video></div><br>
