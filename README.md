@@ -37,6 +37,9 @@
    <img src ="https://img.shields.io/badge/Github-181717.svg?&style=for-the-badge&logo=Github&logoColor=white"/>
 </div>
 
+## ERD
+<img src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/de43fbbc-fb31-4fcc-8d15-26685078484d"><br>
+
 ## 팀원을 소개합니다
 <table>
   <tr>
@@ -91,7 +94,7 @@
       <span>- 관리자 페이지->메인페이지 제작, 1:1문의에 대한 관리자 답변 등록,수정/등록된 숙소 관리</span><br>
     </td>
   </tr>
-</table>
+</table><br>
 
 
 
