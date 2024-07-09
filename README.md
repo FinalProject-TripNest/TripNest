@@ -49,7 +49,7 @@
 </div>
 
 <div><h4>:love_letter:communication</h4>
-  <img src="https://img.shields.io/badge/Github-181717?style=flat&logo=Github&logoColor=white">
+   <img src ="https://img.shields.io/badge/Github-181717.svg?&style=for-the-badge&logo=Github&logoColor=white"/>
 </div>
 
 ## 기능설명
