@@ -315,8 +315,8 @@ button.adminanswerbtn,button.admineditbtn{
 		    		var inquery_id = $(this).data("inquery-id");
 		    		//alert(inquery_id);
 		    		
-		    		$("div.answer-areasecond").hide();
-	          $("div.answer-areafirst").show();
+		    		$(".areasecond").hide();
+	          $(".areafirst").show();
 		    		
 		    			$.ajax({
 		    			url:"/admin/iqlist",
