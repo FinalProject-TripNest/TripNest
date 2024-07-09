@@ -112,12 +112,23 @@
 ### 손범수
 
 ### 이준형
-
-<div><h4>회원가입</h4>
-  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/5eeb201e-7f66-4ea0-a785-d63c6d0544fc"/>
+<div align="center"><h4>회원가입 ➡ 이메일 인증을 통해 회원가입</h4>
+  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/6c878cc2-b183-4a5a-814b-7b13330b6a1f">
 </div>
-<div><h4>회원가입</h4>
-  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/5eeb201e-7f66-4ea0-a785-d63c6d0544fc"/>
+<div align="center"><h4>로그인 ➡ 일반 로그인</h4>
+  <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/8c69050a-e40c-45e7-aaa1-89957b7dfced">
+</div>
+<div align="center"><h4>로그인 ➡ 소셜 로그인(카카오,네이버)</h4>
+  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/2b40ff54-4a61-441d-89d0-4a4aa85847ea">
+  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/551af9c6-3bdf-4abd-a023-10895a1a9d7d">
+</div>
+<div align="center"><h4>아이디/비밀번호 찾기 ➡ 이메일을 통해 비밀번호 재설정 메일 발송</h4>
+  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/906e0471-f5cc-4e22-a334-9c069d7847e0">
+  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/21441d38-7468-4d07-9534-9f08f0bcb6b7">
+</div>
+<div align="center"><h4>마이페이지 ➡ 예약/취소 내역 확인, 회원 정보 수정 및 탈퇴</h4>
+  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a8b3adf0-c804-4c35-bdd5-28f842f5397a">
+  <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a9b53336-6d97-4de6-844c-2c6576c5d488">
 </div>
 
 ### 최유지
