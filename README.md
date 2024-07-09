@@ -121,15 +121,15 @@
 <div align="center"><b>로그인 ➡ 일반 로그인</b>
   <img width="80%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/8c69050a-e40c-45e7-aaa1-89957b7dfced">
 </div>
-<div align="center"><h4>로그인 ➡ 소셜 로그인(카카오,네이버)</h4>
+<div align="center"><b>로그인 ➡ 소셜 로그인(카카오,네이버)</b>
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/2b40ff54-4a61-441d-89d0-4a4aa85847ea">
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/551af9c6-3bdf-4abd-a023-10895a1a9d7d">
 </div>
-<div align="center"><h4>아이디/비밀번호 찾기 ➡ 이메일을 통해 비밀번호 재설정 메일 발송</h4>
+<div align="center"><b>아이디/비밀번호 찾기 ➡ 이메일을 통해 비밀번호 재설정 메일 발송</b>
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/906e0471-f5cc-4e22-a334-9c069d7847e0">
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/21441d38-7468-4d07-9534-9f08f0bcb6b7">
 </div>
-<div align="center"><h4>마이페이지 ➡ 예약/취소 내역 확인, 회원 정보 수정 및 탈퇴</h4>
+<div align="center"><b>마이페이지 ➡ 예약/취소 내역 확인, 회원 정보 수정 및 탈퇴</b>
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a8b3adf0-c804-4c35-bdd5-28f842f5397a">
   <img width="45%" src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/a9b53336-6d97-4de6-844c-2c6576c5d488">
 </div>
@@ -138,11 +138,11 @@
 <span><b>호스트 숙소 등록</b></span><br>
 <span>숙소를 등록할때 이미지들은 aws의 s3에 저장됨 </span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/f5694226-8da1-4c1b-a0ab-17c02bb171b1" type="video/mp4"></video></div><br>
-<h4>등록한 숙소 수정 및 삭제</h4>
+<b>등록한 숙소 수정 및 삭제</b>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/107a0979-44de-4b43-809c-03558244ca9e" type="video/mp4"></video></div><br>
-<h4>1:1문의 등록 / 문의에 대한 관리자의 답변 등록과 수정</h4>
+<b>1:1문의 등록 / 문의에 대한 관리자의 답변 등록과 수정</b>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/5c5c19e5-1dde-4d3e-abff-8e793ba3f94e" type="video/mp4"></video></div><br>
-<h4>위시리스트 추가/ 날짜별로 추가한 위시리스트 목록 출력</h4>
+<b>위시리스트 추가/ 날짜별로 추가한 위시리스트 목록 출력</b>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/8145244b-b27a-4f1b-a56e-bd749990ec66" type="video/mp4"></video></div><br>
-<h4>admin메인페이지/ 등록된 숙소 관리</h4>
+<b>admin메인페이지/ 등록된 숙소 관리</b>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614067/a5c39ff3-852c-4e9b-b153-6e5e3a0727bb" type="video/mp4"></video></div><br>
