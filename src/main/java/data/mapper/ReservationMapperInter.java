@@ -13,4 +13,5 @@ public interface ReservationMapperInter {
 	public MemberDto getOneData_member(String member_useremail);
 	public void insertReservation(ReservationDto reservationDto);
 	public void cancelReservation(String MERCHANT_UID);
+	public void updateReservationStatus();
 }

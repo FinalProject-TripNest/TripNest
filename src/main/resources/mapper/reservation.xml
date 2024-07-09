@@ -15,4 +15,10 @@
 	<update id="cancelReservation" parameterType="String">
 		update RESERVATIONS set RESERVATION_STATUS='예약취소' where MERCHANT_UID=#{MERCHANT_UID};
 	</update>
+    <update id="updateReservationStatus">
+        UPDATE RESERVATIONS 
+		SET RESERVATION_STATUS = '이용완료' 
+		WHERE RESERVATION_STATUS = '예약완료' 
+		AND STR_TO_DATE(RESERVATION_CHECKOUT, '%Y-%m-%d') &lt; CURDATE();
+    </update>
 </mapper>
