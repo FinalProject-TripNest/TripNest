@@ -108,10 +108,13 @@
 
 ### ▪️ 김민규
 
+***
 ### ▪️ 문인규
 
+***
 ### ▪️ 박범수
 
+***
 ### ▪️ 손범수<br>
 <span><b>예약 및 결제 기능 ➡ 결제 API</b></span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/cef6594e-122b-4f87-9605-25aaca8c4527"></video></div><br>
@@ -124,7 +127,7 @@
 <span><b>예약 상태 업데이트 ➡ 스케줄러를 사용하여 일정 시간이 지나면 DB 값 변경 </b></span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/30b157fa-302f-447c-86cc-653295c86544"></video></div><br>
 
-
+***
 ### ▪️ 이준형
 <span><b>회원가입 ➡ 이메일 인증을 통해 회원가입</b></span>
 <div align="center">
@@ -149,6 +152,8 @@
   <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/d8e896ae-8f03-4772-9d31-6c42fba57f99"></video>
   <video src="https://github.com/FinalProject-TripNest/TripNest/assets/155614674/d058dc81-a54d-4e65-bd3c-7f4a68f604c5"></video>
 </div>
+
+***
 
 ### ▪️ 차유지
 <span><b>호스트 숙소 등록</b></span><br>
