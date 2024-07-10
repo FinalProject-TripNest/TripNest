@@ -495,8 +495,8 @@ header#header .menu ul.sub li {
 /*index*/
 #index .top_banner {
 	height: 530px;
-	background-image: url("../img/main/main_bg.jpg");
-	background-position: 0% 70%;
+	background-image: url("../img/main/sea.jpg");
+	background-position: 0% 60%;
 	object-fit: cover;
 	background-repeat: no-repeat;
 	display: flex;

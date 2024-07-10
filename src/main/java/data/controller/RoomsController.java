@@ -225,7 +225,7 @@ public class RoomsController {
 		}
 
 
-		return "redirect:roomlist";
+		return "redirect:/mypage/myroomlist";
 
 	}
 	

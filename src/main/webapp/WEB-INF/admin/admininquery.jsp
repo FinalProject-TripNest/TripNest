@@ -355,8 +355,8 @@ button.adminanswerbtn,button.admineditbtn{
 		    			   dataType:"html",
 		    			   success:function(){
 		    				   
-				    		   $("div.answer-areafirst").hide();
-				           $("div.answer-areasecond").show();
+				    		   $("div.areafirst").hide();
+				           $("div.areasecond").show();
 
 		    					   alert("등록완료");
 		    					   list(inquery_id)
