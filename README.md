@@ -107,10 +107,24 @@
 ## 📑기능설명
 
 ### ▪️ 김민규
-<span><b>메인 숙소,이벤트,기사 목록 출력</b></span>
+<span><b>메인 숙소,이벤트,기사 목록 출력</b></span><br>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/a1c3e2ad-ab89-498f-b7e8-13b99c835bad](https://github.com/FinalProject-TripNest/TripNest/assets/106788159/dac93e02-4d2a-4210-b92b-e6a4dad8f659"></video></div><br>
-<span><b>메인페이지 호텔 검색 바 ➡ 호텔 검색결과 ➡ 디테일 페이지</b></span>
+<span><b>메인 ➡ 숙소 목록</b></span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/5f26b0bf-19d2-4c7d-8e35-9c845bc79296"></video></div><br>
+<span><b>숙소 목록 ➡ 숙소 상세</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/743ef320-d7c6-419c-8c77-86f79917173a"></video></div><br>
+<span><b>이벤트 목록 ➡ 이벤트 상세</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/bd01025c-77c6-4dfd-b682-3b6a620dc878"></video></div><br>
+<span><b>기사 목록 ➡ 기사 상세</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/e0b3e84f-68f0-4301-80ff-28ba2e77bd10"></video></div><br>
+<span><b>관리자 이벤트 관리</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/9f109aee-b4a5-40e0-ae82-dbd5caf7a78e"></video></div><br>
+<span><b>관리자 기사 관리</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/95593b2c-9822-4cef-8867-9b8dc1611f7f"></video></div><br>
+<span><b>관리자 회원 관리</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/e85129da-3e45-4afc-a9dc-aa9fd49dfcb8"></video></div><br>
+<span><b>관리자 리뷰 관리</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/0d51132a-5d2f-4bea-87f5-e24a18b63484"></video></div><br>
 
 ***
 ### ▪️ 문인규
