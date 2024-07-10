@@ -114,11 +114,11 @@
 ***
 ### ▪️ 박범수
 <span><b>메인페이지 호텔 검색 바 ➡ 호텔 검색결과 ➡ 디테일 페이지</b></span>
-<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/b349f8c3-22c9-4fff-8995-03cd267945c6"></video></div><br>
-<span><b>header 검색 바 ➡ 호텔 검색결과</b></span>
-<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/458b4c95-6aa9-4dab-bb16-ec5d4cceed9a"></video></div><br>
-<span><b>다른 페이지 header 검색 바 ➡ 호텔 검색결과</b></span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/a1c3e2ad-ab89-498f-b7e8-13b99c835bad"></video></div><br>
+<span><b>header 검색 바 ➡ 호텔 검색결과</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/b349f8c3-22c9-4fff-8995-03cd267945c6"></video></div><br>
+<span><b>다른 페이지 header 검색 바 ➡ 호텔 검색결과</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/458b4c95-6aa9-4dab-bb16-ec5d4cceed9a"></video></div><br>
 
 ***
 ### ▪️ 손범수<br>
