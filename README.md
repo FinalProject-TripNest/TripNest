@@ -110,6 +110,7 @@
 <span><b>메인 숙소,이벤트,기사 목록 출력</b></span>
 <div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/148257222/a1c3e2ad-ab89-498f-b7e8-13b99c835bad](https://github.com/FinalProject-TripNest/TripNest/assets/106788159/dac93e02-4d2a-4210-b92b-e6a4dad8f659"></video></div><br>
 <span><b>메인페이지 호텔 검색 바 ➡ 호텔 검색결과 ➡ 디테일 페이지</b></span>
+<div><video src="https://github.com/FinalProject-TripNest/TripNest/assets/106788159/5f26b0bf-19d2-4c7d-8e35-9c845bc79296"></video></div><br>
 
 ***
 ### ▪️ 문인규
