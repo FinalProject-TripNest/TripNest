@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.EmailMapperInter">
+    <insert id="insertEmailVerification" parameterType="data.dto.EmailDto">
+        INSERT INTO EMAIL (email_id, member_useremail, email_token, email_verified, email_created_at)
+        VALUES (#{email_id}, #{member_useremail}, #{email_token}, #{email_verified}, NOW())
+    </insert>
+
+    <select id="findByEmailToken" resultType="data.dto.EmailDto">
+        SELECT * FROM EMAIL WHERE email_token = #{token}
+    </select>
+
+    <select id="findByUserEmailAndToken" parameterType="map" resultType="data.dto.EmailDto">
+        SELECT * FROM EMAIL WHERE member_useremail = #{email} AND email_token = #{token}
+    </select>
+
+    <update id="updateEmailVerification" parameterType="data.dto.EmailDto">
+        UPDATE EMAIL SET email_verified = #{email_verified} WHERE email_id = #{email_id}
+    </update>
+    
+    <delete id="deleteEmailVerification" parameterType="map">
+        DELETE FROM EMAIL WHERE member_useremail = #{email} AND email_token = #{token}
+    </delete>
+</mapper>

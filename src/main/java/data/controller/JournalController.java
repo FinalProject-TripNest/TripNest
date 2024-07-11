@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.dto.JournalDto;
@@ -24,13 +25,14 @@ public class JournalController {
 		model.setViewName("/journal/journal");
 		return model;
 	}
-	
-	@GetMapping("/journal/addform")
-	public String showAddForm()
-	{
-		
-		
-		return "journal/journal_addform";
+
+	@GetMapping("/journal/detail")
+	public ModelAndView journalDetail(@RequestParam("journal_id") String journal_id) {
+		ModelAndView model = new ModelAndView();
+		JournalDto dto = service.getOneData(journal_id);
+		model.addObject("dto", dto);
+		model.setViewName("/journal/detail");
+		return model;
 	}
 
 }

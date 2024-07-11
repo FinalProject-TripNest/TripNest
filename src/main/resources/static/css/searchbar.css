@@ -1,0 +1,188 @@
+@charset "EUC-KR";
+
+#index .search {
+   width: 1200px;
+   background-color: #fff;
+   border-radius: 16px;
+   height: 120px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 20px;
+}
+
+#index .search form {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   align-items: center;
+}
+
+#index .search form #main_date {
+	width:30%;
+	height: 50px;
+	background-color: #ebebeb;
+	border-radius: 8px;
+	font-weight: 700;
+	border-radius: 8px;
+	border: 1px solid #fff;
+	 display: flex;
+  justify-content: center;
+  position: relative;
+ 
+}
+
+#index .search #main_checkdate {
+   width: 100%;
+   height: 100%;
+   padding: 0 0 0 50px;
+   background-image: url("../img/main/calendar.png");
+   background-size: cover;
+   background-position: 20px center;
+   background-repeat: no-repeat;
+   background-size: 20px;
+   background-color: transparent;
+   font-weight: 700;
+}
+
+#index .search form #main_address {
+	width: 35%;
+	
+}
+	
+#index .search form #main_address_input {
+	width: 100%;
+	height: 50px;
+	background-color: #ebebeb;
+	padding: 0 20px 0 50px;
+	border-radius: 8px;
+	font-weight: 700;
+	border: 1px solid #fff;
+	background-image: url("../img/main/search.png");
+	background-size: cover;
+	background-position: 20px center;
+	background-repeat: no-repeat;
+	background-size: 20px;
+}
+
+#index .search form img {
+   width: 20px;
+   margin-right: 10px;
+   position: relative;
+   top: 2px;
+}
+
+#index .search form  div {
+   height: 50px;
+   border-radius: 8px;
+   cursor: pointer;
+}
+
+#index .search form #main_personnel {
+   width: 20%;
+   background-color: #ebebeb;
+   padding: 0 20px 0 50px;
+   font-weight: 700;
+   display: flex;
+   align-items: center;
+   border: 1px solid #fff;
+   background-image: url("../img/main/personnel.png");
+   background-size: cover;
+   background-position: 20px center;
+   background-repeat: no-repeat;
+   background-size: 20px;
+}
+
+#index .search form #main_personnel input {
+   width: 100%;
+   height: 100%;
+   background-color:transparent;
+   font-weight: 700;
+}
+
+#index .search form input.btn {
+   width: 10%;
+   color: #fff;
+   background: #2e65c9;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 50px;
+   border-radius: 8px;
+   cursor: pointer;
+}
+
+#index .search form .btn:hover {
+   opacity: 0.8;
+   transition: all 0.3s ease-in-out;
+}
+
+ 
+.main_modal-content {
+    display: none; /* 처음에는 보이지 않도록 설정 */
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 100%; /* main_personnel 요소와 동일한 너비로 설정 */
+}
+
+.main_counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.main_counter label {
+    font-size: 18px;
+    font-weight: thin;
+}
+
+.main_counter button {
+    background-color: #569ff7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.main_counter button:hover {
+    background-color: #1e4a8a;
+}
+
+#main_totalCount {
+    font-size: 18px;
+
+}
+
+.main_button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#main_savePersonnel {
+    background-color: #569ff7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: thin;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#main_savePersonnel:hover {
+    background-color: #1e4a8a;
+}

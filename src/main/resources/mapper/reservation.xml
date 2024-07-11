@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="data.mapper.ReservationMapperInter">
+	<select id="getOneData" resultType="RoomsDto" parameterType="int">
+		select * from ROOMS where room_id=#{room_id}
+	</select>
+	<select id="getOneData_member" resultType="MemberDto" parameterType="String">
+		select * from MEMBERS where member_useremail=#{member_useremail}
+	</select>
+	<insert id="insertReservation" parameterType="ReservationDto">
+		insert into
+		RESERVATIONS(RESERVATION_ID,MEMBER_ID,ROOM_ID,RESERVATION_CHECKIN,RESERVATION_CHECKOUT,RESERVATION_CAPACITY,RESERVATION_REQUIRE,RESERVATION_PRICE,MERCHANT_UID,RESERVATION_DATE)
+		values(null,#{memberId},#{roomId},#{reservationCheckin},#{reservationCheckout},#{reservationCapacity},#{reservationRequire},#{reservationPrice},#{merchantUid}, now())
+	</insert>
+	<update id="cancelReservation" parameterType="String">
+		update RESERVATIONS set RESERVATION_STATUS='예약취소' where MERCHANT_UID=#{MERCHANT_UID};
+	</update>
+  <update id="updateReservationStatus">
+        UPDATE RESERVATIONS 
+		SET RESERVATION_STATUS = '이용완료' 
+		WHERE RESERVATION_STATUS = '예약완료' 
+		AND STR_TO_DATE(RESERVATION_CHECKOUT, '%Y-%m-%d') &lt; CURDATE();
+  </update>
+	<select id="recentReservationList" resultType="ReservationDto">
+		select * from RESERVATIONS order by RESERVATION_ID desc limit 0,5
+	</select>
+</mapper>

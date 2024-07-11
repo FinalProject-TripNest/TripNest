@@ -1,0 +1,21 @@
+ 		.modal-content {
+            display: none; /* 기본적으로 숨기기 */
+            position: absolute; /* 부모 요소 기준으로 위치 설정 */
+            width: 175px; /* 모달창의 너비 */
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 2; /* 모달 콘텐츠 위에 배치 */
+        }
+
+        .modal-background {
+            display: none; /* 기본적으로 숨기기 */
+            position: fixed; /* 화면에 고정 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0); /* 반투명 배경 */
+            z-index: 1; /* 모달 콘텐츠 뒤에 배치 */
+        }

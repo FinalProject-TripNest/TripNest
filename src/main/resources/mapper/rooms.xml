@@ -1,12 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="data.mapper.RoomsMapperInter">
-	<insert id="insertRoom" parameterType="RoomsDto" keyProperty="room_id">
-		insert into ROOMS(room_id,room_name,room_price,room_min_capacity,room_max_capacity,room_address,room_service,room_detail) 
-		values(null,#{room_name},#{room_price},#{room_min_capacity},#{room_max_capacity},#{room_address},#{room_service},#{room_detail})
+	<insert id="insertRoom" parameterType="RoomsDto"
+		keyProperty="room_id">
+		insert into
+		ROOMS(room_id,room_name,room_price,room_min_capacity,room_max_capacity,room_address,room_service,room_detail,room_hp,room_address_detail,member_id,room_region,room_latitude,room_longitude)
+		values(null,#{room_name},#{room_price},#{room_min_capacity},#{room_max_capacity},#{room_address},#{room_service},#{room_detail},#{room_hp},#{room_address_detail},#{member_id},#{room_region},#{room_latitude},#{room_longitude})
 	</insert>
-	
+
 	<select id="getLastInsertedRoomId" resultType="int">
         SELECT LAST_INSERT_ID()
    </select>
+   
+   <select id="getAllRooms" resultType="RoomsDto" parameterType="HashMap">
+   	select * from ROOMS order by room_id desc limit #{start},#{perpage}
+   </select>
+   
+   <select id="getTotalRooms" resultType="int">
+   	select count(*) from ROOMS
+   </select>
+   
+   <select id="getDataRoom" parameterType="String" resultType="RoomsDto">
+   	select * from ROOMS where room_id=#{room_id}
+   </select>
+   
+   <update id="updateRoomAcc" parameterType="String">
+   	update ROOMS set room_status="승인" where room_id=#{room_id}
+   </update>
+   
+   <update id="updateRoomHold" parameterType="String">
+   	update ROOMS set room_status="보류" where room_id=#{room_id}
+   </update>
+
+	<select id="dataList" resultType="RoomsDto">
+		select * from ROOMS order by
+		room_id desc
+	</select>
+
+	<select id="getOneData" resultType="RoomsDto"
+		parameterType="String">
+		select * from ROOMS where room_id = #{room_id}
+	</select>
+
+	<select id="searchRooms" parameterType="string"
+		resultType="RoomsDto">
+		SELECT *
+		FROM ROOMS
+		WHERE room_name LIKE CONCAT('%', #{search}, '%')
+		OR room_address LIKE CONCAT('%', #{search}, '%')
+		ORDER BY room_id DESC
+	</select>
+	
+	<select id="getRoomsDataByRoomId" resultType="RoomsDto" parameterType="String">
+		select * from ROOMS where room_id = #{room_id}
+	</select>
+
+	<select id="getImgsByRoomId" resultType="String" parameterType="String">
+		select image_photo from IMAGES where room_id = #{room_id}
+	</select>
+
+	<select id="getAllRoomsData" resultType="RoomsDto">
+		SELECT
+			ROOMS.room_id,
+			ROOMS.room_name,
+			ROOMS.room_price,
+			ROOMS.room_rating,
+			ROOMS.room_min_capacity,
+			ROOMS.room_max_capacity,
+			ROOMS.room_address,
+			ROOMS.room_address_detail,
+			ROOMS.room_region,
+			ROOMS.room_service,
+			ROOMS.room_detail,
+			ROOMS.room_status,
+			ROOMS.room_hp,
+			IMAGES.image_photo
+		FROM
+			ROOMS
+				LEFT JOIN (
+				SELECT
+					room_id,
+					MIN(image_id) AS min_image_id
+				FROM
+					IMAGES
+				GROUP BY
+					room_id
+			) AS min_images ON ROOMS.room_id = min_images.room_id
+				LEFT JOIN IMAGES ON min_images.min_image_id = IMAGES.image_id
+		ORDER BY
+			ROOMS.room_id ASC;
+	</select>
+
+	<select id="getLackRoomId" parameterType="map" resultType="String">
+		SELECT room_id
+		FROM ROOMS
+		WHERE room_id NOT IN
+		<foreach item="id" index="index" collection="excludedIds" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+		order by room_id desc limit #{num};
+	</select>
+
+	<select id="getSimpleRoomsDataByRoomId" parameterType="String" resultType="RoomsDto">
+		SELECT
+			ROOMS.room_id,
+			ROOMS.room_name,
+			ROOMS.room_price,
+			ROOMS.room_rating,
+			ROOMS.room_min_capacity,
+			ROOMS.room_max_capacity,
+			ROOMS.room_address,
+			ROOMS.room_address_detail,
+			ROOMS.room_region,
+			ROOMS.room_service,
+			ROOMS.room_detail,
+			ROOMS.room_status,
+			ROOMS.room_hp,
+			IMAGES.image_photo
+		FROM
+			ROOMS
+				LEFT JOIN (
+				SELECT
+					room_id,
+					MIN(image_id) AS min_image_id
+				FROM
+					IMAGES
+				GROUP BY
+					room_id
+			) AS min_images ON ROOMS.room_id = min_images.room_id
+				LEFT JOIN IMAGES ON min_images.min_image_id = IMAGES.image_id
+		WHERE
+			ROOMS.room_id = #{room_id}
+		ORDER BY
+			ROOMS.room_id ASC;
+	</select>
+	
+	<!-- 미승인된 room의 갯수를 파악하기 위해서)차유지-->
+	<select id="getCountNoRoom" resultType="int">
+		select count(*) from ROOMS where room_status='미승인' or room_status='보류'
+	</select>
+	
+	<!-- 최신 추가된 방 5개의 정보list 출력하려고) 유지 -->
+	<select id="getRecentRoom" resultType="RoomsDto">
+		select * from ROOMS order by room_id desc limit 0,5
+	</select>
+
+	<delete id="deleteRoom" parameterType="String">
+		delete from ROOMS where room_id=#{room_id}
+	</delete>
+	
+	<select id="getRoomDataByMyid" parameterType="int" resultType="RoomsDto">
+		select * from ROOMS where member_id=#{member_id} order by room_id desc 
+	</select>
+	
+	<update id="updateRoom" parameterType="RoomsDto">
+		update ROOMS set room_name=#{room_name},room_price=#{room_price},room_min_capacity=#{room_min_capacity},
+		room_max_capacity=#{room_max_capacity},room_address=#{room_address},room_latitude=#{room_latitude},room_longitude=#{room_longitude},
+		room_address_detail=#{room_address_detail},room_service=#{room_service},room_detail=#{room_detail},room_hp=#{room_hp},room_region=#{room_region},room_status = 
+		  <choose>
+            <when test="room_status == '승인'">
+                '미승인'
+            </when>
+            <otherwise>
+                room_status
+            </otherwise>
+        </choose>
+		where room_id=#{room_id}
+	</update>
 </mapper>
