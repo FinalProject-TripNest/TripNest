@@ -41,7 +41,7 @@
 			<div class="select">
 				<ul>
 					<li id="openLocationSearch"><img alt="" src="${root }/img/common/header_location.png">
-						<span>어디로 떠날까요?</span></li>
+						<span>어느지역으로 떠날까요?</span></li>
 					<li id="openDateSearch"><img alt="" src="${root }/img/common/header_back.png">
 						<span>언제 떠날까요?</span></li>
 

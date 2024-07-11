@@ -12,7 +12,7 @@ public class ReservationStatusScheduler {
 	@Autowired
 	ReservationService reservationService;
 	
-	@Scheduled(cron = "0 41 10 * * ?") // 매일 오전 10시 20분에 실행
+	@Scheduled(cron = "0 15 18 * * ?") // 매일 오후 6시 15분에 실행
     public void updateReservationStatus() {
         reservationService.updateReservationStatus();
         System.out.println("예약 상태 업데이트 실행");
