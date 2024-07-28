@@ -59,9 +59,8 @@
   <tr>
     <td>문인규</td>
     <td>
-      <span>-</span><br>
-      <span>-</span><br>
-      <span>-</span>
+      <span>- 메인 : Redis를 이용해 메인페이지 인기 숙소 목록 출력</span><br>
+      <span>- 이벤트 : 쿠폰 이벤트 생성. 쿠폰 발급, 사용, 조회 (메세지큐를 이용해 쿠폰 발급 동시성 문제 해결)</span><br>
     </td>
   </tr>
   <tr>
@@ -128,6 +127,12 @@
 
 ***
 ### ▪️ 문인규
+
+<span><b>메인페이지 인기 숙소 목록</b></span>
+<div><video src="https://github.com/user-attachments/assets/169fbc10-d5b0-4ef5-9fb5-b884909453c5"></video></div><br>
+<span><b>쿠폰 발급(수량 체크, 발급 유무 체크, 동시성 해결)</b></span>
+<div><video src="https://github.com/user-attachments/assets/135e9d2d-e4f4-4b10-8e35-86ba3f59ea93"></video></div><br>
+
 
 ***
 ### ▪️ 박범수
